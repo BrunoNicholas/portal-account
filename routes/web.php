@@ -10,6 +10,10 @@ Route::get('/', function () {
     return redirect()->route('home')->with('info','Welcome back!');
 });
 
+Route::get('test', function(){
+	return view('index');
+});
+
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
