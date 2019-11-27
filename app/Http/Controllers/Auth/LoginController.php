@@ -19,7 +19,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-    use Socialite;
+    // use Socialite;
 
     /**
      * Where to redirect users after login.

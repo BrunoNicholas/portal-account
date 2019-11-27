@@ -2,24 +2,43 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Routes for the application
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home')->with('info','Welcome back!');
 });
 
-Auth::routes();
-
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 // redirecting GitHub Auth2 routes
 Route::get('login/github', 'Auth\LoginController@redirectToProvider');
 Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+
+
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','role:super-admin|admin']], function(){
+		Route::resource('/roles', 'RoleController');
+		/*
+		 * closure pages
+		 */
+		Route::get('/', [
+			'as' 	=> 'admin',
+			'uses'	=> 'AdminPageController@index',
+		]);
+	}
+);
+
+Route::group(['prefix'	=> 'admin', 'middleware'	=> ['auth']], function()
+	{
+		Route::resource('/users', 'UserController');
+	}
+);
+
+Route::get('/user', [
+	'as' 	=> 'userhome',
+	'uses'	=> 'HomeController@userIndex'
+]);
 

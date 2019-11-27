@@ -6,8 +6,21 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
+use App\Models\Company;
+use App\Models\Gallery;
+use App\Models\Message;
+use App\Models\Image;
+use App\Models\Booking;
+use App\Models\Order;
+use App\Models\Post;
+use App\Models\Question;
+use App\Models\Rating;
+use App\Models\Review;
+use App\Models\Salon;
+use App\Models\Shop;
+use App\Models\Team;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmailContract
 {
     use LaratrustUserTrait;
     use Notifiable;
@@ -49,5 +62,147 @@ class User extends Authenticatable
         static::roleSynced(function($user, $changes, $team) {
             // 
         });
+    }
+
+
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function salons()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function teams()
+    {
+        return $this->hasMany(Order::class);
     }
 }
