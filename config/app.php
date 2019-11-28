@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Salon Account'),
+    'name'          => env('APP_NAME', 'Salon Account'),
+
+    'description'   => env('APP_DESC', 'The best salon next to you!'),
 
     /*
     |--------------------------------------------------------------------------
