@@ -8,14 +8,18 @@
     <!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="#333">
-    <title>{{ config('app.name', 'Salon Portal') }}</title>
+    <title>@yield('title') - {{ config('app.name', 'Salon Portal') }}</title>
 
     <meta name="description" content="{{ config('app.description') }}">
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png?v=3') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{ asset('assets/css/preload.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.light-blue-500.min.css') }}">
+    @guest
+    <link rel="stylesheet" href="{{ asset('assets/css/style.teal-800.min.css') }}">
+    @else
+    <link rel="stylesheet" href="{{ asset('assets/css/style.pink-800.min.css') }}">
+    @endguest
     <link rel="stylesheet" href="{{ asset('assets/css/width-boxed.min.css') }}" id="ms-boxed" disabled="">
     <!--[if lt IE 9]>
         <script src="assets/js/html5shiv.min.js"></script>
@@ -198,35 +202,46 @@
   		            <div class="modal-body">
   		              	<div class="tab-content">
   		                	<div role="tabpanel" class="tab-pane fade active show" id="ms-login-tab">
-    				                <form autocomplete="off">
+                            {{-- auth: login form --}}
+    				                <form autocomplete="off" method="POST" action="{{ route('login') }}"> 
+                                @csrf
     				                    <fieldset>
-    				                      <div class="form-group label-floating">
-    				                        <div class="input-group">
-    				                          <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-    				                          <label class="control-label" for="ms-form-user">Username</label>
-    				                          <input type="text" id="ms-form-user" class="form-control">
-    				                        </div>
-    				                      </div>
-    				                      <div class="form-group label-floating">
-    				                        <div class="input-group">
-    				                          <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
-    				                          <label class="control-label" for="ms-form-pass">Password</label>
-    				                          <input type="password" id="ms-form-pass" class="form-control">
-    				                        </div>
-    				                      </div>
-    				                      <div class="row mt-2">
-    				                        <div class="col-md-6">
-    				                          <div class="form-group no-mt">
-    				                            <div class="checkbox">
-    				                              <label>
-    				                                <input type="checkbox"> Remember Me </label>
-    				                            </div>
-    				                          </div>
-    				                        </div>
-    				                        <div class="col-md-6">
-    				                          <button class="btn btn-raised btn-primary pull-right">Login</button>
-    				                        </div>
-    				                      </div>
+      				                      <div class="form-group label-floating">
+        				                        <div class="input-group">
+        				                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+        				                            <label class="control-label" for="ms-form-user">{{ __('E-Mail Address') }}</label>
+        				                            <input type="email" id="ms-form-user" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus style="padding-left: 10px;">
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+        				                        </div>
+      				                      </div>
+      				                      <div class="form-group label-floating">
+        				                        <div class="input-group">
+        				                            <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+        				                            <label class="control-label" for="ms-form-pass">{{ __('Password') }}</label>
+        				                            <input type="password" id="ms-form-pass" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" style="padding-left: 10px;">
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+        				                        </div>
+      				                      </div>
+      				                      <div class="row mt-2">
+        				                        <div class="col-md-6">
+          				                          <div class="form-group no-mt">
+            				                            <div class="checkbox">
+            				                                <label> <input type="checkbox"> Remember Me </label>
+            				                            </div>
+          				                          </div>
+        				                        </div>
+        				                        <div class="col-md-6">
+        				                            <button class="btn btn-raised btn-primary pull-right">Login</button>
+        				                        </div>
+      				                      </div>
     				                    </fieldset>
     				                </form>
     				                <div class="text-center">
@@ -303,8 +318,8 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-7 pr-6">
-              <h1 class="animated fadeInDown animation-delay-5 color-white">A single template, infinite possibilities</h1>
-              <p class="lead animated fadeInDown animation-delay-5 color-white mb-2">We give you everything done, except the coffee.</p>
+              <h1 class="animated fadeInDown animation-delay-5 color-white"> Salons, Spa's, Shops, Styles &amp; More</h1>
+              <p class="lead animated fadeInDown animation-delay-5 color-white mb-2">{{ config('app.description') }}</p>
               <div class="card card-body card-warning card-dark-inverse animated fadeInLeft animation-delay-5">
                 <div class="media">
                   <div class="media-left d-none d-sm-block media-middle pr-4">

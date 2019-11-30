@@ -18,10 +18,15 @@
 	          	<a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7"><i class="zmdi zmdi-share"></i></a>
 	        </div>
 
-        	<a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i></a>
-
+	        @guest
+        	<a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
+        		<i class="zmdi zmdi-account"></i>
+        	</a>
+        	@else
+        	{{-- have the user's profile image --}}
+        	@endguest
 	        <form class="search-form animated zoomInDown animation-delay-9">
-	          	<input id="search-box" type="text" class="search-input" placeholder="Search..." name="q" />
+	          	<input id="search-box" type="text" class="search-input" placeholder="Search..." name="search_all" />
 	          	<label for="search-box"><i class="zmdi zmdi-search"></i></label>
 	        </form>
 
@@ -34,8 +39,8 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
 	            <!-- <img src="assets/img/demo/logo-navbar.png" alt=""> -->
-	            <span class="ms-logo ms-logo-sm">M</span>
-	            <span class="ms-title">Material <strong>Style</strong></span>
+	            <span class="ms-logo ms-logo-sm">SP</span>
+	            <span class="ms-title">Salon <strong> Portal </strong></span>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="ms-navbar">
@@ -286,17 +291,6 @@
 	                </ul>
 	            </li>
 	            <li class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-9" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="ecommerce"> User <i class="zmdi zmdi-chevron-down"></i></a>
-	                <ul class="dropdown-menu">
-		                <li><a class="dropdown-item" href="ecommerce-filters.html">E-Commerce Sidebar</a></li>
-		                <li><a class="dropdown-item" href="ecommerce-filters-full.html">E-Commerce Sidebar Full</a></li>
-		                <li><a class="dropdown-item" href="ecommerce-filters-full2.html">E-Commerce Topbar Full</a></li>
-		                <li class="dropdown-divider"></li>
-		                <li><a class="dropdown-item" href="ecommerce-item.html">E-Commerce Item</a></li>
-		                <li><a class="dropdown-item" href="ecommerce-cart.html">E-Commerce Cart</a></li>
-	                </ul>
-	            </li>
-	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="page">Sections <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
 		                <li class="dropdown-submenu">
@@ -384,6 +378,19 @@
                   		<li><a class="dropdown-item" href="page-all.html" class="dropdown-link">All Pages</a></li>
                 	</ul>
 	            </li>
+	            @guest @else
+	            <li class="nav-item dropdown">
+	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-9" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="ecommerce"> User <i class="zmdi zmdi-chevron-down"></i></a>
+	                <ul class="dropdown-menu">
+		                <li><a class="dropdown-item" href="ecommerce-filters.html">E-Commerce Sidebar</a></li>
+		                <li><a class="dropdown-item" href="ecommerce-filters-full.html">E-Commerce Sidebar Full</a></li>
+		                <li><a class="dropdown-item" href="ecommerce-filters-full2.html">E-Commerce Topbar Full</a></li>
+		                <li class="dropdown-divider"></li>
+		                <li><a class="dropdown-item" href="ecommerce-item.html">E-Commerce Item</a></li>
+		                <li><a class="dropdown-item" href="ecommerce-cart.html">E-Commerce Cart</a></li>
+	                </ul>
+	            </li>
+	            @endguest
 	      	</ul>
         </div>
       	<a href="javascript:void(0)" class="ms-toggle-left btn-navbar-menu"><i class="zmdi zmdi-menu"></i></a>
