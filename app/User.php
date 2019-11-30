@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 use App\Models\Company;
@@ -54,17 +55,17 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'email_verified_at' => 'datetime',
     ];
 
-    public static function boot() {
-        parent::boot();
+    // public static function boot() {
+    //     parent::boot();
 
-        static::roleAttached(function($user, $role, $team) {
-            // 
-        });
+    //     static::roleAttached(function($user, $role, $team) {
+    //         // 
+    //     });
         
-        static::roleSynced(function($user, $changes, $team) {
-            // 
-        });
-    }
+    //     static::roleSynced(function($user, $changes, $team) {
+    //         // 
+    //     });
+    // }
 
 
 
@@ -156,16 +157,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function ratings()
     {
         return $this->hasMany(Rating::class);
-    }
-
-    /**
-     * The relationship method for galleries.
-     *
-     * as galleries.
-     */
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
     }
 
     /**

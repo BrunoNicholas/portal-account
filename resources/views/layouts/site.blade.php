@@ -234,7 +234,7 @@
         				                        <div class="col-md-6">
           				                          <div class="form-group no-mt">
             				                            <div class="checkbox">
-            				                                <label> <input type="checkbox"> Remember Me </label>
+            				                                <label> <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }} </label>
             				                            </div>
           				                          </div>
         				                        </div>
