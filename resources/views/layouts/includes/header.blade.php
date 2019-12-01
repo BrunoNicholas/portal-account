@@ -45,9 +45,44 @@
         </div>
         <div class="collapse navbar-collapse" id="ms-navbar">
 	      	<ul class="navbar-nav">
+	      		{{-- home --}}
               	<li class="nav-item dropdown active">
                 	<a href="#" class="nav-link animated fadeIn animation-delay-7" role="button" aria-haspopup="true" aria-expanded="false" data-name="home">Home {{-- <i class="zmdi zmdi-chevron-down"></i> --}} </a>    
             	</li>
+            	{{-- salons and spas --}}
+	            <li class="nav-item dropdown">
+	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="blog">
+	                	Salons &amp; Spas <i class="zmdi zmdi-chevron-down"></i></a>
+	                <ul class="dropdown-menu">
+	                  <li><a class="dropdown-item" href="blog-sidebar.html"><i class="zmdi zmdi-view-compact"></i> Blog Sidebar 1</a></li>
+	                  <li><a class="dropdown-item" href="blog-sidebar2.html"><i class="zmdi zmdi-view-compact"></i> Blog Sidebar 2</a></li>
+	                  <li><a class="dropdown-item" href="blog-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> Blog Masonry 1</a></li>
+	                  <li><a class="dropdown-item" href="blog-masonry2.html"><i class="zmdi zmdi-view-dashboard"></i> Blog Masonry 2</a></li>
+	                  <li><a class="dropdown-item" href="blog-full.html"><i class="zmdi zmdi zmdi-view-stream"></i> Blog Full Page 1</a></li>
+	                  <li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Blog Full Page 2</a></li>
+	                  <li class="dropdown-divider"></li>
+	                  <li><a class="dropdown-item" href="blog-post.html"><i class="zmdi zmdi-file-text"></i> Blog Post 1</a></li>
+	                  <li><a class="dropdown-item" href="blog-post2.html"><i class="zmdi zmdi-file-text"></i> Blog Post 2</a></li>
+	                </ul>
+	            </li>
+	            {{-- shops and products --}}
+	            <li class="nav-item dropdown">
+	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shops &amp; Products <i class="zmdi zmdi-chevron-down"></i></a>
+	                <ul class="dropdown-menu">
+		                <li><a class="dropdown-item" href="portfolio-filters_sidebar.html"><i class="zmdi zmdi-view-compact"></i> Portfolio Sidebar Filters</a></li>
+		                <li><a class="dropdown-item" href="portfolio-filters_topbar.html"><i class="zmdi zmdi-view-agenda"></i> Portfolio Topbar Filters</a></li>
+		                <li><a class="dropdown-item" href="portfolio-filters_sidebar_fluid.html"><i class="zmdi zmdi-view-compact"></i> Portfolio Sidebar Fluid</a></li>
+		                <li><a class="dropdown-item" href="portfolio-filters_topbar_fluid.html"><i class="zmdi zmdi-view-agenda"></i> Portfolio Topbar Fluid</a></li>
+		                <li><a class="dropdown-item" href="portfolio-cards.html"><i class="zmdi zmdi-card-membership"></i> Porfolio Cards</a></li>
+		                <li><a class="dropdown-item" href="portfolio-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> Porfolio Masonry</a></li>
+		                <li><a class="dropdown-item with-badge" href="portfolio-gallery.html"><i class="zmdi zmdi-apps"></i> Picture Gallery <span class="badge badge-success text-right">1.5</span></a></li>
+		                <li class="dropdown-divider"></li>
+		                <li><a class="dropdown-item" href="portfolio-item.html"><i class="zmdi zmdi-collection-item-1"></i> Portfolio Item 1</a></li>
+		                <li><a class="dropdown-item" href="portfolio-item2.html"><i class="zmdi zmdi-collection-item-2"></i> Portfolio Item 2</a></li>
+	                </ul>
+	            </li>
+	            {{-- creative styles --}}
+
 	            <li class="nav-item dropdown dropdown-megamenu-container">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="component">
 	                	Styles <i class="zmdi zmdi-chevron-down"></i></a>
@@ -158,54 +193,54 @@
 			                    </div>
 			                    <div class="col-sm-3 megamenu-col">
 			                        <div class="megamenu-block animated fadeInRight animated-2x">
-			                          <h3 class="megamenu-block-title"><i class="zmdi zmdi-folder-star-alt"></i> Extra Components</h3>
-			                          <ul class="megamenu-block-list">
-			                            <li>
-			                              <a class="withripple" href="component-cards.html">
-			                                <i class="zmdi zmdi-card-membership"></i> Cards</a>
-			                            </li>
-			                            <li>
-			                              <a class="withripple" href="component-composite-cards.html">
-			                                <i class="zmdi zmdi-card-giftcard"></i> Composite Cards</a>
-			                            </li>
-			                            <li>
-			                              <a class="withripple" href="component-counters.html">
-			                                <i class="zmdi zmdi-n-6-square"></i> Counters</a>
-			                            </li>
-			                            <li>
-			                              <a class="withripple" href="component-audio-video.html">
-			                                <i class="zmdi zmdi-play-circle"></i> Audio &amp; Video <span class="badge badge-info pull-right"><i class="zmdi zmdi-long-arrow-up no-mr"></i> 2.3</span></a>
-			                            </li>
-			                            <li>
-			                              <a class="withripple" href="component-masonry.html">
-			                                <i class="zmdi zmdi-view-dashboard"></i> Masonry Layer</a>
-			                            </li>
-			                            <li>
-			                              <a class="withripple" href="component-snackbar.html">
-			                                <i class="zmdi zmdi-notifications-active"></i> SnackBar <span class="badge badge-success pull-right">1.2</span></a>
-			                            </li>
-			                            <li>
-			                              <a class="withripple" href="component-lightbox.html">
-			                                <i class="zmdi zmdi-collection-image-o"></i> Lightbox <span class="badge badge-success pull-right">1.5</span></a>
-			                            </li>
-			                          </ul>
+				                          <h3 class="megamenu-block-title"><i class="zmdi zmdi-folder-star-alt"></i> Extra Components</h3>
+				                          <ul class="megamenu-block-list">
+				                            <li>
+				                              <a class="withripple" href="component-cards.html">
+				                                <i class="zmdi zmdi-card-membership"></i> Cards</a>
+				                            </li>
+				                            <li>
+				                              <a class="withripple" href="component-composite-cards.html">
+				                                <i class="zmdi zmdi-card-giftcard"></i> Composite Cards</a>
+				                            </li>
+				                            <li>
+				                              <a class="withripple" href="component-counters.html">
+				                                <i class="zmdi zmdi-n-6-square"></i> Counters</a>
+				                            </li>
+				                            <li>
+				                              <a class="withripple" href="component-audio-video.html">
+				                                <i class="zmdi zmdi-play-circle"></i> Audio &amp; Video <span class="badge badge-info pull-right"><i class="zmdi zmdi-long-arrow-up no-mr"></i> 2.3</span></a>
+				                            </li>
+				                            <li>
+				                              <a class="withripple" href="component-masonry.html">
+				                                <i class="zmdi zmdi-view-dashboard"></i> Masonry Layer</a>
+				                            </li>
+				                            <li>
+				                              <a class="withripple" href="component-snackbar.html">
+				                                <i class="zmdi zmdi-notifications-active"></i> SnackBar <span class="badge badge-success pull-right">1.2</span></a>
+				                            </li>
+				                            <li>
+				                              <a class="withripple" href="component-lightbox.html">
+				                                <i class="zmdi zmdi-collection-image-o"></i> Lightbox <span class="badge badge-success pull-right">1.5</span></a>
+				                            </li>
+				                        </ul>
 			                        </div>
 			                        <div class="megamenu-block animated fadeInRight animated-2x">
-			                          <h3 class="megamenu-block-title"><i class="zmdi zmdi-tab"></i> Collapses &amp; Tabs</h3>
-			                          <ul class="megamenu-block-list">
-			                            <li>
-			                              <a class="withripple" href="component-collapses.html">
-			                                <i class="zmdi zmdi-view-day"></i> Collapses</a>
-			                            </li>
-			                            <li>
-			                              <a class="withripple" href="component-horizontal-tabs.html">
-			                                <i class="zmdi zmdi-tab"></i> Horitzontal Tabs</a>
-			                            </li>
-			                            <li>
-			                              <a class="withripple" href="component-vertical-tabs.html">
-			                                <i class="zmdi zmdi-menu"></i> Vertical Tabs</a>
-			                            </li>
-			                          </ul>
+				                        <h3 class="megamenu-block-title"><i class="zmdi zmdi-tab"></i> Collapses &amp; Tabs</h3>
+				                        <ul class="megamenu-block-list">
+				                            <li>
+				                              	<a class="withripple" href="component-collapses.html">
+				                                <i class="zmdi zmdi-view-day"></i> Collapses</a>
+				                            </li>
+				                            <li>
+				                              	<a class="withripple" href="component-horizontal-tabs.html">
+				                                <i class="zmdi zmdi-tab"></i> Horitzontal Tabs</a>
+				                            </li>
+				                            <li>
+				                              	<a class="withripple" href="component-vertical-tabs.html">
+				                                <i class="zmdi zmdi-menu"></i> Vertical Tabs</a>
+				                            </li>
+				                        </ul>
 			                        </div>
 			                    </div>
 			                    <div class="col-sm-3 megamenu-col">
@@ -260,63 +295,26 @@
 	                  	</li>
 	                </ul>
 	            </li>
-	            <li class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="blog">
-	                	Salons &amp; Spas <i class="zmdi zmdi-chevron-down"></i></a>
-	                <ul class="dropdown-menu">
-	                  <li><a class="dropdown-item" href="blog-sidebar.html"><i class="zmdi zmdi-view-compact"></i> Blog Sidebar 1</a></li>
-	                  <li><a class="dropdown-item" href="blog-sidebar2.html"><i class="zmdi zmdi-view-compact"></i> Blog Sidebar 2</a></li>
-	                  <li><a class="dropdown-item" href="blog-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> Blog Masonry 1</a></li>
-	                  <li><a class="dropdown-item" href="blog-masonry2.html"><i class="zmdi zmdi-view-dashboard"></i> Blog Masonry 2</a></li>
-	                  <li><a class="dropdown-item" href="blog-full.html"><i class="zmdi zmdi zmdi-view-stream"></i> Blog Full Page 1</a></li>
-	                  <li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Blog Full Page 2</a></li>
-	                  <li class="dropdown-divider"></li>
-	                  <li><a class="dropdown-item" href="blog-post.html"><i class="zmdi zmdi-file-text"></i> Blog Post 1</a></li>
-	                  <li><a class="dropdown-item" href="blog-post2.html"><i class="zmdi zmdi-file-text"></i> Blog Post 2</a></li>
-	                </ul>
-	            </li>
-	            <li class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shops &amp; Products <i class="zmdi zmdi-chevron-down"></i></a>
-	                <ul class="dropdown-menu">
-		                <li><a class="dropdown-item" href="portfolio-filters_sidebar.html"><i class="zmdi zmdi-view-compact"></i> Portfolio Sidebar Filters</a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_topbar.html"><i class="zmdi zmdi-view-agenda"></i> Portfolio Topbar Filters</a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_sidebar_fluid.html"><i class="zmdi zmdi-view-compact"></i> Portfolio Sidebar Fluid</a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_topbar_fluid.html"><i class="zmdi zmdi-view-agenda"></i> Portfolio Topbar Fluid</a></li>
-		                <li><a class="dropdown-item" href="portfolio-cards.html"><i class="zmdi zmdi-card-membership"></i> Porfolio Cards</a></li>
-		                <li><a class="dropdown-item" href="portfolio-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> Porfolio Masonry</a></li>
-		                <li><a class="dropdown-item with-badge" href="portfolio-gallery.html"><i class="zmdi zmdi-apps"></i> Picture Gallery <span class="badge badge-success text-right">1.5</span></a></li>
-		                <li class="dropdown-divider"></li>
-		                <li><a class="dropdown-item" href="portfolio-item.html"><i class="zmdi zmdi-collection-item-1"></i> Portfolio Item 1</a></li>
-		                <li><a class="dropdown-item" href="portfolio-item2.html"><i class="zmdi zmdi-collection-item-2"></i> Portfolio Item 2</a></li>
-	                </ul>
-	            </li>
+	            {{-- app sections --}}
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="page">Sections <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="dropdown-item has_children">Posts</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      <li><a class="dropdown-item" href="page-about.html">About us Option 1</a></li>
-		                      <li><a class="dropdown-item" href="page-about2.html">About us Option 2</a></li>
-		                      <li><a class="dropdown-item" href="page-about3.html">About us Option 3</a></li>
-		                      <li><a class="dropdown-item" href="page-about4.html">About us Option 4</a></li>
+		                      <li><a class="dropdown-item" href="page-about.html"> Portal Posts</a></li>
+		                      <li><a class="dropdown-item" href="page-about2.html"> Users Posts </a></li>
 		                      <li class="dropdown-divider"></li>
-		                      <li><a class="dropdown-item" href="page-team.html">Our Team Option 1</a></li>
-		                      <li><a class="dropdown-item" href="page-team2.html">Our Team Option 2</a></li>
+		                      <li><a class="dropdown-item text-center" href="page-team.html"> Add Post </a></li>
 		                    </ul>
 		                </li>
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="has_children dropdown-item">Questions</a>
 		                    <ul class="dropdown-menu">
-		                      <li><a class="dropdown-item" href="page-contact.html">Contact Option 1</a></li>
-		                      <li><a class="dropdown-item" href="page-contact2.html">Contact Option 2</a></li>
+		                      <li><a class="dropdown-item" href="page-contact.html">Asked Questions</a></li>
+		                      <li><a class="dropdown-item" href="page-contact2.html">My Questions</a></li>
 		                      <li class="dropdown-divider"></li>
-		                      <li><a class="dropdown-item" href="page-login_register.html">Login &amp; Register</a></li>
-		                      <li><a class="dropdown-item" href="page-login.html">Login Full</a></li>
-		                      <li><a class="dropdown-item" href="page-login2.html">Login Integrated</a></li>
-		                      <li class="dropdown-divider"></li>
-		                      <li><a class="dropdown-item" href="page-login_register2.html">Register Option 1</a></li>
-		                      <li><a class="dropdown-item" href="page-register2.html">Register Option 2</a></li>
+		                      <li><a class="dropdown-item" href="page-login_register2.html">Ask A Question</a></li>
 		                    </ul>
 		                </li>
 		                <li class="dropdown-submenu">
@@ -379,15 +377,34 @@
                 	</ul>
 	            </li>
 	            @guest @else
+	            {{-- user section --}}
 	            <li class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-9" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="ecommerce"> User <i class="zmdi zmdi-chevron-down"></i></a>
+	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-9" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="ecommerce">
+	                	<img src="{{ Auth::user()->profile_image ? asset('files/profile/images/' . Auth::user()->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 25px; border-radius: 50%;">
+	                	<span style="visibility: hidden;">i</span> 
+	                	{{ explode(' ', trim(Auth::user()->name))[0] }} <i class="zmdi zmdi-chevron-down"></i>
+	                </a>
 	                <ul class="dropdown-menu">
-		                <li><a class="dropdown-item" href="ecommerce-filters.html">E-Commerce Sidebar</a></li>
-		                <li><a class="dropdown-item" href="ecommerce-filters-full.html">E-Commerce Sidebar Full</a></li>
-		                <li><a class="dropdown-item" href="ecommerce-filters-full2.html">E-Commerce Topbar Full</a></li>
+		                <li>
+		                	<a class="dropdown-item" href="javascript:void(0)">
+		                		<img src="{{ Auth::user()->profile_image ? asset('files/profile/images/' . Auth::user()->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 25px; border-radius: 50%;"> My Profile Settings
+		                	</a>
+		                </li>
+		                <li>
+		                	<a class="dropdown-item" href="javascript:void(0)">
+		                		<i class="zmdi zmdi-email" style="font-size: 23px;"></i> Messages &amp; Info
+		                	</a>
+		                </li>
 		                <li class="dropdown-divider"></li>
-		                <li><a class="dropdown-item" href="ecommerce-item.html">E-Commerce Item</a></li>
-		                <li><a class="dropdown-item" href="ecommerce-cart.html">E-Commerce Cart</a></li>
+		                <li>
+		                	<a class="dropdown-item" href="javascript:void(0)">
+		                		<i class="fa fa-question-circle" style="font-size: 23px;"></i> My Questions </a>
+		                </li>
+		                <li class="dropdown-divider"></li>
+		                <li class="text-center">
+		                	<a class="dropdown-item" href="javascript:void(0)">
+		                		<i class="fa fa-power-off text-danger" style="font-size: 23px;"></i> Logout </a>
+		                </li>
 	                </ul>
 	            </li>
 	            @endguest

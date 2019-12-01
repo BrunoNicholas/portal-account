@@ -96,8 +96,3 @@
         </div>
     </div>
 </aside>
-<footer class="ms-footer">
-	<div class="container">
-		<p>Copyright &copy; {{ date('Y') }} <b>{{ config('app.name') }}</b></p>
-	</div>
-</footer>

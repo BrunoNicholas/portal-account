@@ -14,6 +14,11 @@ class PermissionsTableSeeder extends Seeder
     {
         $permissions = [
         	[
+        		'name'			=> 'can_view_right_menu',
+	        	'display_name'	=> 'Can view right colour menu',
+	        	'description'	=> 'Can view and update the right color menu',
+        	],
+        	[
         		'name'			=> 'view_roles',
 	        	'display_name'	=> 'View saved roles',
 	        	'description'	=> 'Can view all saved roles',

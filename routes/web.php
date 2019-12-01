@@ -7,7 +7,7 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('home')->with('info','Welcome back!');
+    return view('index')->with('info','Welcome back!');
 });
 
 Route::get('test', function(){
