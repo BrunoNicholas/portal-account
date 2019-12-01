@@ -8,6 +8,21 @@ use Illuminate\Http\Request;
 class RatingController extends Controller
 {
     /**
+     * Display the constructor of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        // $this->middleware('permission:can_view_questions',['only'=>'index']);
+        $this->middleware('permission:can_rate',['only'=>['create','store']]);
+        // $this->middleware('permission:can_delete_post',['only'=>'destroy']);
+        $this->middleware('permission:can_update_rate',['only'=>['update','edit']]);
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

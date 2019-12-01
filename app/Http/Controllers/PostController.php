@@ -8,6 +8,21 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     /**
+     * Display the constructor of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        $this->middleware('permission:can_view_posts',['only'=>'index']);
+        $this->middleware('permission:can_add_post',['only'=>['create','store']]);
+        $this->middleware('permission:can_delete_post',['only'=>'destroy']);
+        // $this->middleware('permission:can_respond_to_jobs',['only'=>['update','edit']]);
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

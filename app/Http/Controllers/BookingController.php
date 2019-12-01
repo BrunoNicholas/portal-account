@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 class BookingController extends Controller
 {
     /**
+     * Display the constructor of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        // $this->middleware('role:super-admin|admin|company-admin|salon-admin|shop-admin|attendant|client')->except('show','index');
+
+        $this->middleware('permission:can_make_booking',['only'=>['create','store']]);
+        // $this->middleware('permission:delete_user',['only'=>'destroy']);
+        // $this->middleware('permission:edit_user',['only'=>['update','edit']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

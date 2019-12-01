@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
         $user_super->attachRole(Role::where('name','super-admin')->first());
         $user_admin = new User();
         $user_admin->name = 'Emilly Agaba'; 
-        $user_admin->email = 'katabemma@gmail.com';
+        $user_admin->email = 'emileagaba999@gmail.com';
         $user_admin->password = bcrypt('dollar');
         $user_admin->gender = 'Female';
         $user_admin->home_address = 'Kampala';

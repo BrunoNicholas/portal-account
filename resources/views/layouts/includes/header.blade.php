@@ -1,4 +1,4 @@
-<header class="ms-header ms-header-primary">
+<header class="ms-header ms-header-primary" @if(route('admin') == Request::fullUrl() || route('profile') == Request::fullUrl()) style="display: none;" @endif>
     <!--ms-header-primary-->
     <div class="container container-full">
 	    <div class="ms-title">
@@ -390,11 +390,13 @@
 		                		<img src="{{ Auth::user()->profile_image ? asset('files/profile/images/' . Auth::user()->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 25px; border-radius: 50%;"> My Profile Settings
 		                	</a>
 		                </li>
+		                @permission('can_message')
 		                <li>
 		                	<a class="dropdown-item" href="javascript:void(0)">
 		                		<i class="zmdi zmdi-email" style="font-size: 23px;"></i> Messages &amp; Info
 		                	</a>
 		                </li>
+		                @endpermission
 		                <li class="dropdown-divider"></li>
 		                <li>
 		                	<a class="dropdown-item" href="javascript:void(0)">
@@ -402,8 +404,11 @@
 		                </li>
 		                <li class="dropdown-divider"></li>
 		                <li class="text-center">
-		                	<a class="dropdown-item" href="javascript:void(0)">
-		                		<i class="fa fa-power-off text-danger" style="font-size: 23px;"></i> Logout </a>
+		                	<a class="dropdown-item" href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+		                		<i class="fa fa-power-off text-danger" style="font-size: 23px;"></i> 
+			                	Logout 
+			                </a>
+		                	<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
 		                </li>
 	                </ul>
 	            </li>

@@ -114,6 +114,16 @@ class PermissionsTableSeeder extends Seeder
                 'description'   => 'A user can add a new company',
             ],
             [
+                'name'          => 'can_update_company',
+                'display_name'  => 'Can update company details',
+                'description'   => 'A user can update a saved company details',
+            ],
+            [
+                'name'          => 'can_delete_company',
+                'display_name'  => 'Can delete company',
+                'description'   => 'A user can delete a saved company',
+            ],
+            [
                 'name'          => 'can_make_image_uploads',
                 'display_name'  => 'Can upload images to the system',
                 'description'   => 'A user can upload images to system',
@@ -130,9 +140,9 @@ class PermissionsTableSeeder extends Seeder
                 'description'   => 'A user can edit the profile of their salon',
             ],
             [
-                'name'          => 'can_react_to_reviews',
-                'display_name'  => 'Can take action on reviews',
-                'description'   => 'A user can respond to the reviews of the system',
+                'name'          => 'can_delete_salon',
+                'display_name'  => 'Can delete a salon or spa',
+                'description'   => 'A user can delete a salon profile or spa from the system',
             ],
             // jobs
             [
@@ -155,7 +165,7 @@ class PermissionsTableSeeder extends Seeder
                 'display_name'  => 'Can delete a job opening',
                 'description'   => 'A user can delete a job opening',
             ],
-            // project
+            // posts
             [
                 'name'          => 'can_view_posts',
                 'display_name'  => 'Can view posts',
@@ -183,6 +193,11 @@ class PermissionsTableSeeder extends Seeder
                 'description'   => 'A user can add questions',
             ],
             [
+                'name'          => 'can_delete_questions',
+                'display_name'  => 'Can delete a question',
+                'description'   => 'A user can delete a questions',
+            ],
+            [
                 'name'          => 'can_update_questions',
                 'display_name'  => 'Can view update questions',
                 'description'   => 'A user can update questions',
@@ -194,12 +209,22 @@ class PermissionsTableSeeder extends Seeder
                 'display_name'  => 'Can make rating',
                 'description'   => 'A user can make a rating',
             ],
+            [
+                'name'          => 'can_update_rate',
+                'display_name'  => 'Can update a rating',
+                'description'   => 'A user can update a rating',
+            ],
 
             // reviews
             [
                 'name'          => 'can_review',
                 'display_name'  => 'Can make reviews',
                 'description'   => 'A user can make reviews',
+            ],
+            [
+                'name'          => 'can_update_review',
+                'display_name'  => 'Can update a review',
+                'description'   => 'A user can update a saved review',
             ],
 
             // bookings

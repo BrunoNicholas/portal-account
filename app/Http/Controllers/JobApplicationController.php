@@ -8,6 +8,21 @@ use Illuminate\Http\Request;
 class JobApplicationController extends Controller
 {
     /**
+     * Display the constructor of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        $this->middleware('permission:can_view_jobs',['only'=>'index']);
+        $this->middleware('permission:can_add_job_opening',['only'=>['create','store']]);
+        $this->middleware('permission:can_delete_job_opening',['only'=>'destroy']);
+        $this->middleware('permission:can_respond_to_jobs',['only'=>['update','edit']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

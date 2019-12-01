@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display the constructor of the resource.
@@ -14,13 +14,13 @@ class CompanyController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        // $this->middleware('role:super-admin|admin|company-admin|salon-admin|shop-admin|attendant|client')->except('show','index');
         
-        $this->middleware('permission:can_add_company',['only'=>['create','store']]);
+        $this->middleware('permission:can_make_comment',['only'=>['create','store']]);
         $this->middleware('permission:can_delete_comment',['only'=>'destroy']);
-        $this->middleware('permission:can_update_company',['only'=>['update','edit']]);
+        $this->middleware('permission:can_edit_comment',['only'=>['update','edit']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -55,10 +55,10 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show(Comment $comment)
     {
         //
     }
@@ -66,10 +66,10 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -78,10 +78,10 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -89,10 +89,10 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy(Comment $comment)
     {
         //
     }

@@ -13,15 +13,15 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         $owner = new Role();
-		$owner->name         = 'company-owner';
-		$owner->display_name = 'Company Owner'; // optional
-		$owner->description  = 'User is the owner of a company project'; // optional
+		$owner->name         = 'super-admin';
+		$owner->display_name = 'Super Administrator'; // optional
+		$owner->description  = 'A technical administrator of the system with full rights'; // optional
 		$owner->save();
 
 		$admin = new Role();
 		$admin->name         = 'admin';
-		$admin->display_name = 'User Administrator'; // optional
-		$admin->description  = 'User is allowed to manage and edit other users'; // optional
+		$admin->display_name = 'Administrator'; // optional
+		$admin->description  = 'The business administrator with full system operation abilities'; // optional
 		$admin->save();
 
 

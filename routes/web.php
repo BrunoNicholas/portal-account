@@ -25,6 +25,7 @@ Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','role:super-admin|admin']], function(){
 		Route::resource('/roles', 'RoleController');
+		Route::resource('/permissions', 'PermissionController');
 		/*
 		 * closure pages
 		 */
@@ -46,3 +47,48 @@ Route::get('/user', [
 	'uses'	=> 'HomeController@userIndex'
 ]);
 
+Route::group(['prefix' => 'home', 'middleware' => ['auth','verified']], function(){
+	Route::resource('{type}/messages', 'MessageController');
+	Route::resource('salons', 'SalonController');
+	Route::resource('shops', 'ShopController');
+	Route::resource('sections/jobs', 'JobApplicationController');
+	Route::resource('sections/questions', 'QuestionController');
+	Route::resource('sections/posts', 'PostController');
+	Route::resource('{type}/{id}/orders', 'OrderController');
+	Route::resource('{type}/{id}/bookings', 'BookingController');
+	Route::resource('{type}/{id}/comments', 'CommentController');
+	Route::resource('{type}/{id}/reviews', 'ReviewController');
+	Route::resource('{type}/{id}/ratings', 'RatingController');
+	Route::resource('{type}/{id}/styles', 'StyleController');
+
+	Route::resource('points', 'PointController');
+	Route::resource('teams', 'TeamController');
+	Route::resource('companies', 'CompanyController');
+	Route::resource('categories', 'CategoriesController');
+	Route::resource('sections/feedback', 'FeedbackController');
+	Route::resource('user/gallery/images', 'ImageController');
+	Route::resource('user/galleries', 'GalleryController');
+
+	// closures
+	Route::post('/{type}/message', [
+		'as'	=> 'messages.storeAll',
+		'uses'	=> 'MessageController@storeAll'
+	]);
+	
+	Route::get('/user/profile/settings', [
+		'as' 	=> 'settings',
+		'uses'	=> 'UserPageController@settings',
+	]);
+	Route::get('/user/profile', [
+		'as' 	=> 'profile',
+		'uses'	=> 'UserPageController@profile',
+	]);
+	Route::post('/user/profile', [
+		'as'	=> 'profile.update',
+		'uses'	=> 'UserPageController@update_image'
+	]);
+	Route::post('/user/password/profile', [
+		'as'	=> 'password.update',
+		'uses'	=> 'UserController@changePassword'
+	]);
+});

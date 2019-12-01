@@ -22,8 +22,8 @@ class UserController extends Controller
     {
         $this->middleware('role:super-admin|admin')->except('update','changePassword','show');
         $this->middleware('permission:create_user',['only'=>['create','store']]);
-        $this->middleware('permission:delete_role',['only'=>'destroy']);
-        $this->middleware('permission:edit_role',['only'=>['update','edit']]);
+        $this->middleware('permission:delete_user',['only'=>'destroy']);
+        $this->middleware('permission:edit_user',['only'=>['update','edit']]);
     }
 
     /**
