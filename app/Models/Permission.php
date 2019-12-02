@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Laratrust\Models\LaratrustPermission;
+use Zizaco\Entrust\EntrustPermission;
 
-class Permission extends LaratrustPermission
+class Permission extends EntrustPermission
 {
     protected $fillable = [
     	'name','display_name','description'

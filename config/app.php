@@ -176,8 +176,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        // Laratrust permissions and roles
-        Laratrust\LaratrustServiceProvider::class,
+        // zizaco permissions and roles
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
     ],
 
@@ -229,8 +229,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        // Laratrust permissions and roles
-        'Laratrust'   => Laratrust\LaratrustFacade::class,
+        // zizaco permissions and roles
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 

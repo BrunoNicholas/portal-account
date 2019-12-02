@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laratrust\Traits\LaratrustUserTrait;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 use App\Models\Company;
 use App\Models\Gallery;
 use App\Models\Message;
@@ -23,7 +23,7 @@ use App\Models\Team;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use LaratrustUserTrait;
+    use EntrustUserTrait;
     use Notifiable;
 
     /**
