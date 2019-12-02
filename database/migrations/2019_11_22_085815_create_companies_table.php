@@ -16,6 +16,7 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
             
+            $table->string('status')->default('active');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->timestamps();
         });

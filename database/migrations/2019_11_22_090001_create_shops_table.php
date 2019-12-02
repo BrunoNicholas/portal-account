@@ -15,6 +15,8 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->bigIncrements('id');
+            
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

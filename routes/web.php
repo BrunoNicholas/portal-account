@@ -23,7 +23,7 @@ Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback
 
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth','role:super-admin|admin']], function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','verified','role:super-admin|admin']], function(){
 		Route::resource('/roles', 'RoleController');
 		Route::resource('/permissions', 'PermissionController');
 		/*
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','role:super-admin|adm
 	}
 );
 
-Route::group(['prefix'	=> 'admin', 'middleware'	=> ['auth']], function()
+Route::group(['prefix'	=> 'admin', 'middleware'	=> ['auth','verified']], function()
 	{
 		Route::resource('/users', 'UserController');
 	}
