@@ -18,7 +18,7 @@ class ReviewController extends Controller
         
         // $this->middleware('permission:can_view_questions',['only'=>'index']);
         $this->middleware('permission:can_review',['only'=>['create','store']]);
-        // $this->middleware('permission:can_delete_post',['only'=>'destroy']);
+        $this->middleware('permission:can_delete_salon',['only'=>'destroy']);
         $this->middleware('permission:can_update_review',['only'=>['update','edit']]);
     }
     

@@ -1,4 +1,4 @@
-<header class="ms-header ms-header-primary" @if(route('admin') == Request::fullUrl() || route('profile') == Request::fullUrl()) style="display: none;" @endif>
+<header class="ms-header ms-header-primary" @yield('top_menu')>
     <!--ms-header-primary-->
     <div class="container container-full">
 	    <div class="ms-title">
@@ -37,7 +37,7 @@
 <nav class="navbar navbar-expand-md  navbar-static ms-navbar ms-navbar-primary">
     <div class="container container-full">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ url('/') }}">
 	            <!-- <img src="assets/img/demo/logo-navbar.png" alt=""> -->
 	            <span class="ms-logo ms-logo-sm">SP</span>
 	            <span class="ms-title">Salon <strong> Portal </strong></span>
@@ -47,38 +47,41 @@
 	      	<ul class="navbar-nav">
 	      		{{-- home --}}
               	<li class="nav-item dropdown active">
-                	<a href="#" class="nav-link animated fadeIn animation-delay-7" role="button" aria-haspopup="true" aria-expanded="false" data-name="home">Home {{-- <i class="zmdi zmdi-chevron-down"></i> --}} </a>    
+                	<a href="@guest {{ url('/') }} @else {{ route('home') }} @endguest" class="nav-link animated fadeIn animation-delay-7" role="button" aria-haspopup="true" aria-expanded="false" data-name="home">Home {{-- <i class="zmdi zmdi-chevron-down"></i> --}} </a>
             	</li>
             	{{-- salons and spas --}}
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="blog">
 	                	Salons &amp; Spas <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
-	                  <li><a class="dropdown-item" href="blog-sidebar.html"><i class="zmdi zmdi-view-compact"></i> Blog Sidebar 1</a></li>
-	                  <li><a class="dropdown-item" href="blog-sidebar2.html"><i class="zmdi zmdi-view-compact"></i> Blog Sidebar 2</a></li>
-	                  <li><a class="dropdown-item" href="blog-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> Blog Masonry 1</a></li>
-	                  <li><a class="dropdown-item" href="blog-masonry2.html"><i class="zmdi zmdi-view-dashboard"></i> Blog Masonry 2</a></li>
-	                  <li><a class="dropdown-item" href="blog-full.html"><i class="zmdi zmdi zmdi-view-stream"></i> Blog Full Page 1</a></li>
-	                  <li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Blog Full Page 2</a></li>
-	                  <li class="dropdown-divider"></li>
-	                  <li><a class="dropdown-item" href="blog-post.html"><i class="zmdi zmdi-file-text"></i> Blog Post 1</a></li>
-	                  <li><a class="dropdown-item" href="blog-post2.html"><i class="zmdi zmdi-file-text"></i> Blog Post 2</a></li>
+	                  	<li><a class="dropdown-item" href="blog-sidebar.html"><i class="zmdi zmdi-view-compact"></i> Children Services </a></li>
+	                  	<li><a class="dropdown-item" href="blog-sidebar2.html"><i class="zmdi zmdi-view-compact"></i> Men Services </a></li>
+	                  	<li><a class="dropdown-item" href="blog-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> Women Services </a></li>
+	                  	<li><a class="dropdown-item" href="blog-masonry2.html"><i class="zmdi zmdi-view-dashboard"></i> Party Services </a></li>
+	                  	<li class="dropdown-divider"></li>
+	                  	<li><a class="dropdown-item" href="blog-full.html"><i class="zmdi zmdi zmdi-view-stream"></i> Hair Services</a></li>
+	                  	<li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Face Services </a></li>
+	                  	<li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Nails Services </a></li>
+	                  	<li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Body Services </a></li>
+	                  	<li class="dropdown-divider"></li>
+	                  	<li><a class="dropdown-item" href="blog-post.html"><i class="zmdi zmdi-file-text"></i> Massage Services </a></li>
+	                  	<li><a class="dropdown-item" href="blog-post2.html"><i class="zmdi zmdi-file-text"></i> Tatooings </a></li>
 	                </ul>
 	            </li>
 	            {{-- shops and products --}}
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shops &amp; Products <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
-		                <li><a class="dropdown-item" href="portfolio-filters_sidebar.html"><i class="zmdi zmdi-view-compact"></i> Portfolio Sidebar Filters</a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_topbar.html"><i class="zmdi zmdi-view-agenda"></i> Portfolio Topbar Filters</a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_sidebar_fluid.html"><i class="zmdi zmdi-view-compact"></i> Portfolio Sidebar Fluid</a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_topbar_fluid.html"><i class="zmdi zmdi-view-agenda"></i> Portfolio Topbar Fluid</a></li>
-		                <li><a class="dropdown-item" href="portfolio-cards.html"><i class="zmdi zmdi-card-membership"></i> Porfolio Cards</a></li>
-		                <li><a class="dropdown-item" href="portfolio-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> Porfolio Masonry</a></li>
-		                <li><a class="dropdown-item with-badge" href="portfolio-gallery.html"><i class="zmdi zmdi-apps"></i> Picture Gallery <span class="badge badge-success text-right">1.5</span></a></li>
+		                <li><a class="dropdown-item" href="portfolio-filters_sidebar.html"><i class="zmdi zmdi-view-compact"></i> Children Products </a></li>
+		                <li><a class="dropdown-item" href="portfolio-filters_topbar.html"><i class="zmdi zmdi-view-agenda"></i> Men Products</a></li>
+		                <li><a class="dropdown-item" href="portfolio-filters_sidebar_fluid.html"><i class="zmdi zmdi-view-compact"></i> Female Products</a></li>
+		                <li><a class="dropdown-item" href="portfolio-filters_topbar_fluid.html"><i class="zmdi zmdi-view-agenda"></i> Unisex </a></li>
 		                <li class="dropdown-divider"></li>
+		                <li><a class="dropdown-item" href="portfolio-cards.html"><i class="zmdi zmdi-card-membership"></i> View All Products</a></li>
+		                <li><a class="dropdown-item" href="portfolio-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> View All Shops</a></li>
+		                {{-- <li class="dropdown-divider"></li>
 		                <li><a class="dropdown-item" href="portfolio-item.html"><i class="zmdi zmdi-collection-item-1"></i> Portfolio Item 1</a></li>
-		                <li><a class="dropdown-item" href="portfolio-item2.html"><i class="zmdi zmdi-collection-item-2"></i> Portfolio Item 2</a></li>
+		                <li><a class="dropdown-item" href="portfolio-item2.html"><i class="zmdi zmdi-collection-item-2"></i> Portfolio Item 2</a></li> --}}
 	                </ul>
 	            </li>
 	            {{-- creative styles --}}
@@ -320,7 +323,7 @@
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="has_children dropdown-item">About Us</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      <li><a class="dropdown-item" href="page-profile.html">User Profile Option 1</a></li>
+		                      <li><a class="dropdown-item" href="{{ route('profile') }}"> My Profile</a></li>
 		                      <li><a class="dropdown-item" href="page-profile2.html">User Profile Option 2</a></li>
 		                    </ul>
 		                </li>
@@ -376,7 +379,9 @@
                   		<li><a class="dropdown-item" href="page-all.html" class="dropdown-link">All Pages</a></li>
                 	</ul>
 	            </li>
-	            @guest @else
+	            @guest 
+
+	            @else
 	            {{-- user section --}}
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-9" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="ecommerce">
@@ -386,7 +391,7 @@
 	                </a>
 	                <ul class="dropdown-menu">
 		                <li>
-		                	<a class="dropdown-item" href="javascript:void(0)">
+		                	<a class="dropdown-item" href="{{ route('profile') }}">
 		                		<img src="{{ Auth::user()->profile_image ? asset('files/profile/images/' . Auth::user()->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 25px; border-radius: 50%;"> My Profile Settings
 		                	</a>
 		                </li>
@@ -413,6 +418,10 @@
 	                </ul>
 	            </li>
 	            @endguest
+
+	            <li class="nav-item dropdown">
+		        	<a href="javascript:void(0)" class="btn-ms-menu btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10"><i class="zmdi zmdi-menu"></i></a>
+	            </li>
 	      	</ul>
         </div>
       	<a href="javascript:void(0)" class="ms-toggle-left btn-navbar-menu"><i class="zmdi zmdi-menu"></i></a>

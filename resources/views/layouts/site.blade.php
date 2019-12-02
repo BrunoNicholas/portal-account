@@ -199,6 +199,16 @@
     {{-- header and navigation --}}
     @include('layouts.includes.header')
     {{-- /end of header and navigation --}}
+    <div class="col-md-12" style="border: thin solid red; margin-top: 0px;">
+        <div class="d-flex no-block justify-content-end align-items-center" style="font-size: 10px;">
+            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-dashboard"></i> Administrator </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
     @yield('content')
     {{-- footer --}}
     @yield('footer')

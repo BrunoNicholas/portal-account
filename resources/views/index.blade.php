@@ -31,8 +31,8 @@
             </div>
           </div>
           <div class="text-center mt-4">
-            <a href="javascript:void(0);" class="btn btn-xlg btn-white color-warning btn-raised animated fadeInLeft animation-delay-14 mr-2"><i class="zmdi zmdi-settings"></i> Personalize</a>
-            <a href="javascript:void(0);" class="btn btn-xlg btn-white color-success btn-raised animated fadeInRight animation-delay-14"><i class="zmdi zmdi-download"></i> Download</a>
+            <a href="javascript:void(0);" class="btn btn-xlg btn-white color-warning btn-raised animated fadeInLeft animation-delay-14 mr-2"><i class="zmdi zmdi-settings"></i> Salons </a>
+            <a href="{{ route('styles.index', ['companies','all']) }}" class="btn btn-xlg btn-white color-success btn-raised animated fadeInRight animation-delay-14"><i class="zmdi zmdi-download"></i> Styles </a>
           </div>
         </div>
         <div class="col-lg-5 text-center mt-6">

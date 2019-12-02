@@ -97,9 +97,9 @@
         <div class="ms-slidebar-social ms-slidebar-block">
             <h4 class="ms-slidebar-block-title text-center">Social Links</h4>
             <div class="ms-slidebar-social">
-              <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-facebook"><i class="zmdi zmdi-facebook"></i> {{-- <span class="badge-pill badge-pill-pink">12</span> --}}
-                  <div class="ripple-container"></div>
-              </a>
+	            <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-facebook"><i class="zmdi zmdi-facebook"></i> {{-- <span class="badge-pill badge-pill-pink">12</span> --}}
+	                <div class="ripple-container"></div>
+	            </a>
 	            <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-twitter"><i class="zmdi zmdi-twitter"></i> {{-- <span class="badge-pill badge-pill-pink">4</span> --}}
 	                <div class="ripple-container"></div>
 	            </a>
