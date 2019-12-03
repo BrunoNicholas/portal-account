@@ -6,7 +6,7 @@
 	            <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i> Login</a>
 	            <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal"> Or Register <i class="zmdi zmdi-account-add"></i></a>
 	            @else
-	            <a href="javascript:void(0)" class="withripple"> Bruno Nicholas <small> - {{ App\Models\Role::where('name',Auth::user()->role)->first()->display_name }}</small> </a>
+	            <a href="javascript:void(0)" class="withripple"> {{ Auth::user()->name }} <small> - {{ App\Models\Role::where('name',Auth::user()->role)->first()->display_name }}</small> </a>
 	            @endguest
 	        </div>
 	        <div class="ms-slidebar-title">
@@ -25,17 +25,17 @@
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc1" aria-expanded="false" aria-controls="sc1">
 	            <i class="zmdi zmdi-home"></i> Home Sections </a>
 	            <ul id="sc1" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch1" data-parent="#slidebar-menu">
-	              	<li><a href="{{ url('/') }}">{{ config('app.name') }}</a></li>
+	              	<li><a href="{{ url('/') }}"><i class="fa-angle-double-right fa"></i> {{ config('app.name') }}</a></li>
 	              	@guest   @else
 	              	@role(['client']) @else
-	              	<li><a href="{{ route('home') }}">Home Dashboard</a></li>
+	              	<li><a href="{{ route('home') }}"><i class="fa-angle-double-right fa"></i> Home Dashboard</a></li>
 	              	@endrole
 	              	@role(['super-admin','admin'])
-	              	<li><a href="{{ route('userhome') }}">User Dasboard</a></li>
+	              	<li><a href="{{ route('userhome') }}"><i class="fa-angle-double-right fa"></i> User Dasboard</a></li>
 	              	@endrole
 	              	@endguest
 	              	<li class="dropdown-divider"></li>
-	              	<li><a href="https://salonportal.000webhostapp.com" target="_blank"><i class="fa-link fa"></i>{{ config('app.name') }} Info Site </a></li>
+	              	<li class="text-success"><a href="https://salonportal.000webhostapp.com" target="_blank" class="text-success"><i class="fa-link fa text-primary"></i>{{ config('app.name') }} Info Site </a></li>
 	            </ul>
 	        </li>
 	        <li class="card" role="tab" id="sch2">
@@ -43,25 +43,18 @@
 	              	<i class="zmdi zmdi-account"></i> My Sections 
 	            </a>
 	            <ul id="sc2" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch2" data-parent="#slidebar-menu">
-	              	<li><a href="{{ route('messages.index', 'inbox') }}"> Inbox </a></li>
-	              	<li><a href="{{ route('profile') }}">My Profile</a></li>
-	              	<li><a href="page-product.html">Products</a></li>
-	              	<li><a href="page-services.html">Timeline</a></li>
+	              	<li><a href="{{ route('profile') }}"><i class="fa-angle-double-right fa"></i> My Profile</a></li>
+	              	<li><a href="{{ route('messages.index', 'inbox') }}"><i class="fa-angle-double-right fa"></i>  Inbox </a></li>
+	              	<li><a href="{{ route('settings') }}"><i class="fa-angle-double-right fa"></i> Timeline</a></li>
 	            </ul>
 	        </li>
 	        <li class="card" role="tab" id="sch4">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc4" aria-expanded="false" aria-controls="sc4">
-	              	<i class="zmdi zmdi-edit"></i> Blog 
+	              	<i class="zmdi zmdi-edit"></i> Companies
 	            </a>
 	            <ul id="sc4" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch4" data-parent="#slidebar-menu">
-	              <li><a href="blog-sidebar.html">Blog Sidebar 1</a></li>
-	              <li><a href="blog-sidebar2.html">Blog Sidebar 2</a></li>
-	              <li><a href="blog-masonry.html">Blog Masonry 1</a></li>
-	              <li><a href="blog-masonry2.html">Blog Masonry 2</a></li>
-	              <li><a href="blog-full.html">Blog Full Page 1</a></li>
-	              <li><a href="blog-full2.html">Blog Full Page 2</a></li>
-	              <li><a href="blog-post.html">Blog Post 1</a></li>
-	              <li><a href="blog-post2.html">Blog Post 2</a></li>
+	              	<li><a href="{{ route('companies.index') }}"><i class="fa-angle-double-right fa"></i> Portal Companies </a></li>
+	              	<li><a href="{{ route('companies.create') }}"><i class="fa-angle-double-right fa"></i> Add Company </a>
 	            </ul>
 	        </li>
 	        <li class="card" role="tab" id="sch5">

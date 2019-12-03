@@ -5,12 +5,12 @@
 @section('navigator')
 	<div class="container mt-0">
 		<div class="row">
-			<div class="d-flex no-block align-items-center col-4">
+			<div class="d-flex no-block align-items-center col-md-4">
 				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">
 					<img src="{{ $user->profile_image ? asset('files/profile/images/' . $user->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 30px; border-radius: 40%;">
 					{{ $user->name }} - User Details</span>
 			</div>
-	        <div class="d-flex no-block justify-content-end col-8">
+	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
 	                    <ol class="breadcrumb">
