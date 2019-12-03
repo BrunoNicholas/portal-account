@@ -19,6 +19,9 @@ class Salon extends Model
      * @var array
      */
     protected $fillable = [
+    	'categories_id',
+    	'company_id',
+    	'salon_name',
     	'salon_email',
     	'salon_telephone',
         'salon_website',

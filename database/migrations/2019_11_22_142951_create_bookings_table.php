@@ -24,7 +24,7 @@ class CreateBookingsTable extends Migration
             $table->dateTime('end_time')->nullable();
             $table->integer('quantity')->default(1);
             $table->text('description')->nullable();
-            $tatus->string('status')->default('pending');
+            $table->string('status')->default('pending');
             $table->timestamps();
 
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');

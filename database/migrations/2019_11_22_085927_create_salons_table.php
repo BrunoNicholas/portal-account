@@ -30,7 +30,6 @@ class CreateSalonsTable extends Migration
             $table->boolean('accept_bookings')->nullable();
             $table->boolean('accept_orders')->nullable();
             $table->boolean('accept_job_applicants')->nullable();
-            $table->text('description')->nullable();
             $table->string('status')->default('active');
             $table->timestamps();
 

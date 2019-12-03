@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('quantity')->default(1);
             $table->text('description')->nullable();
             $table->bigInteger('user_id')->unsigned()->index();
-            $tatus->string('status')->default('pending');
+            $table->string('status')->default('pending');
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
