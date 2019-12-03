@@ -20,7 +20,12 @@
     @else
     <link rel="stylesheet" href="{{ asset('assets/css/style.pink-800.min.css') }}">
     @endguest
-    <link rel="stylesheet" href="{{ asset('assets/css/width-boxed.min.css') }}" id="ms-boxed" disabled="">
+    <link rel="stylesheet" href="{{ asset('assets/css/width-boxed.min.css') }}" id="ms-boxed" disabled>
+    <style type="text/css">
+        @media only screen and (max-width: 600px) {
+            .justify-content-end > nav { display: none; }
+        }
+    </style>
     <!--[if lt IE 9]>
         <script src="assets/js/html5shiv.min.js"></script>
         <script src="assets/js/respond.min.js"></script>

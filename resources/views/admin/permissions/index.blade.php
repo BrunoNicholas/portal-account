@@ -37,4 +37,14 @@
 	</div>
 </div>
 @endsection
-@section('scripts') @endsection
+@section('scripts')
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script>
+	    $('#example23').DataTable({
+	        dom: 'Bfrtip',
+	        buttons: [
+	            'copy', 'csv', 'excel', 'pdf', 'print'
+	        ]
+	    });
+	</script>
+@endsection

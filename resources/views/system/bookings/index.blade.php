@@ -1,6 +1,8 @@
 @extends('layouts.site')
 @section('title', 'My Bookings')
-@section('styles') @endsection
+@section('styles')
+<link href="{{ asset('assets/plugins/datatables/media/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+@endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')
 	<div class="container mt-0">
@@ -36,4 +38,14 @@
 	</div>
 </div>
 @endsection
-@section('scripts') @endsection
+@section('scripts')
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script>
+	    $('#example23').DataTable({
+	        dom: 'Bfrtip',
+	        buttons: [
+	            'copy', 'csv', 'excel', 'pdf', 'print'
+	        ]
+	    });
+	</script>
+@endsection

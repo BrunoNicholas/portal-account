@@ -1,15 +1,17 @@
 @extends('layouts.site')
 @section('title', 'Users')
-@section('styles') @endsection
+@section('styles')
+<link href="{{ asset('assets/plugins/datatables/media/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+@endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')
 	<div class="container mt-0">
 		<div class="row">
-			<div class="d-flex no-block align-items-center col-4">
+			<div class="d-flex no-block align-items-center col-md-4">
 				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">System Users
 				</span>
 			</div>
-	        <div class="d-flex no-block justify-content-end col-8">
+	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
 	                    <ol class="breadcrumb">
@@ -32,8 +34,8 @@
 		            <h4 class="section-title no-margin-top">Manage the system users | <a href="{{ route('users.create') }}" class="btn btn-sm btn-info"> <i class="fa-plus fa"></i> New User </a></h4>
 		            <div class="panel box-v4">
 		                <div class="panel-body">
-		                    <div class="responsive-table">
-		                        <table id="example" class="table table-striped table-bordered table-hoverable" width="100%" cellspacing="0">
+		                    <div class="table-responsive">
+		                        <table id="example23" class="table table-striped table-bordered table-hoverable" width="100%" cellspacing="0">
 		                            <thead>
 		                                <tr>
 		                                    <th class="text-center;">#</th>
@@ -74,4 +76,14 @@
 	</div>
 </div>
 @endsection
-@section('scripts') @endsection
+@section('scripts')
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script>
+	    $('#example23').DataTable({
+	        dom: 'Bfrtip',
+	        buttons: [
+	            'copy', 'csv', 'excel', 'pdf', 'print'
+	        ]
+	    });
+	</script>
+@endsection
