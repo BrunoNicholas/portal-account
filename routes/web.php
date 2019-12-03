@@ -83,6 +83,10 @@ Route::group(['prefix' => 'home', 'middleware' => ['auth','verified']], function
 		'as' 	=> 'profile',
 		'uses'	=> 'UserPageController@profile',
 	]);
+	Route::get('/user/profile/timeline', [
+		'as' 	=> 'settings',
+		'uses'	=> 'UserPageController@settings',
+	]);
 	Route::post('/user/profile', [
 		'as'	=> 'profile.update',
 		'uses'	=> 'UserPageController@update_image'

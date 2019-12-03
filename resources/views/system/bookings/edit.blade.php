@@ -26,6 +26,7 @@
 		<div class="col-lg-12 ms-paper-content-container">
 			<div class="ms-paper-content">
 	            <section class="ms-component-section">
+	            	<h4 class="section-title no-margin-top"> </h4>
 
 
 	            </section>

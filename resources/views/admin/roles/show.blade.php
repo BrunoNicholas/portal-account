@@ -12,8 +12,10 @@
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
 	                    <ol class="breadcrumb">
-
-
+	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"> <i class="fa fa-home"></i> Home</a></li>
+				            <li class="breadcrumb-item"><a href="{{ route('admin') }}"> <i class="fa fa-user-plus"></i> Administrator </a></li>
+				            <li class="breadcrumb-item"><a href="{{ route('roles.index') }}"> <i class="fa fa-user-plus"></i> User Roles </a></li>
+				            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-plus"></i> Role Details </li>
 				        </ol>
 	                </ol>
 	            </nav>
@@ -23,8 +25,16 @@
 @endsection
 @section('content')
 <div class="container mt-6" style="min-height: 500px;">
+	<div class="row mt-0 pl-0">
+		<div class="col-lg-12 ms-paper-content-container">
+			<div class="ms-paper-content">
+	            <section class="ms-component-section">
+	            	<h4 class="section-title no-margin-top"> </h4>
 
-
+	            </section>
+	        </div>
+	    </div>
+	</div>
 </div>
 @endsection
 @section('scripts') @endsection

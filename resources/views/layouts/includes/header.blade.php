@@ -305,8 +305,8 @@
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="dropdown-item has_children">Posts</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      <li><a class="dropdown-item" href="page-about.html"> Portal Posts</a></li>
-		                      <li><a class="dropdown-item" href="page-about2.html"> Users Posts </a></li>
+		                      <li><a class="dropdown-item" href="https://salonportal.000webhostapp.com/home/insigts"> Portal Posts</a></li>
+		                      <li><a class="dropdown-item" href="{{ route('posts.index') }}"> Users Posts </a></li>
 		                      <li class="dropdown-divider"></li>
 		                      <li><a class="dropdown-item text-center" href="page-team.html"> Add Post </a></li>
 		                    </ul>
@@ -314,17 +314,18 @@
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="has_children dropdown-item">Questions</a>
 		                    <ul class="dropdown-menu">
-		                      <li><a class="dropdown-item" href="page-contact.html">Asked Questions</a></li>
-		                      <li><a class="dropdown-item" href="page-contact2.html">My Questions</a></li>
+		                      <li><a class="dropdown-item" href="{{ route('questions.index') }}">Asked Questions</a></li>
+		                      <li><a class="dropdown-item" href="{{ route('questions.index') }}">My Questions</a></li>
 		                      <li class="dropdown-divider"></li>
-		                      <li><a class="dropdown-item" href="page-login_register2.html">Ask A Question</a></li>
+		                      <li><a class="dropdown-item" href="{{ route('questions.create') }}">Ask A Question</a></li>
 		                    </ul>
 		                </li>
 		                <li class="dropdown-submenu">
-		                    <a href="javascript:void(0)" class="has_children dropdown-item">About Us</a>
+		                    <a href="javascript:void(0)" class="has_children dropdown-item">My Wall</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
+		                      <li><a class="dropdown-item" href="{{ route('messages.index', 'inbox') }}"> My Inbox</a></li>
 		                      <li><a class="dropdown-item" href="{{ route('profile') }}"> My Profile</a></li>
-		                      <li><a class="dropdown-item" href="page-profile2.html">User Profile Option 2</a></li>
+		                      <li><a class="dropdown-item" href="{{ route('settings') }}">My Timeline</a></li>
 		                    </ul>
 		                </li>
 		                <li class="dropdown-submenu">
