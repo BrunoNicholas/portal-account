@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
+use App\Models\JobApplication;
 use App\Models\Question;
 use App\Models\Company;
-use App\Models\Project;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\Style;
+use App\Models\Post;
 use App\User;
 
 class Comment extends Model
@@ -37,11 +40,9 @@ class Comment extends Model
 
     /**
      * Belonds to relationship connects both
-     * the comment to e parent post, question, sermon 
-     * or deveotional
+     * the comment to this table
      *
      */
-
     public function questions()
     {
         return $this->belongsTo(Question::class);
@@ -75,5 +76,41 @@ class Comment extends Model
     public function users()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Belonds to relationship connects both
+     * the comment to this table
+     */
+    public function job_applications()
+    {
+        return $this->belongsTo(JobApplication::class);
+    }
+
+    /**
+     * Belonds to relationship connects both
+     * the comment to this table
+     */
+    public function products()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Belonds to relationship connects both
+     * the comment to this table
+     */
+    public function orders()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * Belonds to relationship connects both
+     * the comment to this table
+     */
+    public function styles()
+    {
+        return $this->belongsTo(Style::class);
     }
 }

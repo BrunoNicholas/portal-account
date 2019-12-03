@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Image;
+use App\Models\Image as GalleryImage;
 use App\User;
 
 class Gallery extends Model
@@ -18,10 +18,9 @@ class Gallery extends Model
     	'description',
     	'gallery_id',
     	'image',
-    	'caption',
     	'title',
-    	'size',
     	'user_id',
+        'status'
     ];
 
     /**
@@ -42,9 +41,7 @@ class Gallery extends Model
     }
 
     /**
-     * The relationship method for comments.
-     *
-     * as comments.
+     * The relationship method for images
      */
     public function images()
     {

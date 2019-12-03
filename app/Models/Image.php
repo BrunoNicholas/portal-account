@@ -3,7 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Company;
+use App\Models\Product;
+use App\Models\Product;
+use App\Models\Product;
 use App\Models\Gallery;
+use App\Models\Style;
 use App\User;
 
 class Image extends Model
@@ -46,5 +51,55 @@ class Image extends Model
     public function galleries()
     {
         return $this->belongsTo(Gallery::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function companies()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function shops()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function salons()
+    {
+        return $this->belongsTo(Salon::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function products()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function styles()
+    {
+        return $this->belongsTo(Style::class);
     }
 }

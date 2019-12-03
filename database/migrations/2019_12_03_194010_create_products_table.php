@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStylesTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,23 @@ class CreateStylesTable extends Migration
      */
     public function up()
     {
-        Schema::create('styles', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('shop_id')->nullable()->unsigned()->index();
             $table->bigInteger('categories_id')->nullable()->unsigned()->index();
-            $table->bigInteger('salon_id')->nullable()->unsigned()->index();
-            $table->bigInteger('style_id')->nullable()->unsigned()->index();
-            $table->bigInteger('user_id')->unsigned()->index();
-            $table->string('style_name');
+            $table->bigInteger('product_id')->nullable()->unsigned()->index();
+            $table->string('product_name');
             $table->text('description')->nullable();
             $table->float('previous_price')->nullable();
-            $table->float('current_price')->nullable();
+            $table->float('current_price')->nullable();            
+            $table->bigInteger('user_id')->unsigned()->index();
             $table->string('status')->default('available');
             $table->timestamps();
-
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('style_id')->references('id')->on('styles')->onDelete('cascade');
-            $table->foreign('salon_id')->references('id')->on('salons')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
@@ -40,6 +40,6 @@ class CreateStylesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('styles');
+        Schema::dropIfExists('products');
     }
 }

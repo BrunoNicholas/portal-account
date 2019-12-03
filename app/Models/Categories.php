@@ -9,6 +9,7 @@ use App\Models\Style;
 use App\Models\Salon;
 use App\Models\Post;
 use App\Models\Shop;
+use App\Models\Product;
 use App\User;
 
 class Categories extends Model
@@ -36,6 +37,14 @@ class Categories extends Model
     public function users()
     {
     	return $this->belongsTo(User::class);
+    }
+
+    /*
+	 * belongs to table
+     */
+    public function categories()
+    {
+    	return $this->belongsTo(Categories::class);
     }
 
     /*
@@ -84,5 +93,13 @@ class Categories extends Model
     public function styles()
     {
     	return $this->hasMany(Style::class);
+    }
+
+    /*
+	 * Has many relationship to table
+     */
+    public function products()
+    {
+    	return $this->hasMany(Product::class);
     }
 }

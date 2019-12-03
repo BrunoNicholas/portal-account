@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories;
-use App\Models\Booking;
 use App\Models\Comment;
+use App\Models\Booking;
 use App\Models\Image;
-use App\Models\Salon;
+use App\Models\Shop;
 use App\User;
 
-class Style extends Model
+class Product extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,15 +18,8 @@ class Style extends Model
      * @var array
      */
     protected $fillable = [
-        'categories_id',
-        'salon_id',
-        'style_id',
-        'user_id',
-        'style_name',
-        'description',
-        'previous_price',
-        'current_price',
-        'status'
+    	'shop_id','product_name','product_id','description','previous_price',
+    	'current_price','categories_id','user_id','status'
     ];
 
     /**
@@ -34,15 +27,7 @@ class Style extends Model
      *
      * @var array
      */
-    protected $table = 'styles';
-
-    /*
-     * belongs to table
-     */
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $table = 'products';
 
     /*
      * belongs to table
@@ -55,9 +40,25 @@ class Style extends Model
     /*
      * belongs to table
      */
-    public function salons()
+    public function shops()
     {
-        return $this->belongsTo(Salon::class);
+        return $this->belongsTo(Shop::class);
+    }
+
+    /*
+     * has many images
+     */
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    /*
+     * belongs to table
+     */
+    public function users()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -75,13 +76,5 @@ class Style extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * The relationship method for images
-     */
-    public function images()
-    {
-        return $this->hasMany(Image::class);
     }
 }

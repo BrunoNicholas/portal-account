@@ -18,7 +18,7 @@ class CreateCompaniesTable extends Migration
             $table->bigInteger('categories_id')->nullable()->unsigned()->index();
             $table->string('company_name')->unique();
             $table->string('company_email')->unique();
-            $table->string('company_logo')->nullable()->default('logo.jpg');
+            $table->string('company_logo')->nullable();
             $table->bigInteger('user_id')->nullable()->unsigned()->index();
             $table->string('company_telephone')->nullable();
             $table->string('products_services')->nullable(); // chose if products/services/both

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Categories;
 use App\Models\Comment;
 use App\User;
 
@@ -14,14 +15,11 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'project_id',
-        'post_date',
+        'categories_id',
         'references',
         'title',
-        'image_id',
         'description',
         'user_id',
-        'more',
         'status'
     ];
 
@@ -50,5 +48,13 @@ class Post extends Model
     public function users()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /*
+     * belongs to table
+     */
+    public function categories()
+    {
+        return $this->belongsTo(Categories::class);
     }
 }

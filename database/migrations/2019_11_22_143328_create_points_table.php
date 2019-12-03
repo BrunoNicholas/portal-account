@@ -15,7 +15,12 @@ class CreatePointsTable extends Migration
     {
         Schema::create('points', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('number')->nullable()->default(0);
+            $table->bigInteger('user_id')->unsigned()->index();
+            $table->status('status')->default('cool');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

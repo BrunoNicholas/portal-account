@@ -13,6 +13,7 @@ use App\Models\Gallery;
 use App\Models\Message;
 use App\Models\Image;
 use App\Models\Booking;
+use App\Models\Feedback;
 use App\Models\Order;
 use App\Models\Post;
 use App\Models\Question;
@@ -74,6 +75,16 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function companies()
     {
         return $this->hasMany(Company::class);
+    }
+
+    /**
+     * The relationship method for galleries.
+     *
+     * as galleries.
+     */
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class);
     }
 
     /**
@@ -189,7 +200,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
     /**
      * The relationship method for galleries.
      *
-     * as galleries.
+     * as this table.
      */
     public function teams()
     {

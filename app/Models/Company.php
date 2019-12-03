@@ -3,6 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Categories;
+use App\Models\Comment;
+use App\Models\Review;
+use App\Models\Rating;
+use App\Models\Salon;
+use App\Models\Image;
+use App\Models\Shop;
+use App\User;
 
 class Company extends Model
 {
@@ -12,13 +20,18 @@ class Company extends Model
      * @var array
      */
     protected $fillable = [
+        'categories_id',
         'user_id',
         'company_name',
         'company_email',
         'company_logo',
         'company_telephone',
         'company_location',
-        'company_description',
+        'products_services',
+        'description',
+        'company_ID',
+        'company_gps',
+        'company_website',
         'company_bio',
         'status'
     ];
@@ -33,7 +46,6 @@ class Company extends Model
     /*
      * belongs to table
      */
-
     public function categories()
     {
         return $this->belongsTo(Categories::class);
@@ -42,18 +54,33 @@ class Company extends Model
     /*
      * belongs to table
      */
-
     public function users()
     {
         return $this->belongsTo(User::class);
     }
 
     /*
-	 * Has many relationship to table
+     * Has many relationship to table
+     */
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
+
+    /*
+     * Has many relationship to table
+     */
+    public function salons()
+    {
+        return $this->hasMany(Salon::class);
+    }
+
+    /*
+     * Has many relationship to table
      */
     public function reviews()
     {
-    	return $this->hasMany(Review::class);
+        return $this->hasMany(Review::class);
     }
 
     /*
@@ -70,5 +97,13 @@ class Company extends Model
     public function comments()
     {
     	return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * The relationship method for images
+     */
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }

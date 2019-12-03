@@ -29,13 +29,12 @@ class Team extends Model
     protected $table = 'teams';
 
     /**
-     * Belonds to relationship connects both 
-     * the user table and the books table
+     * Belonds to relationship for users
      *
      */
-    public function projects()
+    public function users()
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(User::class);
     }
 
     /**

@@ -19,8 +19,6 @@ class CreateCategoriesTable extends Migration
             $table->string('type')->default('open');
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
-
-
             $table->bigInteger('categories_id')->nullable()->unsigned()->index();
             $table->bigInteger('user_id')->nullable()->unsigned()->index();
             $table->timestamps();

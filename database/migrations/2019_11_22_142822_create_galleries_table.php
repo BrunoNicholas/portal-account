@@ -15,13 +15,11 @@ class CreateGalleriesTable extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('gallery_name')->nullable();
+            $table->string('gallery_name');
             $table->text('description')->nullable();
             $table->bigInteger('gallery_id')->nullable()->unsigned()->index();
-            $table->string('image');
-            $table->string('caption')->nullable();
+            $table->string('image')->nullable();
             $table->string('title')->nullable();
-            $table->string('size')->nullable();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('status')->default('visible');
             $table->timestamps();
