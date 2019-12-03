@@ -28,7 +28,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = Booking::latest()->paginate(50);
+        return view('system.bookings.index',compact(['bookings']));
     }
 
     /**
@@ -38,7 +39,8 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        $bookings = Booking::latest()->paginate(50);
+        return view('system.bookings.create',compact(['bookings']));
     }
 
     /**
@@ -58,9 +60,13 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function show(Booking $booking)
+    public function show($id)
     {
-        //
+        $booking    = Booking::find($id);
+        if (!$booking) {
+            return back()->with('danger','Booking not found, it is either missing or deleted!');
+        }
+        return view('system.bookings.show', compact(['booking']));
     }
 
     /**
@@ -69,9 +75,13 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function edit(Booking $booking)
+    public function edit($id)
     {
-        //
+        $booking    = Booking::find($id);
+        if (!$booking) {
+            return back()->with('danger', 'Booking not found. It is either missing or deleted');
+        }
+        return view('system.bookings.edit', compact(['booking']));
     }
 
     /**
@@ -81,7 +91,7 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -92,7 +102,7 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy($id)
     {
         //
     }

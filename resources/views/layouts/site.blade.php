@@ -22,6 +22,43 @@
     @endguest
     <link rel="stylesheet" href="{{ asset('assets/css/width-boxed.min.css') }}" id="ms-boxed" disabled>
     <style type="text/css">
+        #example23_paginate {
+            text-align: right;
+            padding: 3px;
+        }
+
+        #example23_paginate > .paginate_button {
+            /* for previos and next */
+            border: thin solid #00695c;
+            border-radius: 3px;
+            background-color:#00695c;
+            color: #fff;
+            padding: 5px 10px;
+            margin-left: 1px;
+            margin-right: 1px;
+        }
+
+        #example23_paginate > span > a {
+            /* for previos and next */
+            border: thin solid #00695c;
+            border-radius: 3px;
+            color: #00695c;
+            padding: 5px 10px;
+            margin-left: 1px;
+            margin-right: 1px;
+        }
+
+        #example23_paginate > span > .current {
+            /* for previos and next */
+            border: thin solid #00695c;
+            border-radius: 3px;
+            background-color:#00695c;
+            color: #fff;
+            padding: 5px 10px;
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+
         @media only screen and (max-width: 600px) {
             .justify-content-end > nav { display: none; }
         }

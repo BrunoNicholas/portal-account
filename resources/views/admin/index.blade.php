@@ -31,7 +31,7 @@
 	                        <div class="col-8">
 		                        <h2>
 		                        	<b class="counter">{{ App\User::where('status', 'active')->get()->count() }}</b>
-		                        	<small style="font-size: 15px;"> / <b class="counter">{{ count($users) }}</b></small>
+		                        	<small style="font-size: 15px;"> / <b class="counter">{{ App\User::all()->count() }}</b></small>
 		                        </h2>
 		                        <p class="mt-2 no-mb lead small-caps">system users</p>
 		                    </div>
@@ -45,7 +45,7 @@
 	                        <div class="col-8">
 		                        <h2>
 		                        	<b class="counter">{{ App\Models\Company::where('status', 'active')->get()->count() }}</b>
-		                        	<small style="font-size: 15px;"> / <b class="counter">{{ count($companies) }}</b></small>
+		                        	<small style="font-size: 15px;"> / <b class="counter">{{ App\Models\Company::all()->count() }}</b></small>
 		                        </h2>
 		                        <p class="mt-2 no-mb lead small-caps">companies</p>
 		                    </div>
@@ -59,7 +59,7 @@
 	                        <div class="col-8">
 		                        <h2>
 		                        	<b class="counter">{{ App\Models\Salon::where('status', 'active')->get()->count() }}</b>
-		                        	<small style="font-size: 15px;"> / <b class="counter">{{ count($salons) }}</b></small>
+		                        	<small style="font-size: 15px;"> / <b class="counter">{{ App\Models\Salon::all()->count() }}</b></small>
 		                        </h2>
 		                        <p class="mt-2 no-mb lead small-caps">salons &amp; spas</p>
 		                    </div>
@@ -73,7 +73,7 @@
 	                        <div class="col-8">
 		                        <h2>
 		                        	<b class="counter">{{ App\Models\Shop::where('status', 'active')->get()->count() }}</b>
-		                        	<small style="font-size: 15px;"> / <b class="counter">{{ count($shops) }}</b></small>
+		                        	<small style="font-size: 15px;"> / <b class="counter">{{ App\Models\Shop::all()->count() }}</b></small>
 		                        </h2>
 		                        <p class="mt-2 no-mb lead small-caps">shops</p>
 		                    </div>

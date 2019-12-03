@@ -14,7 +14,8 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $feedback = Feedback::latest()->paginate(100);
+        return view('admin.feedback', compact(['feedback']))->with('info', 'View the users feedback on the system, '. config('app.name'));
     }
 
     /**

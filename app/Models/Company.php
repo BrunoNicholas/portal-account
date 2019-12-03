@@ -31,12 +31,21 @@ class Company extends Model
     protected $table = 'companies';
 
     /*
-	 * belongs to table
+     * belongs to table
+     */
+
+    public function categories()
+    {
+        return $this->belongsTo(Categories::class);
+    }
+
+    /*
+     * belongs to table
      */
 
     public function users()
     {
-    	return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /*

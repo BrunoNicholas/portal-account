@@ -34,7 +34,7 @@
 	            	<div class="panel box-v4">
 		                <div class="panel-body">
 		                    <div class="responsive-table">
-		                        <table id="example" class="table table-striped table-bordered table-hoverable" width="100%" cellspacing="0">
+		                        <table id="example23" class="table table-striped table-bordered table-hoverable" width="100%" cellspacing="0">
 		                            <thead>
 		                                <tr>
 		                                    <th class="text-center;">#</th>

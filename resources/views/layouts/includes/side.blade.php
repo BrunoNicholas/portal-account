@@ -32,6 +32,7 @@
 	              	@endrole
 	              	@role(['super-admin','admin'])
 	              	<li><a href="{{ route('userhome') }}"><i class="fa-angle-double-right fa"></i> User Dasboard</a></li>
+	              	<li><a href="{{ route('feedback.index') }}" class="text-warning"><i class="fa-angle-double-right fa text-warning"></i> User Feedback</a></li>
 	              	@endrole
 	              	@endguest
 	              	<li class="dropdown-divider"></li>
@@ -46,11 +47,14 @@
 	              	<li><a href="{{ route('profile') }}"><i class="fa-angle-double-right fa"></i> My Profile</a></li>
 	              	<li><a href="{{ route('messages.index', 'inbox') }}"><i class="fa-angle-double-right fa"></i>  Inbox </a></li>
 	              	<li><a href="{{ route('settings') }}"><i class="fa-angle-double-right fa"></i> Timeline</a></li>
+	              	<li class="dropdown-divider"></li>
+	              	<li><a href="{{ route('galleries.index') }}"><i class="fa-angle-double-right fa"></i> Galleries</a></li>
+	              	<li><a href="{{ route('images.index') }}"><i class="fa-angle-double-right fa"></i> Images </a></li>
 	            </ul>
 	        </li>
 	        <li class="card" role="tab" id="sch4">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc4" aria-expanded="false" aria-controls="sc4">
-	              	<i class="zmdi zmdi-edit"></i> Companies
+	              	<i class="zmdi zmdi-ungroup"></i> Companies
 	            </a>
 	            <ul id="sc4" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch4" data-parent="#slidebar-menu">
 	              	<li><a href="{{ route('companies.index') }}"><i class="fa-angle-double-right fa"></i> Portal Companies </a></li>
@@ -59,32 +63,42 @@
 	        </li>
 	        <li class="card" role="tab" id="sch5">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc5" aria-expanded="false" aria-controls="sc5">
-	              	<i class="zmdi zmdi-shopping-basket"></i> E-Commerce 
+	              	<i class="zmdi zmdi-male-female"></i> Salons &amp; Spa's
 	            </a>
 	            <ul id="sc5" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch5" data-parent="#slidebar-menu">
-		            <li><a href="ecommerce-filters.html">E-Commerce Sidebar</a></li>
-		            <li><a href="ecommerce-filters-full.html">E-Commerce Sidebar Full</a></li>
-		            <li><a href="ecommerce-filters-full2.html">E-Commerce Topbar Full</a></li>
-		            <li><a href="ecommerce-item.html">E-Commerce Item</a></li>
-		            <li><a href="ecommerce-cart.html">E-Commerce Cart</a></li>
+		            <li><a href="{{ route('salons.index') }}"><i class="fa-angle-double-right fa"></i> Portal Salons</a></li>
+		            <li><a href="{{ route('salons.create') }}"><i class="fa-angle-double-right fa"></i> Register Salon </a></li>
 	            </ul>
 	        </li>
 	        <li class="card" role="tab" id="sch6">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc6" aria-expanded="false" aria-controls="sc6">
-	              <i class="zmdi zmdi-collection-image-o"></i> Portfolio </a>
+	              	<i class="zmdi zmdi-male-female"></i> Shops </a>
 	            <ul id="sc6" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch6" data-parent="#slidebar-menu">
-	              <li><a href="portfolio-filters_sidebar.html">Portfolio Sidebar Filters</a></li>
-	              <li><a href="portfolio-filters_topbar.html">Portfolio Topbar Filters</a></li>
-	              <li><a href="portfolio-filters_sidebar_fluid.html">Portfolio Sidebar Fluid</a></li>
-	              <li><a href="portfolio-filters_topbar_fluid.html">Portfolio Topbar Fluid</a></li>
-	              <li><a href="portfolio-cards.html">Porfolio Cards</a></li>
-	              <li><a href="portfolio-masonry.html">Porfolio Masonry</a></li>
-	              <li><a href="portfolio-item.html">Portfolio Item 1</a></li>
-	              <li><a href="portfolio-item2.html">Portfolio Item 2</a></li>
+	              	<li><a href="{{ route('shops.index') }}"><i class="fa-angle-double-right fa"></i> Product Shop </a></li>
+	              	<li><a href="{{ route('shops.create') }}"><i class="fa-angle-double-right fa"></i> Register Shop </a></li>
+	            </ul>
+	        </li>
+	        <li class="card" role="tab" id="sch6">
+	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc7" aria-expanded="false" aria-controls="sc7">
+	              	<i class="zmdi zmdi-plus-square"></i> Bookings </a>
+	            <ul id="sc7" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch6" data-parent="#slidebar-menu">
+	              	<li><a href="{{ route('bookings.index', ['all',0]) }}"><i class="fa-angle-double-right fa"></i> Bookings </a></li>
+	              	<li><a href="{{ route('bookings.create', ['all',0]) }}"><i class="fa-angle-double-right fa"></i> Book Now </a></li>
+	            </ul>
+	        </li>
+	        <li class="card" role="tab" id="sch6">
+	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc8" aria-expanded="false" aria-controls="sc8">
+	              	<i class="zmdi zmdi-star-circle"></i> Orders </a>
+	            <ul id="sc8" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch6" data-parent="#slidebar-menu">
+	              	<li><a href="{{ route('orders.index', ['all',0]) }}"><i class="fa-angle-double-right fa"></i> View Orders </a></li>
+	              	<li><a href="{{ route('orders.create', ['all',0]) }}"><i class="fa-angle-double-right fa"></i> Order Now </a></li>
 	            </ul>
 	        </li>
 	        <li>
-	            <a class="link" href="component-typography.html"><i class="zmdi zmdi-view-compact"></i> UI Elements</a>
+	            <a class="link" href="{{ route('questions.index') }}"><i class="zmdi zmdi-view-compact"></i> Questions</a>
+	        </li>
+	        <li>
+	            <a class="link" href="{{ route('posts.index') }}"><i class="zmdi zmdi-view-compact"></i> Posts</a>
 	        </li>
 	        <li>
 	            <a class="link" href="page-all.html"><i class="zmdi zmdi-link"></i> All Pages</a>
