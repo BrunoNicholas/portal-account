@@ -397,14 +397,14 @@
 		                </li>
 		                @permission('can_message')
 		                <li>
-		                	<a class="dropdown-item" href="javascript:void(0)">
+		                	<a class="dropdown-item" href="{{ route('messages.index', 'inbox') }}">
 		                		<i class="zmdi zmdi-email" style="font-size: 23px;"></i> Messages &amp; Info
 		                	</a>
 		                </li>
 		                @endpermission
 		                <li class="dropdown-divider"></li>
 		                <li>
-		                	<a class="dropdown-item" href="javascript:void(0)">
+		                	<a class="dropdown-item" href="{{ route('questions.index') }}">
 		                		<i class="fa fa-question-circle" style="font-size: 23px;"></i> My Questions </a>
 		                </li>
 		                <li class="dropdown-divider"></li>

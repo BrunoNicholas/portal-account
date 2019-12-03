@@ -6,7 +6,7 @@
 	            <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i> Login</a>
 	            <a href="javascript:void(0)" class="withripple" data-toggle="modal" data-target="#ms-account-modal"> Or Register <i class="zmdi zmdi-account-add"></i></a>
 	            @else
-	            <a href="javascript:void(0)" class="withripple"> Bruno Nicholas <small> - Admin</small> </a>
+	            <a href="javascript:void(0)" class="withripple"> Bruno Nicholas <small> - {{ App\Models\Role::where('name',Auth::user()->role)->first()->display_name }}</small> </a>
 	            @endguest
 	        </div>
 	        <div class="ms-slidebar-title">
@@ -22,28 +22,31 @@
         </header>
         <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true">
 	        <li class="card" role="tab" id="sch1">
-	            <a class="collapsed" role="button" href="#sc1" aria-controls="sc1">
-	            <i class="zmdi zmdi-home"></i> Home </a>
-	            {{-- <ul id="sc1" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch1" data-parent="#slidebar-menu">
-	              	<li><a href="index.html">Default Home</a></li>
-	              	<li><a href="home-generic-2.html">Home Black Slider</a></li>
-	            </ul> --}}
+	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc1" aria-expanded="false" aria-controls="sc1">
+	            <i class="zmdi zmdi-home"></i> Home Sections </a>
+	            <ul id="sc1" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch1" data-parent="#slidebar-menu">
+	              	<li><a href="{{ url('/') }}">{{ config('app.name') }}</a></li>
+	              	@guest   @else
+	              	@role(['client']) @else
+	              	<li><a href="{{ route('home') }}">Home Dashboard</a></li>
+	              	@endrole
+	              	@role(['super-admin','admin'])
+	              	<li><a href="{{ route('userhome') }}">User Dasboard</a></li>
+	              	@endrole
+	              	@endguest
+	              	<li class="dropdown-divider"></li>
+	              	<li><a href="https://salonportal.000webhostapp.com" target="_blank"><i class="fa-link fa"></i>{{ config('app.name') }} Info Site </a></li>
+	            </ul>
 	        </li>
 	        <li class="card" role="tab" id="sch2">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc2" aria-expanded="false" aria-controls="sc2">
-	              	<i class="zmdi zmdi-desktop-mac"></i> Pages 
+	              	<i class="zmdi zmdi-account"></i> My Sections 
 	            </a>
 	            <ul id="sc2" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch2" data-parent="#slidebar-menu">
-	              <li><a href="page-about.html">About US</a></li>
-	              <li><a href="page-team.html">Our Team</a></li>
-	              <li><a href="page-product.html">Products</a></li>
-	              <li><a href="page-services.html">Services</a></li>
-	              <li><a href="page-faq.html">FAQ</a></li>
-	              <li><a href="page-timeline_left.html">Timeline</a></li>
-	              <li><a href="page-contact.html">Contact Option</a></li>
-	              <li><a href="page-login.html">Login</a></li>
-	              <li><a href="page-pricing.html">Pricing</a></li>
-	              <li><a href="page-coming.html">Coming Soon</a></li>
+	              	<li><a href="{{ route('messages.index', 'inbox') }}"> Inbox </a></li>
+	              	<li><a href="{{ route('profile') }}">My Profile</a></li>
+	              	<li><a href="page-product.html">Products</a></li>
+	              	<li><a href="page-services.html">Timeline</a></li>
 	            </ul>
 	        </li>
 	        <li class="card" role="tab" id="sch4">

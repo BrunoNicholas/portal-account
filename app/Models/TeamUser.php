@@ -3,10 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Gallery;
-use App\User;
 
-class Image extends Model
+class TeamUser extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,11 +12,8 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-    	'gallery_id',
-    	'image',
-    	'caption',
-    	'title',
-    	'user_id',
+        'team_id',
+        'user_id',
     ];
 
     /**
@@ -26,7 +21,17 @@ class Image extends Model
      *
      * @var array
      */
-    protected $table = 'images';
+    protected $table = 'teams';
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function teams()
+    {
+        return $this->belongsTo(Team::class);
+    }
 
     /**
      * Belonds to relationship connects both 
@@ -37,14 +42,5 @@ class Image extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    /**
-     * Belonds to relationship connects both 
-     * the user table and the books table
-     *
-     */
-    public function galleries()
-    {
-        return $this->belongsTo(Gallery::class);
-    }
 }
+

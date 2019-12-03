@@ -24,10 +24,10 @@
 	<div class="row mt-0 pl-0">
 		<div class="col-lg-12 ms-paper-content-container">
 			<div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('users.index') }}'">
                     <div class="panel panel-body text-center">
-                    	<div class="row pl-2">                    	
-                        	<i class="fa fa-4x fa-group primary-color text-center col-4" style="padding-top: 20px;"></i>
+                    	<div class="row pl-2 text-success">                    	
+                        	<i class="fa fa-4x fa-group primary-color text-success text-center col-4" style="padding-top: 20px;"></i>
 	                        <div class="col-8">
 		                        <h2>
 		                        	<b class="counter">{{ App\User::where('status', 'active')->get()->count() }}</b>
@@ -38,10 +38,10 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('companies.index') }}'">
                     <div class="panel panel-body text-center">
-                    	<div class="row pl-2">                    	
-                        	<i class="fa fa-4x fa-id-card-o primary-color text-center col-4" style="padding-top: 20px;"></i>
+                    	<div class="row pl-2 text-warning">                    	
+                        	<i class="fa fa-4x fa-id-card-o primary-color text-warning text-center col-4" style="padding-top: 20px;"></i>
 	                        <div class="col-8">
 		                        <h2>
 		                        	<b class="counter">{{ App\Models\Company::where('status', 'active')->get()->count() }}</b>
@@ -52,10 +52,10 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('salons.index') }}'">
                     <div class="panel panel-body text-center">
-                    	<div class="row pl-2">                    	
-                        	<i class="fa fa-4x fa-address-book primary-color text-center col-4" style="padding-top: 20px;"></i>
+                    	<div class="row pl-2 text-info">                    	
+                        	<i class="fa fa-4x fa-address-book primary-color text-info text-center col-4" style="padding-top: 20px;"></i>
 	                        <div class="col-8">
 		                        <h2>
 		                        	<b class="counter">{{ App\Models\Salon::where('status', 'active')->get()->count() }}</b>
@@ -66,10 +66,10 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('shops.index') }}'">
                     <div class="panel panel-body text-center">
-                    	<div class="row pl-2">                    	
-                        	<i class="fa fa-4x fa-address-card primary-color text-center col-4" style="padding-top: 20px;"></i>
+                    	<div class="row pl-2 text-danger">                    	
+                        	<i class="fa fa-4x fa-address-card primary-color text-danger text-center col-4" style="padding-top: 20px;"></i>
 	                        <div class="col-8">
 		                        <h2>
 		                        	<b class="counter">{{ App\Models\Shop::where('status', 'active')->get()->count() }}</b>

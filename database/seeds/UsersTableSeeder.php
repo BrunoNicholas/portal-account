@@ -32,6 +32,7 @@ class UsersTableSeeder extends Seeder
         $user_super->save();
         
         $user_super->attachRole(Role::where('name','super-admin')->first());
+        
         $user_admin = new User();
         $user_admin->name = 'Emilly Agaba'; 
         $user_admin->email = 'emileagaba999@gmail.com';
@@ -43,6 +44,7 @@ class UsersTableSeeder extends Seeder
         $user_admin->bio = 'Am a loving good Christian!';
         $user_admin->status = 'active';
         $user_admin->save();
+        
         $user_admin->attachRole(Role::where('name','admin')->first());
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\Permission;
 use App\Models\Role;
 
 class RolesTableSeeder extends Seeder
@@ -12,6 +14,8 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('permission_role');
+
         $owner = new Role();
 		$owner->name         = 'super-admin';
 		$owner->display_name = 'Super Administrator'; // optional
@@ -60,5 +64,13 @@ class RolesTableSeeder extends Seeder
         $role_guest->display_name = 'Guest User';
         $role_guest->description = 'A user reviewing the system';
         $role_guest->save();
+
+        // attaching roles to super-admin
+        $permissions = Permission::all();
+
+        foreach ($permissions as $perm) {
+            $owner->attachPermission($perm);
+        }
+        
     }
 }
