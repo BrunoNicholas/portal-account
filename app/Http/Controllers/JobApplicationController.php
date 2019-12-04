@@ -29,7 +29,8 @@ class JobApplicationController extends Controller
      */
     public function index()
     {
-        //
+        $jobs   = JobApplication::latest()->paginate(50);
+        return view('system.jobs.index',compact('jobs'));
     }
 
     /**
@@ -59,9 +60,13 @@ class JobApplicationController extends Controller
      * @param  \App\Models\JobApplication  $jobApplication
      * @return \Illuminate\Http\Response
      */
-    public function show(JobApplication $jobApplication)
+    public function show($id)
     {
-        //
+        $job    = JobApplication::find($id);
+        if (!$job) {
+            return redirect()->route('jobs.index')->with('danger','Job application not found. It is either missing or deleted');
+        }
+        return view('system.jobs.show',compact(['job']));
     }
 
     /**
@@ -70,9 +75,13 @@ class JobApplicationController extends Controller
      * @param  \App\Models\JobApplication  $jobApplication
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobApplication $jobApplication)
+    public function edit($id)
     {
-        //
+        $job    = JobApplication::find($id);
+        if (!$job) {
+            return redirect()->route('jobs.index')->with('danger','Job application not found. It is either missing or deleted');
+        }
+        return view('system.jobs.show',compact(['job']));
     }
 
     /**
@@ -82,7 +91,7 @@ class JobApplicationController extends Controller
      * @param  \App\Models\JobApplication  $jobApplication
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobApplication $jobApplication)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -93,8 +102,10 @@ class JobApplicationController extends Controller
      * @param  \App\Models\JobApplication  $jobApplication
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobApplication $jobApplication)
+    public function destroy($id)
     {
-        //
+        $item = JobApplication::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->back()->with('danger', 'Job application deleted successfully');
     }
 }

@@ -34,24 +34,30 @@ class BookingController extends Controller
     public function index( $type=null,$item_id)
     {
         if ($type == 'shop') {
-            $shop = Shop::find($id);
+            $shop = Shop::find($item_id);
+            if (!$shop) {
+                return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+            }
             $bookings   = $shop->bookings;
-            return view('system.bookings.index',compact(['bookings','type','id']));
+            return view('system.bookings.index',compact(['bookings','type','item_id']));
         }
         elseif ($type == 'salon') {
-            $salon = Salon::find($id);
+            $salon = Salon::find($item_id);
+            if (!$salon) {
+                return back()->with('danger','Salon not found. It is either deleted or it is missing.');
+            }
             $bookings   = $salon->bookings;
-            return view('system.bookings.index',compact(['bookings','type','id']));
+            return view('system.bookings.index',compact(['bookings','type','item_id']));
         }
         elseif ($type == 'style') {
-            $style = Style::find($id);
+            $style = Style::find($item_id);
             $bookings   = $style->bookings;
-            return view('system.bookings.index',compact(['bookings','type','id']));
+            return view('system.bookings.index',compact(['bookings','type','item_id']));
         }
         elseif ($type == 'product') {
-            $product = Product::find($id);
+            $product = Product::find($item_id);
             $bookings   = $product->bookings;
-            return view('system.bookings.index',compact(['bookings','type','id']));
+            return view('system.bookings.index',compact(['bookings','type','item_id']));
         }
 
         $bookings = Booking::latest()->paginate(50);

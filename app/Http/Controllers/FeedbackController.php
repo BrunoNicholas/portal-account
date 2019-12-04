@@ -36,7 +36,11 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'category' => 'required',
+        ]);
+        Feedback::create($request->all());
+        return back()->with('success','Thank you for your feedback. We shall consider carefully!');
     }
 
     /**
@@ -45,7 +49,7 @@ class FeedbackController extends Controller
      * @param  \App\Models\Feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function show(Feedback $feedback)
+    public function show($id)
     {
         //
     }
@@ -56,7 +60,7 @@ class FeedbackController extends Controller
      * @param  \App\Models\Feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function edit(Feedback $feedback)
+    public function edit($id)
     {
         //
     }
@@ -68,9 +72,13 @@ class FeedbackController extends Controller
      * @param  \App\Models\Feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Feedback $feedback)
+    public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'category' => 'required',
+        ]);
+        Feedback::find($id)->update($request->all());
+        return back()->with('success','Feedback record updated successfully!');
     }
 
     /**
@@ -79,8 +87,10 @@ class FeedbackController extends Controller
      * @param  \App\Models\Feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Feedback $feedback)
+    public function destroy($id)
     {
-        //
+        $item = Feedback::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->back()->with('danger', 'Feedback details deleted successfully');
     }
 }

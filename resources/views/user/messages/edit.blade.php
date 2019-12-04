@@ -23,9 +23,10 @@
     </div>
 @endsection
 @section('content')
-<div class="container mt-6" style="min-height: 500px;">
+<div class="container mt-0" style="min-height: 500px;">
 	<div class="row mt-0 pl-0">
-		<div class="col-lg-12 ms-paper-content-container">
+		@include('layouts.includes.left_message')
+		<div class="col-lg-9 ms-paper-content-container">
 			<div class="ms-paper-content">
 	            <section class="ms-component-section">
 

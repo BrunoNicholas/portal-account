@@ -101,7 +101,7 @@
 	            <a class="link" href="{{ route('posts.index') }}"><i class="zmdi zmdi-view-compact"></i> Posts</a>
 	        </li>
 	        <li>
-	            <a class="link" href="page-all.html"><i class="zmdi zmdi-link"></i> All Pages</a>
+	            <a class="link" href="{{ route('jobs.index') }}"><i class="zmdi zmdi-link"></i> Job Applications </a>
 	        </li>
         </ul>
         <div class="ms-slidebar-social ms-slidebar-block">

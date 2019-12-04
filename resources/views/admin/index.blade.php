@@ -144,45 +144,47 @@
 		                        </div>
 		                        <div role="tabpanel" class="tab-pane fade" id="profile">
 			                        <div class="table-hoverable">
-			                        	<table class="table table-hoverable">
-			                                <thead>
-			                                    <tr>
-			                                        <th class="text-left">#</th>
-			                                        <th>Database Name</th>
-			                                        <th>Display Name</th>
-			                                        <th>Description</th>
-			                                        <th>Updated</th>
-			                                        <th>Added</th>
-			                                        <th>Actions</th>
-			                                    </tr>
-			                                </thead>
-			                                <tbody><?php $a=0; ?>
-			                                    @foreach($roles as $role)
-			                                        <tr>
-			                                            <td class="text-left">{{ ++$a }}</td>
-			                                            <td class="text-left">{{ $role->name }}</td>
-			                                            <td class="text-left">{{ $role->display_name }}</td>
-			                                            <td class="text-left">{{ $role->description }}</td>
-			                                            <td class="text-left">{{ $role->updated_at }}</td>
-			                                            <td class="text-left">{{ $role->created_at }}</td>
-			                                            <td class="row text-center" style="min-width: 115px;">
-			                                                <a href="{{ route('roles.show', $role->id) }}" class="col-5 btn btn-sm btn-info" style="font-size: 13px; margin: 2px;" title="User Details"><i class="fa fa-info-circle"></i></a>
-			                                                <a href="{{ route('roles.edit', $role->id) }}" class="col-5 btn btn-sm btn-primary" style="font-size: 13px; margin: 2px;"><i class="fa fa-edit" title="Edit User Profile"></i></a>
-			                                            </td>
-			                                        </tr>
-			                                    @endforeach
-			                                    <tr>
-			                                        <td colspan="7">
-			                                            <a href="{{ route('roles.index') }}">
-			                                                <button class="btn btn-sm btn-info">View All Roles</button>
-			                                            </a> | 
-			                                            <a href="{{ route('roles.create') }}" title="Add new user role" class="btn btn-primary btn-sm">
-			                                                <i class="fa-plus fa">add</i>
-			                                            </a>
-			                                        </td>
-			                                    </tr>
-			                                </tbody>
-			                            </table>
+			                        	<div class="table-responsive">
+				                        	<table class="table table-hoverable">
+				                                <thead>
+				                                    <tr>
+				                                        <th class="text-left">#</th>
+				                                        <th>Database Name</th>
+				                                        <th>Display Name</th>
+				                                        <th>Description</th>
+				                                        <th>Updated</th>
+				                                        <th>Added</th>
+				                                        <th>Actions</th>
+				                                    </tr>
+				                                </thead>
+				                                <tbody><?php $a=0; ?>
+				                                    @foreach($roles as $role)
+				                                        <tr>
+				                                            <td class="text-left">{{ ++$a }}</td>
+				                                            <td class="text-left">{{ $role->name }}</td>
+				                                            <td class="text-left">{{ $role->display_name }}</td>
+				                                            <td class="text-left">{{ $role->description }}</td>
+				                                            <td class="text-left">{{ $role->updated_at }}</td>
+				                                            <td class="text-left">{{ $role->created_at }}</td>
+				                                            <td class="row text-center" style="min-width: 115px;">
+				                                                <a href="{{ route('roles.show', $role->id) }}" class="col-5 btn btn-sm btn-info" style="font-size: 13px; margin: 2px;" title="User Details"><i class="fa fa-info-circle"></i></a>
+				                                                <a href="{{ route('roles.edit', $role->id) }}" class="col-5 btn btn-sm btn-primary" style="font-size: 13px; margin: 2px;"><i class="fa fa-edit" title="Edit User Profile"></i></a>
+				                                            </td>
+				                                        </tr>
+				                                    @endforeach
+				                                    <tr>
+				                                        <td colspan="7">
+				                                            <a href="{{ route('roles.index') }}">
+				                                                <button class="btn btn-sm btn-info">View All Roles</button>
+				                                            </a> | 
+				                                            <a href="{{ route('roles.create') }}" title="Add new user role" class="btn btn-primary btn-sm">
+				                                                <i class="fa-plus fa">add</i>
+				                                            </a>
+				                                        </td>
+				                                    </tr>
+				                                </tbody>
+				                            </table>
+				                        </div>
 			                        </div>
 		                        </div>
 		                        <div role="tabpanel" class="tab-pane fade" id="messages">

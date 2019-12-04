@@ -25,12 +25,151 @@
     </div>
 @endsection
 @section('content')
-<div class="container mt-6" style="min-height: 500px;">
+<div class="container mt-0" style="min-height: 500px;">
 	<div class="row mt-0 pl-0">
-		<div class="col-lg-12 ms-paper-content-container">
+		@include('layouts.includes.left_message')
+		<div class="col-lg-9 ms-paper-content-container">
 			<div class="ms-paper-content">
 	            <section class="ms-component-section">
+	            	<div class="card">
+			            <section class="card-primary" style="padding: 5px 15px;">
+			                <h3 class="card-title">
+			                    @if($type == 'inbox')
+			                        <i class="fa fa-envelope text-info"></i> Inboxed Messages 
+			                    @elseif($type == 'draft')
+			                        <i class="fa fa-envelope text-primary"></i> Drafted Messages
+			                    @elseif($type == 'trash')
+			                        <i class="fa fa-envelope text-danger"></i> Trashed Messages
+			                    @elseif($type == 'spam')
+			                        <i class="fa fa-envelope text-warning"></i> Spamed Messages
+			                    @elseif($type == 'sent')
+			                        <i class="fa fa-envelope text-success"></i> Sent Messages
+			                    @elseif($type == 'important')
+			                        <i class="fa fa-envelope text-danger"></i> Important Messages
+			                    @elseif($type == 'urgent')
+			                        <i class="fa fa-envelope text-success"></i> Urgent Messages
+			                    @elseif($type == 'official')
+			                        <i class="fa fa-envelope text-warning"></i> Official Messages
+			                    @elseif($type == 'unofficial')
+			                        <i class="fa fa-envelope text-info"></i> Unofficial Messages
+			                    @elseif($type == 'normal')
+			                        <i class="fa fa-envelope text-dark"></i> Normal Messages
+			                    @elseif($type == 'all')
+			                        <i class="fa fa-envelope text-primary"></i> All Messages
+			                    @elseif($type == 'all')
+			                        All Messages
+			                    @else
+			                        Messagess
+			                    @endif
+			                </h3>
+			            </section>
+			            <div class="col-md-12" style="overflow-x: auto;">
+			                <div class="panel panel-primary">
+				                <!-- /.box-header -->
+				                <div class="panel-body no-padding">
+				                  	<div class="mailbox-controls">
+					                    <!-- Check all button -->
+					                    <div class="btn-group">
+					                        <button type="button" class="btn btn-default btn-sm" onclick="window.location='{{ route('messages.index', 'trash') }}'"><i class="fa fa-trash-o"></i></button>
+					                        <button type="button" class="btn btn-default btn-sm" onclick="window.location='{{ route('messages.index', 'important') }}'"><i class="fa fa-star"></i></button>
+					                        <button type="button" class="btn btn-default btn-sm" onclick="window.location='{{ route('messages.index', 'spam') }}'"><i class="fa fa-fire"></i></button>
+					                    </div>
+					                    <!-- /.btn-group -->
+					                    <a href=""><button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button></a>
+					                    <div class="pull-right">
+					                        
+					                    </div>
+					                </div>
+					                <div class="table-responsive mailbox-messages">
+					                    <table class="table table-hover table-striped">
+						                    <tbody>
+						                        @if(sizeof($messages) < 1)
+					                              	<tr>
+					                                  	<td class="chb text-center" colspan="6"> <i> No {{ $type }} message found! </i> </td>
+					                              	</tr>
+						                        @endif
+						                        @foreach ($messages as $message)
+						                            <tr class="@if($message->priority == 'seen') unread @else read @endif" @if ($message->priority == 'seen') style="background-color: #e9f9f9;" @endif>
+						                                <td class="check chb">
+						                                    {{-- <input type="checkbox" class="icheck" name="checkbox1" /> --}}
+						                                    <div class="custom-control custom-checkbox">
+				                                              	<input type="checkbox" name="checker" class="custom-control-input" id="cst{{ $message->id }}">
+				                                              	<label class="custom-control-label" for="cst{{ $message->id }}">&nbsp;</label>
+				                                          	</div>
+						                                </td>
 
+				                                        @if($message->sender == Auth::user()->id)
+				                                            <td class="user-image">
+				                                                <img src="{{ App\User::where('id',$message->receiver)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->receiver)->get()->first())->profile_image : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
+				                                            </td>
+				                                            <td class="user-name">
+				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->receiver)->get()->first())->name }}</h6>
+				                                            </td>
+				                                        @else
+				                                            <td class="user-image">
+				                                                <img src="{{ asset('/files/profile/images/'. (App\User::where('id',$message->sender)->get()->first())->profile_image) }}" alt="user" class="rounded-circle" width="30">
+				                                            </td>
+				                                            <td class="user-name">
+				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->sender)->get()->first())->name }}</h6>
+				                                            </td>
+				                                        @endif
+						                                <td class="contact pull-left">
+						                                    <a class="link pull-left" href="{{ route('messages.show',[$message->id,'details']) }}">
+				                                                @if($message->folder == 'important')
+				                                                    <span class="btn btn-sm btn-danger m-r-10">{{ $message->folder }}</span>
+				                                                @elseif($message->folder == 'urgent')
+				                                                    <span class="btn btn-sm btn-success m-r-10">{{ $message->folder }}</span>
+				                                                @elseif($message->folder == 'official')
+				                                                    <span class="btn btn-sm btn-warning m-r-10">{{ $message->folder }}</span>
+				                                                @elseif($message->folder == 'unofficial')
+				                                                    <span class="btn btn-sm btn-info m-r-10">{{ $message->folder }}</span>
+				                                                @elseif($message->folder == 'normal')
+				                                                    <span class="btn btn-sm btn-default m-r-10">{{ $message->folder }}</span>
+				                                                @else
+				                                                    <span class="btn btn-sm btn-primary m-r-10 text-primary">{{ $message->folder }}</span>
+				                                                @endif
+				                                            </a>
+				                                        </td>
+				                                        <td class="contact">
+				                                          	<a  href="{{ route('messages.show',[$message->id,'details']) }}">
+				                                                <span class="blue-grey-text text-darken-4">
+				                                                    <b>{{ $message->title }}</b>
+				                                                </span> 
+				                                                {{ strlen($message->message) > 20 ? substr($message->message, 0, 20) . '... ' : $message->message }}
+				                                            </a>
+						                                </td>
+					                                  	@if($message->attachment) 
+				                                            <td class="clip" title="This is a public (group) message sent to all!"><i class="fa fa-users"></i></td> <!-- fa fa-paperclip -->
+				                                            <td class="time" title="This is a public (group) message sent to all!"> {{ $message->created_at }} </td>
+				                                        @else
+				                                            <td colspan="2" class="time" title="{{ $message->created_at }}"> {{ $message->created_at }} </td>
+				                                        @endif
+						                            </tr>
+						                        @endforeach
+					                        </tbody>
+					                    </table>
+					                    <!-- /.table -->
+					                </div>
+					                <!-- /.mail-box-messages -->
+					                <br>
+				                </div>
+				                <!-- /.box-body -->
+				                <div class="box-footer no-padding">
+				                    <div class="btn-group">
+				                        <button type="button" class="btn btn-default btn-sm" onclick="window.location='{{ route('messages.index', 'trash') }}'"><i class="fa fa-trash-o"></i></button>
+				                        <button type="button" class="btn btn-default btn-sm" onclick="window.location='{{ route('messages.index', 'important') }}'"><i class="fa fa-star"></i></button>
+				                        <button type="button" class="btn btn-default btn-sm" onclick="window.location='{{ route('messages.index', 'spam') }}'"><i class="fa fa-fire"></i></button>
+				                    </div>
+				                    <!-- /.btn-group -->
+				                    <a href=""><button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button></a>
+				                    <div class="pull-right">
+				                        {{ $messages->links() }}
+				                    </div>
+				                </div>
+				                <br style="visibility: hidden;">
+				            </div>
+			            </div>
+			        </div>
 
 	            </section>
 	        </div>

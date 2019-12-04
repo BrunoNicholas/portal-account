@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Gallery;
 use App\Models\Company;
 use App\Models\Product;
-use App\Models\Product;
-use App\Models\Product;
-use App\Models\Gallery;
+use App\Models\Shop;
+use App\Models\Salon;
 use App\Models\Style;
 use App\User;
 
@@ -19,6 +19,11 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
+        'company_id',
+        'shop_id',
+        'salon_id',
+        'style_id',
+        'product_id',
     	'gallery_id',
     	'image',
     	'caption',

@@ -59,9 +59,13 @@ class SalonController extends Controller
      * @param  \App\Models\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function show(Salon $salon)
+    public function show($id)
     {
-        //
+        $salon  = Salon::find($id);
+        if (!$salon) {
+            return back()->with('danger','Salon not found. It is either deleted or it is missing.');
+        }
+        return view('system.salons.show', compact(['salon']));
     }
 
     /**
@@ -70,9 +74,13 @@ class SalonController extends Controller
      * @param  \App\Models\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function edit(Salon $salon)
+    public function edit($id)
     {
-        //
+        $salon  = Salon::find($id);
+        if (!$salon) {
+            return back()->with('danger','Salon not found. It is either deleted or it is missing.');
+        }
+        return view('system.salons.edit', compact(['salon']));
     }
 
     /**
@@ -82,7 +90,7 @@ class SalonController extends Controller
      * @param  \App\Models\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Salon $salon)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -93,8 +101,18 @@ class SalonController extends Controller
      * @param  \App\Models\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Salon $salon)
+    public function destroy($id)
     {
-        //
+        $item = Salon::where('id',$id)->get()->first();
+        
+        $user = User::find($item->user_id);
+        $user->role = 'client';
+        $user->save();
+
+        DB::table('role_user')->where('user_id',$item->user_id)->delete();
+        $user->attachRole(Role::where('name','client')->first());
+
+        $item->delete();
+        return redirect()->back()->with('danger', 'Salon details deleted successfully');
     }
 }

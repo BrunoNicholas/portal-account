@@ -69,9 +69,11 @@
     <![endif]-->
 </head>
 <body>
+    <span id="topmessage"></span>
     @permission('can_view_right_menu')
     <a href="javascript:void(0)" class="ms-conf-btn ms-configurator-btn btn-circle btn-circle-raised btn-circle-primary animated rubberBand" style=""><i class="fa fa-gears"></i></a>
     @endpermission
+    @include('layouts.includes.rightmessage')
     @include('layouts.includes.notifications')
     {{-- right menu --}}
     @include('layouts.includes.right_menu')

@@ -31,14 +31,6 @@ class Booking extends Model
     /*
      * belongs to table
      */
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /*
-     * belongs to table
-     */
     public function shops()
     {
         return $this->belongsTo(Shop::class);

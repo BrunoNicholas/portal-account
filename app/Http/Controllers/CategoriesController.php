@@ -28,7 +28,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categories::latest()->paginate(50);
+        return view('system.categories.index');
     }
 
     /**
@@ -49,7 +50,11 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+        ]);
+        Categories::create($request->all());
+        return back()->with('success','Category added successfully!');
     }
 
     /**
@@ -60,7 +65,11 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Categories::findOrFail($id);
+        if (!$category) {
+            return back()->with('danger','Category not found. It is either missing or deleted.');
+        }
+        return view('system.categories.show',compact(['category']));
     }
 
     /**
@@ -83,7 +92,11 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+        ]);
+        Categories::find($id)->update($request->all());
+        return redirect()->route('categories.index')->with('success', "Category updated successfully");
     }
 
     /**

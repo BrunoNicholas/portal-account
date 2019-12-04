@@ -33,7 +33,7 @@
 	            	<h4 class="section-title no-margin-top">Manage the user roles &amp; permissions | <a href="{{ route('roles.create') }}" class="btn btn-sm btn-info"> <i class="fa-plus fa"></i>Add New</a></h4>
 	            	<div class="panel box-v4">
 		                <div class="panel-body">
-		                    <div class="responsive-table">
+		                    <div class="table-responsive">
 		                        <table id="example23" class="table table-striped table-bordered table-hoverable" width="100%" cellspacing="0">
 		                            <thead>
 		                                <tr>

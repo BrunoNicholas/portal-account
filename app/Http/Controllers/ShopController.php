@@ -44,9 +44,13 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function show(Shop $shop)
+    public function show($id)
     {
-        //
+        $shop  = Shop::find($id);
+        if (!$shop) {
+            return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+        }
+        return view('system.shops.show', compact(['shop']));
     }
 
     /**
@@ -55,9 +59,13 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shop $shop)
+    public function edit($id)
     {
-        //
+        $shop  = Shop::find($id);
+        if (!$shop) {
+            return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+        }
+        return view('system.shops.show', compact(['shop']));
     }
 
     /**
@@ -67,7 +75,7 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -78,8 +86,18 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shop $shop)
+    public function destroy($id)
     {
-        //
+        $item = Shop::where('id',$id)->get()->first();
+        
+        $user = User::find($item->user_id);
+        $user->role = 'client';
+        $user->save();
+
+        DB::table('role_user')->where('user_id',$item->user_id)->delete();
+        $user->attachRole(Role::where('name','client')->first());
+        
+        $item->delete();
+        return redirect()->back()->with('danger', 'Shop details deleted successfully');
     }
 }
