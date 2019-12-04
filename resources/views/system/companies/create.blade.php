@@ -1,4 +1,4 @@
--md@extends('layouts.site')
+@extends('layouts.site')
 @section('title', 'Administrator')
 @section('styles') @endsection
 @section('navigator')
@@ -11,9 +11,9 @@
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
 	                    <ol class="breadcrumb">
-	                    	<li><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
-					    	<li><a href="{{ route('companies.index') }}"><i class="ion ion-ios-toggle-outline text-primary"></i>Companies</a></li>
-					        <li class="active"><a href="javascript:void(0)"><i class="fa fa-plus"></i>Add Company</a></li>
+	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
+					    	<li class="breadcrumb-item"><a href="{{ route('companies.index') }}"><i class="ion ion-ios-toggle-outline text-primary"></i>Companies</a></li>
+					        <li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="fa fa-plus"></i> Add Company</a></li>
 				        </ol>
 	                </ol>
 	            </nav>

@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use App\Models\Shop;
+use App\Models\Salon;
+use App\Models\Style;
+use App\Models\Product;
+use App\User;
 
 class BookingController extends Controller
 {
@@ -26,10 +31,31 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( $type=null,$item_id)
     {
+        if ($type == 'shop') {
+            $shop = Shop::find($id);
+            $bookings   = $shop->bookings;
+            return view('system.bookings.index',compact(['bookings','type','id']));
+        }
+        elseif ($type == 'salon') {
+            $salon = Salon::find($id);
+            $bookings   = $salon->bookings;
+            return view('system.bookings.index',compact(['bookings','type','id']));
+        }
+        elseif ($type == 'style') {
+            $style = Style::find($id);
+            $bookings   = $style->bookings;
+            return view('system.bookings.index',compact(['bookings','type','id']));
+        }
+        elseif ($type == 'product') {
+            $product = Product::find($id);
+            $bookings   = $product->bookings;
+            return view('system.bookings.index',compact(['bookings','type','id']));
+        }
+
         $bookings = Booking::latest()->paginate(50);
-        return view('system.bookings.index',compact(['bookings']));
+        return view('system.bookings.index',compact(['bookings','type','id']));
     }
 
     /**
@@ -37,7 +63,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type=null, $id)
     {
         $bookings = Booking::latest()->paginate(50);
         return view('system.bookings.create',compact(['bookings']));
@@ -49,9 +75,16 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $type=null,$item_id)
     {
-        //
+        request()->validate([
+            'user_id' => 'required',
+        ]);
+        Booking::create($request->all());
+        if ($type && $item_id) {
+            return redirect()->route('bookings.index',[$type,$item_id])->with('success','Booking created successfully!');
+        }
+        return redirect()->back()->with('success','Booking created successfully!');
     }
 
     /**
@@ -60,13 +93,13 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type=null, $item_id, $id)
     {
         $booking    = Booking::find($id);
         if (!$booking) {
             return back()->with('danger','Booking not found, it is either missing or deleted!');
         }
-        return view('system.bookings.show', compact(['booking']));
+        return view('system.bookings.show', compact(['booking','type','item_id','id']));
     }
 
     /**
@@ -75,7 +108,7 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $type=null, $item_id, $id)
     {
         $booking    = Booking::find($id);
         if (!$booking) {
@@ -91,9 +124,16 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $type=null, $item_id, $id)
     {
-        //
+        request()->validate([
+            'user_id' => 'required',
+        ]);
+        Booking::find($id)->update($request->all());
+        if ($type && $item_id) {
+            return redirect()->route('bookings.index',[$type,$item_id])->with('success','Booking created successfully!');
+        }
+        return redirect()->back()->with('success','Booking created successfully!');
     }
 
     /**
@@ -102,8 +142,10 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($type=null,$item_id,$id)
     {
-        //
+        $item = Booking::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->back()->with('danger', 'Booking deleted successfully!');
     }
 }

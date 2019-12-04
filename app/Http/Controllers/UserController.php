@@ -158,19 +158,19 @@ class UserController extends Controller
         
         $user  = User::find($id);
         $user->name     = $request->name;
+        $user->role     = $request->role;
         $user->email    = $request->email;
         $user->gender   = $request->gender;
         $user->telephone     = $request->telephone;
-        $user->role     = $request->role;
-        $user->location = $request->location;
+        $user->place_of_work = $request->place_of_work;
         $user->nationality  = $request->nationality;
         $user->occupation   = $request->occupation;
         $user->date_of_birth     = $request->date_of_birth;
-        $user->institution  = $request->institution;
+        $user->work_address  = $request->work_address;
         $user->bio      = $request->bio;
-        $user->facebook_link    = $request->facebook_link;
-        $user->twitter_handle   = $request->twitter_handle;
-        $user->whatsapp_number  = $request->whatsapp_number;
+        $user->home_address    = $request->home_address;
+        $user->email_notifications   = $request->email_notifications;
+        // $user->whatsapp_number  = $request->whatsapp_number;
         $user->status   = $request->status;
         $user->save();
 
