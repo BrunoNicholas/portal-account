@@ -17,6 +17,7 @@ class CompanyController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('auth')->except('index','show');
         // $this->middleware('role:super-admin|admin|client')->except('show','index');
         
         $this->middleware('permission:can_add_company',['only'=>['create','store']]);

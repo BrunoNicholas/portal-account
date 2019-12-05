@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -13,7 +14,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::all();
+        return view('admin.permissions.index',compact(['permissions']));
     }
 
     /**
@@ -23,7 +25,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.permissions.create');
     }
 
     /**
@@ -34,7 +36,11 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+        ]);
+        Permission::create($request->all());
+        return redirect()->route('permissions.index')->with('success','Permission added successfully!');
     }
 
     /**
@@ -45,7 +51,11 @@ class PermissionController extends Controller
      */
     public function show($id)
     {
-        //
+        $permission    = Permission::find($id);
+        if (!$permission) {
+            return redirect()->route('permissions.index')->with('danger','Permission not found. It is either missing or deleted');
+        }
+        return view('admin.permissions.show',compact(['permission']));
     }
 
     /**
@@ -56,7 +66,11 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $permission    = Permission::find($id);
+        if (!$permission) {
+            return redirect()->route('permissions.index')->with('danger','Permission not found. It is either missing or deleted');
+        }
+        return view('admin.permissions.edit',compact(['permission']));
     }
 
     /**
@@ -68,7 +82,11 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+        ]);
+        Permission::find($id)->update($request->all());
+        return redirect()->route('permissions.index')->with('success','Permission added successfully!');
     }
 
     /**

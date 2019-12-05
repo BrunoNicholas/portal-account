@@ -39,6 +39,7 @@
 	              	<li class="text-success"><a href="https://salonportal.000webhostapp.com" target="_blank" class="text-success"><i class="fa-link fa text-primary"></i>{{ config('app.name') }} Info Site </a></li>
 	            </ul>
 	        </li>
+	        @guest @else
 	        <li class="card" role="tab" id="sch2">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc2" aria-expanded="false" aria-controls="sc2">
 	              	<i class="zmdi zmdi-account"></i> My Sections 
@@ -51,7 +52,7 @@
 	              	<li><a href="{{ route('galleries.index') }}"><i class="fa-angle-double-right fa"></i> Galleries</a></li>
 	              	<li><a href="{{ route('images.index') }}"><i class="fa-angle-double-right fa"></i> Images </a></li>
 	            </ul>
-	        </li>
+	        </li>@endguest
 	        <li class="card" role="tab" id="sch4">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc4" aria-expanded="false" aria-controls="sc4">
 	              	<i class="zmdi zmdi-ungroup"></i> Companies

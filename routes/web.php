@@ -49,21 +49,15 @@ Route::get('/user', [
 
 Route::group(['prefix' => 'home', 'middleware' => ['auth','verified']], function(){
 	Route::resource('{type}/messages', 'MessageController');
-	Route::resource('salons', 'SalonController');
-	Route::resource('shops', 'ShopController');
 	Route::resource('sections/jobs', 'JobApplicationController');
-	Route::resource('sections/questions', 'QuestionController');
-	Route::resource('sections/posts', 'PostController');
 	Route::resource('{type}/{id}/orders', 'OrderController');
 	Route::resource('{type}/{id}/bookings', 'BookingController');
 	Route::resource('{type}/{id}/comments', 'CommentController');
 	Route::resource('{type}/{id}/reviews', 'ReviewController');
 	Route::resource('{type}/{id}/ratings', 'RatingController');
-	Route::resource('{type}/{id}/styles', 'StyleController');
 
 	Route::resource('points', 'PointController');
 	Route::resource('teams', 'TeamController');
-	Route::resource('companies', 'CompanyController');
 	Route::resource('categories', 'CategoriesController');
 	Route::resource('sections/feedback', 'FeedbackController');
 	Route::resource('user/gallery/images', 'ImageController');
@@ -95,4 +89,14 @@ Route::group(['prefix' => 'home', 'middleware' => ['auth','verified']], function
 		'as'	=> 'password.update',
 		'uses'	=> 'UserController@changePassword'
 	]);
+});
+
+Route::group(['prefix' => 'home', 'middleware' => 'web'], function(){
+	Route::resource('sections/posts', 'PostController');
+	Route::resource('companies', 'CompanyController');
+	Route::resource('salons', 'SalonController');
+	Route::resource('shops', 'ShopController');
+	Route::resource('{type}/{id}/styles', 'StyleController');
+	Route::resource('{type}/{id}/products', 'ProductController');
+	Route::resource('sections/questions', 'QuestionController');
 });

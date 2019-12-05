@@ -23,7 +23,7 @@
     </div>
 @endsection
 @section('content')
-<div class="container mt-6" style="min-height: 500px;">
+<div class="container mt-0" style="min-height: 500px;">
 
 
 </div>

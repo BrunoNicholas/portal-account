@@ -31,7 +31,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index( $type=null,$item_id)
+    public function index($type=null,$item_id)
     {
         if ($type == 'shop') {
             $shop = Shop::find($item_id);
@@ -51,11 +51,17 @@ class BookingController extends Controller
         }
         elseif ($type == 'style') {
             $style = Style::find($item_id);
+            if (!$shop) {
+                return back()->with('danger','Style not found. It is either deleted or it is missing.');
+            }
             $bookings   = $style->bookings;
             return view('system.bookings.index',compact(['bookings','type','item_id']));
         }
         elseif ($type == 'product') {
             $product = Product::find($item_id);
+            if (!$product) {
+                return back()->with('danger','Product not found. It is either deleted or it is missing.');
+            }
             $bookings   = $product->bookings;
             return view('system.bookings.index',compact(['bookings','type','item_id']));
         }
@@ -72,7 +78,7 @@ class BookingController extends Controller
     public function create($type=null, $id)
     {
         $bookings = Booking::latest()->paginate(50);
-        return view('system.bookings.create',compact(['bookings']));
+        return view('system.bookings.create',compact(['bookings','type','item_id']));
     }
 
     /**
@@ -114,13 +120,13 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function edit( $type=null, $item_id, $id)
+    public function edit($type=null, $item_id, $id)
     {
         $booking    = Booking::find($id);
         if (!$booking) {
             return back()->with('danger', 'Booking not found. It is either missing or deleted');
         }
-        return view('system.bookings.edit', compact(['booking']));
+        return view('system.bookings.edit', compact(['booking','type','item_id']));
     }
 
     /**

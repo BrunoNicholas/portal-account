@@ -14,14 +14,14 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        $this->middleware('role:super-admin|admin|editor')->except('index','show');
         
-        $this->middleware('permission:can_view_posts',['only'=>'index']);
+        // $this->middleware('permission:can_view_posts',['only'=>'index']);
         $this->middleware('permission:can_add_post',['only'=>['create','store']]);
         $this->middleware('permission:can_delete_post',['only'=>'destroy']);
         // $this->middleware('permission:can_respond_to_jobs',['only'=>['update','edit']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +29,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::latest()->paginate(20);
+        return view('system.posts.index', compact(['posts']));
     }
 
     /**
@@ -39,7 +40,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $posts = Post::latest()->paginate(5);
+        return view('system.posts.create',compact(['posts']));
     }
 
     /**
@@ -50,7 +52,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'description'     => 'required',
+        ]);
+        Post::create($request->all());
+        return redirect()->route('posts.index')->with('success','Post created successfully');
     }
 
     /**
@@ -59,9 +65,13 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+        $post = Post::find($id);
+        if (!$post) {
+            return redirect()->route('posts.index')->with('danger', 'Post Not Found!');
+        }
+        return view('system.posts.show', compact(['post']));
     }
 
     /**
@@ -70,9 +80,13 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        if (!$post) {
+            return redirect()->route('posts.index')->with('danger', 'Post Not Found!');
+        }
+        return view('system.posts.edit', compact(['post']));
     }
 
     /**
@@ -82,9 +96,13 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        request()->validate(['description'     => 'required',
+        ]);
+        Post::find($id)->update($request->all());
+
+        return redirect()->route('posts.index')->with('success','Post updated successfully!');
     }
 
     /**
@@ -93,8 +111,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $item = Post::find($id);
+        $item->delete();
+
+        return redirect()->route('posts.index')->with('danger', 'Post Deleted Successfully');
     }
 }

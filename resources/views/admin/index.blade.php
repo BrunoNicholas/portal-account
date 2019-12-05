@@ -207,8 +207,8 @@
 						<div class="card-header text-center">
 							Operations &amp; Counters
 						</div>
-						<div class="card-body">
-
+						<div class="card-body text-center">
+							<a href="{{ route('permissions.index') }}"><button class="btn btn-sm btn-warning">Permissions</button></a>
 							
 						</div>
 					</div>

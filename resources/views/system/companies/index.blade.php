@@ -13,8 +13,8 @@
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
 	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
-        					<li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="ion ion-ios-toggle-outline"></i>Companies</a></li>
+	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
+        					<li class="breadcrumb-item active"><i class="fa fa-address-book-o"></i> Companies</li>
 				        </ol>
 	                </ol>
 	            </nav>
@@ -23,7 +23,7 @@
     </div>
 @endsection
 @section('content')
-<div class="container mt-6" style="min-height: 500px;">
+<div class="container mt-0" style="min-height: 500px;">
 	<div class="row mt-0 pl-0">
 		<div class="col-lg-12 ms-paper-content-container">
 			<div class="ms-paper-content">

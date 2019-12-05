@@ -35,7 +35,11 @@ class PointController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'user_id' => 'required',
+        ]);
+        Point::create($request->all());
+        return redirect()->route('points.index')->with('success','Point added successfully!');
     }
 
     /**
@@ -44,7 +48,7 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function show(Point $point)
+    public function show($id)
     {
         //
     }
@@ -55,7 +59,7 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function edit(Point $point)
+    public function edit($id)
     {
         //
     }
@@ -67,9 +71,13 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Point $point)
+    public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'user_id' => 'required',
+        ]);
+        Point::find($id)->update($request->all());
+        return redirect()->route('points.index')->with('success','Point added successfully!');
     }
 
     /**
@@ -78,8 +86,10 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Point $point)
+    public function destroy($id)
     {
-        //
+        $item = Point::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->back()->with('danger', 'Point deleted successfully');
     }
 }

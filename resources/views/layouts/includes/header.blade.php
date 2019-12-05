@@ -54,31 +54,31 @@
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="blog">
 	                	Salons &amp; Spas <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
-	                  	<li><a class="dropdown-item" href="blog-sidebar.html"><i class="zmdi zmdi-view-compact"></i> Children Services </a></li>
-	                  	<li><a class="dropdown-item" href="blog-sidebar2.html"><i class="zmdi zmdi-view-compact"></i> Men Services </a></li>
-	                  	<li><a class="dropdown-item" href="blog-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> Women Services </a></li>
-	                  	<li><a class="dropdown-item" href="blog-masonry2.html"><i class="zmdi zmdi-view-dashboard"></i> Party Services </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-view-compact"></i> Children Services </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-view-compact"></i> Men Services </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-view-dashboard"></i> Women Services </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-view-dashboard"></i> Party Services </a></li>
 	                  	<li class="dropdown-divider"></li>
-	                  	<li><a class="dropdown-item" href="blog-full.html"><i class="zmdi zmdi zmdi-view-stream"></i> Hair Services</a></li>
-	                  	<li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Face Services </a></li>
-	                  	<li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Nails Services </a></li>
-	                  	<li><a class="dropdown-item" href="blog-full2.html"><i class="zmdi zmdi zmdi-view-stream"></i> Body Services </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi zmdi-view-stream"></i> Hair Services</a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi zmdi-view-stream"></i> Face Services </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi zmdi-view-stream"></i> Nails Services </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi zmdi-view-stream"></i> Body Services </a></li>
 	                  	<li class="dropdown-divider"></li>
-	                  	<li><a class="dropdown-item" href="blog-post.html"><i class="zmdi zmdi-file-text"></i> Massage Services </a></li>
-	                  	<li><a class="dropdown-item" href="blog-post2.html"><i class="zmdi zmdi-file-text"></i> Tatooings </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-file-text"></i> Massage Services </a></li>
+	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-file-text"></i> Tatooings </a></li>
 	                </ul>
 	            </li>
 	            {{-- shops and products --}}
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shops &amp; Products <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
-		                <li><a class="dropdown-item" href="portfolio-filters_sidebar.html"><i class="zmdi zmdi-view-compact"></i> Children Products </a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_topbar.html"><i class="zmdi zmdi-view-agenda"></i> Men Products</a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_sidebar_fluid.html"><i class="zmdi zmdi-view-compact"></i> Female Products</a></li>
-		                <li><a class="dropdown-item" href="portfolio-filters_topbar_fluid.html"><i class="zmdi zmdi-view-agenda"></i> Unisex </a></li>
+		                <li><a class="dropdown-item" href="{{ route('products.index',['children','0']) }}"><i class="zmdi zmdi-view-compact"></i> Children Products </a></li>
+		                <li><a class="dropdown-item" href="{{ route('products.index',['men','0']) }}"><i class="zmdi zmdi-view-agenda"></i> Men Products</a></li>
+		                <li><a class="dropdown-item" href="{{ route('products.index',['female','0']) }}"><i class="zmdi zmdi-view-compact"></i> Female Products</a></li>
+		                <li><a class="dropdown-item" href="{{ route('products.index',['unisex','0']) }}"><i class="zmdi zmdi-view-agenda"></i> Unisex </a></li>
 		                <li class="dropdown-divider"></li>
-		                <li><a class="dropdown-item" href="portfolio-cards.html"><i class="zmdi zmdi-card-membership"></i> View All Products</a></li>
-		                <li><a class="dropdown-item" href="portfolio-masonry.html"><i class="zmdi zmdi-view-dashboard"></i> View All Shops</a></li>
+		                <li><a class="dropdown-item" href="{{ route('products.index',['all','0']) }}"><i class="zmdi zmdi-card-membership"></i> View All Products</a></li>
+		                <li><a class="dropdown-item" href="{{ route('shops.index') }}"><i class="zmdi zmdi-view-dashboard"></i> All Shops</a></li>
 		                {{-- <li class="dropdown-divider"></li>
 		                <li><a class="dropdown-item" href="portfolio-item.html"><i class="zmdi zmdi-collection-item-1"></i> Portfolio Item 1</a></li>
 		                <li><a class="dropdown-item" href="portfolio-item2.html"><i class="zmdi zmdi-collection-item-2"></i> Portfolio Item 2</a></li> --}}
@@ -217,10 +217,10 @@
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="dropdown-item has_children">Posts</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      <li><a class="dropdown-item" href="https://salonportal.000webhostapp.com/home/insigts"> Portal Posts</a></li>
+		                      <li><a class="dropdown-item text-success" target="_blank" href="https://salonportal.000webhostapp.com/blog" ><i class="fa fa-link text-success" ></i> Portal Posts</a></li>
 		                      <li><a class="dropdown-item" href="{{ route('posts.index') }}"> Users Posts </a></li>
 		                      <li class="dropdown-divider"></li>
-		                      <li><a class="dropdown-item text-center" href="page-team.html"> Add Post </a></li>
+		                      <li><a class="dropdown-item text-center" href="{{ route('posts.create') }}"> Add Post </a></li>
 		                    </ul>
 		                </li>
 		                <li class="dropdown-submenu">
@@ -243,27 +243,13 @@
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="has_children dropdown-item">FAQ &amp; Support</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      <li><a class="dropdown-item" href="page-support.html">Support Center</a></li>
-		                      <li><a class="dropdown-item" href="page-faq.html">FAQ Option 1</a></li>
-		                      <li><a class="dropdown-item" href="page-faq2.html">FAQ Option 2</a></li>
+		                      	<li><a class="dropdown-item text-success" href="#" target="_blank"><i class="fa-link fa text-success"></i> Site FAQs</a></li>
+		                      	<li class="dropdown-divider"></li>
+		                      	<li><a class="dropdown-item" href="{{ route('questions.index') }}"> Questions </a></li>
+		                      	<li><a class="dropdown-item" href="{{ route('questions.create') }}">Ask Question</a></li>
 		                    </ul>
 		                </li>
-		                <li class="dropdown-submenu">
-		                    <a href="javascript:void(0)" class="has_children dropdown-item">Email Templates</a>
-		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      	<li>
-		                      		<a class="dropdown-item with-badge" href="">Email Template 1 
-		                      			<span class="badge badge-success text-right">1.2</span>
-		                      		</a>
-		                      	</li>
-		                      	<li>
-		                      		<a class="dropdown-item with-badge" href="page-email2.html">Email Template 2 
-		                      			<span class="badge badge-success text-right">1.2</span>
-		                      		</a>
-		                      	</li>
-		                    </ul>
-		                </li>
-                  		<li><a class="dropdown-item" href="page-all.html" class="dropdown-link">All Pages</a></li>
+                  		<li><a class="dropdown-item" href="{{ route('settings') }}" class="dropdown-link text-center"><i class="fa-gear fa"></i> Timeline</a></li>
                 	</ul>
 	            </li>
 	            @guest 

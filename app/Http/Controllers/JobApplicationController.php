@@ -51,7 +51,12 @@ class JobApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'job_title' => 'required',
+            'status' => 'required',
+        ]);
+        JobApplication::create($request->all());
+        return redirect()->route('jobs.index')->with('success','Job application added successfully!');
     }
 
     /**
@@ -93,7 +98,12 @@ class JobApplicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'job_title' => 'required',
+            'status' => 'required',
+        ]);
+        JobApplication::find($id)->update($request->all());
+        return redirect()->route('jobs.index')->with('success','Job application updated successfully carefully!');
     }
 
     /**
