@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use App\Models\Categories;
+use App\Models\Company;
+use App\User;
 
 class ShopController extends Controller
 {
@@ -12,9 +15,27 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type=null)
     {
-        //
+        if ($type == 'shop') {
+            $shop = Shop::find($item_id);
+            if (!$shop) {
+                return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+            }
+            $shops   = $shop->shops;
+            return view('system.shops.index',compact(['shops','type',]));
+        }
+        elseif ($type == 'salon') {
+            $salon = Shop::find($item_id);
+            if (!$salon) {
+                return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+            }
+            $shops   = $salon->shops;
+            return view('system.shops.index',compact(['shops','type']));
+        }
+
+        $shops = Shop::latest()->paginate(50);
+        return view('system.shops.index',compact(['shops','type']));
     }
 
     /**

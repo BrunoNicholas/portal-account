@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Style;
 use Illuminate\Http\Request;
+use App\Models\Salon;
+use App\Models\Categories;
+use App\User;
 
 class StyleController extends Controller
 {
@@ -12,9 +15,27 @@ class StyleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type=null,$item_id)
     {
-        //
+        if ($type == 'shop') {
+            $shop = Shop::find($item_id);
+            if (!$shop) {
+                return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+            }
+            $styles   = $shop->styles;
+            return view('system.styles.index',compact(['styles','type','item_id']));
+        }
+        elseif ($type == 'salon') {
+            $salon = Salon::find($item_id);
+            if (!$salon) {
+                return back()->with('danger','Salon not found. It is either deleted or it is missing.');
+            }
+            $styles   = $salon->styles;
+            return view('system.styles.index',compact(['styles','type','item_id']));
+        }
+
+        $styles = Style::latest()->paginate(50);
+        return view('system.styles.index',compact(['styles','type','id']));
     }
 
     /**
@@ -22,7 +43,7 @@ class StyleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type=null,$item_id)
     {
         //
     }
@@ -44,7 +65,7 @@ class StyleController extends Controller
      * @param  \App\Models\Style  $style
      * @return \Illuminate\Http\Response
      */
-    public function show(Style $style)
+    public function show($type=null,$item_id,$id)
     {
         //
     }
@@ -55,7 +76,7 @@ class StyleController extends Controller
      * @param  \App\Models\Style  $style
      * @return \Illuminate\Http\Response
      */
-    public function edit(Style $style)
+    public function edit($type=null,$item_id, $id)
     {
         //
     }
@@ -67,7 +88,7 @@ class StyleController extends Controller
      * @param  \App\Models\Style  $style
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Style $style)
+    public function update(Request $request, $type=null,$item_id,$id)
     {
         //
     }
@@ -78,7 +99,7 @@ class StyleController extends Controller
      * @param  \App\Models\Style  $style
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Style $style)
+    public function destroy($type=null,$item_id,$id)
     {
         //
     }

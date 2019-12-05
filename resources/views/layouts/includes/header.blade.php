@@ -55,9 +55,9 @@
 	                	Salons &amp; Spas <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
 	                  	<li><a class="dropdown-item" href="{{ route('salons.index','children') }}"><i class="fa-child fa"></i> Children  </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','men') }}"><i class="zmdi zmdi-view-compact"></i> Men  </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','women') }}"><i class="zmdi zmdi-view-dashboard"></i> Women  </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','party') }}"><i class="zmdi zmdi-view-dashboard"></i> Party Dressing </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','men') }}"><i class="fa-male fa"></i> Men  </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','women') }}"><i class="fa-female fa"></i> Women  </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','party') }}"><i class="fa-star fa"></i> Party Dressing </a></li>
 	                  	<li class="dropdown-divider"></li>
 	                  	<li><a class="dropdown-item" href="{{ route('salons.index','hair') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Hair </a></li>
 	                  	<li><a class="dropdown-item" href="{{ route('salons.index','face') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Face  </a></li>

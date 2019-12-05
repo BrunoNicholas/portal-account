@@ -27,7 +27,7 @@ class OrderController extends Controller
 
             return view('system.orders.index',compact(['orders','type','item_id']));
         }
-        $orders = Booking::latest()->paginate(50);
+        $orders = Order::latest()->paginate(50);
         return view('system.orders.index',compact(['orders','type','id']));
     }
 
@@ -38,7 +38,7 @@ class OrderController extends Controller
      */
     public function create($type=null,$item_id)
     {
-        return view('system.bookings.create',compact(['bookings','type','item_id']));
+        return view('system.orders.create',compact(['type','item_id']));
     }
 
     /**

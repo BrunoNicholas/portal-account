@@ -27,9 +27,10 @@ class SalonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type=null)
     {
-        //
+        $salons = Salon::latest()->paginate(50);
+        return view('system.salons.index',compact(['salons','type']));
     }
 
     /**

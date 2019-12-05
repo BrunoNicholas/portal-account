@@ -52,7 +52,7 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('salons.index') }}'">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('salons.index','all') }}'">
                     <div class="panel panel-body text-center">
                     	<div class="row pl-2 text-info">                    	
                         	<i class="fa fa-4x fa-address-book primary-color text-info text-center col-4" style="padding-top: 20px;"></i>
@@ -66,7 +66,7 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('shops.index') }}'">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('shops.index','all') }}'">
                     <div class="panel panel-body text-center">
                     	<div class="row pl-2 text-danger">                    	
                         	<i class="fa fa-4x fa-address-card primary-color text-danger text-center col-4" style="padding-top: 20px;"></i>

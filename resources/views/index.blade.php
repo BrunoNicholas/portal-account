@@ -42,8 +42,14 @@
                         </div>
                     </div>
                     <div class="text-center mt-4">
-                        <a href="javascript:void(0);" class="btn btn-xlg btn-white color-warning btn-raised animated fadeInLeft animation-delay-14 mr-2"><i class="zmdi zmdi-settings"></i> Salons </a>
-                        <a href="{{ route('styles.index', ['companies','all']) }}" class="btn btn-xlg btn-white color-success btn-raised animated fadeInRight animation-delay-14"><i class="zmdi zmdi-download"></i> Styles </a>
+                        <a href="{{ route('salons.index', 'all') }}" 
+                        class="btn btn-sm btn-white color-primary btn-raised animated fadeInRight animation-delay-14"><i class="zmdi zmdi-balance"></i> Salons </a>
+                        <a href="{{ route('shops.index', 'all') }}" 
+                        class="btn btn-sm btn-white color-primary btn-raised animated fadeInLeft animation-delay-14"><i class="zmdi zmdi-settings"></i> Shops </a>
+                        <a href="{{ route('products.index', ['all','0']) }}" 
+                        class="btn btn-sm btn-white color-primary btn-raised animated fadeInRight animation-delay-14"><i class="zmdi zmdi-settings"></i> Products </a>
+                        <a href="{{ route('styles.index', ['companies','all']) }}" 
+                        class="btn btn-sm btn-white color-primary btn-raised animated fadeInLeft animation-delay-14"><i class="zmdi zmdi-balance"></i> Styles </a>
                     </div>
                 </div>
                 <div class="col-lg-5 text-center mt-6">
@@ -62,36 +68,26 @@
         <h2 class="text-center color-primary mb-2 wow fadeInDown animation-delay-4">{{ config('app.name') }} Features</h2>
         <p class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"> 
             Why, <span class="color-primary">{{ config('app.name') }}</span> is your ultimate choice.<br>
-            Dolor alias provident excepturi eligendi, nam numquam iusto eum illum, ea quisquam.
+            {{ config('app.name') }} is a result of a high standard of the market demands, the salon businesses and more to give you the best and make you love your business more.
         </p>
         <div class="row">
           <div class="col-xl-3 col-lg-6 col-md-6">
               <div class="card card-warning-inverse wow fadeInLeft animation-delay-4">
                   <div class="text-center card-body">
                       <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="zmdi zmdi-desktop-mac"></i></span>
-                      <h4 class="">A feature title</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                      <a href="javascript:void(0)" class="btn btn-white color-warning btn-raised">Action here</a>
+                      <h4 style="font-weight: bold;">Your business POS </h4>
+                      <p class="">Manage your shops, salons, orders, bookings, and clients from one place.</p>
+                      <a href="javascript:void(0)" class="btn btn-white color-warning btn-raised"> Register Now </a>
                   </div>
               </div>
           </div>
           <div class="col-xl-3 col-lg-6 col-md-6">
               <div class="card card-royal-inverse wow fadeInLeft animation-delay-3">
                   <div class="text-center card-body">
-                      <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="zmdi zmdi-download"></i></span>
-                      <h4 class="">A feature title</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                      <a href="javascript:void(0)" class="btn btn-white color-royal btn-raised">Action here</a>
-                  </div>
-              </div>
-          </div>
-          <div class="col-xl-3 col-lg-6 col-md-6">
-              <div class="card card-success-inverse wow fadeInRight animation-delay-3">
-                  <div class="text-center card-body">
-                      <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="zmdi zmdi-cloud-outline"></i></span>
-                      <h4 class="">A feature title</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                      <a href="javascript:void(0)" class="btn btn-white color-success btn-raised">Action here</a>
+                      <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="fa-thumbs-o-up fa"></i></span>
+                      <h4 style="font-weight: bold;">Reviews &amp; Ratings</h4>
+                      <p class="">All companies, salons, spa's, shops rated and reviewed with products and services.</p>
+                      <a href="javascript:void(0)" class="btn btn-white color-royal btn-raised"> About Feature </a>
                   </div>
               </div>
           </div>
@@ -99,9 +95,19 @@
               <div class="card card-danger-inverse wow fadeInRight animation-delay-4">
                   <div class="text-center card-body">
                       <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="zmdi zmdi-flower"></i></span>
-                      <h4 class="">A feature title</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                      <a href="javascript:void(0)" class="btn btn-white color-danger btn-raised">Action here</a>
+                      <h4 style="font-weight: bold;">Advanced ACL</h4>
+                      <p class="">A secure and clear management of user roles and abilities for access of the system.</p>
+                      <a href="javascript:void(0)" class="btn btn-white color-danger btn-raised">Read More</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6">
+              <div class="card card-success-inverse wow fadeInRight animation-delay-3">
+                  <div class="text-center card-body">
+                      <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="zmdi zmdi-my-location"></i></span>
+                      <h4 style="font-weight: bold;">Geo location notifications</h4>
+                      <p class="">All can locate your business facility with the geo-location features enabled.</p>
+                      <a href="javascript:void(0)" class="btn btn-white color-success btn-raised">Read More</a>
                   </div>
               </div>
           </div>
@@ -110,7 +116,7 @@
     <div class="wrap ms-hero-bg-dark ms-hero-img-keyboard ms-bg-fixed mt-6">
         <div class="container index-1">
             <div class="text-center color-white mb-4 mw-800 center-block">
-                <h1>Latest Works</h1>
+                <h1>Trending Fashion Styles</h1>
                 <p class="lead color-medium">Discover our projects and the rigorous process of creation. Our principles are creativity, design, experience and <span class="color-white">knowledge</span>. We are backed by 20 years of research.</p>
             </div>
             <div class="row">
@@ -203,7 +209,7 @@
     </div>
     <div class="container mt-6">
         <div class="text-center color-white mb-4 text-center">
-            <h1 class="color-primary">Our Team</h1>
+            <h1 class="color-primary">User Testimonials</h1>
             <p class="lead lead-lg color-danger text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">These are <span class="text-normal">the professionals</span> who, every day, make progress <span class="text-normal">the projects of our clients</span>.</p>
         </div>
         <div class="row d-flex justify-content-center">

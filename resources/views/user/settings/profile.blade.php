@@ -238,24 +238,12 @@
 					                                      <div class="form-group">
 					                                        <label >Account Status </label>
 					                                        <div >
-					                                            <input type="radio" name="status" value="Active" @if (strtolower($user->status) == strtolower('Active'))
-					                                                checked 
-					                                            @endif> Active
-					                                            <input type="radio" name="status" value="Busy" @if (strtolower($user->status) == strtolower('Busy'))
-					                                                checked 
-					                                            @endif> Busy
-					                                            <input type="radio" name="status" value="Inactive" @if (strtolower($user->status) == strtolower('Inactive'))
-					                                                checked 
-					                                            @endif> Inactive
-					                                            <input type="radio" name="status" value="Blocked" @if (strtolower($user->status) == strtolower('Blocked'))
-					                                                checked 
-					                                            @endif> Blocked
-					                                            <input type="radio" name="status" value="Not Active" @if (strtolower($user->status) == strtolower('Not Active'))
-					                                                checked 
-					                                            @endif> Not Active
-					                                            <input type="radio" name="status" value="Available" @if (strtolower($user->status) == strtolower('Available'))
-					                                                checked 
-					                                            @endif> Available
+					                                            <input type="radio" name="status" value="Active" checked> Active
+					                                            <input type="radio" name="status" value="Busy"> Busy
+					                                            <input type="radio" name="status" value="Inactive"> Inactive
+					                                            <input type="radio" name="status" value="Blocked"> Blocked
+					                                            <input type="radio" name="status" value="Not Active"> Not Active
+					                                            <input type="radio" name="status" value="Available"> Available
 					                                        </div>
 					                                    </div>
 					                                    <div class="form-group">

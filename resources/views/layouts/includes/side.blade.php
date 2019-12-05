@@ -117,6 +117,17 @@
 	            <a class="link" href="{{ route('jobs.index') }}"><i class="zmdi zmdi-link"></i> Job Applications </a>
 	        </li>
 	        @endpermission
+	        <li>
+	        	@guest
+		        	<a href="{{ route('login') }}" class="btn btn-raised btn-primary btn-xs">
+		        		<i class="fa fa-power-off text-white" style="font-size: 23px;"></i> Login
+		        	</a>
+	        	@else
+	        		<a class="btn btn-raised btn-danger" href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+		            <i class="fa fa-power-off text-white" style="font-size: 23px;"></i> Logout </a>
+		            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+	        	@endif
+	        </li>
         </ul>
         <div class="ms-slidebar-social ms-slidebar-block">
             <h4 class="ms-slidebar-block-title text-center">Social Links</h4>
