@@ -196,7 +196,7 @@
 					                                    <div class="form-group">
 					                                        <label > Home Address </label>
 					                                        <div>
-					                                            <input type="date" placeholder="Your home address, where you currently live" name="home_address" class="form-control form-control-line" value="{{ $user->home_address }}">
+					                                            <input type="text" placeholder="Your home address, where you currently live" name="home_address" class="form-control form-control-line" value="{{ $user->home_address }}">
 					                                        </div>
 					                                    </div>
 					                                    <input type="hidden" name="role" value="{{ $user->role }}">

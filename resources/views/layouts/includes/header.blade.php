@@ -54,18 +54,20 @@
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="blog">
 	                	Salons &amp; Spas <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-view-compact"></i> Children Services </a></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-view-compact"></i> Men Services </a></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-view-dashboard"></i> Women Services </a></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-view-dashboard"></i> Party Services </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','children') }}"><i class="fa-child fa"></i> Children  </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','men') }}"><i class="zmdi zmdi-view-compact"></i> Men  </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','women') }}"><i class="zmdi zmdi-view-dashboard"></i> Women  </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','party') }}"><i class="zmdi zmdi-view-dashboard"></i> Party Dressing </a></li>
 	                  	<li class="dropdown-divider"></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi zmdi-view-stream"></i> Hair Services</a></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi zmdi-view-stream"></i> Face Services </a></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi zmdi-view-stream"></i> Nails Services </a></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi zmdi-view-stream"></i> Body Services </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','hair') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Hair </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','face') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Face  </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','nails') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Nails  </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','body') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Body  </a></li>
 	                  	<li class="dropdown-divider"></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-file-text"></i> Massage Services </a></li>
-	                  	<li><a class="dropdown-item" href=""><i class="zmdi zmdi-file-text"></i> Tatooings </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','massage') }}"><i class="fa fa-thumbs-up"></i> Massage Services </a></li>
+	                  	<li><a class="dropdown-item" href="{{ route('salons.index','tatooes') }}"><i class="fa fa-thumbs-o-up"></i> Tatooes </a></li>
+	                  	<li class="dropdown-divider"></li>
+	                  	<li><a class="dropdown-item text-center" href="{{ route('salons.index','all') }}"><i class="fa fa-tree"></i> All Salons &amp; Spa's </a></li>
 	                </ul>
 	            </li>
 	            {{-- shops and products --}}
@@ -78,7 +80,7 @@
 		                <li><a class="dropdown-item" href="{{ route('products.index',['unisex','0']) }}"><i class="zmdi zmdi-view-agenda"></i> Unisex </a></li>
 		                <li class="dropdown-divider"></li>
 		                <li><a class="dropdown-item" href="{{ route('products.index',['all','0']) }}"><i class="zmdi zmdi-card-membership"></i> View All Products</a></li>
-		                <li><a class="dropdown-item" href="{{ route('shops.index') }}"><i class="zmdi zmdi-view-dashboard"></i> All Shops</a></li>
+		                <li><a class="dropdown-item" href="{{ route('shops.index','all') }}"><i class="zmdi zmdi-view-dashboard"></i> All Shops</a></li>
 		                {{-- <li class="dropdown-divider"></li>
 		                <li><a class="dropdown-item" href="portfolio-item.html"><i class="zmdi zmdi-collection-item-1"></i> Portfolio Item 1</a></li>
 		                <li><a class="dropdown-item" href="portfolio-item2.html"><i class="zmdi zmdi-collection-item-2"></i> Portfolio Item 2</a></li> --}}
@@ -203,8 +205,11 @@
 			                        </div>
 			                    </div>
 			                    <hr>
-			                    <div class="col-sm-12">
-			                    	<a href="{{ route('styles.index',['all',0]) }}" class="btn btn-block btn-primary">View All Fashion Styles</a>
+			                    <div class="col-sm-6">
+			                    	<a href="{{ route('styles.index',['all',0]) }}" class="btn btn-block btn-primary"><i class="fa-list fa"></i> View All Fashion Styles</a>
+			                    </div>
+			                    <div class="col-sm-6">
+			                    	<a href="{{ route('products.index',['all',0]) }}" class="btn btn-block btn-primary"><i class="fa-list fa"></i> View All Products</a>
 			                    </div>
 	                    	</div>
 	                  	</li>
@@ -217,44 +222,41 @@
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="dropdown-item has_children">Posts</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      <li><a class="dropdown-item text-success" target="_blank" href="https://salonportal.000webhostapp.com/blog" ><i class="fa fa-link text-success" ></i> Portal Posts</a></li>
-		                      <li><a class="dropdown-item" href="{{ route('posts.index') }}"> Users Posts </a></li>
-		                      <li class="dropdown-divider"></li>
-		                      <li><a class="dropdown-item text-center" href="{{ route('posts.create') }}"> Add Post </a></li>
+		                      	<li><a class="dropdown-item" href="{{ route('posts.index') }}"> Users Posts </a></li>
+		                      	@permission('can_add_post')
+		                      	<li class="dropdown-divider"></li>
+		                      	<li><a class="dropdown-item text-center" href="{{ route('posts.create') }}"> Add Post </a></li>
+		                      	@endpermission
+		                      	<li class="dropdown-divider"></li>
+		                      	<li><a class="dropdown-item text-success" target="_blank" href="https://salonportal.000webhostapp.com/blog" ><i class="fa fa-link text-success" ></i> Portal Posts</a></li>
 		                    </ul>
 		                </li>
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="has_children dropdown-item">Questions</a>
 		                    <ul class="dropdown-menu">
-		                      <li><a class="dropdown-item" href="{{ route('questions.index') }}">Asked Questions</a></li>
-		                      <li><a class="dropdown-item" href="{{ route('questions.index') }}">My Questions</a></li>
-		                      <li class="dropdown-divider"></li>
-		                      <li><a class="dropdown-item" href="{{ route('questions.create') }}">Ask A Question</a></li>
+		                      	<li><a class="dropdown-item" href="{{ route('questions.index') }}">Asked Questions</a></li>
+		                      	@permission('can_add_questions')
+		                      	<li class="dropdown-divider"></li>
+		                      	<li><a class="dropdown-item" href="{{ route('questions.create') }}">Ask A Question</a></li>
+		                      	@endpermission
+		                      	<li class="dropdown-divider"></li>
+		                      	<li><a class="dropdown-item text-success" href="#" target="_blank"><i class="fa-link fa text-success"></i> Site FAQs</a></li>
 		                    </ul>
 		                </li>
+		                @auth
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="has_children dropdown-item">My Wall</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      <li><a class="dropdown-item" href="{{ route('messages.index', 'inbox') }}"> My Inbox</a></li>
-		                      <li><a class="dropdown-item" href="{{ route('profile') }}"> My Profile</a></li>
-		                      <li><a class="dropdown-item" href="{{ route('settings') }}">My Timeline</a></li>
+		                      	<li><a class="dropdown-item" href="{{ route('messages.index', 'inbox') }}"> My Inbox</a></li>
+		                      	<li><a class="dropdown-item" href="{{ route('profile') }}"> My Profile</a></li>
+		                      	<li><a class="dropdown-item" href="{{ route('settings') }}">My Timeline</a></li>
 		                    </ul>
 		                </li>
-		                <li class="dropdown-submenu">
-		                    <a href="javascript:void(0)" class="has_children dropdown-item">FAQ &amp; Support</a>
-		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      	<li><a class="dropdown-item text-success" href="#" target="_blank"><i class="fa-link fa text-success"></i> Site FAQs</a></li>
-		                      	<li class="dropdown-divider"></li>
-		                      	<li><a class="dropdown-item" href="{{ route('questions.index') }}"> Questions </a></li>
-		                      	<li><a class="dropdown-item" href="{{ route('questions.create') }}">Ask Question</a></li>
-		                    </ul>
-		                </li>
+		                @endauth
                   		<li><a class="dropdown-item" href="{{ route('settings') }}" class="dropdown-link text-center"><i class="fa-gear fa"></i> Timeline</a></li>
                 	</ul>
 	            </li>
-	            @guest 
-
-	            @else
+	            @auth
 	            {{-- user section --}}
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-9" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="ecommerce">
@@ -290,7 +292,7 @@
 		                </li>
 	                </ul>
 	            </li>
-	            @endguest
+	            @endauth
 
 	            <li class="nav-item dropdown">
 		        	<a href="javascript:void(0)" class="btn-ms-menu btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10"><i class="zmdi zmdi-menu"></i></a>

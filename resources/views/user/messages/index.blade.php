@@ -90,16 +90,15 @@
 						                        @endif
 						                        @foreach ($messages as $message)
 						                            <tr class="@if($message->priority == 'seen') unread @else read @endif" @if ($message->priority == 'seen') style="background-color: #e9f9f9;" @endif>
-						                                <td class="check chb">
-						                                    {{-- <input type="checkbox" class="icheck" name="checkbox1" /> --}}
+						                                {{-- <td class="check chb">
 						                                    <div class="custom-control custom-checkbox">
 				                                              	<input type="checkbox" name="checker" class="custom-control-input" id="cst{{ $message->id }}">
 				                                              	<label class="custom-control-label" for="cst{{ $message->id }}">&nbsp;</label>
 				                                          	</div>
-						                                </td>
+						                                </td> --}}
 
 				                                        @if($message->sender == Auth::user()->id)
-				                                            <td class="user-image">
+				                                            <td class="user-image" style="vertical-align: middle;">
 				                                                <img src="{{ App\User::where('id',$message->receiver)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->receiver)->get()->first())->profile_image : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
 				                                            </td>
 				                                            <td class="user-name">
@@ -116,17 +115,17 @@
 						                                <td class="contact pull-left">
 						                                    <a class="link pull-left" href="{{ route('messages.show',[$message->id,'details']) }}">
 				                                                @if($message->folder == 'important')
-				                                                    <span class="btn btn-sm btn-danger m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="btn btn-xs btn-danger m-r-10">{{ $message->folder }}</span>
 				                                                @elseif($message->folder == 'urgent')
-				                                                    <span class="btn btn-sm btn-success m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="btn btn-xs btn-success m-r-10">{{ $message->folder }}</span>
 				                                                @elseif($message->folder == 'official')
-				                                                    <span class="btn btn-sm btn-warning m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="btn btn-xs btn-warning m-r-10">{{ $message->folder }}</span>
 				                                                @elseif($message->folder == 'unofficial')
-				                                                    <span class="btn btn-sm btn-info m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="btn btn-xs btn-info m-r-10">{{ $message->folder }}</span>
 				                                                @elseif($message->folder == 'normal')
-				                                                    <span class="btn btn-sm btn-default m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="btn btn-xs btn-default m-r-10">{{ $message->folder }}</span>
 				                                                @else
-				                                                    <span class="btn btn-sm btn-primary m-r-10 text-primary">{{ $message->folder }}</span>
+				                                                    <span class="btn btn-xs btn-primary m-r-10 text-primary">{{ $message->folder }}</span>
 				                                                @endif
 				                                            </a>
 				                                        </td>

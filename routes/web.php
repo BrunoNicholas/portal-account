@@ -94,8 +94,8 @@ Route::group(['prefix' => 'home', 'middleware' => ['auth','verified']], function
 Route::group(['prefix' => 'home', 'middleware' => 'web'], function(){
 	Route::resource('sections/posts', 'PostController');
 	Route::resource('companies', 'CompanyController');
-	Route::resource('salons', 'SalonController');
-	Route::resource('shops', 'ShopController');
+	Route::resource('{type}/salons', 'SalonController');
+	Route::resource('{type}/shops', 'ShopController');
 	Route::resource('{type}/{id}/styles', 'StyleController');
 	Route::resource('{type}/{id}/products', 'ProductController');
 	Route::resource('sections/questions', 'QuestionController');
