@@ -87,7 +87,7 @@
 	            {{-- fashion styles --}}
 	            <li class="nav-item dropdown dropdown-megamenu-container">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="component">
-	                	Fasion Styles <i class="zmdi zmdi-chevron-down"></i>
+	                	Fashion Styles <i class="zmdi zmdi-chevron-down"></i>
 	                </a>
 	                <ul class="dropdown-menu dropdown-megamenu animated fadeIn animated-2x">
 	                  	<li class="container">
