@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use App\Models\Salon;
+use App\Models\Shop;
+use App\Models\Company;
+use App\User;
 
 class RatingController extends Controller
 {
@@ -27,9 +31,49 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type=null,$item_id)
     {
-        //
+        if ($type == 'shop') {
+            $shop = Shop::find($item_id);
+            if (!$shop) {
+                return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+            }
+
+
+
+
+
+            $ratings   = $shop->ratings;
+            return view('system.ratings.index',compact(['ratings','type','item_id']));
+        }
+        elseif ($type == 'salon') {
+            $salon = Salon::find($item_id);
+            if (!$salon) {
+                return back()->with('danger','Salon not found. It is either deleted or it is missing.');
+            }
+
+
+
+
+            $ratings   = $salon->ratings;
+            return view('system.ratings.index',compact(['ratings','type','item_id']));
+        }
+        elseif ($type == 'company') {
+            $company = Company::find($item_id);
+            if (!$shop) {
+                return back()->with('danger','Company not found. It is either deleted or it is missing.');
+            }
+
+
+
+
+
+            $ratings   = $company->ratings;
+            return view('system.ratings.index',compact(['ratings','type','item_id']));
+        }
+
+        $ratings = Rating::all();
+        return view('system.ratings.index',compact(['ratings','type','id']));
     }
 
     /**
@@ -37,7 +81,7 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type=null,$item_id)
     {
         //
     }
@@ -48,9 +92,15 @@ class RatingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$type=null,$item_id)
     {
-        //
+        request()->validate([
+            'user_id'       => 'required',
+            'rate_number'   => 'required',
+        ]);
+        Rating::create($request->all());
+
+        return back()->with('success','Thanks for rating successfully!');
     }
 
     /**
@@ -59,7 +109,7 @@ class RatingController extends Controller
      * @param  \App\Models\Rating  $rating
      * @return \Illuminate\Http\Response
      */
-    public function show(Rating $rating)
+    public function show($type=null,$item_id,$id)
     {
         //
     }
@@ -70,7 +120,7 @@ class RatingController extends Controller
      * @param  \App\Models\Rating  $rating
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rating $rating)
+    public function edit($type=null,$item_id,$id)
     {
         //
     }
@@ -82,9 +132,15 @@ class RatingController extends Controller
      * @param  \App\Models\Rating  $rating
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rating $rating)
+    public function update(Request $request,$type=null,$item_id,$id)
     {
-        //
+        request()->validate([
+            'user_id'       => 'required',
+            'rate_number'   => 'required',
+        ]);
+        Rating::find($id)->update($request->all());
+
+        return back()->with('success','Thanks for rating successfully!');
     }
 
     /**
@@ -93,8 +149,10 @@ class RatingController extends Controller
      * @param  \App\Models\Rating  $rating
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rating $rating)
+    public function destroy($type=null,$item_id,$id)
     {
-        //
+        $item = Rating::find($id);
+        $item->delete();
+        return back()->with('danger', 'Rating removed successfully!');
     }
 }
