@@ -258,11 +258,24 @@
 	            </li>
 	            @auth
 	            {{-- user section --}}
+	            <!-- {{ $mess = App\Models\Message::where([['receiver',Auth::user()->id],['status','inbox'],['priority','unseen']])->get() }} -->
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-9" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="ecommerce">
 	                	<img src="{{ Auth::user()->profile_image ? asset('files/profile/images/' . Auth::user()->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 25px; border-radius: 50%;">
-	                	<span style="visibility: hidden;">i</span> 
-	                	{{ explode(' ', trim(Auth::user()->name))[0] }} <i class="zmdi zmdi-chevron-down"></i>
+	                	<span style="visibility: hidden;">i</span>
+	                	{{ explode(' ', trim(Auth::user()->name))[0] }} 
+	                	@if (sizeof($mess) > 0)
+	                	<sup>
+	                		<sup>
+	                			<span class="ml-auto badge-pill bg-success">
+	                				{{ (App\Models\Message::where([['receiver',Auth::user()->id],['status','inbox'],['priority','unseen']])->get())->count() }}
+	                			</span>
+	                		</sup>
+	                	</sup>
+	                	@endif
+
+	                	<i class="zmdi zmdi-chevron-down"></i>
+
 	                </a>
 	                <ul class="dropdown-menu">
 		                <li>
@@ -272,8 +285,13 @@
 		                </li>
 		                @permission('can_message')
 		                <li>
-		                	<a class="dropdown-item" href="{{ route('messages.index', 'inbox') }}">
-		                		<i class="zmdi zmdi-email" style="font-size: 23px;"></i> Messages &amp; Info
+		                	<a class="dropdown-item" style="min-width: 250px;" href="{{ route('messages.index', 'inbox') }}">
+		                		<b class="float-left"><i class="zmdi zmdi-email" style="font-size: 23px;"></i> Messages &amp; Info </b> 
+		                		@if (sizeof($mess) > 0)
+		                			<b class="ml-auto badge-pill bg-success float-right">
+		                				{{ (App\Models\Message::where([['receiver',Auth::user()->id],['status','inbox'],['priority','unseen']])->get())->count() }}
+		                			</b>
+		                		@endif
 		                	</a>
 		                </li>
 		                @endpermission

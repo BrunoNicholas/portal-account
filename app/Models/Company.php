@@ -8,7 +8,7 @@ use App\Models\Comment;
 use App\Models\Review;
 use App\Models\Rating;
 use App\Models\Salon;
-use App\Models\Image;
+use App\Models\Gallery;
 use App\Models\Shop;
 use App\User;
 
@@ -102,8 +102,8 @@ class Company extends Model
     /**
      * The relationship method for images
      */
-    public function images()
+    public function galleries()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Gallery::class);
     }
 }

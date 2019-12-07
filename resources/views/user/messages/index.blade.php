@@ -90,26 +90,20 @@
 						                        @endif
 						                        @foreach ($messages as $message)
 						                            <tr class="@if($message->priority == 'seen') unread @else read @endif" @if ($message->priority == 'seen') style="background-color: #e9f9f9;" @endif>
-						                                {{-- <td class="check chb">
-						                                    <div class="custom-control custom-checkbox">
-				                                              	<input type="checkbox" name="checker" class="custom-control-input" id="cst{{ $message->id }}">
-				                                              	<label class="custom-control-label" for="cst{{ $message->id }}">&nbsp;</label>
-				                                          	</div>
-						                                </td> --}}
 
 				                                        @if($message->sender == Auth::user()->id)
 				                                            <td class="user-image" style="vertical-align: middle;">
-				                                                <img src="{{ App\User::where('id',$message->receiver)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->receiver)->get()->first())->profile_image : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
+				                                                <img src="{{ App\User::where('id',$message->receiver)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->receiver)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
 				                                            </td>
 				                                            <td class="user-name">
-				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->receiver)->get()->first())->name }}</h6>
+				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->receiver)->first())->name }}</h6>
 				                                            </td>
 				                                        @else
 				                                            <td class="user-image">
-				                                                <img src="{{ asset('/files/profile/images/'. (App\User::where('id',$message->sender)->get()->first())->profile_image) }}" alt="user" class="rounded-circle" width="30">
+				                                                <img src="{{ App\User::where('id',$message->sender)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->sender)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
 				                                            </td>
 				                                            <td class="user-name">
-				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->sender)->get()->first())->name }}</h6>
+				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->sender)->first())->name }}</h6>
 				                                            </td>
 				                                        @endif
 						                                <td class="contact pull-left">

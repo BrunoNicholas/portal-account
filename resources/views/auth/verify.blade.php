@@ -22,7 +22,7 @@
                         {{ __('Hey ') . Auth::user()->name . __(', ') . __(' (') . Auth::user()->email . __(')') }} <br>
                         {{ __('Before proceeding, please check your email for a verification link.') }}
                         {{ __('If you did not receive the email') }}, <br>
-                        <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+                        <a href="{{ route('verification.resend') }}" class="btn btn-primary">{{ __('click here to request another link') }}</a>.
                     </div>
                     <div class="card-footer text-center">
                         <span class="txt1 p-b-9"> Not ready to proceed? </span>

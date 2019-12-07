@@ -79,7 +79,7 @@
 					                <div class="form-group row">
 					                    <label class="col-lg-4 col-form-label"> Permissions <span class="text-danger">*</span>
 					                    </label>
-					                    <div class="col-lg-6" style="max-height: 100px; overflow-y: auto;">
+					                    <div class="col-lg-6" style="max-height: 200px; overflow-y: auto;">
 					                    	@foreach($permissions as $perm)
 					                    		<input type="checkbox" 
 					                    		{{ in_array($perm->id, $permission_role)?"checked":"" }}

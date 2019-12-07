@@ -290,7 +290,7 @@ class MessageController extends Controller
         ]);
         Message::find($id)->update($request->all());
         $type = 'inbox';
-        return redirect()->route('messages.index','type')->with('success','Message updated successfully.');
+        return redirect()->route('messages.index','inbox')->with('success','Message updated successfully.');
     }
 
     /**

@@ -7,7 +7,7 @@ use App\Models\Categories;
 use App\Models\Booking;
 use App\Models\Review;
 use App\Models\Rating;
-use App\Models\Image;
+use App\Models\Gallery;
 use App\Models\Style;
 use App\User;
 
@@ -70,11 +70,11 @@ class Salon extends Model
     }
 
     /**
-     * The relationship method for images
+     * The relationship method for galleries
      */
-    public function images()
+    public function galleries()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Gallery::class);
     }
 
     /**

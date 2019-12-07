@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Booking;
 use App\Models\Categories;
 use App\Models\Product;
-use App\Models\Image;
+use App\Models\Gallery;
 use App\User;
 
 class Shop extends Model
@@ -70,9 +70,9 @@ class Shop extends Model
     /**
      * The relationship method for images
      */
-    public function images()
+    public function galleries()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Gallery::class);
     }
 
     /**
