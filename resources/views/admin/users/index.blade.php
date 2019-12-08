@@ -32,8 +32,8 @@
 			<div class="ms-paper-content">
 	            <section class="ms-component-section">
 		            <h4 class="section-title no-margin-top">Manage the system users | <a href="{{ route('users.create') }}" class="btn btn-sm btn-info"> <i class="fa-plus fa"></i> New User </a></h4>
-		            <div class="panel box-v4">
-		                <div class="panel-body">
+		            <div class="card box-v4">
+		                <div class="card-body">
 		                    <div class="table-responsive">
 		                        <table id="example23" class="table table-striped table-bordered table-hoverable" width="100%" cellspacing="0">
 		                            <thead>

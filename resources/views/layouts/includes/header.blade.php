@@ -50,34 +50,47 @@
                 	<a href="@guest {{ url('/') }} @else {{ route('home') }} @endguest" class="nav-link animated fadeIn animation-delay-7" role="button" aria-haspopup="true" aria-expanded="false" data-name="home">Home {{-- <i class="zmdi zmdi-chevron-down"></i> --}} </a>
             	</li>
             	{{-- salons and spas --}}
+            	<!-- {{ $asalons = App\Models\Categories::where('type','salon-gender')->get() }} -->
+            	<!-- {{ $bsalons = App\Models\Categories::where('type','salon-style')->get() }} -->
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="blog">
 	                	Salons &amp; Spas <i class="zmdi zmdi-chevron-down"></i></a>
-	                <ul class="dropdown-menu">
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','children') }}"><i class="fa-child fa"></i> Children  </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','men') }}"><i class="fa-male fa"></i> Men  </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','women') }}"><i class="fa-female fa"></i> Women  </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','party') }}"><i class="fa-star fa"></i> Party Dressing </a></li>
-	                  	<li class="dropdown-divider"></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','hair') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Hair </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','face') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Face  </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','nails') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Nails  </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','body') }}"><i class="zmdi zmdi zmdi-view-stream"></i> Body  </a></li>
-	                  	<li class="dropdown-divider"></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','massage') }}"><i class="fa fa-thumbs-up"></i> Massage Services </a></li>
-	                  	<li><a class="dropdown-item" href="{{ route('salons.index','tatooes') }}"><i class="fa fa-thumbs-o-up"></i> Tatooes </a></li>
-	                  	<li class="dropdown-divider"></li>
-	                  	<li><a class="dropdown-item text-center" href="{{ route('salons.index','all') }}"><i class="fa fa-tree"></i> All Salons &amp; Spa's </a></li>
-	                </ul>
+                	<ul class="dropdown-menu">
+	                	<li class="ms-tab-menu">
+	                		<ul class="nav nav-tabs ms-tab-menu-left" role="tablist">
+			                    <li class="nav-item"><a class="nav-link active" href="#tab-general" data-hover="tab" data-toggle="tab" role="tab"><i class="zmdi zmdi-male-female"></i> By Gender</a></li>
+			                    <li class="nav-item"><a class="nav-link" href="#tab-landing" data-hover="tab" data-toggle="tab" role="tab"><i class="zmdi zmdi-account"></i> By Style </a></li>
+			                    <li class="dropdown-divider"></li>
+			                    <li class="nav-item"><a class="nav-link" href="{{ route('salons.index','all') }}" role="tab"><i class="fa fa-list"></i> View All Salons &amp; Spa's </a></li>
+			                </ul>
+			                    <!-- Tab panes -->
+			                <div class="tab-content ms-tab-menu-right">
+			                    <div class="tab-pane active" id="tab-general" role="tabpanel">
+			                        <ul class="ms-tab-menu-right-container">
+			                        	@foreach($asalons as $sal)
+					                  	<li><a href="{{ route('salons.index',$sal->name) }}"><i class="zmdi zmdi zmdi zmdi-male-female"></i> <span style="visibility: hidden;">p</span> {{ $sal->display_name }} </a></li>
+					                  	@endforeach
+			                        </ul>
+			                    </div>
+			                    <div class="tab-pane" id="tab-landing" role="tabpanel">
+			                        <ul class="ms-tab-menu-right-container">
+			                          	@foreach($bsalons as $sal)
+					                  	<li><a class="dropdown-item" href="{{ route('salons.index',$sal->name) }}"><i class="zmdi zmdi-view-stream"></i> {{ $sal->display_name }} </a></li>
+					                  	@endforeach
+			                        </ul>
+			                    </div>
+			                </div>
+	            		</li>
+	            	</ul>
 	            </li>
 	            {{-- shops and products --}}
+            	<!-- {{ $aproducts = App\Models\Categories::where('type','products-gender')->get() }} -->
 	            <li class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shops &amp; Products <i class="zmdi zmdi-chevron-down"></i></a>
+	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shop Products <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">
-		                <li><a class="dropdown-item" href="{{ route('products.index',['children','0']) }}"><i class="zmdi zmdi-view-compact"></i> Children Products </a></li>
-		                <li><a class="dropdown-item" href="{{ route('products.index',['men','0']) }}"><i class="zmdi zmdi-view-agenda"></i> Men Products</a></li>
-		                <li><a class="dropdown-item" href="{{ route('products.index',['female','0']) }}"><i class="zmdi zmdi-view-compact"></i> Female Products</a></li>
-		                <li><a class="dropdown-item" href="{{ route('products.index',['unisex','0']) }}"><i class="zmdi zmdi-view-agenda"></i> Unisex </a></li>
+	                	@foreach($aproducts as $prod)
+	                  	<li><a class="dropdown-item" href="{{ route('products.index',[$prod->name,0]) }}"><i class="zmdi zmdi-view-compact"></i> {{ $prod->display_name }} </a></li>
+	                  	@endforeach
 		                <li class="dropdown-divider"></li>
 		                <li><a class="dropdown-item" href="{{ route('products.index',['all','0']) }}"><i class="zmdi zmdi-card-membership"></i> View All Products</a></li>
 		                <li><a class="dropdown-item" href="{{ route('shops.index','all') }}"><i class="zmdi zmdi-view-dashboard"></i> All Shops</a></li>
@@ -87,6 +100,10 @@
 	                </ul>
 	            </li>
 	            {{-- fashion styles --}}
+            	<!-- {{ $cstyle = App\Models\Categories::where('type','children-style')->get() }} -->
+            	<!-- {{ $mstyle = App\Models\Categories::where('type','male-style')->get() }} -->
+            	<!-- {{ $fstyle = App\Models\Categories::where('type','female-style')->get() }} -->
+            	<!-- {{ $ustyle = App\Models\Categories::where('type','unisex-style')->get() }} -->
 	            <li class="nav-item dropdown dropdown-megamenu-container">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="component">
 	                	Fashion Styles <i class="zmdi zmdi-chevron-down"></i>
@@ -98,31 +115,24 @@
 			                        <div class="megamenu-block animated fadeInLeft animated-2x">
 			                          	<h3 class="megamenu-block-title"><i class="fa fa-child"></i> Children Styles</h3>
 				                        <ul class="megamenu-block-list">
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One
-				                              		<span class="badge badge-info">1</span>
-				                              	</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One
-				                              		<span class="badge badge-success">1</span> 
-				                              	</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
+				                        	@foreach($cstyle as $prod)
+						                  	<li><a class="withripple" href="{{ route('products.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
+						                  	@endforeach
+				                            {{--
+				                            	<li>
+					                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One
+					                              		<span class="badge badge-info">1</span>
+					                              	</a>
+					                            </li>
+					                            <li>
+					                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One
+					                              		<span class="badge badge-success">1</span> 
+					                              	</a>
+					                            </li>
+					                            <li>
+					                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
+					                            </li> 
+					                        --}}
 				                        </ul>
 			                        </div>
 			                    </div>
@@ -130,24 +140,9 @@
 			                        <div class="megamenu-block animated fadeInLeft animated-2x">
 			                          	<h3 class="megamenu-block-title"><i class="fa fa-male"></i> Male Styles</h3>
 				                        <ul class="megamenu-block-list">
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
+				                        	@foreach($mstyle as $prod)
+						                  	<li><a class="withripple" href="{{ route('products.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
+						                  	@endforeach
 				                        </ul>
 			                        </div>
 			                    </div>
@@ -155,27 +150,9 @@
 			                        <div class="megamenu-block animated fadeInRight animated-2x">
 				                        <h3 class="megamenu-block-title text-right"> Female Styles <b style="visibility: hidden;">w</b> <i class="fa fa-female"></i></h3>
 				                        <ul class="megamenu-block-list">
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
+				                        	@foreach($fstyle as $prod)
+						                  	<li><a class="withripple" href="{{ route('products.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
+						                  	@endforeach
 				                        </ul>
 			                        </div>
 			                    </div>
@@ -183,33 +160,18 @@
 			                        <div class="megamenu-block animated fadeInRight animated-2x">
 			                          	<h3 class="megamenu-block-title text-right"> Unisex <b style="visibility: hidden;">w</b> <i class="zmdi zmdi-male-female"></i></h3>
 			                          	<ul class="megamenu-block-list">
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
-				                            <li>
-				                              	<a class="withripple" href=""><i class="fa fa-arrow-circle-right"></i> One</a>
-				                            </li>
+			                          		@foreach($ustyle as $prod)
+						                  	<li><a class="withripple" href="{{ route('products.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
+						                  	@endforeach
 			                          	</ul>
 			                        </div>
 			                    </div>
 			                    <hr>
 			                    <div class="col-sm-6">
-			                    	<a href="{{ route('styles.index',['all',0]) }}" class="btn btn-block btn-primary"><i class="fa-list fa"></i> View All Fashion Styles</a>
+			                    	<a href="{{ route('styles.index',['all',0]) }}" class="btn btn-block btn-primary"><i class="fa-list fa"></i> All Fashion Styles</a>
 			                    </div>
 			                    <div class="col-sm-6">
-			                    	<a href="{{ route('products.index',['all',0]) }}" class="btn btn-block btn-primary"><i class="fa-list fa"></i> View All Products</a>
+			                    	<a href="{{ route('products.index',['all',0]) }}" class="btn btn-block btn-primary"><i class="fa-list fa"></i> All Products</a>
 			                    </div>
 	                    	</div>
 	                  	</li>
@@ -311,12 +273,16 @@
 	                </ul>
 	            </li>
 	            @endauth
-
 	            <li class="nav-item dropdown">
 		        	<a href="javascript:void(0)" class="btn-ms-menu btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10"><i class="zmdi zmdi-menu"></i></a>
 	            </li>
 	      	</ul>
         </div>
-      	<a href="javascript:void(0)" class="ms-toggle-left btn-navbar-menu"><i class="zmdi zmdi-menu"></i></a>
+      	@if(URL::previous() != Request::fullUrl())
+            <div class="mr-4">
+                <a href="{{ URL::previous() }}" class="btn btn-sm btn-info btn-rounded text-white"><i class="fa-angle-double-left fa text-white" style="font-size: 15px;"></i> Back </a>
+            </div>
+        @endif
+        <a href="javascript:void(0)" class="ms-toggle-left btn-navbar-menu"><i class="zmdi zmdi-menu"></i></a>
     </div> <!-- container -->
 </nav>

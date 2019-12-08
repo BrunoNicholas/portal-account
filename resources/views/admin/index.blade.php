@@ -208,6 +208,14 @@
 							Operations &amp; Counters
 						</div>
 						<div class="card-body text-center">
+							<a href="{{ route('categories.index') }}">
+								<button class="btn btn-sm btn-info">
+									<span class="ml-auto badge-pill bg-info">
+										{{ App\Models\Categories::all()->count() }}
+									</span> View Categories
+								</button>
+							</a>
+
 							<a href="{{ route('permissions.index') }}"><button class="btn btn-sm btn-warning">Permissions</button></a>
 							
 						</div>

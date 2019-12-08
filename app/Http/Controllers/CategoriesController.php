@@ -29,7 +29,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Categories::latest()->paginate(50);
-        return view('system.categories.index');
+        return view('system.categories.index',compact('categories'));
     }
 
     /**
@@ -39,7 +39,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('categories.index')->with('info', "Add new category from main categories page");
     }
 
     /**
@@ -80,7 +80,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return redirect()->route('categories.index')->with('info', "Edit category from main categories page");
     }
 
     /**
@@ -107,8 +107,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $item = Category::where('id',$id)->get()->first();
+        $item = Categories::where('id',$id)->get()->first();
         $item->delete();
-        return redirect()->back()->with('danger', 'Category deleted successfully');
+        return redirect()->route('categories.index')->with('danger', 'Category deleted successfully');
     }
 }

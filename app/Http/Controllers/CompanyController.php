@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Categories;
 use App\Models\Role;
 use App\User;
+use Image;
+use File;
 
 class CompanyController extends Controller
 {
@@ -43,7 +46,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('system.companies.create');
+
+        $cats       = Categories::where('type','company')->get();
+        return view('system.companies.create',compact(['cats']));
     }
 
     /**
@@ -64,6 +69,19 @@ class CompanyController extends Controller
         $user = User::find($request->user_id);
         $user->role = 'company-admin';
         $user->save();
+
+        if ($request->file('company_logo')->isValid()) {
+            $fileWithExtension = $request->file('company_logo')->getClientOriginalName();
+            $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
+
+            $user_image = $request->file('company_logo');
+            $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
+
+            Image::make($user_image)->save( public_path('/files/companies/images/' . $filename) );
+            $co = Company::where('company_email',$request->company_email)->first();
+            $co->company_logo = $filename;
+            $co->save();
+        }
 
         DB::table('role_user')->where('user_id',$request->user_id)->delete();
         $user->attachRole(Role::where('name','company-admin')->first());
