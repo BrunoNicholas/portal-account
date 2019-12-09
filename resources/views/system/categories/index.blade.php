@@ -159,7 +159,7 @@
 					                    <label class="col-md-4 col-form-label text-right"> Major </label>
 					                    <div class="col-md-8">
 					                        <select class="form-control" name="categories_id">
-					                        	<option value="">Leave empty id major</option>
+					                        	<option value="">Leave empty if major</option>
 					                        	@foreach($categories as $cat)
 					                        		<option value="{{ $cat->id }}">{{ $cat->display_name }}</option>
 					                        	@endforeach
