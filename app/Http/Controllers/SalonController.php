@@ -72,7 +72,7 @@ class SalonController extends Controller
         $user->attachRole(Role::where('name','salon-admin')->first());
 
         $new_salon = Salon::where('salon_email',$request->salon_email)->first(); 
-        return redirect()->route('salons.show',$new_salon->id)->with('success','Salon created successfully.');
+        return redirect()->route('salons.show',['all',$new_salon->id])->with('success','Salon created successfully.');
     }
 
     /**
@@ -81,13 +81,17 @@ class SalonController extends Controller
      * @param  \App\Models\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type=null, $id)
     {
         $salon  = Salon::find($id);
         if (!$salon) {
             return back()->with('danger','Salon not found. It is either deleted or it is missing.');
         }
-        return view('system.salons.show', compact(['salon']));
+
+        if (!$type) {
+            $type = 'all';
+        }
+        return view('system.salons.show', compact(['type','salon']));
     }
 
     /**
@@ -96,7 +100,7 @@ class SalonController extends Controller
      * @param  \App\Models\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($type=null,$id)
     {
         $salon  = Salon::find($id);
         if (!$salon) {
@@ -112,7 +116,7 @@ class SalonController extends Controller
      * @param  \App\Models\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $type=null, $id)
     {
         //
     }
@@ -123,7 +127,7 @@ class SalonController extends Controller
      * @param  \App\Models\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($type=null, $id)
     {
         $item = Salon::where('id',$id)->get()->first();
         
