@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Page Expired')
+@section('title', '419 - Page Expired')
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('content')

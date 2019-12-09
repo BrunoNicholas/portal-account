@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Not Found')
+@section('title', '404 - Not Found')
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('content')

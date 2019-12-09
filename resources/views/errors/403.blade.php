@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Restricted Access')
+@section('title', '403 - Restricted Access')
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('content')

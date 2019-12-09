@@ -28,7 +28,7 @@ class HomeController extends Controller
         if (Auth::user()->hasRole(['super-admin','admin'])) {
             return redirect()->route('admin')->with('info','Welcome back, ' . (Role::where('name',Auth::user()->role)->first())->display_name . ' - ' . Auth::user()->name . '!');
         }
-        elseif (Auth::user()->hasRole(['super-admin','admin'])) {
+        elseif (Auth::user()->hasRole(['company-admin','salon-admin','shop-admin','attendant'])) {
             return view('home')->with('info','Welcome back, ' . ' - ' . Auth::user()->name . '!');
         }
         return view('index')->with('info','Welcome back, ' . ' - ' . Auth::user()->name . '!'); 

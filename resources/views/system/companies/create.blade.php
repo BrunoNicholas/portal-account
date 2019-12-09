@@ -7,7 +7,7 @@
         <div class="text-center">
             <div class="row">
 				<div class="d-flex no-block align-items-center col-md-4">
-					<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;"><span class="text-white">Add Company</span></span>
+					<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;"><b class="text-white">Add Company</b></span>
 				</div>
 		        <div class="d-flex no-block justify-content-end col-md-8">
 		            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
@@ -28,8 +28,8 @@
 <div class="container">
     <div class="card card-hero animated fadeInUp animation-delay-7">
         <div class="card-body">
-            <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('companies.index') }}" name="cal">
-            	  @csrf
+            <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('companies.store') }}" name="cal">
+            	@csrf
               	@foreach ($errors->all() as $error)
   	            	<p class="alert alert-danger">{{ $error }}</p>
   	            @endforeach

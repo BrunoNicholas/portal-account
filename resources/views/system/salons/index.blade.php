@@ -13,8 +13,8 @@
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
 	                    <ol class="breadcrumb">
-
-
+	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
+        					<li class="breadcrumb-item active"><i class="fa fa-address-book-o"></i> Salons</li>
 				        </ol>
 	                </ol>
 	            </nav>

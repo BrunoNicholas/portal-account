@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Salon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Categories;
+use App\Models\Company;
+use App\User;
 
 class SalonController extends Controller
 {
@@ -38,9 +42,11 @@ class SalonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type=null)
     {
-        //
+        $cats       = Categories::where('type','salon-style')->orWhere('type', 'salon-gender')->get();
+        $companies  = Company::latest()->paginate();
+        return view('system.salons.create',compact(['type','cats','companies']));
     }
 
     /**
@@ -51,7 +57,22 @@ class SalonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'salon_name'    => 'required',
+            'salon_email'   => 'required|unique:salons',
+            'user_id'       => 'required',
+        ]);
+        Salon::create($request->all());
+
+        $user = User::find($request->user_id);
+        $user->role = 'salon-admin';
+        $user->save();
+
+        DB::table('role_user')->where('user_id',$request->user_id)->delete();
+        $user->attachRole(Role::where('name','salon-admin')->first());
+
+        $new_salon = Salon::where('salon_email',$request->salon_email)->first(); 
+        return redirect()->route('salons.show',$new_salon->id)->with('success','Salon created successfully.');
     }
 
     /**
