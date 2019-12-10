@@ -20,7 +20,7 @@ class CompanyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index','show');
+        $this->middleware(['auth','verified'])->except('index','show');
         // $this->middleware('role:super-admin|admin|client')->except('show','index');
         
         $this->middleware('permission:can_add_company',['only'=>['create','store']]);
@@ -70,7 +70,10 @@ class CompanyController extends Controller
         $user->role = 'company-admin';
         $user->save();
 
-        if ($request->file('company_logo')->isValid()) {
+        DB::table('role_user')->where('user_id',$request->user_id)->delete();
+        $user->attachRole(Role::where('name','company-admin')->first());
+
+        if (!is_null($request->company_logo) && $request->file('company_logo')->isValid()) {
             $fileWithExtension = $request->file('company_logo')->getClientOriginalName();
             $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
 
@@ -82,9 +85,6 @@ class CompanyController extends Controller
             $co->company_logo = $filename;
             $co->save();
         }
-
-        DB::table('role_user')->where('user_id',$request->user_id)->delete();
-        $user->attachRole(Role::where('name','company-admin')->first());
 
         $new_company = Company::where('company_email',$request->company_email)->first(); 
         return redirect()->route('companies.show',$new_company->id)->with('success','Company created successfully.');

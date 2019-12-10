@@ -12,11 +12,9 @@
 		        <div class="d-flex no-block justify-content-end col-md-8">
 		            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 		                <ol class="breadcrumb">
-		                    <ol class="breadcrumb">
-		                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-home text-white"></i> <span class="text-white"> Home </span></a></li>
-	        					<li class="breadcrumb-item"><a href="{{ route('salons.index','all') }}"> <i class="fa fa-address-book-o text-white"></i> <span class="text-white"> Salons &amp; Spa's </span></a></li>
-	        					<li class="breadcrumb-item active"> <i class="fa fa-plus text-white"></i> <span class="text-white"> New </span></li>
-					        </ol>
+	                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-home text-white"></i> <span class="text-white"> Home </span></a></li>
+        					<li class="breadcrumb-item"><a href="{{ route('salons.index','all') }}"> <i class="fa fa-address-book-o text-white"></i> <span class="text-white"> Salons &amp; Spa's </span></a></li>
+        					<li class="breadcrumb-item active"> <i class="fa fa-plus text-white"></i> <span class="text-white"> New </span></li>
 		                </ol>
 		            </nav>
 		        </div>

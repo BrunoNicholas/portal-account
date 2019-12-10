@@ -3,13 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Company;
+use App\Models\Role;
 use App\User;
 
 class ShopController extends Controller
 {
+    /**
+     * Display the constructor of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified'])->except('index','show');
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        $this->middleware('permission:can_add_salon',['only'=>['create','store']]);
+        $this->middleware('permission:can_delete_salon',['only'=>'destroy']);
+        $this->middleware('permission:can_edit_salon',['only'=>['update','edit']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

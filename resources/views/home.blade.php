@@ -5,7 +5,7 @@
     <div class="container mt-0" style="min-height: 500px;">
         <div class="row">
             <div class="d-flex no-block align-items-center col-md-4">
-                <span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">{{ Auth::user()->name }} - Home</span>
+                <span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">Home <small> - {{ Auth::user()->name }}</small></span>
             </div>
             <div class="d-flex no-block justify-content-end col-md-8">
                 <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">

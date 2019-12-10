@@ -71,7 +71,7 @@
 	            <ul id="sc5" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch5" data-parent="#slidebar-menu">
 		            <li><a href="{{ route('salons.index','all') }}"><i class="fa-angle-double-right fa"></i> Portal Salons</a></li>
 		            @permission('can_add_salon')
-		            <li><a href="{{ route('salons.create','all') }}"><i class="fa-angle-double-right fa"></i> Register Salon </a></li>
+		            <li><a href="{{ route('salons.create','all') }}"><i class="fa-angle-double-right fa"></i> Register Salon/Spa </a></li>
 		            @endpermission
 	            </ul>
 	        </li>
@@ -80,7 +80,7 @@
 	              	<i class="zmdi zmdi-male-female"></i> Shops 
 	            </a>
 	            <ul id="sc6" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch6" data-parent="#slidebar-menu">
-	              	<li><a href="{{ route('shops.index','all') }}"><i class="fa-angle-double-right fa"></i> Product Shop </a></li>
+	              	<li><a href="{{ route('shops.index','all') }}"><i class="fa-angle-double-right fa"></i> Product Shops </a></li>
 	              	@permission('can_add_salon')
 	              	<li><a href="{{ route('shops.create','all') }}"><i class="fa-angle-double-right fa"></i> Register Shop </a></li>
 	              	@endpermission

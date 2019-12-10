@@ -128,7 +128,7 @@ class PermissionsTableSeeder extends Seeder
                 'display_name'  => 'Can upload images to the system',
                 'description'   => 'A user can upload images to system',
             ],
-            // salons
+            // salons and shops
             [
                 'name'          => 'can_add_salon',
                 'display_name'  => 'Can craete a salon',

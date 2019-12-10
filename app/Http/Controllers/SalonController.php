@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Company;
+use App\Models\Role;
 use App\User;
 
 class SalonController extends Controller
@@ -18,11 +19,12 @@ class SalonController extends Controller
      */
     public function __construct()
     {
+        $this->middleware(['auth','verified'])->except('index','show');
         // $this->middleware('role:super-admin|admin|client')->except('show','index');
         
         // $this->middleware('permission:can_view_questions',['only'=>'index']);
         $this->middleware('permission:can_add_salon',['only'=>['create','store']]);
-        // $this->middleware('permission:can_delete_post',['only'=>'destroy']);
+        $this->middleware('permission:can_delete_salon',['only'=>'destroy']);
         $this->middleware('permission:can_edit_salon',['only'=>['update','edit']]);
     }
     
@@ -34,6 +36,18 @@ class SalonController extends Controller
     public function index($type=null)
     {
         $salons = Salon::latest()->paginate(50);
+
+        if ($type != 'all') {
+            $category = Categories::where('name',$type)->first();
+            if ($category) {
+                $type = $category->display_name;
+                $salons = Salon::where('categories_id',$category->id)->get();
+                return view('system.salons.index',compact(['salons','type']));
+            }
+            $type = 'all';
+            return redirect()->route('salons.index',$type)->with('warning','Category type does not exist');
+        }
+        $type = 'all';
         return view('system.salons.index',compact(['salons','type']));
     }
 
@@ -91,7 +105,8 @@ class SalonController extends Controller
         if (!$type) {
             $type = 'all';
         }
-        return view('system.salons.show', compact(['type','salon']));
+        $salons = Salon::latest()->paginate(3);
+        return view('system.salons.show', compact(['type','salon','salons']));
     }
 
     /**
