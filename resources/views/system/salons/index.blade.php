@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'View Salons')
+@section('title', $type . ' Salons')
 @section('styles')
 <link href="{{ asset('assets/plugins/datatables/media/css/dataTables.bootstrap.css') }}" rel="stylesheet">
 @endsection
@@ -7,13 +7,13 @@
 <div class="ms-hero-page ms-hero-img-city2 ms-hero-bg-info mb-6" style="padding: 0px;">
     <div class="text-center color-white mt-0 mb-0 index-1" style="padding-top: 5px;">
         <h2>Salons &amp; Spas</h2>
-      	<p class="lead lead-lg" style="text-transform: capitalize;"> Registered {{ $type }} Salons &amp; Spa's
+      	<p class="lead lead-lg" style="text-transform: capitalize;"> {{ $type }} Salons &amp; Spa's
             <ol class="breadcrumb d-flex justify-content-center" style="height: 40px;">
             	<li class="breadcrumb-item"><a href="{{ route('userhome') }}" class="text-white"><i class="fa fa-home text-white"></i> Home</a></li>
-				<li class="breadcrumb-item active text-white"><i class="fa fa-address-book-o text-white"></i> Salons</li>
+				<li class="breadcrumb-item active text-white"><i class="zmdi zmdi-male-female text-white"></i> Salons</li>
             </ol>
         </p>
-      	<a href="javascript:void(0)" class="btn btn-raised btn-white color-danger"><i class="zmdi zmdi-male-female"></i> View Shops </a>
+      	<a href="{{ route('shops.index','all') }}" class="btn btn-raised btn-white color-primary"><i class="zmdi zmdi-male-female"></i> View Shops </a>
     </div>
 </div>
 @endsection
@@ -34,7 +34,7 @@
 		                    <div class="form-group no-mt">
 		                    	@foreach($asalons as $sal)
 			                    <div class="radio" onclick="window.location='{{ route('salons.index',$sal->name) }}'">
-			                        <label><input type="radio" @if($type == $sal->name) checked @endif><i class="zmdi zmdi zmdi zmdi-male-female"></i> <span style="visibility: hidden;">p</span> {{ $sal->display_name }} </label>
+			                        <label><input type="radio" @if($stype == $sal->name) checked @endif><i class="zmdi zmdi zmdi zmdi-male-female"></i> <span style="visibility: hidden;">p</span> {{ $sal->display_name }} </label>
 			                    </div>
 			                    @endforeach			                  	
 		                    </div>
@@ -44,7 +44,7 @@
 		                    <div class="form-group no-mt">
 			                    @foreach($bsalons as $sal)
 			                    <div class="radio" onclick="window.location='{{ route('salons.index',$sal->name) }}'">
-			                        <label><input type="radio" @if($type == $sal->name) checked @endif><i class="zmdi zmdi zmdi zmdi-male-female"></i> <span style="visibility: hidden;">p</span> {{ $sal->display_name }} </label>
+			                        <label><input type="radio" @if($stype == $sal->name) checked @endif><i class="zmdi zmdi zmdi zmdi-male-female"></i> <span style="visibility: hidden;">p</span> {{ $sal->display_name }} </label>
 			                    </div>
 			                    @endforeach	
 		                    </div>
@@ -105,6 +105,9 @@
 		                </div>
 		            </div>
 		        @endforeach
+		        <div class="col-lg-10 offset-lg-1 d-flex justify-content-center">
+					{{ $salons->links() }}
+				</div>
             </div>
         </div>
     </div>

@@ -40,7 +40,7 @@ class Shop extends Model
      *
      * @var array
      */
-    protected $table = 'reviews';
+    protected $table = 'shops';
 
     /*
      * belongs to table

@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Salon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SalonCreated;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Company;
 use App\Models\Role;
 use App\User;
+use Auth;
 
 class SalonController extends Controller
 {
@@ -41,14 +44,16 @@ class SalonController extends Controller
             $category = Categories::where('name',$type)->first();
             if ($category) {
                 $type = $category->display_name;
-                $salons = Salon::where('categories_id',$category->id)->get();
-                return view('system.salons.index',compact(['salons','type']));
+                $stype= $category->name;
+                $salons = Salon::where('categories_id',$category->id)->latest()->paginate(12);
+                return view('system.salons.index',compact(['salons','type','stype']));
             }
             $type = 'all';
-            return redirect()->route('salons.index',$type)->with('warning','Category type does not exist');
+            return redirect()->route('salons.index',$type)->with('warning','Salon category does not exist');
         }
         $type = 'all';
-        return view('system.salons.index',compact(['salons','type']));
+        $stype= 'all';
+        return view('system.salons.index',compact(['salons','type','stype']));
     }
 
     /**
@@ -78,6 +83,17 @@ class SalonController extends Controller
         ]);
         Salon::create($request->all());
 
+        $salon = Salon::where('salon_email',$request->salon_email)->first();
+
+        // mailing to user who has made booking
+        Mail::to($salon->salon_email)->send(
+            new SalonCreated($salon)
+        );
+
+        if (Auth::user()->hasRole('company-admin')) {
+            return redirect()->route('salons.show',['all',$salon->id])->with('success','Salon created successfully. You are now a salon administrator');
+        }
+
         $user = User::find($request->user_id);
         $user->role = 'salon-admin';
         $user->save();
@@ -85,8 +101,8 @@ class SalonController extends Controller
         DB::table('role_user')->where('user_id',$request->user_id)->delete();
         $user->attachRole(Role::where('name','salon-admin')->first());
 
-        $new_salon = Salon::where('salon_email',$request->salon_email)->first(); 
-        return redirect()->route('salons.show',['all',$new_salon->id])->with('success','Salon created successfully.');
+        
+        return redirect()->route('salons.show',['all',$salon->id])->with('success','Salon created successfully. You are now a salon administrator');
     }
 
     /**
@@ -97,9 +113,13 @@ class SalonController extends Controller
      */
     public function show($type=null, $id)
     {
+        if (!$type) {
+            $type='all';
+        }
+
         $salon  = Salon::find($id);
         if (!$salon) {
-            return back()->with('danger','Salon not found. It is either deleted or it is missing.');
+            return redirect()->route('salons.index',$type)->with('danger','Salon not found. It is either deleted or it is missing.');
         }
 
         if (!$type) {
@@ -117,6 +137,10 @@ class SalonController extends Controller
      */
     public function edit($type=null,$id)
     {
+        if (!$type) {
+            $type='all';
+        }
+
         $salon  = Salon::find($id);
         if (!$salon) {
             return back()->with('danger','Salon not found. It is either deleted or it is missing.');
@@ -144,6 +168,10 @@ class SalonController extends Controller
      */
     public function destroy($type=null, $id)
     {
+        if (!$type) {
+            $type='all';
+        }
+
         $item = Salon::where('id',$id)->get()->first();
         
         $user = User::find($item->user_id);
@@ -154,6 +182,6 @@ class SalonController extends Controller
         $user->attachRole(Role::where('name','client')->first());
 
         $item->delete();
-        return redirect()->back()->with('danger', 'Salon details deleted successfully');
+        return redirect()->route('salons.index',$type)->with('danger', 'Salon deleted successfully');
     }
 }

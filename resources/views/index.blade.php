@@ -77,7 +77,7 @@
                       <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="zmdi zmdi-desktop-mac"></i></span>
                       <h4 style="font-weight: bold;">Your business POS </h4>
                       <p class="">Manage your shops, salons, orders, bookings, and clients from one place.</p>
-                      <a href="javascript:void(0)" class="btn btn-white color-warning btn-raised"> Register Now </a>
+                      <a href="{{ route('register') }}" class="btn btn-white color-warning btn-raised"> Register Now </a>
                   </div>
               </div>
           </div>
@@ -96,7 +96,7 @@
                   <div class="text-center card-body">
                       <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="zmdi zmdi-flower"></i></span>
                       <h4 style="font-weight: bold;">Advanced ACL</h4>
-                      <p class="">A secure and clear management of user roles and abilities for access of the system.</p>
+                      <p class="">Secure and clear management of user roles and abilities for access of the system.</p>
                       <a href="javascript:void(0)" class="btn btn-white color-danger btn-raised">Read More</a>
                   </div>
               </div>
@@ -209,11 +209,14 @@
     </div>
     <div class="container mt-6">
         <div class="text-center color-white mb-4 text-center">
-            <h1 class="color-primary">User Testimonials</h1>
-            <p class="lead lead-lg color-danger text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">These are <span class="text-normal">the professionals</span> who, every day, make progress <span class="text-normal">the projects of our clients</span>.</p>
-        </div>
+            <h1 class="color-primary">Companies</h1>
+            <p class="lead lead-lg color-danger text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
+              With {{ config('app.name') }}, you can create more salons and shops under one profile as a company to brand your business outlets <br>
+              <small>Recent Companies</small>
+            </p>
+        </div><?php $companies = App\Models\Company::latest()->paginate(3); $i=0; ?>
         <div class="row d-flex justify-content-center">
-            <div class="col-lg-4 col-md-6">
+            {{-- <div class="col-lg-4 col-md-6">
                 <div class="card card-royal wow zoomInUp animation-delay-7">
                     <div class="ms-hero-bg-royal ms-hero-img-city">
                         <img src="{{ asset('assets/img/demo/avatar4.jpg') }}" alt="..." class="img-avatar-circle">
@@ -254,7 +257,40 @@
                         <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+            @foreach($companies as $company)
+                <div class="col-xl-4 col-md-6 mix laptop apple" data-price="1999.99" data-date="20160901" onclick="window.location='{{ route('companies.show',['all',$company->id]) }}'">
+                    <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
+                      <div class="card-body overflow-hidden text-center">
+                          <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 400px;" class="img-fluid center-block">
+                          <h4 class="text-normal text-center">{{ $company->company_name }}</h4>
+                          <p>{{ strlen($company->description) > 20 ? substr($company->description, 0, 20) . '... ' : $company->description }}</p>
+                          <div class="mt-2">
+                            <span class="mr-2">
+                                <i class="zmdi zmdi-star color-warning"></i>
+                                <i class="zmdi zmdi-star color-warning"></i>
+                                <i class="zmdi zmdi-star color-warning"></i>
+                                <i class="zmdi zmdi-star color-warning"></i>
+                                <i class="zmdi zmdi-star"></i>
+                            </span>
+                            <span class="ms-tag ms-tag-success"> {{ $company->status }} </span>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <button type="button" class="btn btn-primary btn-sm btn-block mt-0 no-mb">
+                                {{ $company->salons->count() }} Salons
+                              </button>
+                            </div>
+                            <div class="col-md-6">
+                              <button type="button" class="btn btn-primary btn-sm btn-block mt-0 no-mb">
+                                {{ $company->shops->count() }} Shops
+                              </button>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                @endforeach
         </div>
     </div> <!-- container -->
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobApplication;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\JobCreated;
 use Illuminate\Http\Request;
 
 class JobApplicationController extends Controller
@@ -55,7 +57,15 @@ class JobApplicationController extends Controller
             'job_title' => 'required',
             'status' => 'required',
         ]);
-        JobApplication::create($request->all());
+        $job = JobApplication::create($request->all());
+
+        $user= User::where('id',$job->user_id)->first();
+
+        // mailing to user who has made the job application record
+        Mail::to($user->email)->send(
+            new JobCreated($job)
+        );
+
         return redirect()->route('jobs.index')->with('success','Job application added successfully!');
     }
 

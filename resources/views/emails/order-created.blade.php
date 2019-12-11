@@ -1,5 +1,5 @@
 @component('mail::message')
-# Introduction
+# Order created successfully!
 
 The body of your message.
 
@@ -7,6 +7,6 @@ The body of your message.
 Button Text
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+Thanks for partnering with us,<br>
+Regards, {{ config('app.name') }}
 @endcomponent

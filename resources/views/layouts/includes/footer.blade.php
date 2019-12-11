@@ -3,20 +3,20 @@
         <div class="row">
             <div class="col-lg-4 ms-footer-col">
 	            <div class="ms-footbar-block">
-	                <h3 class="ms-footbar-title">Sitemap</h3>
+	                <h3 class="ms-footbar-title text-center">Brief Sitemap</h3>
 	                <ul class="list-unstyled ms-icon-list three_cols">
-		                <li><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
-		                <li><a href="page-blog.html"><i class="zmdi zmdi-edit"></i> Blog</a></li>
-		                <li><a href="page-blog.html"><i class="zmdi zmdi-image-o"></i> Portafolio</a></li>
-		                <li><a href="portfolio-filters_sidebar.html"><i class="zmdi zmdi-case"></i> Works</a></li>
-		                <li><a href="page-timeline_left2.html"><i class="zmdi zmdi-time"></i> Timeline</a></li>
-		                <li><a href="page-pricing.html"><i class="zmdi zmdi-money"></i> Pricing</a></li>
-		                <li><a href="page-about.html"><i class="zmdi zmdi-favorite-outline"></i> About Us</a></li>
-		                <li><a href="page-team2.html"><i class="zmdi zmdi-accounts"></i> Our Team</a></li>
-		                <li><a href="page-services.html"><i class="zmdi zmdi-face"></i> Services</a></li>
-		                <li><a href="page-faq2.html"><i class="zmdi zmdi-help"></i> FAQ</a></li>
-		                <li><a href="page-login2.html"><i class="zmdi zmdi-lock"></i> Login</a></li>
-		                <li><a href="page-contact.html"><i class="zmdi zmdi-email"></i> Contact</a></li>
+		                <li><a href="{{ route('userhome') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
+		                <li><a href="{{ route('home') }}"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+		                <li><a href="{{ route('messages.index','inbox') }}"><i class="fa-envelope fa"></i> Messages</a></li>
+		                <li><a href="{{ route('profile') }}"><i class="zmdi zmdi-image-o"></i> User Profile</a></li>
+		                <li><a href="{{ route('jobs.index') }}"><i class="zmdi zmdi-case"></i> Jobs </a></li>
+		                <li><a href="{{ route('bookings.index',['all',0]) }}"><i class="zmdi zmdi-time"></i> Bookings</a></li>
+		                <li><a href="{{ route('companies.index','all') }}"><i class="zmdi zmdi-money"></i> Companies</a></li>
+		                <li><a href="{{ route('shops.index','all') }}"><i class="zmdi zmdi-favorite-outline"></i> Shops</a></li>
+		                <li><a href="{{ route('salons.index','all') }}"><i class="zmdi zmdi-accounts"></i> Salons</a></li>
+		                <li><a href="{{ route('galleries.index') }}"><i class="zmdi zmdi-image"></i> Galleries</a></li>
+		                <li><a href="{{ route('questions.index') }}"><i class="fa-question-circle fa"></i> Questions</a></li>
+		                <li><a href="{{ route('posts.index') }}"><i class="zmdi zmdi-lock"></i> Posts</a></li>
 	                </ul>
 	            </div>
 	            {{-- <div class="ms-footbar-block">

@@ -14,7 +14,7 @@
 		                <ol class="breadcrumb">
 		                    <ol class="breadcrumb">
 		                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home text-white"></i><span class="text-white">Home</span></a></li>
-						    	<li class="breadcrumb-item"><a href="{{ route('companies.index') }}"><i class="fa fa-tree text-white"></i> <span class="text-white">Companies</span></a></li>
+						    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="fa fa-tree text-white"></i> <span class="text-white">Companies</span></a></li>
 						        <li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="fa fa-plus text-white"></i> <span class="text-white">Add Company</span></a></li>
 					        </ol>
 		                </ol>
@@ -28,7 +28,7 @@
 <div class="container">
     <div class="card card-hero animated fadeInUp animation-delay-7">
         <div class="card-body">
-            <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('companies.store') }}" name="cal">
+            <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('companies.store','all') }}" name="cal">
             	@csrf
               	@foreach ($errors->all() as $error)
   	            	<p class="alert alert-danger">{{ $error }}</p>

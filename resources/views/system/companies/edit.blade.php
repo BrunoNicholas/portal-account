@@ -12,7 +12,7 @@
 	                <ol class="breadcrumb">
 	                    <ol class="breadcrumb">
 	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
-					    	<li class="breadcrumb-item"><a href="{{ route('companies.index') }}"><i class="ion ion-ios-toggle-outline text-primary"></i>Companies</a></li>
+					    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="ion ion-ios-toggle-outline text-primary"></i>Companies</a></li>
 					        <li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="fa fa-edit"></i>Edit Company</a></li>
 				        </ol>
 	                </ol>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingCreated;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Models\Shop;
@@ -77,8 +79,21 @@ class BookingController extends Controller
      */
     public function create($type=null, $id)
     {
-        $bookings = Booking::latest()->paginate(50);
-        return view('system.bookings.create',compact(['bookings','type','item_id']));
+        $booking = Booking::latest()->paginate(50);
+
+        $user   = User::where('id',$booking->user_id)->first();
+
+        // mailing to user who has made booking
+        Mail::to($user->email)->send(
+            new BookingCreated($booking)
+        );
+
+        // // mailing to salon or shop manager has the products
+        // Mail::to($user->email)->send(
+        //     new BookingCreated($booking)
+        // );
+
+        return view('system.bookings.create',compact(['booking','type','item_id']));
     }
 
     /**

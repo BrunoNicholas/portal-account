@@ -101,7 +101,7 @@
                             <ul class="nav nav-tabs nav-tabs-full nav-tabs-3 nav-tabs-primary" role="tablist">
                                 <li class="nav-item" role="presentation"><a href="#ms-login-tab" aria-controls="ms-login-tab" role="tab" data-toggle="tab" class="nav-link active withoutripple"><i class="zmdi zmdi-account"></i> Login </a></li>
                                 <li class="nav-item" role="presentation"><a href="#ms-register-tab" aria-controls="ms-register-tab" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="zmdi zmdi-account-add"></i> Register</a></li>
-                                <li class="nav-item" role="presentation"><a href="#ms-recovery-tab" aria-controls="ms-recovery-tab" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="zmdi zmdi-key"></i> Recovery Pass</a></li>
+                                <li class="nav-item" role="presentation"><a href="#ms-recovery-tab" aria-controls="ms-recovery-tab" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="zmdi zmdi-key"></i> Recovery </a></li>
                             </ul>
                         </div>
                     </div>
@@ -213,23 +213,23 @@
                             {{-- /end of registration --}}
                             {{-- auth: reset password form --}}
                             <div role="tabpanel" class="tab-pane fade" id="ms-recovery-tab">
-                                <form>
+                                <form method="POST" action="{{ route('password.email') }}">
+                                    @csrf
                                     <fieldset>
                                         <div class="form-group label-floating">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                                <label class="control-label" for="ms-form-user-re">Username</label>
-                                                <input type="text" id="ms-form-user-re" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group label-floating">
-                                            <div class="input-group">
                                                 <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-                                                <label class="control-label" for="ms-form-email-re">Email</label>
-                                                <input type="email" id="ms-form-email-re" class="form-control">
+                                                <label class="control-label" for="ms-form-email-re">{{ __('E-Mail Address') }}</label>
+                                                <input type="email" id="ms-form-email-re" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
-                                        <button class="btn btn-raised btn-block btn-primary">Send Password</button>
+                                        <button type="submit" class="btn btn-raised btn-block btn-primary">{{ __('Send Password Reset Link') }}</button>
                                     </fieldset>
                                 </form>
                             </div>

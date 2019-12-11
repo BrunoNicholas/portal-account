@@ -1,39 +1,7 @@
 @extends('layouts.site')
 @section('title', 'Company Details')
 @section('styles') @endsection
-{{-- @section('navigator')
-	<div class="container mt-0">
-		<div class="row">
-			<div class="d-flex no-block align-items-center col-md-4">
-				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">Company Details</span>
-			</div>
-	        <div class="d-flex no-block justify-content-end col-md-8">
-	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
-	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
-					    	<li class="breadcrumb-item"><a href="{{ route('companies.index') }}"><i class="ion ion-ios-toggle-outline text-primary"></i>Companies</a></li>
-					        <li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="fa fa-tree"></i>View Company</a></li>
-				        </ol>
-	                </ol>
-	            </nav>
-	        </div>
-	    </div>
-    </div>
-@endsection --}}
 @section('content')
-{{-- <div class="container mt-0" style="min-height: 500px;">
-	<div class="row mt-0 pl-0">
-		<div class="col-lg-12 ms-paper-content-container">
-			<div class="ms-paper-content">
-	            <section class="ms-component-section">
-
-
-	            </section>
-	        </div>
-	    </div>
-	</div>
-</div> --}}
 <div class="container">
     <div class="row">
         <div class="col-lg-4">
@@ -64,7 +32,7 @@
 		                		<a href="javascript:void(0)" title="Edit my company profile" class="btn btn-warning btn-raised btn-block animated fadeInUp animation-delay-12"><i class="zmdi zmdi-edit" style="margin: 0px;"></i> Edit</a>
 		                	</div>
 		                	<div class="col-lg-6">
-		                		<form method="POST" action="{{ route('companies.destroy', $company->id) }}">
+		                		<form method="POST" action="{{ route('companies.destroy', ['all',$company->id]) }}">
 	                                {{ csrf_field() }}
 	                                {{ method_field('DELETE') }}
 		                			<button type="submit" title="Delete this company profile" class="btn btn-danger btn-raised btn-block animated fadeInUp animation-delay-12" onclick="return confirm('You are about to delete this company.\nThis is riskky and not reversible.')">
@@ -80,57 +48,34 @@
 	            <div class="col-lg-12 col-md-6 order-md-2 order-lg-3">
 	                <div class="card animated fadeInUp animation-delay-12">
 		                <div class="ms-hero-bg-royal ms-hero-img-mountain">
-		                    <h3 class="color-white index-1 text-center pb-4 pt-4"> Company Salons, Spa's & Shops </h3>
+		                    <h3 class="color-white index-1 text-center pb-1 pt-1"> Salons, Spa's & Shops </h3>
 		                </div>
 		                <div class="card-body">
-		                    <div class="ms-media-list">
-		                      <div class="media mb-2">
-		                        <a class="mr-3" href="#">
-		                          <img class="media-object" src="assets/img/demo/avatar6.jpg">
-		                        </a>
-		                        <div class="media-body">
-		                          <h4 class="mt-0 mb-0 color-warning">Maria Sharaphova</h4>
-		                          <a href="mailto:joe@example.com?subject=feedback">maria.sha@example.com</a>
-		                          <div class="">
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
-		                          </div>
-		                        </div>
-		                      </div>
-		                      <div class="media mb-2">
-		                        <div class="media-left media-middle">
-		                          <a class="mr-3" href="#">
-		                            <img class="media-object" src="assets/img/demo/avatar3.jpg">
-		                          </a>
-		                        </div>
-		                        <div class="media-body">
-		                          <h4 class="mt-0 mb-0 color-warning">Rafael Nadal</h4>
-		                          <a href="mailto:joe@example.com?subject=feedback">rafa.nad@example.com</a>
-		                          <div class="">
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
-		                          </div>
-		                        </div>
-		                      </div>
-		                      <div class="media mb-2">
-		                        <div class="media-left media-middle">
-		                          <a class="mr-3" href="#">
-		                            <img class="media-object" src="assets/img/demo/avatar5.jpg">
-		                          </a>
-		                        </div>
-		                        <div class="media-body">
-		                          <h4 class="mt-0 mb-0 color-warning">Roger Federer</h4>
-		                          <a href="mailto:joe@example.com?subject=feedback">roger.fef@example.com</a>
-		                          <div class="">
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-		                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
-		                          </div>
-		                        </div>
-		                      </div>
+		                    <div class="panel">
+		                    	<div class="panel-heading text-center"> {{ $company->salons->count() }}  | Salons &amp; Spa's </div>
+		                    	<div class="panel-body">
+		                    		
+		                    	</div>
 		                    </div>
+                    		<div class="panel">
+		                    	<div class="panel-heading text-center"> {{ $company->shops->count() }} | Shops </div>
+			                    <div class="panel-body">
+			                    	<div class="row">
+				                        <div class="col-3 mr-1">
+				                          	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 50px; border-radius: 10%;" >
+				                        </div>
+				                        <div class="col-8">
+				                          	<h4 class="mt-0 mb-0 color-warning">Shop Name</h4>
+				                          	<a href="mailto:joe@example.com?subject=feedback">maria.sha@example.com</a>
+					                        <div class="">
+					                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
+					                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
+					                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
+					                        </div>
+				                        </div>
+				                    </div>
+			                    </div>
+			                </div>
 		                </div>
 	                </div>
 	            </div>

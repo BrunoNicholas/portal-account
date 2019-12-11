@@ -38,7 +38,7 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('companies.index') }}'">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('companies.index','all') }}'">
                     <div class="panel panel-body text-center">
                     	<div class="row pl-2 text-warning">                    	
                         	<i class="fa fa-4x fa-id-card-o primary-color text-warning text-center col-4" style="padding-top: 20px;"></i>

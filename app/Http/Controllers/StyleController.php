@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Style;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StyleCreated;
 use App\Models\Salon;
 use App\Models\Categories;
 use App\User;
+use Auth;
 
 class StyleController extends Controller
 {
@@ -57,6 +60,15 @@ class StyleController extends Controller
     public function store(Request $request)
     {
         //
+
+        $style = Style::create($request->all());
+
+        $user   = User::where('id',$style->user_id)->first();
+
+        // mailing to user who has made booking
+        Mail::to($style->shop_email)->send(
+            new StyleCreated($style)
+        );
     }
 
     /**

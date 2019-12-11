@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CompanyCreated;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Role;
@@ -33,10 +35,24 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type=null)
     {
-        $companies  = Company::latest()->paginate(50);
-        return view('system.companies.index',compact(['companies']));
+        $companies  = Company::latest()->paginate(12);
+
+        if ($type != 'all') {
+            $category = Categories::where('name',$type)->first();
+            if ($category) {
+                $type = $category->display_name;
+                $stype= $category->name;
+                $companies = Company::where('categories_id',$category->id)->latest()->paginate(12);
+                return view('system.companies.index',compact(['companies','type','stype']));
+            }
+            $type = 'all';
+            return redirect()->route('companies.index',$type)->with('warning','Company category does not exist');
+        }
+        $type = 'all';
+        $stype= 'all';
+        return view('system.companies.index',compact(['companies','type','stype']));
     }
 
     /**
@@ -44,11 +60,10 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type=null)
     {
-
         $cats       = Categories::where('type','company')->get();
-        return view('system.companies.create',compact(['cats']));
+        return view('system.companies.create',compact(['cats','type']));
     }
 
     /**
@@ -64,7 +79,7 @@ class CompanyController extends Controller
             'company_email' => 'required|unique:companies',
             'user_id'       => 'required|unique:companies',
         ]);
-        Company::create($request->all());
+        $new_company = Company::create($request->all());
 
         $user = User::find($request->user_id);
         $user->role = 'company-admin';
@@ -85,9 +100,14 @@ class CompanyController extends Controller
             $co->company_logo = $filename;
             $co->save();
         }
+        
+        $company = $new_company;
 
-        $new_company = Company::where('company_email',$request->company_email)->first(); 
-        return redirect()->route('companies.show',$new_company->id)->with('success','Company created successfully.');
+        Mail::to($company->company_email)->send(
+            new CompanyCreated($company)
+        );
+
+        return redirect()->route('companies.show',[$company->id,$type])->with('success','Company created successfully.');
     }
 
     /**
@@ -96,11 +116,14 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type=null,$id)
     {
+        if (!$type) {
+            $type='all';
+        }
         $company    = Company::find($id);
         if (!$company) {
-            return redirect()->route('companies.index')->with('danger','Company not found. It is either missing or deleted.');
+            return redirect()->route('companies.index',$type)->with('danger','Company not found. It is either missing or deleted.');
         }
 
         $total_ratings  = $company->ratings->count();
@@ -114,7 +137,7 @@ class CompanyController extends Controller
             $avg    = $avg_avs;
         }
 
-        return view('system.companies.show',compact(['company', 'avg']));
+        return view('system.companies.show',compact(['company','type','avg']));
     }
 
     /**
@@ -123,13 +146,17 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($type=null,$id)
     {
+        if (!$type) {
+            $type='all';
+        }
+        
         $company    = Company::find($id);
         if (!$company) {
-            return redirect()->route('companies.index')->with('danger','Company not found. It is either missing or deleted.');
+            return redirect()->route('companies.index',$type)->with('danger','Company not found. It is either missing or deleted.');
         }
-        return view('system.companies.edit',compact(['company']));
+        return view('system.companies.edit',compact(['company','type']));
     }
 
     /**
@@ -139,7 +166,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $type=null, $id)
     {
         
         request()->validate([
@@ -148,7 +175,7 @@ class CompanyController extends Controller
             'user_id'       => 'request',
         ]);
         Company::find($id)->update($request->all());
-        return redirect()->route('categories.index')->with('success', "Category updated successfully");
+        return redirect()->route('categories.index',$type)->with('success', "Category updated successfully");
     }
 
     /**
@@ -157,7 +184,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($type=null, $id)
     {
         $item = Company::where('id',$id)->get()->first();
         

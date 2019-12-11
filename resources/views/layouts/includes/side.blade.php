@@ -58,9 +58,9 @@
 	              	<i class="zmdi zmdi-ungroup"></i> Companies
 	            </a>
 	            <ul id="sc4" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch4" data-parent="#slidebar-menu">
-	              	<li><a href="{{ route('companies.index') }}"><i class="fa-angle-double-right fa"></i> Portal Companies </a></li>
+	              	<li><a href="{{ route('companies.index','all') }}"><i class="fa-angle-double-right fa"></i> All Companies </a></li>
 	              	@permission('can_add_company')
-	              	<li><a href="{{ route('companies.create') }}"><i class="fa-angle-double-right fa"></i> Add Company </a>
+	              	<li><a href="{{ route('companies.create','all') }}"><i class="fa-angle-double-right fa"></i> Add Company </a>
 	              	@endpermission
 	            </ul>
 	        </li>
@@ -69,7 +69,7 @@
 	              	<i class="zmdi zmdi-male-female"></i> Salons &amp; Spa's
 	            </a>
 	            <ul id="sc5" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch5" data-parent="#slidebar-menu">
-		            <li><a href="{{ route('salons.index','all') }}"><i class="fa-angle-double-right fa"></i> Portal Salons</a></li>
+		            <li><a href="{{ route('salons.index','all') }}"><i class="fa-angle-double-right fa"></i> All Salons</a></li>
 		            @permission('can_add_salon')
 		            <li><a href="{{ route('salons.create','all') }}"><i class="fa-angle-double-right fa"></i> Register Salon/Spa </a></li>
 		            @endpermission

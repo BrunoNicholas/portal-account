@@ -1,12 +1,12 @@
 @component('mail::message')
-# Introduction
+# New Job: 
 
-The body of your message.
+You have created a new job application.
 
 @component('mail::button', ['url' => ''])
 Button Text
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+Thanks for partnering with us,<br>
+Regards, {{ config('app.name') }}
 @endcomponent

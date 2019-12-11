@@ -77,12 +77,17 @@
 	                		<div class="form-group row mt-0">
 	                			<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Owner Company</label>
 				                <div class="col-lg-8">
-				                    <select class="form-control" id="inputName" name="company_id">
-				                    	<option value="">(Leave empty if independent)</option>
-				                    	@foreach($companies as $company)
-				                    		<option value="{{ $company->id }}" title="{{ $company->description }}">{{ $company->company_name }}</option>
-				                    	@endforeach
-				                    </select>
+				                    @if(Auth::user()->hasRole('company-admin'))
+					                	<input type="hidden" name="company_id" value="{{ App\Models\Company::where('user_id',Auth::user()->id)->first()->id }}">
+					                	<input type="text" class="form-control" value="{{ App\Models\Company::where('user_id',Auth::user()->id)->first()->company_name }} ({{ App\Models\Company::where('user_id',Auth::user()->id)->first()->company_email }})" disabled>
+					               	@else
+					                    <select class="form-control" id="inputName" name="company_id">
+					                    	<option value="">(Leave empty if independent)</option>
+					                    	@foreach($companies as $company)
+					                    		<option value="{{ $company->id }}" title="{{ $company->description }}">{{ $company->company_name }}</option>
+					                    	@endforeach
+					                    </select>
+					                @endif
 				                </div>
 	                		</div>
 	                	</div>
