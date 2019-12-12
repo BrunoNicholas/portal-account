@@ -20,6 +20,7 @@
     @else
     <link rel="stylesheet" href="{{ asset('assets/css/style.pink-800.min.css') }}">
     @endguest
+    @yield('styles')
     <link rel="stylesheet" href="{{ asset('assets/css/width-boxed.min.css') }}" id="ms-boxed" disabled>
     <style type="text/css">
         #example23_paginate {

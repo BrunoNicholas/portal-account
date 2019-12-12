@@ -7,6 +7,8 @@ use App\Models\Booking;
 use App\Models\Categories;
 use App\Models\Product;
 use App\Models\Gallery;
+use App\Models\Rating;
+use App\Models\Review;
 use App\User;
 
 class Shop extends Model
@@ -65,6 +67,24 @@ class Shop extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    /**
+     * The relationship method for.
+     * as this table.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * The relationship method for.
+     * as this table.
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
     }
 
     /**

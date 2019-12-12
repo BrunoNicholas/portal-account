@@ -122,7 +122,22 @@ class ShopController extends Controller
         if (!$shop) {
             return back()->with('danger','Shop not found. It is either deleted or it is missing.');
         }
-        return view('system.shops.show', compact(['all','shop']));
+
+        $ratings_num  = $shop->ratings->count();
+        $tot_sum      = 0;
+
+        if ($ratings_num > 0) {
+            foreach ($shop->ratings as $rat) {
+                $tot_sum += $rat->rate_number;
+            }
+            $avg_ratings    = $tot_sum/$ratings_num;
+        } else {
+            $avg_ratings    = $tot_sum;
+        }
+
+        $shops = Shop::latest()->paginate(3);
+        $revs = $shop->reviews;
+        return view('system.shops.show', compact(['shops','all','shop','revs','avg_ratings']));
     }
 
     /**

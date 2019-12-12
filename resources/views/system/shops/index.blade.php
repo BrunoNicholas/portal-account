@@ -13,7 +13,7 @@
 					<li class="breadcrumb-item active text-white"><i class="zmdi zmdi-male-female text-white"></i> Shops</li>
 	            </ol>
 	        </p>
-	      	<a href="{{ route('products.index',['all',0]) }}" class="btn btn-raised btn-white color-primary"><i class="zmdi zmdi-male-female"></i> All Products </a>
+	      	<a href="{{ route('products.index',['all',0]) }}" class="btn btn-raised btn-white color-info"><i class="zmdi zmdi-male-female"></i> All Products </a>
 	    </div>
 	</div>
 @endsection
@@ -27,7 +27,7 @@
             			<div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 			                <div class="card-body overflow-hidden text-center">
 			                	<span class="text-danger">No Shops found with that major category.</span> <br>
-			                	<button class="btn btn-primary no-mb mt-0" onclick="window.location='{{ route('shops.index','all') }}'"><i class="fa fa-tree"></i> View All <i class="fa fa-tree"></i> </button> 
+			                	<button class="btn btn-info no-mb mt-0" onclick="window.location='{{ route('shops.index','all') }}'"><i class="fa fa-tree"></i> View All <i class="fa fa-tree"></i> </button> 
 			                	@permission('can_add_salon') Or <a href="{{ route('shops.create','all') }}" class="btn btn-warning no-mb mt-0"> Create One </a>  @endpermission
 			                </div>
 			            </div>
@@ -50,7 +50,7 @@
 			                      </span>
 			                      <span class="ms-tag ms-tag-success"> {{ $shop->status }} </span>
 			                    </div>
-			                    <button type="button" class="btn btn-primary btn-sm btn-block mt-0 no-mb">
+			                    <button type="button" class="btn btn-info btn-sm btn-block mt-0 no-mb">
 			                    	{{ $shop->products->count() }} Products
 			                    </button>
 			                </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="card card-primary">
+            <div class="card card-info">
 	            <div class="card-header">
 	                <h3 class="card-title text-center"> Shops Categories</h3>
 	            </div>
@@ -92,7 +92,7 @@
 			                </div>
 			            </div>
 		            </form>
-	                <button class="btn btn-primary btn-raised btn-block no-mb mt-0" onclick="window.location='{{ route('shops.index','all') }}'"><i class="fa fa-tree"></i> View All <i class="fa fa-tree"></i></button>
+	                <button class="btn btn-info btn-raised btn-block no-mb mt-0" onclick="window.location='{{ route('shops.index','all') }}'"><i class="fa fa-tree"></i> View All <i class="fa fa-tree"></i></button>
               	</div>
         	</div>
   		</div>

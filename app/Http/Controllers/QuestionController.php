@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\User;
 
 class QuestionController extends Controller
 {
@@ -57,7 +58,7 @@ class QuestionController extends Controller
     {
         request()->validate([
             'description'   => 'required',
-            'asked_by'      => 'required',
+            'user_id'      => 'required',
         ]);
         Question::create($request->all());
         return redirect()->route('questions.index')->with('success','Your question is sent successfully! Please come back later once it has been responded to.');
@@ -107,8 +108,7 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-            'description'   => 'required',
-            'asked_by'      => 'required',
+            'description'   => 'required'
         ]);
         Question::find($id)->update($request->all());
         return redirect()->route('questions.index')->with('success','Question Updated Successfully');
