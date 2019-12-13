@@ -45,36 +45,24 @@
             </div>
             <div class="col-lg-5 col-md-7 ms-footer-col ms-footer-alt-color">
               	<div class="ms-footbar-block">
-	                <h3 class="ms-footbar-title text-center mb-2">Last Articles</h3>
-	                <div class="ms-footer-media">
-	                  <div class="media">
-	                    <div class="media-left media-middle">
-	                      <a href="javascript:void(0)">
-	                        <img class="media-object media-object-circle" src="{{ asset('assets/img/demo/p75.jpg') }}" alt="...">
-	                      </a>
-	                    </div>
-	                    <div class="media-body">
-	                      <h4 class="media-heading"><a href="javascript:void(0)">Lorem ipsum dolor sit expedita cumque amet consectetur adipisicing repellat</a></h4>
-	                      <div class="media-footer">
-	                        <span><i class="zmdi zmdi-time color-info-light"></i> August 18, 2016</span>
-	                        <span><i class="zmdi zmdi-folder-outline color-warning-light"></i> <a href="javascript:void(0)">Design</a></span>
-	                      </div>
-	                    </div>
-	                  </div>
-	                  <div class="media">
-	                    <div class="media-left media-middle">
-	                      <a href="javascript:void(0)">
-	                        <img class="media-object media-object-circle" src="assets/img/demo/p75.jpg" alt="...">
-	                      </a>
-	                    </div>
-	                    <div class="media-body">
-	                      <h4 class="media-heading"><a href="javascript:void(0)">Labore ut esse Duis consectetur expedita cumque ullamco ad dolor veniam velit</a></h4>
-	                      <div class="media-footer">
-	                        <span><i class="zmdi zmdi-time color-info-light"></i> August 18, 2016</span>
-	                        <span><i class="zmdi zmdi-folder-outline color-warning-light"></i> <a href="javascript:void(0)">News</a></span>
-	                      </div>
-	                    </div>
-	                  </div>
+	                <h3 class="ms-footbar-title text-center mb-2">Recent Site Reviews</h3><!-- {{ $a=0 }} -->
+	                <div class="ms-footer-media"><!-- {{ $feedback = App\Models\Feedback::latest()->paginate(2) }} -->
+	                	@foreach($feedback as $feed)
+			                <div class="media" onclick="window.location='{{ route('users.show',$feed->user_id) }}'">
+			                    <div class="media-left media-middle">
+				                    <a href="javascript:void(0)"> 
+				                        <img class="media-object media-object-circle" src="{{ App\User::where('id',$feed->user_id)->first()->profile_image ? asset('files/profile/images/'. App\User::where('id',$feed->user_id)->first()->profile_image) : asset('assets/img/demo/p75.jpg')  }}" alt="...">
+				                    </a>
+			                    </div>
+			                    <div class="media-body">
+				                    <h4 class="media-heading"><a href="javascript:void(0)"><b>{{ App\User::where('id',$feed->user_id)->first()->name }} </b> - {{ $feed->description }}</a></h4>
+				                    <div class="media-footer">
+				                        <span><i class="zmdi zmdi-time color-info-light"></i> {{ explode(' ', trim($feed->created_at))[1] }}, {{ explode(' ', trim($feed->created_at))[0] }}</span>
+				                        <span><i class="zmdi zmdi-folder-outline color-warning-light"></i> <a href="javascript:void(0)">{{ $feed->category }}</a></span>
+				                    </div>
+			                    </div>
+			                </div>
+			            @endforeach
 	                </div>
               	</div>
             </div>
@@ -85,10 +73,10 @@
 	                  	<h3 class="no-m ms-site-title"> Salon <span> Portal </span></h3>
 	                </div>
 	                <address class="no-mb">
-		                <p><i class="color-danger-light zmdi zmdi-pin mr-1"></i> 795 Folsom Ave, Suite 600</p>
-		                <p><i class="color-warning-light zmdi zmdi-map mr-1"></i> San Francisco, CA 94107</p>
-		                <p><i class="color-info-light zmdi zmdi-email mr-1"></i> <a href="mailto:joe@example.com">example@domain.com</a></p>
-		                <p><i class="color-royal-light zmdi zmdi-phone mr-1"></i>+34 123 456 7890 </p>
+		                <p><i class="color-danger-light zmdi zmdi-pin mr-1"></i> Soliz House, Lumumba Avenue</p>
+		                <p><i class="color-warning-light zmdi zmdi-map mr-1"></i> Plot _  Wandegeya, Kampala</p>
+		                <p><i class="color-info-light zmdi zmdi-email mr-1"></i> <a href="info@ubunifu.systems">info@ubunifu.systems</a></p>
+		                <p><i class="color-royal-light zmdi zmdi-phone mr-1"></i>+256 777 090909 </p>
 		                <p><i class="color-success-light fa fa-fax mr-1"></i>+34 123 456 7890 </p>
 	                </address>
 	            </div>

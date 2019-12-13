@@ -10,16 +10,14 @@
 			</div>
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
-	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
-	                    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="fa fa-address-book"></i> Companies</a></li>
-	                    	<li class="breadcrumb-item"><a href="{{ route('shops.index','all') }}"><i class="fa fa-address-book-o"></i> Shops</a></li>
-	                    	<li class="breadcrumb-item"><a href="{{ route('shops.show',['all',$shop->id]) }}"><i class="fa fa-address-book-o"></i> {{ $shop->shop_name }}</a></li>
-	                    	<li class="breadcrumb-item"><a href="{{ route('products.index',['all',$shop->id]) }}"><i class="fa fa-list"></i> Products</a></li>
-							<li class="breadcrumb-item active"><i class=""></i> {{ $product->product_name }}</li>
-				        </ol>
-	                </ol>
+                    <ol class="breadcrumb">
+                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
+                    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="fa fa-address-book"></i> Companies</a></li>
+                    	<li class="breadcrumb-item"><a href="{{ route('shops.index','all') }}"><i class="fa fa-address-book-o"></i> Shops</a></li>
+                    	<li class="breadcrumb-item"><a href="{{ route('shops.show',['all',$shop->id]) }}"><i class="fa fa-address-book-o"></i> {{ $shop->shop_name }}</a></li>
+                    	<li class="breadcrumb-item"><a href="{{ route('products.index',['all',$shop->id]) }}"><i class="fa fa-list"></i> Products</a></li>
+						<li class="breadcrumb-item active"><i class=""></i> {{ $product->product_name }}</li>
+			        </ol>
 	            </nav>
 	        </div>
 	    </div>

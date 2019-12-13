@@ -6,6 +6,7 @@ use App\Models\Style;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StyleCreated;
+use App\Models\Shop;
 use App\Models\Salon;
 use App\Models\Categories;
 use App\User;
@@ -89,7 +90,6 @@ class StyleController extends Controller
             'categories_id' => 'required',
             'user_id'       => 'required',
         ]);
-        Style::create($request->all());
         $type = 'all';
 
         $style = Style::create($request->all());
@@ -100,6 +100,8 @@ class StyleController extends Controller
         Mail::to($user->email)->send(
             new StyleCreated($style)
         );
+
+        return redirect()->route('salons.show',['type',$request->salon_id])->with('success','Fashion style saved successfully! Now you can attach an image gallery on it.');
     }
 
     /**
@@ -110,7 +112,16 @@ class StyleController extends Controller
      */
     public function show($type=null,$item_id,$id)
     {
-        //
+        $style    = Style::find($id);
+        if (!$style) {
+            return back()->with('danger', 'Style not found. It is either missing or deleted');
+        }
+
+        $salon   = Salon::find($item_id);
+        if (!$salon) {
+            return back()->with('warning','Looks like a broken link or the referenced salon does not exist.');
+        }
+        return view('system.styles.show', compact(['style','salon','type']));
     }
 
     /**

@@ -117,7 +117,7 @@
 		                <div class="col-md-6"><h2>{{ $shop->shop_name }} <br><small>{{ number_format((float)$avg_ratings, 1, '.', '') }} Stars</small></h2></div>
 		                <div class="col-md-6 mt-3 text-right">
 		                    <div>
-		                    	<input class="input-3-xs" name="input-3-xs" value="{{ number_format((float)$avg_ratings, 1, '.', '') }}" class="rating-loading" data-size="xs">
+		                    	<input class="input-3-xs" name="input-3-xs" value="{{ $avg_ratings }}" class="rating-loading" data-size="xs">
 		                    </div>
 		                </div>
 			        </div>

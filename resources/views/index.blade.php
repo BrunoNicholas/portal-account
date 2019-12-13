@@ -116,94 +116,44 @@
     <div class="wrap ms-hero-bg-dark ms-hero-img-keyboard ms-bg-fixed mt-6">
         <div class="container index-1">
             <div class="text-center color-white mb-4 mw-800 center-block">
-                <h1>Trending Fashion Styles</h1>
+                <h1>Recent Fashion Styles &amp; Products</h1>
                 <p class="lead color-medium">Discover our projects and the rigorous process of creation. Our principles are creativity, design, experience and <span class="color-white">knowledge</span>. We are backed by 20 years of research.</p>
+            </div><!-- {{ $styles = App\Models\Style::latest()->paginate(3) }} --> <!-- {{ $products = App\Models\Product::latest()->paginate(3) }} -->
+            <div class="row">
+                @foreach($styles as $style)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="ms-thumbnail-container wow fadeInUp">
+                        <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
+                            <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; alt="" class="img-fluid">
+                            <figcaption class="ms-thumbnail-caption text-center">
+                                <div class="ms-thumbnail-caption-content">
+                                    <h3 class="ms-thumbnail-caption-title">{{ $style->style_name }}</h3>
+                                    <p>{{ $style->description }}</p>
+                                    <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-raised btn-success"><i class="zmdi zmdi-eye"></i> Fashion Style Details</a>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                @endforeach
             </div>
             <div class="row">
+                @foreach($products as $product)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="ms-thumbnail-container wow fadeInUp">
                         <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
-                            <img src="{{ asset('assets/img/demo/port21.jpg') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; alt="" class="img-fluid">
                             <figcaption class="ms-thumbnail-caption text-center">
                                 <div class="ms-thumbnail-caption-content">
-                                    <h3 class="ms-thumbnail-caption-title">Lorem ipsum dolor sit</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <a href="javascript:void(0)" class="btn btn-raised btn-danger"><i class="zmdi zmdi-eye"></i> View more</a>
+                                    <h3 class="ms-thumbnail-caption-title">{{ $product->product_name }}</h3>
+                                    <p>{{ $product->description }}</p>
+                                    <a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-raised btn-info"><i class="zmdi zmdi-eye"></i> View Product </a>
                                 </div>
                             </figcaption>
                         </figure>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                <div class="ms-thumbnail-container wow fadeInUp">
-                    <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
-                        <img src="{{ asset('assets/img/demo/port10.jpg') }}" alt="" class="img-fluid">
-                        <figcaption class="ms-thumbnail-caption text-center">
-                            <div class="ms-thumbnail-caption-content">
-                                <h3 class="ms-thumbnail-caption-title">Lorem ipsum dolor sit</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="javascript:void(0)" class="btn btn-raised btn-danger"><i class="zmdi zmdi-eye"></i> View more</a>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="ms-thumbnail-container wow fadeInUp">
-                        <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
-                            <img src="{{ asset('assets/img/demo/portG1.jpg') }}" alt="" class="img-fluid">
-                            <figcaption class="ms-thumbnail-caption text-center">
-                                <div class="ms-thumbnail-caption-content">
-                                    <h3 class="ms-thumbnail-caption-title">Lorem ipsum dolor sit</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <a href="javascript:void(0)" class="btn btn-raised btn-danger"><i class="zmdi zmdi-eye"></i> View more</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="ms-thumbnail-container wow fadeInUp">
-                        <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
-                            <img src="{{ asset('assets/img/demo/port20.jpg') }}" alt="" class="img-fluid">
-                            <figcaption class="ms-thumbnail-caption text-center">
-                                <div class="ms-thumbnail-caption-content">
-                                    <h3 class="ms-thumbnail-caption-title">Lorem ipsum dolor sit</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <a href="javascript:void(0)" class="btn btn-raised btn-danger"><i class="zmdi zmdi-eye"></i> View more</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                  <div class="ms-thumbnail-container wow fadeInUp">
-                      <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
-                          <img src="{{ asset('assets/img/demo/port18.jpg') }}" alt="" class="img-fluid">
-                          <figcaption class="ms-thumbnail-caption text-center">
-                              <div class="ms-thumbnail-caption-content">
-                                  <h3 class="ms-thumbnail-caption-title">Lorem ipsum dolor sit</h3>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                  <a href="javascript:void(0)" class="btn btn-raised btn-danger"><i class="zmdi zmdi-eye"></i> View more</a>
-                              </div>
-                          </figcaption>
-                      </figure>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="ms-thumbnail-container wow fadeInUp">
-                        <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
-                            <img src="{{ asset('assets/img/demo/port2.jpg') }}" alt="" class="img-fluid">
-                            <figcaption class="ms-thumbnail-caption text-center">
-                                <div class="ms-thumbnail-caption-content">
-                                    <h3 class="ms-thumbnail-caption-title">Lorem ipsum dolor sit</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <a href="javascript:void(0)" class="btn btn-raised btn-danger"><i class="zmdi zmdi-eye"></i> View more</a>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

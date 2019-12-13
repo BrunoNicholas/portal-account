@@ -6,8 +6,8 @@
 @section('navigator')
 	<div class="ms-hero-page ms-hero-img-city2 ms-hero-bg-info mb-6" style="padding: 0px;">
 	    <div class="text-center color-white mt-0 mb-0 index-1" style="padding-top: 5px;">
-	        <h2>Fashion Shops &amp; Products</h2>
-	      	<p class="lead lead-lg" style="text-transform: capitalize;"> {{ $type }} - Fashion Shops &amp; Products
+	        <h2>Items &amp; Products</h2>
+	      	<p class="lead lead-lg" style="text-transform: capitalize;"> {{ $type }} - Items &amp; Products
 	            <ol class="breadcrumb d-flex justify-content-center" style="height: 40px;">
 	            	<li class="breadcrumb-item"><a href="{{ route('userhome') }}" class="text-white"><i class="fa fa-home text-white"></i> Home</a></li>
 					<li class="breadcrumb-item active text-white"><i class="zmdi zmdi-male-female text-white"></i> Shops</li>
