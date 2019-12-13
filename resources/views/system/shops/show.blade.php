@@ -52,19 +52,58 @@
 	            </ol>
             </div>
             <div class="card card-info animated fadeInUp animation-delay-10">
-            	<div class="card-header overflow-hidden text-center"> Shop Products </div>
+            	<div class="card-header overflow-hidden text-center">
+            		Shop Products 
+            		@auth @if($shop->user_id == Auth::user()->id)
+        				<a class="btn btn-sm btn-raised btn-primary" href="{{ route('products.create',['all',$shop->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px; padding: 0px;"></i> New product </a>
+        			@endif @endauth
+            	</div>
 	            <div class="card-body overflow-hidden">
-	                <div class="row" style="height: 495px; text-align: center;">
-	                	@if(sizeof($shop->products) < 1)
-                			<span class="text-danger"> No products found in this shop.
-                			@auth @if($shop->user_id == Auth::user()->id)
-                				<a class="btn btn-sm btn-info btn-raised" href="{{ route('products.create',['all',$shop->id]) }}"><i class="fa-plus fa"></i> Add new product </a>
-                			@endif @endauth
-                			</span>
-                		@endif
+	            	@if(sizeof($shop->products) < 1)
+            			<div class="col-md-12 text-center text-danger"> No products found in this shop.
+	            			@auth @if($shop->user_id == Auth::user()->id)
+	            				<a class="btn btn-sm btn-info btn-raised" href="{{ route('products.create',['all',$shop->id]) }}"><i class="fa-plus fa" style="margin: 0px;"></i> Add new product </a>
+	            			@endif @endauth
+            			</div>
+            		@endif
+	                <div class="row" style="height: 495px; text-align: center; overflow-y: auto;"><?php $i=0; ?>
                 		@foreach($shop->products as $product)
-                			<div class="panel panel-body">
-
+                			<div class="col-md-12" style="border-bottom: thin solid #e8e8e8;margin-bottom: 5px; padding-bottom: 5px;">
+	                			<div class="row" onclick="window.location='{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$shop->id,$product->id]) }}'">
+			                        <div class="col-md-6 text-center">
+			                        	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; border-radius: 5px;">
+			                        </div>
+			                        <div class="col-md-6">
+			                        	<div class="row">
+				                          	<div class="col-12">
+				                          		<div class="table-responsive">
+				                          			<table style="width: 100%;">
+				                          				<tbody>
+				                          					@if($product->product_name)
+				                          						<tr>
+				                          							<th colspan="2">{{ $product->product_name }}</th>
+				                          						</tr>
+				                          					@endif
+			                          						<tr>
+			                          							@if($product->previous_price)<td class="text-left"><strike>UGX {{ $product->previous_price }}</strike></td>@endif
+			                          							@if($product->current_price)<td class="text-right text-info">UGX {{ $product->current_price }}</td>@endif
+			                          						</tr>
+			                          						<tr>
+			                          							@if($product->categories_id)<td class="text-left">{{ App\Models\Categories::where('id',$product->categories_id )->first()->display_name }}</td>@endif
+			                          							@if($product->status)<td class="text-right"><span class="badge badge-xs badge-success">{{ $product->status }}</td>@endif
+			                          						</tr>
+				                          					@if($product->description)
+				                          						<tr>
+				                          							<td colspan="2" class="text-left"><i>{{ strlen($product->description) > 60 ? substr($product->description, 0, 60) . '... ' : $product->description }}</i></td>
+				                          						</tr>
+				                          					@endif
+				                          				</tbody>
+				                          			</table>
+				                          		</div>
+				                          	</div>
+				                        </div>
+				                    </div>
+				                </div>
 		                	</div>
                 		@endforeach
 	                </div>
@@ -75,10 +114,10 @@
             <div class="card animated zoomInDown animation-delay-5">
 	            <div class="card-body">
 	            	<div class="row">
-		                <div class="col-md-6"><h2>{{ $shop->shop_name }} <br><small>{{ $avg_ratings }} Stars</small></h2></div>
+		                <div class="col-md-6"><h2>{{ $shop->shop_name }} <br><small>{{ number_format((float)$avg_ratings, 1, '.', '') }} Stars</small></h2></div>
 		                <div class="col-md-6 mt-3 text-right">
 		                    <div>
-		                    	<input class="input-3-xs" name="input-3-xs" value="{{ $avg_ratings }}" class="rating-loading" data-size="xs">
+		                    	<input class="input-3-xs" name="input-3-xs" value="{{ number_format((float)$avg_ratings, 1, '.', '') }}" class="rating-loading" data-size="xs">
 		                    </div>
 		                </div>
 			        </div>
@@ -104,7 +143,7 @@
 		                	@endif
 		                	@if($shop->shop_email)
 		                  		<tr>
-		                  			<td><strong>shop Email: </strong></td><td> {{ $shop->shop_email }}</td>
+		                  			<td><strong>Shop Email: </strong></td><td> {{ $shop->shop_email }}</td>
 		                  		</tr>
 		                  	@endif
 		                  	@if($shop->shop_website)
@@ -119,7 +158,7 @@
 		                  	@endif
 		                  	@if($shop->shop_location)
 		                  		<tr> 
-		                  			<td><strong>shop Location: </strong></td><td> {{ $shop->shop_location }}</td>
+		                  			<td><strong>Shop Location: </strong></td><td> {{ $shop->shop_location }}</td>
 		                  		</tr>
 		                  	@endif
 		                  	@if($shop->accept_cash)
@@ -157,25 +196,25 @@
 	            </div>
             </div>
             <div class="card card-info animated fadeInUp animation-delay-10">
-            	<div class="card-header overflow-hidden text-center">{{ $shop->reviews->count() }} - Reviews | &amp; | Ratings - {{ $shop->ratings->count() }}</div>
+            	<div class="card-header overflow-hidden text-center"> Reviews | &amp; | Ratings </div>
 	            <div class="card-body overflow-hidden">
 	            	@if(sizeof($revs) < 1)
 	            		<div class="col-md-12 text-center text-danger">
 	            			<span>No reviews made for this shop yet</span>
 	            		</div>
 	            	@endif
-	                <div class="row" style="max-height: 350px; overflow-y: auto;"><?php $i=0; ?>
+	                <div class="row" style="max-height: 373px; overflow-y: auto;"><?php $i=0; ?>
                 		@foreach($revs as $review) 
                 			<span style="display: none;">{{ $user[$i] = App\User::where('id',$review->user_id)->first() }}</span>
 	                		<div class="col-md-12">
-	                			<div class="row">
+	                			<div class="row" style="border-bottom: thin solid #e7e7e7; border-radius: 5px; margin-bottom: 10px;">
 			                        <div class="col-3 mr-1 text-center" onclick="window.location='{{ route('users.show',$user[$i]->id) }}'">
 			                          	<img src="{{ $user[$i]->profile_image ? asset('files/profile/images/'.$user[$i]->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="..." style="max-height: 50px; border-radius: 10%;" >
 			                          	<h5 class="mt-0 color-info">{{ $user[$i]->name }}</h5>
 			                        </div>
 			                        <div class="col-8">
 			                        	<div class="row">
-				                          	<div class="col-12" style="border-bottom: thin solid #e6e6e6;">
+				                          	<div class="col-12">
 				                          		<span class="pull-right" style="font-size: 8px;">
 				                          			@if(App\Models\Rating::where('created_at',$review->created_at)->first())
 				                          			<input class="input-3-xs" name="input-3-xs" value="{{  App\Models\Rating::where('created_at',$review->created_at)->first()->rate_number }}" class="rating-loading" data-size="xs">

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Categories;
+use App\Models\Shop;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -43,7 +46,16 @@ class ProductController extends Controller
      */
     public function create($type=null, $item_id)
     {
-        return view('system.products.create',compact(['item_id','type']));
+        $shop = Shop::find($item_id);
+        if (!$shop) {
+            return back()->with('warning','You can not create a shop item without a valid shop. Shop not found!');
+        }
+        if (Auth::user()->id != $shop->user_id) {
+            return back()->with('warning','You can only add shop item to your shop. Operation Blocked!');
+        }
+        $cats       = Categories::where('type','products-gender')->get();
+        $products   = Product::latest()->paginate(30);
+        return view('system.products.create',compact(['item_id','type','shop','cats','products']));
     }
 
     /**
@@ -59,7 +71,9 @@ class ProductController extends Controller
             'user_id'       => 'required',
         ]);
         Product::create($request->all());
-        return redirect()->route('products.index',['type','item_id'])->with('success','Product created successfully');
+        $type = 'all';
+
+        return redirect()->route('shops.show',['type',$request->shop_id])->with('success','Product created successfully! Now you can attach an image gallery on it.');
     }
 
     /**
@@ -74,7 +88,12 @@ class ProductController extends Controller
         if (!$product) {
             return back()->with('danger', 'Product not found. It is either missing or deleted');
         }
-        return view('system.products.edit', compact(['product']));
+
+        $shop   = Shop::find($item_id);
+        if (!$shop) {
+            return back()->with('warning','Looks like a broken link or the referenced shop does not exist.');
+        }
+        return view('system.products.show', compact(['product','shop','type']));
     }
 
     /**

@@ -51,7 +51,7 @@ class SalonController extends Controller
             $type = 'all';
             return redirect()->route('salons.index',$type)->with('warning','Salon category does not exist');
         }
-        $type = 'all';
+        $type   = 'All';
         $stype= 'all';
         return view('system.salons.index',compact(['salons','type','stype']));
     }
@@ -90,7 +90,7 @@ class SalonController extends Controller
             new SalonCreated($salon)
         );
 
-        if (Auth::user()->hasRole('company-admin')) {
+        if (Auth::user()->hasRole('company-admin') || Auth::user()->hasRole('super-admin') || Auth::user()->hasRole('admin')) {
             return redirect()->route('salons.show',['all',$salon->id])->with('success','Salon created successfully. You are now a salon administrator');
         }
 
@@ -122,11 +122,24 @@ class SalonController extends Controller
             return redirect()->route('salons.index',$type)->with('danger','Salon not found. It is either deleted or it is missing.');
         }
 
+        $ratings_num  = $salon->ratings->count();
+        $tot_sum      = 0;
+
+        if ($ratings_num > 0) {
+            foreach ($salon->ratings as $rat) {
+                $tot_sum += $rat->rate_number;
+            }
+            $avg_ratings    = $tot_sum/$ratings_num;
+        } else {
+            $avg_ratings    = $tot_sum;
+        }
+
         if (!$type) {
             $type = 'all';
         }
         $salons = Salon::latest()->paginate(3);
-        return view('system.salons.show', compact(['type','salon','salons']));
+        $revs = $salon->reviews;
+        return view('system.salons.show', compact(['type','salon','salons','revs','avg_ratings']));
     }
 
     /**
@@ -145,7 +158,9 @@ class SalonController extends Controller
         if (!$salon) {
             return back()->with('danger','Salon not found. It is either deleted or it is missing.');
         }
-        return view('system.salons.edit', compact(['salon']));
+        $cats       = Categories::where('type','salon-style')->orWhere('type', 'salon-gender')->get();
+        $companies  = Company::latest()->paginate();
+        return view('system.salons.edit', compact(['salon','type','cats','companies']));
     }
 
     /**
@@ -157,7 +172,23 @@ class SalonController extends Controller
      */
     public function update(Request $request, $type=null, $id)
     {
-        //
+        request()->validate([
+            'salon_name'    => 'required',
+            'salon_email'   => 'required',
+            'user_id'       => 'required',
+        ]);
+
+        Salon::find($id)->update($request->all());
+
+        if (Auth::user()->hasRole('company-admin') || Auth::user()->hasRole('super-admin') || Auth::user()->hasRole('admin')) {
+            return redirect()->route('salons.show',['all',$salon->id])->with('success','Salon updated successfully. Salon administrator might be updated as well!');
+        }
+
+        DB::table('role_user')->where('user_id',$request->user_id)->delete();
+        $user->attachRole(Role::where('name','salon-admin')->first());
+
+        
+        return redirect()->route('salons.show',['all',$salon->id])->with('success','Salon updated successfully. Administrator might be updated too');
     }
 
     /**

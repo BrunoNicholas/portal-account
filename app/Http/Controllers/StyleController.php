@@ -14,6 +14,22 @@ use Auth;
 class StyleController extends Controller
 {
     /**
+     * Display the constructor of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index','show');
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        // $this->middleware('permission:can_view_questions',['only'=>'index']);
+        // $this->middleware('permission:can_add_questions',['only'=>['create','store']]);
+        // $this->middleware('permission:can_delete_post',['only'=>'destroy']);
+        // $this->middleware('permission:can_update_questions',['only'=>['update','edit']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,7 +52,7 @@ class StyleController extends Controller
             $styles   = $salon->styles;
             return view('system.styles.index',compact(['styles','type','item_id']));
         }
-
+        $type = 'All';
         $styles = Style::latest()->paginate(50);
         return view('system.styles.index',compact(['styles','type','id']));
     }
@@ -48,7 +64,16 @@ class StyleController extends Controller
      */
     public function create($type=null,$item_id)
     {
-        //
+        $salon = Salon::find($item_id);
+        if (!$salon) {
+            return back()->with('warning','You can not create a salon item without a valid salon. Salon not found!');
+        }
+        if (Auth::user()->id != $salon->user_id) {
+            return back()->with('warning','You can only add salon item to your salon. Operation Blocked!');
+        }
+        $cats       = Categories::where('type','salon-gender')->orWhere('type','salon-style')->get();
+        $styles   = Style::latest()->paginate(30);
+        return view('system.styles.create',compact(['item_id','type','salon','cats','styles']));
     }
 
     /**
@@ -59,14 +84,20 @@ class StyleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'style_name'    => 'required',
+            'categories_id' => 'required',
+            'user_id'       => 'required',
+        ]);
+        Style::create($request->all());
+        $type = 'all';
 
         $style = Style::create($request->all());
 
         $user   = User::where('id',$style->user_id)->first();
 
-        // mailing to user who has made booking
-        Mail::to($style->shop_email)->send(
+        // mailing to user who has created the style
+        Mail::to($user->email)->send(
             new StyleCreated($style)
         );
     }

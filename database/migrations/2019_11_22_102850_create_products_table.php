@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->text('description')->nullable();
             $table->float('previous_price')->nullable();
-            $table->float('current_price')->nullable();            
+            $table->float('current_price')->nullable();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('status')->default('available');
             $table->timestamps();

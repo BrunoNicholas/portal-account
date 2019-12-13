@@ -91,7 +91,7 @@ class ShopController extends Controller
             new ShopCreated($shop)
         );
 
-        if (Auth::user()->hasRole('company-admin')) {
+        if (Auth::user()->hasRole('company-admin') || Auth::user()->hasRole('super-admin') || Auth::user()->hasRole('admin')) {
             return redirect()->route('shops.show',['all',$shop->id])->with('success','Shop created successfully. You are now a shop administrator');
         }
 
@@ -120,7 +120,7 @@ class ShopController extends Controller
 
         $shop  = Shop::find($id);
         if (!$shop) {
-            return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+            return redirect()->route('shops.index',$type)->with('danger','Shop not found. It is either deleted or it is missing.');
         }
 
         $ratings_num  = $shop->ratings->count();
@@ -137,7 +137,7 @@ class ShopController extends Controller
 
         $shops = Shop::latest()->paginate(3);
         $revs = $shop->reviews;
-        return view('system.shops.show', compact(['shops','all','shop','revs','avg_ratings']));
+        return view('system.shops.show', compact(['shops','type','shop','revs','avg_ratings']));
     }
 
     /**
@@ -168,7 +168,26 @@ class ShopController extends Controller
      */
     public function update(Request $request, $type=null, $id)
     {
-        //
+        request()->validate([
+            'shop_name'    => 'required',
+            'shop_email'   => 'required',
+            'user_id'       => 'required',
+        ]);
+
+        Shop::find($id)->update($request->all());
+        if (Auth::user()->hasRole('company-admin') || Auth::user()->hasRole('super-admin') || Auth::user()->hasRole('admin')) {
+            return redirect()->route('shops.show',['all',$shop->id])->with('success','Shop updated successfully. Shop administrator might be updated as well!');
+        }
+
+        $user = User::find($request->user_id);
+        $user->role = 'shop-admin';
+        $user->save();
+
+        DB::table('role_user')->where('user_id',$request->user_id)->delete();
+        $user->attachRole(Role::where('name','shop-admin')->first());
+
+        $shop = Shop::where('shop_email',$request->shop_email)->first(); 
+        return redirect()->route('shops.show',['all',$shop->id])->with('success','Shop updated successfully. Shop administrator might be updated as well!');
     }
 
     /**

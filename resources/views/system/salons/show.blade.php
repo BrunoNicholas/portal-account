@@ -1,6 +1,10 @@
 @extends('layouts.site')
 @section('title') {{ $salon->salon_name }} - Salon Details @endsection
-@section('styles') @endsection
+@section('styles')
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+@endsection
 @section('top_menu') style="display: none;" @endsection
 @section('content')
 <div class="container">
@@ -48,22 +52,64 @@
 	            </ol>
             </div>
             <div class="card card-primary animated fadeInUp animation-delay-10">
-            	<div class="card-header overflow-hidden text-center"> Salon Styles </div>
+            	<div class="card-header overflow-hidden text-center"> Salon Styles
+            		@auth @if($salon->user_id == Auth::user()->id)
+        				<a class="btn btn-sm btn-raised btn-success" href="{{ route('styles.create',['all',$salon->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px; padding: 0px;"></i> New Style </a>
+        			@endif @endauth
+            	</div>
 	            <div class="card-body overflow-hidden">
 	                <div class="row" style="height: 495px; text-align: center;">
 	                	@if(sizeof($salon->styles) < 1)
-                			<span class="text-danger"> No fashion style saved for this salon/spa.
-                			@auth @if($salon->user_id == Auth::user()->id)
-                				<a class="btn btn-sm btn-primary btn-raised" href="{{ route('styles.create',['all',$salon->id]) }}"><i class="fa-plus fa"></i> Add new style </a>
-                			@endif @endauth
-                			</span>
+                			<div class="col-md-12 text-center text-danger"> No fashion style saved for this salon/spa.
+	                			@auth @if($salon->user_id == Auth::user()->id)
+	                				<a class="btn btn-sm btn-success btn-raised" href="{{ route('styles.create',['all',$salon->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px;"></i> Add new style </a>
+	                			@endif @endauth
+                			</div>
                 		@endif
-                		@foreach($salon->styles as $style)
-                			<div class="panel panel-body">
-
+                		<div class="col-md-12" style="height: 495px; text-align: center; overflow-y: auto;">
+	                		<div class="row"><?php $i=0; ?>
+		                		@foreach($salon->styles as $style)
+		                			<div class="col-md-12" style="border-bottom: thin solid #e8e8e8;margin-bottom: 5px; padding-bottom: 5px;">
+		                				<div class="row" onclick="window.location='{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$salon->id,$style->id]) }}'">
+					                        <div class="col-md-6 text-center">
+					                        	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; border-radius: 5px;">
+					                        </div>
+					                        <div class="col-md-6">
+					                        	<div class="row">
+						                          	<div class="col-12">
+						                          		<div class="table-responsive">
+						                          			<table style="width: 100%;">
+						                          				<tbody>
+						                          					@if($style->style_name)
+						                          						<tr>
+						                          							<th colspan="2">{{ $style->style_name }}</th>
+						                          						</tr>
+						                          					@endif
+					                          						<tr>
+					                          							@if($style->previous_price)<td class="text-left"><strike>UGX {{ $style->previous_price }}</strike></td>@endif
+					                          							@if($style->current_price)<td class="text-right text-info">UGX {{ $style->current_price }}</td>@endif
+					                          						</tr>
+					                          						<tr>
+					                          							@if($style->categories_id)<td class="text-left">{{ App\Models\Categories::where('id',$style->categories_id )->first()->display_name }}</td>@endif
+					                          							@if($style->status)<td class="text-right"><span class="badge badge-xs badge-success">{{ $style->status }}</td>@endif
+					                          						</tr>
+						                          					@if($style->description)
+						                          						<tr>
+						                          							<td colspan="2" class="text-left"><i>{{ strlen($style->description) > 60 ? substr($style->description, 0, 60) . '... ' : $style->description }}</i></td>
+						                          						</tr>
+						                          					@endif
+						                          				</tbody>
+						                          			</table>
+						                          		</div>
+						                          	</div>
+						                        </div>
+						                    </div>
+						                </div>
+				                	</div>
+		                		@endforeach
 		                	</div>
-                		@endforeach
-	                </div>
+		                </div>
+		            </div>
 	            </div>
             </div>
         </div>
@@ -71,16 +117,10 @@
             <div class="card animated zoomInDown animation-delay-5">
 	            <div class="card-body">
 	            	<div class="row">
-		                <div class="col-md-6"><h2>{{ $salon->salon_name }} <small>- Details</small></h2></div>
+		                <div class="col-md-6"><h2>{{ $salon->salon_name }} <br><small>{{ number_format((float)$avg_ratings, 1, '.', '') }} Stars</small></h2></div>
 		                <div class="col-md-6 mt-3 text-right">
 		                    <div>
-		                      <span class="mr-2">
-		                        <i class="zmdi zmdi-hc-lg zmdi-star color-warning"></i>
-		                        <i class="zmdi zmdi-hc-lg zmdi-star color-warning"></i>
-		                        <i class="zmdi zmdi-hc-lg zmdi-star color-warning"></i>
-		                        <i class="zmdi zmdi-hc-lg zmdi-star"></i>
-		                        <i class="zmdi zmdi-hc-lg zmdi-star"></i>
-		                      </span>
+			                    <input class="input-3-xs" name="input-3-xs" value="{{ number_format((float)$avg_ratings, 1, '.', '') }}" class="rating-loading" data-size="xs">
 		                    </div>
 		                </div>
 			        </div>
@@ -155,21 +195,92 @@
 		                  	</tr> --}}
 		                </table>
 		            </div>
-	                <button type="button" class="btn btn-primary btn-block btn-raised mt-2 no-mb"><i class="zmdi zmdi-plus"></i> Add Review</button>
+	                <button type="button" class="btn btn-success btn-block btn-raised mt-2 no-mb" data-toggle="modal" data-target="#myRatingModal" @guest disabled title="You must be logged in to make a rating and review!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this salon" @endguest><i class="zmdi zmdi-plus"></i> Add Review</button>
 	            </div>
             </div>
             <div class="card card-success animated fadeInUp animation-delay-10">
-            	<div class="card-header overflow-hidden text-center">User Reviews &amp; Ratings</div>
+            	<div class="card-header overflow-hidden text-center">Reviews | &amp; | Ratings</div>
 	            <div class="card-body overflow-hidden">
-	                <div class="row" style="height: 300px;">
-	                	<div class="panel panel-body">
-	                		
-	                	</div>
+	            	@if(sizeof($revs) < 1)
+	            		<div class="col-md-12 text-center text-danger">
+	            			<span>No reviews made for this salon yet</span>
+	            		</div>
+	            	@endif
+	                <div class="row" style="max-height: 373px; overflow-y: auto;"><?php $i=0; ?>
+	                	@foreach($revs as $review) 
+                			<span style="display: none;">{{ $user[$i] = App\User::where('id',$review->user_id)->first() }}</span>
+	                		<div class="col-md-12">
+	                			<div class="row" style="border-bottom: thin solid #e7e7e7; border-radius: 5px; margin-bottom: 10px;">
+			                        <div class="col-3 mr-1 text-center" onclick="window.location='{{ route('users.show',$user[$i]->id) }}'">
+			                          	<img src="{{ $user[$i]->profile_image ? asset('files/profile/images/'.$user[$i]->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="..." style="max-height: 50px; border-radius: 10%;" >
+			                          	<h5 class="mt-0 color-info">{{ $user[$i]->name }}</h5>
+			                        </div>
+			                        <div class="col-8">
+			                        	<div class="row">
+				                          	<div class="col-12">
+				                          		<span class="pull-right" style="font-size: 8px;">
+				                          			@if(App\Models\Rating::where('created_at',$review->created_at)->first())
+				                          			<input class="input-3-xs" name="input-3-xs" value="{{  App\Models\Rating::where('created_at',$review->created_at)->first()->rate_number }}" class="rating-loading" data-size="xs">
+				                          			@endif
+				                          		</span>
+				                          		<span class="pull-left" style="color: #c3c3c3;">{{ explode(' ', trim($review->created_at))[1] . ', ' . explode(' ', trim($review->created_at))[0] }}</span>
+				                          	</div>
+					                        <div class="col-12">
+					                            {{ $review->review_message }}
+					                        </div>
+					                    </div>
+			                        </div>
+			                    </div>
+		                    </div><!-- {{ ++$i }} -->
+		                    <hr>
+	                    @endforeach
 	                </div>
 	            </div>
             </div>
         </div>
     </div>
+    {{-- the rating box --}}
+    <div class="modal" id="myRatingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h3 class="modal-title color-primary" id="myModalLabel"> Review &amp; Rate </h3>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+	            </div>
+	            <form action="{{ route('reviews.store',['salon',$salon->id]) }}" class="form-horizontal form-bordered" method="post">
+	            	@csrf
+	            	<div class="modal-body">
+			            @if($salon->company_id) <input type="hidden" name="company_id" value="{{ $salon->company_id }}"> @endif
+			            @if($salon->id) <input type="hidden" name="salon_id" value="{{ $salon->id }}"> @endif
+			            @auth<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">@endauth
+
+			            @foreach ($errors->all() as $error)
+			            	<p class="alert alert-danger">{{ $error }}</p>
+			            @endforeach
+
+			            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+		                <div class="form-group row mt-0">
+		                    <label class="col-md-4 col-form-label text-right" for="input-5-sm"> Rating this salon</label>
+		                    <div class="col-md-8">
+    							<input id="input-5-sm" name="rate_number" class="rating rating-loading" data-size="sm" data-max="5" data-step="0.1" data-show-clear="false" data-show-caption="true">
+		                    </div>
+		                </div>
+		                <div class="form-group row mt-0">
+		                    <label class="col-md-4 col-form-label text-right"> Your Review </label>
+		                    <div class="col-md-8">
+		                        <textarea class="form-control" name="review_message" placeholder="Describe your feeling towards this salon" required></textarea>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="reset" class="btn btn-danger" data-dismiss="modal">Clear & Close</button>
+		                <button type="submit" class="btn  btn-primary"> SUBMIT </button>
+		            </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+	{{-- /end of rating box --}}
     <h2 class="mt-4 mb-4 right-line"> Other Salons | <a href="{{ route('salons.index','all') }}">View All</a> </h2>
     <div class="row"><?php $i=3; ?>
         @foreach($salons as $sal)
@@ -201,4 +312,11 @@
     </div>
 </div> <!-- container -->
 @endsection
-@section('scripts') @endsection
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+    <script>
+		$(document).ready(function(){
+		    $('.input-3-xs').rating({displayOnly: true, step: 0.5});
+		});
+	</script>
+@endsection

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories;
 use App\Models\Comment;
 use App\Models\Booking;
+use App\Models\Order;
 use App\Models\Image;
 use App\Models\Shop;
 use App\User;
@@ -68,6 +69,15 @@ class Product extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    /**
+     * The relationship method for.
+     * as this table.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     /**
