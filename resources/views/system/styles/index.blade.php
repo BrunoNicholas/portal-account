@@ -100,6 +100,7 @@
         </div>
     </div>
 </div> <!-- container -->
+@include('layouts.includes.footer')
 @endsection
 @section('scripts')
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

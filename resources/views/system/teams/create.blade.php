@@ -11,13 +11,10 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
-					    	<li><a href="{{ route('users.index') }}"><i class="fa fa-users text-primary"></i>Users</a></li>
-					    	<li><a href="{{ route('teams.index') }}"><i class="fa fa-users text-primary"></i>Teams</a></li>
-					        <li class="active"><a href="javascript:void(0)"><i class="fa fa-plus"></i> Add Team </a></li>
-
-				        </ol>
+                    	<li><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
+				    	<li><a href="{{ route('users.index') }}"><i class="fa fa-users text-primary"></i>Users</a></li>
+				    	<li><a href="{{ route('teams.index') }}"><i class="fa fa-users text-primary"></i>Teams</a></li>
+				        <li class="active"><a href="javascript:void(0)"><i class="fa fa-plus"></i> Add Team </a></li>
 	                </ol>
 	            </nav>
 	        </div>

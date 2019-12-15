@@ -26,7 +26,7 @@
 @endsection
 @section('content')
 <div class="container mt-0" style="min-height: 500px;">
-<div class="row mt-0 pl-0">
+	<div class="row mt-0 pl-0">
 		<div class="col-lg-12 ms-paper-content-container">
 			<div class="ms-paper-content">
 	            <section class="ms-component-section">
@@ -37,6 +37,7 @@
 	    </div>
 	</div>
 </div>
+@include('layouts.includes.footer')
 @endsection
 @section('scripts')
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

@@ -98,6 +98,7 @@
   		</div>
     </div>
 </div> <!-- container -->
+@include('layouts.includes.footer')
 @endsection
 @section('scripts')
 

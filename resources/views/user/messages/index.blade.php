@@ -13,11 +13,9 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
-				            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
-				            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-envelope"></i> Messages </li>
-				        </ol>
+                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
+			            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
+			            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-envelope"></i> Messages </li>
 	                </ol>
 	            </nav>
 	        </div>
@@ -64,9 +62,9 @@
 			                </h3>
 			            </section>
 			            <div class="col-md-12" style="overflow-x: auto;">
-			                <div class="panel panel-primary">
+			                <div class="box box-primary">
 				                <!-- /.box-header -->
-				                <div class="panel-body no-padding">
+				                <div class="no-padding">
 				                  	<div class="mailbox-controls">
 					                    <!-- Check all button -->
 					                    <div class="btn-group">
@@ -169,6 +167,7 @@
 	    </div>
 	</div>
 </div>
+@include('layouts.includes.footer')
 @endsection
 @section('scripts')
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
