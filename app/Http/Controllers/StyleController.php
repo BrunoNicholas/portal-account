@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Style;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\StyleCreated;
-use App\Models\Shop;
-use App\Models\Salon;
 use App\Models\Categories;
+use App\Mail\StyleCreated;
+use App\Models\Salon;
 use App\User;
 use Auth;
 
@@ -37,23 +36,20 @@ class StyleController extends Controller
      */
     public function index($type=null,$item_id)
     {
-        if ($type == 'shop') {
-            $shop = Shop::find($item_id);
-            if (!$shop) {
-                return back()->with('danger','Shop not found. It is either deleted or it is missing.');
+        if ($type != 'all') {
+            $category = Categories::where('name',$type)->first();
+            if ($category) {
+                $type = $category->display_name;
+                $stype= $category->name;
+
+                $styles = Style::where('categories_id',$category->id)->latest()->paginate(12);
+                return view('system.styles.index',compact(['styles','type','stype']));
             }
-            $styles   = $shop->styles;
-            return view('system.styles.index',compact(['styles','type','item_id']));
+            $type = 'all';
+            return redirect()->route('styles.index',$type)->with('warning','Fashion style category does not exist here!');
         }
-        elseif ($type == 'salon') {
-            $salon = Salon::find($item_id);
-            if (!$salon) {
-                return back()->with('danger','Salon not found. It is either deleted or it is missing.');
-            }
-            $styles   = $salon->styles;
-            return view('system.styles.index',compact(['styles','type','item_id']));
-        }
-        $type = 'All';
+
+        $type   = 'All';
         $styles = Style::latest()->paginate(50);
         return view('system.styles.index',compact(['styles','type','id']));
     }

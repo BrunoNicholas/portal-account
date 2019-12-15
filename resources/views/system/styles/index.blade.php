@@ -20,92 +20,86 @@
 @endsection
 @section('content')
 <div class="container mt-6">
-        <div class="text-center">
-          <h2 class="color-primary">Knows the <span class="text-normal">Material Style</span> and surprise yourself</h2>
-          <p class="lead">Put here a short description or brief highlights in your app.</p>
-        </div>
-        <div class="mw-800 center-block">
-          <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-3" role="tablist">
-            <li class="nav-item wow fadeInDown animation-delay-6" role="presentation"><a href="#windows" aria-controls="windows" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="zmdi zmdi-windows"></i> <span class="d-none d-sm-inline">Windows</span></a></li>
-            <li class="nav-item wow fadeInDown animation-delay-4" role="presentation"><a href="#macos" aria-controls="macos" role="tab" data-toggle="tab" class="nav-link withoutripple active"><i class="zmdi zmdi-apple"></i> <span class="d-none d-sm-inline">MacOS</span></a></li>
-            <li class="nav-item wow fadeInDown animation-delay-2" role="presentation"><a href="#linux" aria-controls="linux" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="fa fa-linux"></i> <span class="d-none d-sm-inline">Linux</span></a></li>
-          </ul>
-        </div>
-        <div class="panel-body">
-          <!-- Tab panes -->
-          <div class="tab-content mt-4">
+    <div class="text-center">
+    <h2 class="color-primary">Salon fashion styles and designs by categories</h2>
+      	<p class="lead"> Limited Category View  </p>
+    </div>
+    <div class="mw-800 center-block">
+      	<ul class="nav nav-tabs nav-tabs-transparent nav-tabs-full nav-tabs-4" role="tablist">
+            <li class="nav-item wow fadeInDown animation-delay-6 col-3" role="presentation">
+            	<a href="#windows" aria-controls="windows" role="tab" data-toggle="tab" class="nav-link withoutripple">
+            		<i class="fa-child fa"></i> 
+            		<span class="d-none d-sm-inline">Children</span>
+            	</a>
+            </li>
+            <li class="nav-item wow fadeInDown animation-delay-4 col-3" role="presentation">
+            	<a href="#macos" aria-controls="macos" role="tab" data-toggle="tab" class="nav-link withoutripple active">
+            		<i class="zmdi zmdi-male"></i> 
+            		<span class="d-none d-sm-inline">Male</span>
+            	</a>
+            </li>
+            <li class="nav-item wow fadeInDown animation-delay-2 col-3" role="presentation">
+            	<a href="#linux" aria-controls="linux" role="tab" data-toggle="tab" class="nav-link withoutripple">
+            		<i class="zmdi zmdi-female"></i> 
+            		<span class="d-none d-sm-inline">Female</span>
+            	</a>
+            </li>
+            <li class="nav-item wow fadeInDown animation-delay-0 col-3" role="presentation">
+            	<a href="#othercats" aria-controls="othercats" role="tab" data-toggle="tab" class="nav-link withoutripple">
+            		<i class="zmdi zmdi-male-female"></i> 
+            		<span class="d-none d-sm-inline">Others</span>
+            	</a>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-body">
+      	<!-- Tab panes -->
+      	<div class="tab-content mt-4">
             <div role="tabpanel" class="tab-pane fade" id="windows">
-              <div class="row">
-                <div class="col-lg-6 col-xl-5 order-lg-2">
-                  <ul class="list-unstyled hand-list">
-                    <li class="animated fadeInLeft animation-delay-2">
-                      <h2 class="handwriting no-mt color-primary no-mb">Ideas for your product</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum sapiente.</p>
-                    </li>
-                    <li class="animated fadeInLeft animation-delay-4">
-                      <h2 class="handwriting no-mt color-primary no-mb">Type here annotations</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum sapiente.</p>
-                    </li>
-                    <li class="animated fadeInLeft animation-delay-6">
-                      <h2 class="handwriting no-mt color-primary no-mb">An informal approach to design</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum.</p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-lg-6 col-xl-7 order-lg-1">
-                  <img class="img-fluid animated zoomInDown animation-delay-3" src="{{ asset('assets/img/demo/surface.png') }}">
-                </div>
-              </div>
+	            <div class="row">
+                    
+
+
+	            </div>
             </div>
             <div role="tabpanel" class="tab-pane active show fade" id="macos">
-              <div class="row">
-                <div class="col-lg-6 col-xl-5">
-                  <ul class="list-unstyled hand-list">
-                    <li class="wow fadeInLeft animation-delay-2">
-                      <h2 class="handwriting no-mt color-primary no-mb">Ideas for your product</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum sapiente.</p>
-                    </li>
-                    <li class="wow fadeInLeft animation-delay-4">
-                      <h2 class="handwriting no-mt color-primary no-mb">Type here annotations</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum sapiente.</p>
-                    </li>
-                    <li class="wow fadeInLeft animation-delay-6">
-                      <h2 class="handwriting no-mt color-primary no-mb">An informal approach to design</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum.</p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-lg-6 col-xl-7">
-                  <img class="img-fluid animated zoomInDown animation-delay-3" src="{{ asset('assets/img/demo/new_mac.png') }}">
-                </div>
-              </div>
+	            <div class="row">
+                    @foreach($styles as $style)
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card wow zoomIn">
+                                <div class="ms-thumbnail card-body p-05">
+                                    <div class="withripple zoom-img">
+                                        <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $style->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+                                        <div class="col-md-12" style="padding: 0px;">
+                                            <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
+                                            <a title="Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">View Salon</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach	                
+	            </div>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="linux">
-              <div class="row">
-                <div class="col-lg-6 col-xl-5 order-lg-2">
-                  <ul class="list-unstyled hand-list">
-                    <li class="animated fadeInLeft animation-delay-2">
-                      <h2 class="handwriting no-mt color-primary no-mb">Ideas for your product</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum sapiente.</p>
-                    </li>
-                    <li class="animated fadeInLeft animation-delay-4">
-                      <h2 class="handwriting no-mt color-primary no-mb">Type here annotations</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum sapiente.</p>
-                    </li>
-                    <li class="animated fadeInLeft animation-delay-6">
-                      <h2 class="handwriting no-mt color-primary no-mb">An informal approach to design</h2>
-                      <p class="lead handwriting">Lorem ipsum dolor sit amet, consectetur adipisicing elit provident tempore porro deserunt nostrum.</p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-lg-6 col-xl-7 order-lg-1">
-                  <img class="img-fluid animated zoomInDown animation-delay-3" src="{{ asset('assets/img/demo/ubuntu_tablet.png') }}">
-                </div>
-              </div>
+	            <div class="row">
+	                
+
+
+	            </div>
             </div>
-          </div>
+            <div role="tabpanel" class="tab-pane fade" id="othercats">
+	            <div class="row">
+	                <div class="col-lg-6 col-xl-5 order-lg-2">
+	                  	
+
+
+		            </div>
+		        </div>
+		    </div>
         </div>
-      </div> <!-- container -->
+    </div>
+</div> <!-- container -->
 @endsection
 @section('scripts')
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

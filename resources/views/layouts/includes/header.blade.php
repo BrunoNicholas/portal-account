@@ -40,7 +40,7 @@
             <a class="navbar-brand" href="{{ url('/') }}">
 	            <!-- <img src="assets/img/demo/logo-navbar.png" alt=""> -->
 	            <span class="ms-logo ms-logo-sm">SP</span>
-	            <span class="ms-title">Salon <strong> Portal </strong></span>
+	            <span class="ms-title"> Salon <strong> Portal </strong></span>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="ms-navbar">
@@ -115,8 +115,8 @@
 			                        <div class="megamenu-block animated fadeInLeft animated-2x">
 			                          	<h3 class="megamenu-block-title"><i class="fa fa-child"></i> Children Styles</h3>
 				                        <ul class="megamenu-block-list">
-				                        	@foreach($cstyle as $prod)
-						                  	<li><a class="withripple" href="{{ route('products.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
+				                        	@foreach($cstyle as $stycat)
+						                  	<li><a class="withripple" href="{{ route('styles.index',[$stycat->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $stycat->display_name }} </a></li>
 						                  	@endforeach
 				                            {{--
 				                            	<li>
@@ -140,8 +140,8 @@
 			                        <div class="megamenu-block animated fadeInLeft animated-2x">
 			                          	<h3 class="megamenu-block-title"><i class="fa fa-male"></i> Male Styles</h3>
 				                        <ul class="megamenu-block-list">
-				                        	@foreach($mstyle as $prod)
-						                  	<li><a class="withripple" href="{{ route('products.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
+				                        	@foreach($mstyle as $stycat)
+						                  	<li><a class="withripple" href="{{ route('styles.index',[$stycat->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $stycat->display_name }} </a></li>
 						                  	@endforeach
 				                        </ul>
 			                        </div>
@@ -150,8 +150,8 @@
 			                        <div class="megamenu-block animated fadeInRight animated-2x">
 				                        <h3 class="megamenu-block-title text-right"> Female Styles <b style="visibility: hidden;">w</b> <i class="fa fa-female"></i></h3>
 				                        <ul class="megamenu-block-list">
-				                        	@foreach($fstyle as $prod)
-						                  	<li><a class="withripple" href="{{ route('products.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
+				                        	@foreach($fstyle as $stylcat)
+						                  	<li><a class="withripple" href="{{ route('styles.index',[$stylcat->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $stylcat->display_name }} </a></li>
 						                  	@endforeach
 				                        </ul>
 			                        </div>
@@ -161,17 +161,17 @@
 			                          	<h3 class="megamenu-block-title text-right"> Unisex <b style="visibility: hidden;">w</b> <i class="zmdi zmdi-male-female"></i></h3>
 			                          	<ul class="megamenu-block-list">
 			                          		@foreach($ustyle as $prod)
-						                  	<li><a class="withripple" href="{{ route('products.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
+						                  	<li><a class="withripple" href="{{ route('styles.index',[$prod->name,0]) }}"><i class="fa fa-arrow-circle-right"></i> {{ $prod->display_name }} </a></li>
 						                  	@endforeach
 			                          	</ul>
 			                        </div>
 			                    </div>
 			                    <hr>
 			                    <div class="col-sm-6">
-			                    	<a href="{{ route('styles.index',['all',0]) }}" class="btn btn-block btn-primary"><i class="fa-list fa"></i> All Fashion Styles</a>
+			                    	<a href="{{ route('styles.index',['all',0]) }}" class="btn btn-block btn-success"><i class="fa-list fa"></i> All Fashion Styles</a>
 			                    </div>
 			                    <div class="col-sm-6">
-			                    	<a href="{{ route('products.index',['all',0]) }}" class="btn btn-block btn-primary"><i class="fa-list fa"></i> All Products</a>
+			                    	<a href="{{ route('products.index',['all',0]) }}" class="btn btn-block btn-info"><i class="fa-list fa"></i> All Products</a>
 			                    </div>
 	                    	</div>
 	                  	</li>
