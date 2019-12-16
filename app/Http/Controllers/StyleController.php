@@ -43,15 +43,53 @@ class StyleController extends Controller
                 $stype= $category->name;
 
                 $styles = Style::where('categories_id',$category->id)->latest()->paginate(12);
+
                 return view('system.styles.index',compact(['styles','type','stype']));
             }
             $type = 'all';
-            return redirect()->route('styles.index',$type)->with('warning','Fashion style category does not exist here!');
+
+            return redirect()->route('styles.index',[$type,0])->with('warning','Fashion style category does not exist here!');
         }
 
+        $chcat = Categories::where('type','children-style')->get();
+        $lacat = Categories::where('type','male-style')->get();
+        $fmcat = Categories::where('type','female-style')->get();
+        $uxcat = Categories::where('type','unisex-style')->get();
+
+        $child_arr   = array();
+        $male_arr    = array();
+        $female_arr  = array();
+        $unisex_arr  = array();
+        $i=0;
+
+        foreach ($chcat as $key => $cat) {
+            $arr1[++$i] = Style::where('categories_id',$cat->id)->get();
+        }
+        $child_style = array_merge($child_arr, [$arr1[1]]);
+        $child_styles = $child_style[0];
+
+        foreach ($lacat as $key => $cat) {
+            $arr2[++$i] = Style::where('categories_id',$cat->id)->get();
+        }
+        $male_style = array_merge($male_arr, [$arr2[2]]);
+        $male_styles = $male_style[0];
+
+        foreach ($fmcat as $key => $cat) {
+            $arr3[++$i] = Style::where('categories_id',$cat->id)->get();
+            
+        }
+        $female_style = array_merge($female_arr, [$arr3[3]]);
+        $female_styles = $female_style[0];
+
+        foreach ($uxcat as $key => $cat) {
+            $arr4[++$i] = Style::where('categories_id',$cat->id)->get();
+        }
+        $unisex_style = array_merge($unisex_arr, [$arr4[4]]);
+        $unisex_styles = $unisex_style[0];
+        
         $type   = 'All';
         $styles = Style::latest()->paginate(50);
-        return view('system.styles.index',compact(['styles','type','id']));
+        return view('system.styles.index',compact(['styles','child_styles','male_styles','female_styles','unisex_styles','type','id']));
     }
 
     /**
@@ -68,7 +106,7 @@ class StyleController extends Controller
         if (Auth::user()->id != $salon->user_id) {
             return back()->with('warning','You can only add salon item to your salon. Operation Blocked!');
         }
-        $cats       = Categories::where('type','salon-gender')->orWhere('type','salon-style')->get();
+        $cats       = Categories::where('type','children-style')->orWhere('type','male-style')->orWhere('type','female-style')->orWhere('type','unisex-style')->get();
         $styles   = Style::latest()->paginate(30);
         return view('system.styles.create',compact(['item_id','type','salon','cats','styles']));
     }

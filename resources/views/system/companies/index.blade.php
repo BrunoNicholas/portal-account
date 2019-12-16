@@ -1,7 +1,9 @@
 @extends('layouts.site')
 @section('title', $type . ' Companies')
 @section('styles')
-<link href="{{ asset('assets/plugins/datatables/media/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 @endsection
 @section('navigator')
 <div class="ms-hero-page ms-hero-img-city2 ms-hero-bg-info mb-0" style="padding: 0px;">
@@ -90,20 +92,27 @@
             		</div>
             	@endif
             	@foreach($companies as $company)
+            		<?php
+		        		$ratings_num  = $company->ratings->count();
+				        $tot_sum      = 0;
+
+				        if ($ratings_num > 0) {
+				            foreach ($company->ratings as $rat) {
+				                $tot_sum += $rat->rate_number;
+				            }
+				            $avgs_ratings    = $tot_sum/$ratings_num;
+				        } else {
+				            $avgs_ratings    = $tot_sum;
+				        }
+		        	?>
             		<div class="col-xl-4 col-md-6 mix laptop apple" data-price="1999.99" data-date="20160901" onclick="window.location='{{ route('companies.show',['all',$company->id]) }}'">
 		                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 			                <div class="card-body overflow-hidden text-center">
 			                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 400px;" class="img-fluid center-block">
 			                    <h4 class="text-normal text-center">{{ $company->company_name }}</h4>
 			                    <p>{{ strlen($company->description) > 20 ? substr($company->description, 0, 20) . '... ' : $company->description }}</p>
-			                    <div class="mt-2">
-				                    <span class="mr-2">
-				                        <i class="zmdi zmdi-star color-warning"></i>
-				                        <i class="zmdi zmdi-star color-warning"></i>
-				                        <i class="zmdi zmdi-star color-warning"></i>
-				                        <i class="zmdi zmdi-star color-warning"></i>
-				                        <i class="zmdi zmdi-star"></i>
-				                    </span>
+			                    <div class="mt-1">
+				                    <input class="input-3-xs" name="input-3-xs" value="{{ $avgs_ratings }}" class="rating-loading" data-size="xs">
 				                    <span class="ms-tag ms-tag-success"> {{ $company->status }} </span>
 			                    </div>
 		                    	<div class="row">
@@ -132,13 +141,10 @@
 @include('layouts.includes.footer')
 @endsection
 @section('scripts')
-<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-	<script>
-	    $('#example23').DataTable({
-	        dom: 'Bfrtip',
-	        buttons: [
-	            'copy', 'csv', 'excel', 'pdf', 'print'
-	        ]
-	    });
+<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+    <script>
+		$(document).ready(function(){
+		    $('.input-3-xs').rating({displayOnly: true, step: 0.5});
+		});
 	</script>
 @endsection

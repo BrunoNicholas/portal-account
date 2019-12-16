@@ -1,6 +1,10 @@
 @extends('layouts.site')
 @section('title', 'Company Details')
-@section('styles') @endsection
+@section('styles')
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
@@ -15,6 +19,9 @@
 		                </div>
 		                <div class="card-body pt-4 text-center">
 		                    <h3 class="color-primary">Company Bio</h3>
+		                    <div>
+		                    	<input class="input-3-xs" name="input-3-xs" value="{{ $avg }}" class="rating-loading" data-size="xs">
+		                    </div>
 		                    <p>{{ $company->company_bio }}</p>
 		                    <hr>
 		                    <b>Date Added: </b> {{ explode(' ', trim($company->created_at))[0] }}, <b> Time: </b> {{ explode(' ', trim($company->created_at))[1] }}
@@ -174,138 +181,96 @@
 		            </table>
 		        </div>
             </div>
-            <h2 class="color-primary text-center mt-4 mb-2">Company Reviews</h2>
-            <div class="row">
-              <div class="col-lg-12">
-                {{-- <ul class="ms-timeline">
-                  <li class="ms-timeline-item wow materialUp">
-                    <div class="ms-timeline-date">
-                      <time class="timeline-time" datetime="">2016 <span>March</span></time>
-                      <i class="ms-timeline-point bg-royal"></i>
-                      <img src="assets/img/demo/avatar6.jpg" class="ms-timeline-point-img">
-                    </div>
-                    <div class="card card-royal">
-                      <div class="card-header">
-                        <h3 class="card-title">Card Title</h3>
-                      </div>
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-sm-4">
-                            <img src="assets/img/demo/office1.jpg" alt="" class="img-fluid">
-                          </div>
-                          <div class="col-sm-8">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum, praesentium, quam! Quia fugiat aperiam.</p>
-                            <p>Perspiciatis soluta voluptate dolore officiis libero repellat cupiditate explicabo atque facere aliquam.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="ms-timeline-item wow materialUp">
-                    <div class="ms-timeline-date">
-                      <time class="timeline-time" datetime="">2015 <span>October</span></time>
-                      <i class="ms-timeline-point bg-info"></i>
-                    </div>
-                    <div class="card card-info">
-                      <div class="card-header">
-                        <h3 class="card-title">Card Title</h3>
-                      </div>
-                      <div class="list-group">
-                        <a href="javascript:void(0)" class="list-group-item withripple"><i class="zmdi zmdi-favorite"></i>Cras justo odio <span class="badge badge-default pull-right">Active</span></a>
-                        <a href="javascript:void(0)" class="list-group-item withripple"><i class="zmdi zmdi-cocktail"></i> Dapibus ac facilisis in <span class="badge badge-primary pull-right">Other</span></a>
-                        <a href="javascript:void(0)" class="list-group-item withripple active"><i class="zmdi zmdi-cast"></i>Morbi leo risus <span class="badge badge-default pull-right">New</span></a>
-                        <a href="javascript:void(0)" class="list-group-item withripple"><i class="zmdi zmdi-city"></i>Porta ac consectetur ac <span class="badge badge-warning pull-right">Two words</span></a>
-                        <a href="javascript:void(0)" class="list-group-item withripple"><i class="zmdi zmdi-chart"></i>Vestibulum at eros <span class="badge badge-success pull-right">Success</span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="ms-timeline-item wow materialUp">
-                    <div class="ms-timeline-date">
-                      <time class="timeline-time" datetime="">2015 <span>October</span></time>
-                      <i class="ms-timeline-point bg-success"></i>
-                    </div>
-                    <div class="card card-success-inverse">
-                      <div class="card-body"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus officiis autem magni et, nisi eveniet nulla magnam tenetur voluptatem dolore, assumenda delectus error porro animi architecto dolorum quod veniam nesciunt. </div>
-                    </div>
-                  </li>
-                  <li class="ms-timeline-item wow materialUp">
-                    <div class="ms-timeline-date">
-                      <time class="timeline-time" datetime="">2015 <span>February</span></time>
-                      <i class="ms-timeline-point bg-warning"></i>
-                      <img src="assets/img/demo/avatar2.jpg" class="ms-timeline-point-img">
-                    </div>
-                    <div class="card card-warning">
-                      <div class="card-header">
-                        <h3 class="card-title">Card Title</h3>
-                      </div>
-                      <div class="card-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, nulla recusandae blanditiis architecto soluta culpa obcaecati quis earum atque consequuntur.</p>
-                        <div class="row">
-                          <div class="col-sm-4">
-                            <img src="assets/img/demo/office2.jpg" alt="" class="img-fluid">
-                          </div>
-                          <div class="col-sm-4">
-                            <img src="assets/img/demo/office3.jpg" alt="" class="img-fluid">
-                          </div>
-                          <div class="col-sm-4">
-                            <img src="assets/img/demo/office4.jpg" alt="" class="img-fluid">
-                          </div>
-                        </div>
-                        <br>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, ipsum voluptates eius placeat dolorum reprehenderit ducimus accusamus magni aspernatur at dolore assumenda quae suscipit enim veritatis obcaecati molestias laudantium maxime!</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="ms-timeline-item wow materialUp">
-                    <div class="ms-timeline-date">
-                      <time class="timeline-time" datetime="">2014 <span>July</span></time>
-                      <i class="ms-timeline-point"></i>
-                    </div>
-                    <div class="card">
-                      <blockquote class="blockquote blockquote-color-bg-primary withripple color-white">
-                        <p><strong>Blockquote in timeline!</strong> consectetur adipiscing elit. Integer sodales sagittis magna. consectetur adipiscing elit sed consequat, quam semper libero.</p>
-                        <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                      </blockquote>
-                    </div>
-                  </li>
-                  <li class="ms-timeline-item wow materialUp">
-                    <div class="ms-timeline-date">
-                      <time class="timeline-time" datetime="">2014 <span>January</span></time>
-                      <i class="ms-timeline-point bg-info"></i>
-                      <img src="assets/img/demo/avatar3.jpg" class="ms-timeline-point-img">
-                    </div>
-                    <div class="card card-info">
-                      <div class="card-header">
-                        <h3 class="card-title">Card Title</h3>
-                      </div>
-                      <div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="9ZfN87gSjvI"></div>
-                    </div>
-                  </li>
-                  <li class="ms-timeline-item wow materialUp">
-                    <div class="ms-timeline-date">
-                      <time class="timeline-time" datetime="">2013 <span>June</span></time>
-                      <i class="ms-timeline-point"></i>
-                    </div>
-                    <div class="card">
-                      <div class="ms-hero-bg-primary ms-hero-img-coffee">
-                        <h3 class="color-white index-1 text-center no-m pt-4">Victoria Smith</h3>
-                        <div class="color-medium index-1 text-center np-m">@vic_smith</div>
-                        <img src="assets/img/demo/avatar1.jpg" alt="..." class="img-avatar-circle">
-                      </div>
-                      <div class="card-body pt-4 text-center">
-                        <h3 class="color-primary">Bio</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur alter adipisicing elit. Facilis, natuse inse voluptates officia repudiandae beatae magni es magnam autem molestias.</p>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
-                      </div>
-                    </div>
-                  </li>
-                </ul> --}}
-              </div>
+            <div class="card card-primary animated fadeInUp animation-delay-10">
+            	<div class="card-header overflow-hidden text-center">Reviews | &amp; | Ratings <button class="btn btn-xs btn-info pull-right text-white" style="margin: 0px;" data-toggle="modal" data-target="#myRatingModal" @guest disabled title="You must be logged in to make a rating and review!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this company" @endguest><i class="zmdi zmdi-plus"></i>Add New</button></div>
+	            <div class="card-body overflow-hidden">
+	            	@if(sizeof($revs) < 1)
+	            		<div class="col-md-12 text-center text-danger">
+	            			<span>No reviews made for this company yet</span>
+	            		</div>
+	            	@endif
+	                <div class="row" style="max-height: 425px; overflow-y: auto;"><?php $i=0; ?>
+	                	@foreach($revs as $review) 
+                			<span style="display: none;">{{ $user[$i] = App\User::where('id',$review->user_id)->first() }}</span>
+	                		<div class="col-md-12">
+	                			<div class="row" style="border-bottom: thin solid #e7e7e7; border-radius: 5px; margin-bottom: 10px;">
+			                        <div class="col-3 mr-1 text-center" onclick="window.location='{{ route('users.show',$user[$i]->id) }}'">
+			                          	<img src="{{ $user[$i]->profile_image ? asset('files/profile/images/'.$user[$i]->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="..." style="max-height: 50px; border-radius: 10%;" >
+			                          	<h5 class="mt-0 color-info">{{ $user[$i]->name }}</h5>
+			                        </div>
+			                        <div class="col-8">
+			                        	<div class="row">
+				                          	<div class="col-12">
+				                          		<span class="pull-right" style="font-size: 8px;">
+				                          			@if(App\Models\Rating::where('created_at',$review->created_at)->first())
+				                          			<input class="input-3-xs" name="input-3-xs" value="{{  App\Models\Rating::where('created_at',$review->created_at)->first()->rate_number }}" class="rating-loading" data-size="xs">
+				                          			@endif
+				                          		</span>
+				                          		<span class="pull-left" style="color: #c3c3c3;">{{ explode(' ', trim($review->created_at))[1] . ', ' . explode(' ', trim($review->created_at))[0] }}</span>
+				                          	</div>
+					                        <div class="col-12">
+					                            {{ $review->review_message }}
+					                        </div>
+					                    </div>
+			                        </div>
+			                    </div>
+		                    </div><!-- {{ ++$i }} -->
+		                    <hr>
+	                    @endforeach
+	                </div>
+	            </div>
             </div>
         </div>
 	</div>
+	{{-- the rating box --}}
+    <div class="modal" id="myRatingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h3 class="modal-title color-primary" id="myModalLabel"> Review &amp; Rate </h3>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+	            </div>
+	            <form action="{{ route('reviews.store',['company',$company->id]) }}" class="form-horizontal form-bordered" method="post">
+	            	@csrf
+	            	<div class="modal-body">
+			            <input type="hidden" name="company_id" value="{{ $company->id }}">
+			            @auth<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">@endauth
+
+			            @foreach ($errors->all() as $error)
+			            	<p class="alert alert-danger">{{ $error }}</p>
+			            @endforeach
+
+			            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+		                <div class="form-group row mt-0">
+		                    <label class="col-md-4 col-form-label text-right" for="input-5-sm"> Rating this salon</label>
+		                    <div class="col-md-8">
+    							<input id="input-5-sm" name="rate_number" class="rating rating-loading" data-size="sm" data-max="5" data-step="0.1" data-show-clear="false" data-show-caption="true">
+		                    </div>
+		                </div>
+		                <div class="form-group row mt-0">
+		                    <label class="col-md-4 col-form-label text-right"> Your Review </label>
+		                    <div class="col-md-8">
+		                        <textarea class="form-control" name="review_message" placeholder="Describe your feeling towards this salon" required></textarea>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="reset" class="btn btn-danger" data-dismiss="modal">Clear & Close</button>
+		                <button type="submit" class="btn  btn-primary"> SUBMIT </button>
+		            </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+	{{-- /end of rating box --}}
 </div> <!-- container -->
+
 @endsection
-@section('scripts') @endsection
+@section('scripts')
+<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+    <script>
+		$(document).ready(function(){
+		    $('.input-3-xs').rating({displayOnly: true, step: 0.5});
+		});
+	</script>
+@endsection

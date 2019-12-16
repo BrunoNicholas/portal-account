@@ -282,6 +282,19 @@
     <h2 class="mt-4 mb-4 right-line"> Other Shops | <a href="{{ route('shops.index','all') }}">View All</a> </h2>
     <div class="row"><?php $i=3; ?>
         @foreach($shops as $sal)
+        	<?php
+        		$ratings_num  = $sal->ratings->count();
+		        $tot_sum      = 0;
+
+		        if ($ratings_num > 0) {
+		            foreach ($sal->ratings as $rat) {
+		                $tot_sum += $rat->rate_number;
+		            }
+		            $avgs_ratings    = $tot_sum/$ratings_num;
+		        } else {
+		            $avgs_ratings    = $tot_sum;
+		        }
+        	?>
         	@if($sal->id != $shop->id)
 	            <div class="col-md-4" onclick="window.location='{{ route('shops.show',['all',$sal->id]) }}'">
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
@@ -289,15 +302,9 @@
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid center-block" style="max-height: 250px;">
 		                    <h4 class="text-normal text-center">{{ $sal->shop_name }}</h4>
 		                    <p>{{ strlen($sal->description) > 20 ? substr($sal->description, 0, 20) . '... ' : $sal->description }}</p>
-		                    <div class="mt-2">
-		                      <span class="mr-2">
-		                        <i class="zmdi zmdi-star color-warning"></i>
-		                        <i class="zmdi zmdi-star color-warning"></i>
-		                        <i class="zmdi zmdi-star color-warning"></i>
-		                        <i class="zmdi zmdi-star color-warning"></i>
-		                        <i class="zmdi zmdi-star"></i>
-		                      </span>
-		                      <span class="ms-tag ms-tag-success" style="text-transform: capitalize;">{{ $sal->status }}</span>
+		                    <div class="mt-1" style="font-size: 8px;">
+			                	<input class="input-3-xs" name="input-3-xs" value="{{ $avgs_ratings }}" class="rating-loading" data-size="xs">
+		                      	<span class="ms-tag ms-tag-success" style="text-transform: capitalize;">{{ $sal->status }}</span>
 		                    </div>
 		                    <button type="button" class="btn btn-primary btn-sm btn-block mt-0 no-mb">
 		                    	{{ $sal->products->count() }} Registered Products

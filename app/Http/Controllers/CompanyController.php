@@ -137,7 +137,8 @@ class CompanyController extends Controller
             $avg    = $avg_avs;
         }
 
-        return view('system.companies.show',compact(['company','type','avg']));
+        $revs = $company->reviews;
+        return view('system.companies.show',compact(['company','type','avg','revs']));
     }
 
     /**
