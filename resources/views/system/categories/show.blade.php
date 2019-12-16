@@ -10,11 +10,9 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
-	                    	<li class="breadcrumb-item"><a href="{{ route('categories.index') }}"> <i class="fa fa-tree"></i> Categories</a></li>
-				            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-paperclip"></i> View Category </li>
-				        </ol>
+                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
+                    	<li class="breadcrumb-item"><a href="{{ route('categories.index') }}"> <i class="fa fa-tree"></i> Categories</a></li>
+			            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-paperclip"></i> View Category </li>
 	                </ol>
 	            </nav>
 	        </div>

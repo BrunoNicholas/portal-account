@@ -17,7 +17,12 @@ class GalleryController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('role:super-admin|admin|patron|chaiperson|cu-leader|editor')->except('index','show','album');
+        $this->middleware(['auth','verified']);
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        $this->middleware('permission:can_make_image_uploads',['only'=>['create','store']]);
+        // $this->middleware('permission:can_delete_salon',['only'=>'destroy']);
+        // $this->middleware('permission:can_edit_salon',['only'=>['update','edit']]);
     }
 
     /**
@@ -52,7 +57,6 @@ class GalleryController extends Controller
         request()->validate([
             'image'     => 'required',
             'user_id'   => 'required',
-            'status'    => 'required',
         ]);
 
         $image_item = new Gallery();
@@ -65,13 +69,13 @@ class GalleryController extends Controller
             $user_image = $request->file('image');
             $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            Image::make($user_image)->save( public_path('/files/storage/images/' . $filename) );
+            Image::make($user_image)->save( public_path('/files/galleries/images/' . $filename) );
             // $path = $request->file('image')->storeAs('public/gallery/', $filename);
 
             $image_item->image      = $filename;
             $image_item->gallery_name = $request->gallery_name;
             $image_item->gallery_id = $request->gallery_id;
-            $image_item->caption    = $request->caption;
+            $image_item->description    = $request->description;
             $image_item->user_id    = $request->user_id;
             $image_item->title      = $request->title;
             $image_item->save();
@@ -120,7 +124,6 @@ class GalleryController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-            'image'     => 'required',
             'user_id'   => 'required',
             'status'    => 'required',
         ]);
@@ -128,27 +131,27 @@ class GalleryController extends Controller
         $gallery_item = Gallery::find($id);
         
         // if ($request->hasFile('image')) {
-        if ($request->file('image')->isValid()) {
-            $fileWithExtension = $request->file('image')->getClientOriginalName();
-            $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
+        if($request->image){
+            if ($request->file('image')->isValid()) {
+                $fileWithExtension = $request->file('image')->getClientOriginalName();
+                $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
 
-            $user_image = $request->file('image');
-            $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
+                $user_image = $request->file('image');
+                $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            Image::make($user_image)->save( public_path('/files/storage/gallery/' . $filename) );
-            // $path = $request->file('image')->storeAs('public/gallery/', $filename);
+                Image::make($user_image)->save( public_path('/files/galleries/gallery/' . $filename) );
+                // $path = $request->file('image')->storeAs('public/gallery/', $filename);
 
-            $gallery_item->image = $filename;
+                $gallery_item->image = $filename;
+            }
         }
+
 
         $gallery_item->gallery_name = $request->gallery_name;
         $gallery_item->description  = $request->description;
         $gallery_item->gallery_id = $request->gallery_id;
-        $gallery_item->caption  = $request->caption;
         $gallery_item->title    = $request->title;
-        $gallery_item->size     = $request->size;
         $gallery_item->user_id = $request->user_id;
-        $gallery_item->status = $request->status;
         $gallery_item->save();
 
         return redirect()->route('galleries.index')->with('success','Gallery saved successfully!');
@@ -163,7 +166,7 @@ class GalleryController extends Controller
     {
         $item = Gallery::find($id);
 
-        $pathToImage = public_path('files/storage/images/').$item->image;
+        $pathToImage = public_path('files/galleries/images/').$item->image;
         File::delete($pathToImage);
 
         $item->delete();

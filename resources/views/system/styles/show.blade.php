@@ -30,7 +30,13 @@
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
 	            <div class="card card-body text-center">
 	                <!-- Wrapper for slides -->
-	                <span class="badge badge-success mb-1" style="font-size: 20px; text-transform: capitalize; padding: 5px 10px; border-radius: 5px;">{{ $salon->salon_name }} <small> - {{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }}</small></span>
+	                <div class="col-12" style="overflow-x: auto;">
+	                	<span class="badge badge-success mb-1" style="font-size: 20px; text-transform: capitalize; padding: 5px 10px; border-radius: 5px;">
+	                		{{ $salon->salon_name }} 
+	                		<small> - {{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }}
+	                		</small>
+	                	</span>
+	                </div>
 	                <div class="carousel-inner" role="listbox">
 		                <div class="carousel-item active">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">

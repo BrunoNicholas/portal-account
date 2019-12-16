@@ -57,7 +57,7 @@ class ImageController extends Controller
             $user_image = $request->file('image');
             $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            IntervImage::make($user_image)->save( public_path('files/storage/images/' . $filename) );
+            IntervImage::make($user_image)->save( public_path('files/others/images/' . $filename) );
             // $path = $request->file('image')->storeAs('public/gallery/', $filename);
 
             $gallery_item->image = $filename;
@@ -133,7 +133,7 @@ class ImageController extends Controller
             $user_image = $request->file('image');
             $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            IntervImage::make($user_image)->save( public_path('files/storage/images/' . $filename) );
+            IntervImage::make($user_image)->save( public_path('files/others/images/' . $filename) );
             // $path = $request->file('image')->storeAs('public/gallery/', $filename);
 
             $gallery_item->image = $filename;
@@ -156,7 +156,7 @@ class ImageController extends Controller
         $item = Image::find($id);
         // delete old image
         
-        $pathToImage = public_path('files/storage/images/').$item->image;
+        $pathToImage = public_path('files/others/images/').$item->image;
         File::delete($pathToImage);
 
         $item->delete();
