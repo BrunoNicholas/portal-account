@@ -36,7 +36,7 @@
                                         <p class="col-md-12 alert alert-danger" style="padding-left: 50px;"> No image items found! </p>
                                     @endif
                                     @foreach($galleries as $gallery)
-                                        <div id="{{ $gallery->id }}" class="col-md-12" style="border-bottom: thin solid #e6e6e6; padding-bottom: 5px;">
+                                        <div id="{{ $gallery->id }}" class="col-md-12 mt-2" style="border-bottom: thin solid #e6e6e6; padding-bottom: 5px;">
                                             <div class="card">
                                                 <div class="card-header text-center" onclick="window.location='{{ route('galleries.show',$gallery->id) }}'">
                                                     <h3>
@@ -45,42 +45,44 @@
                                                     </h3>
                                                 </div>
                                                 <div class="card-body">
-                                                    @foreach($gallery->images as $image)
-                                                        <div class="col-md-3" style="padding-top: 10px;" onclick="window.location='{{ route('images.show',$image->id) }}'">
-                                                            <div class="card" style="border: thin solid transparent;">
-                                                                <div class="el-card-item">
-                                                                    <div class="el-card-avatar el-overlay-1" style="text-align: center;"> 
-                                                                        <div style="max-width: 450px; overflow-x: auto;">
-                                                                            <img src="{{ asset('files/others/images/'. $image->image) }}" alt="image" style=" height: 200px; width: auto; border-radius: 3px;"/>
-                                                                        </div>
-                                                                        <div class="el-overlay">
-                                                                            <div class="row">
-                                                                                <div class="col-md-6">
-                                                                                    {{ explode(' ',trim($image->created_at))[0] }}
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    {{ explode(' ',trim($image->created_at))[1] }}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-card-content">
-                                                                        <div class="row">
-                                                                            <div class="col-md-12 ml-1">
-                                                                                <span class="pull-left">{{ substr($image->title, 0,17) . '...' }} 
-                                                                                    <small>
-                                                                                    </small>
-                                                                                </span> 
-                                                                                <span class="pull-right">
-                                                                                    
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
+                                                	<div class="row">
+	                                                    @foreach($gallery->images as $image)
+	                                                        <div class="col-md-3 mt-2" onclick="window.location='{{ route('images.show',$image->id) }}'">
+	                                                            <div>
+	                                                                <div class="el-card-item">
+	                                                                    <div class="card-avatar el-overlay-1" style="text-align: center;"> 
+	                                                                        <div style="max-width: 450px; overflow-x: auto;">
+	                                                                            <img src="{{ asset('files/others/images/'. $image->image) }}" alt="image" style=" height: 200px; width: auto; border-radius: 3px;"/>
+	                                                                        </div>
+	                                                                        <div class="el-overlay">
+	                                                                            <div class="row">
+	                                                                                <div class="col-md-6">
+	                                                                                    {{ explode(' ',trim($image->created_at))[0] }}
+	                                                                                </div>
+	                                                                                <div class="col-md-6">
+	                                                                                    {{ explode(' ',trim($image->created_at))[1] }}
+	                                                                                </div>
+	                                                                            </div>
+	                                                                        </div>
+	                                                                    </div>
+	                                                                    <div class="card-content">
+	                                                                        <div class="row">
+	                                                                            <div class="col-md-12 ml-1">
+	                                                                                <span class="pull-left">{{ substr($image->title, 0,17) . '...' }} 
+	                                                                                    <small>
+	                                                                                    </small>
+	                                                                                </span> 
+	                                                                                <span class="pull-right">
+	                                                                                    
+	                                                                                </span>
+	                                                                            </div>
+	                                                                        </div>
+	                                                                    </div>
+	                                                                </div>
+	                                                            </div>
+	                                                        </div>
+	                                                    @endforeach
+	                                                </div>
                                                 </div>
                                             </div>
                                         </div>

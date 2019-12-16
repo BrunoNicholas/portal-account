@@ -43,10 +43,7 @@
                                 @endif
                                         
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <!-- Step 1 -->
-                                <br>
-                                <h6 class="text-center">Category Info</h6>
-                                <br>
+                                
                                 <section class="row">
                                     <div class="col-md-12">
                                         <div class="row">

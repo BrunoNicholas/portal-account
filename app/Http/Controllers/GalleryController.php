@@ -133,6 +133,10 @@ class GalleryController extends Controller
         // if ($request->hasFile('image')) {
         if($request->image){
             if ($request->file('image')->isValid()) {
+
+                $pathToImage = public_path('files/galleries/images/').$gallery_item->image;
+                File::delete($pathToImage);
+
                 $fileWithExtension = $request->file('image')->getClientOriginalName();
                 $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
 
@@ -154,7 +158,7 @@ class GalleryController extends Controller
         $gallery_item->user_id = $request->user_id;
         $gallery_item->save();
 
-        return redirect()->route('galleries.index')->with('success','Gallery saved successfully!');
+        return redirect()->route('galleries.index')->with('success','Gallery details updated successfully!');
     }
     /**
      * Remove the specified resource from storage.

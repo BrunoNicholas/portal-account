@@ -122,27 +122,32 @@ class ImageController extends Controller
         $gallery_item = Image::find($id);
         
         // if ($request->hasFile('image')) {
-        if ($request->file('image')->isValid()) {
+        if(!$request->image){
+            if ($request->file('image')->isValid()) {
 
-            $pathToImage = public_path('files/profile/images/').$gallery_item->image;
-            File::delete($pathToImage);
+                $pathToImage = public_path('files/others/images/').$gallery_item->image;
+                File::delete($pathToImage);
 
-            $fileWithExtension = $request->file('image')->getClientOriginalName();
-            $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
+                $fileWithExtension = $request->file('image')->getClientOriginalName();
+                $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
 
-            $user_image = $request->file('image');
-            $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
+                $user_image = $request->file('image');
+                $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            IntervImage::make($user_image)->save( public_path('files/others/images/' . $filename) );
-            // $path = $request->file('image')->storeAs('public/gallery/', $filename);
+                IntervImage::make($user_image)->save( public_path('files/others/images/' . $filename) );
+                // $path = $request->file('image')->storeAs('public/gallery/', $filename);
 
-            $gallery_item->image = $filename;
+                $gallery_item->image = $filename;
+            }
         }
+
         $gallery_item->gallery_id   = $request->gallery_id;
         $gallery_item->caption      = $request->caption;
         $gallery_item->title        = $request->title;
         $gallery_item->user_id      = $request->user_id;
         $gallery_item->save();
+
+        return redirect()->route('images.index')->with('success','Image details updated successfully!');
     }
 
     /**
