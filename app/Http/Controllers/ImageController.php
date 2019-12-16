@@ -122,7 +122,7 @@ class ImageController extends Controller
         $gallery_item = Image::find($id);
         
         // if ($request->hasFile('image')) {
-        if(!$request->image){
+        if($request->image){
             if ($request->file('image')->isValid()) {
 
                 $pathToImage = public_path('files/others/images/').$gallery_item->image;

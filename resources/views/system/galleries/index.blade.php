@@ -35,36 +35,36 @@
                                 @endif
                                 @foreach($galleries as $gallery)
                                     <div class="col-md-4" style="padding-top: 10px;" onclick="window.location='{{ route('galleries.show', $gallery->id) }}'">
-                                <div class="card" style="border: thin solid transparent;">
-                                    <div class="el-card-item">
-                                        <div class="el-card-avatar el-overlay-1" style="text-align: center;"> 
-                                            <div style="max-width: 450px; overflow-x: auto;">
-                                                <img src="{{ asset('files/galleries/images/'. $gallery->image) }}" alt="image" style=" height: 200px; width: auto; border-radius: 5px;"/>
-                                            </div>
-                                            <div class="el-overlay">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <span>{{ explode(' ', trim($gallery->created_at))[0] }}</span>
+                                        <div class="" style="border: thin solid transparent;">
+                                            <div class="el-card-item">
+                                                <div class="el-card-avatar el-overlay-1" style="text-align: center;"> 
+                                                    <div style="max-width: 450px; overflow-x: auto;">
+                                                        <img src="{{ asset('files/galleries/images/'. $gallery->image) }}" alt="image" style=" height: 200px; width: auto; border-radius: 5px;"/>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <span class="text-muted"> {{ $gallery->images->count() }} Photos </span>
+                                                    <div class="el-overlay">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <span>{{ explode(' ', trim($gallery->created_at))[0] }}</span>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <span class="text-muted"> {{ $gallery->images->count() }} Photos </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="el-card-content">
-                                            <div class="row">                                                    
-                                                <div class="col-md-4 pull-left">
-                                                    
-                                                </div>
-                                                <div class="col-md-8 pull-right">
-                                                    
+                                                <div class="el-card-content">
+                                                    <div class="row">                                                    
+                                                        <div class="col-md-4 pull-left">
+                                                            
+                                                        </div>
+                                                        <div class="col-md-8 pull-right">
+                                                            
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
                                 @endforeach
                             </div>
                         </div>

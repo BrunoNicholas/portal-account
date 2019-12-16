@@ -53,8 +53,8 @@
 	                                                </select>
 	                                            </div>
 	                                        </div>
-	                                        <div class="col-md-6" style="border: thin solid red;">
-	                                            <div class="mt-3" style="border: thin solid red;">
+	                                        <div class="col-md-6">
+	                                            <div class="mt-3">
 	                                                <label >Change Image :</label>
 	                                                <input type="file" onclick="return confirm('Chosing a different image will delete the current one.\nClick okay if this is what you want.')" name="image" accept=".jpg, .png, .jpeg, .gif">
 	                                            </div>

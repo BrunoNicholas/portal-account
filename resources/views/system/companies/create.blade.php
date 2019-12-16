@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Administrator')
+@section('title', 'New Company')
 @section('styles') @endsection
 @section('content')
 <div class="ms-hero-page-override ms-hero-img-team ms-hero-bg-primary">

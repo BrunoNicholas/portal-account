@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Administrator')
+@section('title', 'Add Booking')
 @section('styles') @endsection
 @section('navigator')
 	<div class="container mt-0">
