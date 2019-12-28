@@ -20,7 +20,7 @@
     </div>
 @endsection
 @section('content')
-<div class="container" style="min-height: 500px;">
+<div class="card card-body container" style="min-height: 500px;">
 	<div class="row mt-0 pl-0">
 		<div class="col-lg-12 ms-paper-content-container">
 			<div class="row">
