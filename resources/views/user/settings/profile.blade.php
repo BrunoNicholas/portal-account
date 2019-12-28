@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title') {{ Auth::user()->name }} | My Profile @endsection
+@section('title') {{ Auth::user()->name }} | My Profile & Settingss @endsection
 @section('styles')
 <link href="{{ asset('assets/plugins/datatables/media/css/dataTables.bootstrap.css') }}" rel="stylesheet">
 @endsection
@@ -8,7 +8,7 @@
 	<div class="container mt-0">
 		<div class="row">
 			<div class="d-flex no-block align-items-center col-md-4">
-				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">My Profile</span>
+				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">{{ explode(' ', trim($user->name))[0] }} - Profile &amp; Settings</span>
 			</div>
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
@@ -42,7 +42,9 @@
 				                        {{ Auth::user()->name }} <br>
 				                        <small>
 					                        <small style="text-transform: capitalize;">
-					                            {{ Auth::user()->role ? App\Models\Role::where('name',Auth::user()->role)->first()->display_name : 'No User Category' }} | {{ Auth::user()->status }}
+					                            {{ Auth::user()->role ? App\Models\Role::where('name',Auth::user()->role)->first()->display_name : 'No User Category' }}
+					                            <br>
+					                            <small>{{ Auth::user()->status . ' Account'}}</small>
 					                        </small>
 					                    </small>
 				                    </h2>
@@ -52,12 +54,19 @@
 			                                @csrf
 			                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 			                                <div class="row">
-			                                    <div class="row">
-			                                        <div class="col-6">
-			                                            <input type="file" class="btn btn-xs btn-raised btn-info" name="profile_image" accept=".jpg, .png, .jpeg">
+			                                    <div class="row text-center">
+			                                        <div class="col-12">
+			                                            <input type="file" class="btn btn-xs btn-raised btn-info btn-block" name="profile_image" accept=".jpg, .png, .jpeg">
 			                                        </div>
-			                                        <div class="col-6">
-			                                            <button type="submit" class="btn btn-sm btn-raised btn-success" ><i class="fa-check fa"></i><small>change</small></button>
+			                                        <div class="col-12">
+			                                        	<div class="row">
+			                                        		<div class="col-6">
+			                                        			<button type="reset" class="btn btn-sm btn-raised btn-danger btn-block" ><i class="fa-remove fa"></i><small>Remove</small></button>
+			                                        		</div>
+			                                        		<div class="col-6">
+			                                        			<button type="submit" class="btn btn-sm btn-raised btn-success btn-block" ><i class="fa-check fa"></i><small>change</small></button>
+			                                        		</div>
+			                                        	</div>
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -66,19 +75,19 @@
 				                </div>
 				            </div>
 			            </div>
-		                <div class="card-footer stretch-card col-md-12">
-		                    <section class="mdc-card__action-footer mt-4 bg-red w-100" style="margin: 0px;">
-		                        <div class="col mdc-button" data-mdc-auto-init="MDCRipple" title="My Profile Settings" onclick="window.location='{{ route('profile') }}'">
-		                            <i class="mdi mdi-account-convert icon-md"></i>
+		                <div class="card-footer col-md-12">
+		                    <section class="mdc-card-footer mt-0 bg-red row text-center">
+		                        <div class="col-3 mdc-button" title="My Profile & Settings" onclick="window.location='{{ route('profile') }}'">
+		                            <i class="zmdi zmdi-account icon-md"></i>
 		                        </div>
-		                        <div class="col mdc-button" data-mdc-auto-init="MDCRipple" title="My messages inbox" onclick="window.location='{{ route('messages.index','inbox') }}'">
-		                            <i class="mdi mdi-comment-multiple-outline icon-md"></i>
+		                        <div class="col-3 mdc-button" data-mdc-auto-init="MDCRipple" title="My messages inbox" onclick="window.location='{{ route('messages.index','inbox') }}'">
+		                            <i class="zmdi zmdi-comment-outline icon-md"></i>
 		                        </div>
-		                        <div class="col mdc-button" data-mdc-auto-init="MDCRipple" title="Questions" onclick="window.location='{{ route('questions.index') }}'">
-		                            <i class="mdi mdi-help-circle-outline icon-md"></i>
+		                        <div class="col-3 mdc-button" data-mdc-auto-init="MDCRipple" title="Questions" onclick="window.location='{{ route('questions.index') }}'">
+		                            <i class="zmdi zmdi-help-outline icon-md"></i>
 		                        </div>
-		                        <div class="col mdc-button" data-mdc-auto-init="MDCRipple" title="Content Posts!" onclick="window.location='{{ route('posts.index') }}'">
-		                            <i class="mdi mdi-autorenew icon-md"></i>
+		                        <div class="col-3 mdc-button" data-mdc-auto-init="MDCRipple" title="Content Posts!" onclick="window.location='{{ route('posts.index') }}'">
+		                            <i class="fa fa-tree icon-md"></i>
 		                        </div>
 		                    </section>
 		                </div>
@@ -122,7 +131,9 @@
 				                                    @endif
 				                                    <div class="row">
 				                                    	<div >
-				                                    		<h4>{{ $user->name }} <small title="{{ App\Models\Role::where('name',$user->role)->first()->description }}"> - {{ $user->email . ' (' . $user->status . ') ' }} | {{ App\Models\Role::where('name',$user->role)->first()->display_name }}</small></h4>
+				                                    		<h4>{{ $user->name }} <small title="{{ App\Models\Role::where('name',$user->role)->first()->description }}"> - {{ $user->email . ' (' . $user->status . ') ' }}
+				                                    			<br>
+				                                    			{{ App\Models\Role::where('name',$user->role)->first()->display_name }}</small></h4>
 				                                    	</div>
 				                                    	<div class="col-12"><hr></div>
 				                                    	<div class="col-md-6">

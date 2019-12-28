@@ -48,7 +48,7 @@ class CompanyController extends Controller
                 return view('system.companies.index',compact(['companies','type','stype']));
             }
             $type = 'all';
-            return redirect()->route('companies.index',$type)->with('warning','Company category does not exist');
+            return redirect()->route('companies.index',$type)->with('warning','Account category does not exist');
         }
         $type = 'all';
         $stype= 'all';
@@ -107,7 +107,9 @@ class CompanyController extends Controller
             new CompanyCreated($company)
         );
 
-        return redirect()->route('companies.show',[$company->id,$type])->with('success','Company created successfully.');
+        $type='all';
+
+        return redirect()->route('companies.show',[$type,$company->id])->with('success','Account created successfully.');
     }
 
     /**
@@ -123,7 +125,7 @@ class CompanyController extends Controller
         }
         $company    = Company::find($id);
         if (!$company) {
-            return redirect()->route('companies.index',$type)->with('danger','Company not found. It is either missing or deleted.');
+            return redirect()->route('companies.index',$type)->with('danger','Account not found. It is either missing or deleted.');
         }
 
         $total_ratings  = $company->ratings->count();
@@ -155,7 +157,7 @@ class CompanyController extends Controller
         
         $company    = Company::find($id);
         if (!$company) {
-            return redirect()->route('companies.index',$type)->with('danger','Company not found. It is either missing or deleted.');
+            return redirect()->route('companies.index',$type)->with('danger','Account not found. It is either missing or deleted.');
         }
         return view('system.companies.edit',compact(['company','type']));
     }
@@ -197,6 +199,6 @@ class CompanyController extends Controller
         $user->attachRole(Role::where('name','client')->first());
 
         $item->delete();
-        return redirect()->back()->with('danger', 'Company deleted successfully');
+        return redirect()->back()->with('danger', 'Account deleted successfully! User made client.');
     }
 }

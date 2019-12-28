@@ -107,7 +107,7 @@
                                 	@if(sizeof($gallery->images) < 1)
                                 		<div class="col-md-12 text-center" style="padding-top: 10px;">
                                             <div class="card card-body" style="border: thin solid transparent;">
-                                            	<span class="text-danger"> No iage added to this gallery yet. </span>
+                                            	<span class="text-danger"> No image added to this gallery yet. </span>
                                             </div>
                                         </div>
                                 	@endif

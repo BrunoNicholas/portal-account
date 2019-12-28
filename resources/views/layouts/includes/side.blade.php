@@ -53,17 +53,19 @@
 	              	<li><a href="{{ route('images.index') }}"><i class="fa-angle-double-right fa"></i> Images </a></li>
 	            </ul>
 	        </li>@endauth
+	        @permission('can_view_companies')
 	        <li class="card" role="tab" id="sch4">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc4" aria-expanded="false" aria-controls="sc4">
-	              	<i class="zmdi zmdi-ungroup"></i> Companies
+	              	<i class="zmdi zmdi-ungroup"></i> Multi Accounts
 	            </a>
 	            <ul id="sc4" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch4" data-parent="#slidebar-menu">
-	              	<li><a href="{{ route('companies.index','all') }}"><i class="fa-angle-double-right fa"></i> All Companies </a></li>
+	              	<li><a href="{{ route('companies.index','all') }}"><i class="fa-angle-double-right fa"></i> All Accounts </a></li>
 	              	@permission('can_add_company')
-	              	<li><a href="{{ route('companies.create','all') }}"><i class="fa-angle-double-right fa"></i> Add Company </a>
+	              	<li><a href="{{ route('companies.create','all') }}"><i class="fa-angle-double-right fa"></i> Add New </a>
 	              	@endpermission
 	            </ul>
 	        </li>
+	        @endpermission
 	        <li class="card" role="tab" id="sch5">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc5" aria-expanded="false" aria-controls="sc5">
 	              	<i class="zmdi zmdi-male-female"></i> Salons &amp; Spa's

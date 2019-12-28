@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'New Company')
+@section('title', 'New Multi Account')
 @section('styles') @endsection
 @section('content')
 <div class="ms-hero-page-override ms-hero-img-team ms-hero-bg-primary">
@@ -7,19 +7,19 @@
         <div class="text-center">
             <div class="row">
 				<div class="d-flex no-block align-items-center col-md-4">
-					<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;"><b class="text-white">Add Company</b></span>
+					<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;"><b class="text-white">Add Account</b></span>
 				</div>
 		        <div class="d-flex no-block justify-content-end col-md-8">
 		            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 		                <ol class="breadcrumb">
 	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home text-white"></i><span class="text-white">Home</span></a></li>
-					    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="fa fa-tree text-white"></i> <span class="text-white">Companies</span></a></li>
-					        <li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="fa fa-plus text-white"></i> <span class="text-white">Add Company</span></a></li>
+					    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="fa fa-tree text-white"></i> <span class="text-white">Multi Accounts</span></a></li>
+					        <li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="fa fa-plus text-white"></i> <span class="text-white">Add Account</span></a></li>
 		                </ol>
 		            </nav>
 		        </div>
 	    	</div>
-            <p class="lead lead-lg color-light text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">Create a company to manage more than one shop, salon or spa!</p>
+            <p class="lead lead-lg color-light text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">Create a multi account to manage more than one shop, salon or spa!</p>
         </div>
     </div>
 </div>
@@ -44,7 +44,7 @@
 	                <div class="row">
 	                	<div class="col-md-6">
 	                		<div class="form-group row">
-	                			<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Company Name</label>
+	                			<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Account Name</label>
 				                <div class="col-lg-8">
 				                    <input type="text" name="company_name" class="form-control" id="inputName" placeholder="Valid Name">
 				                </div>
@@ -66,7 +66,7 @@
 	                <div class="row">
 	                	<div class="col-md-6">
 	                		<div class="form-group row mt-0">
-			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Email</label>
+			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label"> Email </label>
 				                <div class="col-lg-8">
 				                    <input type="email" class="form-control" name="company_email" value="{{ Auth::user()->email }}" id="inputEmail" placeholder="Email">
 				                </div>
@@ -74,7 +74,7 @@
 				        </div>
 	                	<div class="col-md-6">
 	                		<div class="row" style="padding: 10px;">
-	                			<label for="file-item" autocomplete="false" class="col-lg-4 control-label">Company Logo</label>
+	                			<label for="file-item" autocomplete="false" class="col-lg-4 control-label"> Logo </label>
 				                <div class="col-lg-8">
 				                	<input type="file" class="" id="file-item" name="company_logo" accept=".jpg, .png, .jpeg">
 				                </div>
@@ -84,7 +84,7 @@
 	                <div class="row">
 	                	<div class="col-md-6">
 	                		<div class="form-group row mt-0">
-			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Company Telephone</label>
+			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label"> Telephone </label>
 				                <div class="col-lg-8">
 				                    <input type="text" class="form-control" id="inputSubject" placeholder="Active Telephone Number" name="company_telephone">
 				                </div>
@@ -92,9 +92,9 @@
 				        </div>
 	                	<div class="col-md-6">
 	                		<div class="form-group row mt-0">
-			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Company Website</label>
+			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label"> Website (If Any!)</label>
 				                <div class="col-lg-8">
-				                    <input type="url" class="form-control" id="inputSubject" name="company_website" placeholder="The website link">
+				                    <input type="url" class="form-control" id="inputSubject" name="company_website" placeholder="Copy and paste the full website link here">
 				                </div>
 				            </div>
 				        </div>
@@ -102,7 +102,7 @@
 	                <div class="row">
 	                	<div class="col-md-6">
 	                		<div class="form-group row mt-0">
-			                  	<label for="inputLoca" autocomplete="false" class="col-lg-4 control-label">Company Location</label>
+			                  	<label for="inputLoca" autocomplete="false" class="col-lg-4 control-label">Headquaters Location</label>
 				                <div class="col-lg-8">
 				                    <input type="text" class="form-control" id="inputLoca" placeholder="City, Street, P.O.Box" name="company_location">
 				                </div>
@@ -110,7 +110,7 @@
 				        </div>
 	                	<div class="col-md-6">
 	                		<div class="form-group row mt-0">
-			                  	<label for="gpsAddr" autocomplete="false" id="demo" class="col-lg-3 control-label">GPS</label>
+			                  	<label for="gpsAddr" autocomplete="false" id="demo" class="col-lg-3 control-label">Headquaters Map Cordinates</label>
 			                  	<div class="col-lg-2 mt-1"><button type="button" class="btn btn-raised btn-xs btn-primary" onclick="getLocation()">Get GPS</button></div>
 				                <div class="col-lg-5">
 				                    <input type="text" class="form-control" id="gpsAddr" name="company_gps" placeholder="1.024 32.554">
@@ -128,12 +128,12 @@
 				                <div class="col-lg-8">
 				                	<div class="form-check radio">
                                         <label class="form-radio-label">
-				                    		<input type="radio" id="text22" value="products" name="products_services"> Products
+				                    		<input type="radio" id="text22" value="products" name="products_services"> Products (Shops Only)
 				                    	</label>
 				                    </div>
 				                    <div class="form-check radio">
                                         <label class="form-radio-label">
-				                    		<input type="radio" id="text23" value="services" name="products_services"> Services 
+				                    		<input type="radio" id="text23" value="services" name="products_services"> Services (Salons &amp; Spa's Onlu)
 				                    	</label>
 				                    </div>
 				                    <div class="form-check radio">

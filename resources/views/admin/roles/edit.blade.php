@@ -70,9 +70,7 @@
 					                <div class="form-group row">
 					                    <label class="col-lg-3 col-form-label"> Description </label>
 					                    <div class="col-lg-9">
-					                    	<textarea class="form-control" rows="3" name="description">
-					                    		{{ $role->description }}
-					                    	</textarea>
+					                    	<textarea class="form-control" rows="3" name="description">{{ $role->description }}</textarea>
 					                    </div>
 					                </div>
 

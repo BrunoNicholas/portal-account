@@ -3,6 +3,7 @@
 
 Hello {{ explode(' ', trim(Auth::user()->name))[0] }},
 Your a new fashion style has been added to your salon profile successfully!
+
 Next, please attach a gallery with images to it so that your client can book for it
 
 @component('mail::button', ['url' => route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$salon->id,$style->id])])

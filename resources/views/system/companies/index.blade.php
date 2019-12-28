@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', $type . ' Companies')
+@section('title', $type . ' Multi Accounts')
 @section('styles')
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -8,11 +8,11 @@
 @section('navigator')
 <div class="ms-hero-page ms-hero-img-city2 ms-hero-bg-info mb-0" style="padding: 0px;">
     <div class="text-center color-white mt-0 mb-0 index-1" style="padding-top: 5px;">
-        <h2>Registered Companies</h2>
-      	<p class="lead lead-lg" style="text-transform: capitalize;"> {{ $type }} Registered Companies
+        <h2>Multi Accounts</h2>
+      	<p class="lead lead-lg" style="text-transform: capitalize;"> {{ $type }} Registered Multi Accounts
             <ol class="breadcrumb d-flex justify-content-center" style="height: 40px;">
             	<li class="breadcrumb-item"><a href="{{ route('userhome') }}" class="text-white"><i class="fa fa-home text-white"></i> Home</a></li>
-				<li class="breadcrumb-item active text-white"><i class="fa fa-address-book-o text-white"></i> Companies</li>
+				<li class="breadcrumb-item active text-white"><i class="fa fa-address-book-o text-white"></i> Multi Accounts</li>
             </ol>
         </p>
       	<a href="{{ route('salons.index','all') }}" class="btn btn-raised btn-white color-primary"><i class="zmdi zmdi-male-female"></i> Salons </a>
@@ -25,29 +25,29 @@
     <div class="row justify-content-md-center">
         <div class="col-lg-8">
             <div class="card card-primary">
-              	<div class="card-header text-center"> <h3 class="card-title">Company Categories</h3> </div>
+              	<div class="card-header text-center"> <h3 class="card-title">Accounts Categories</h3> </div>
               	<div class="card-body">
                 	<div class="row">
                   		<div class="col-lg-8">
 		                    <form class="form-horizontal" id="Filters">
 			                    <div class="row">
 			                        <div class="col-sm-6">
-			                          <fieldset>
-            							<!-- {{ $acomps = App\Models\Categories::where('type','company')->get() }} -->
-			                            <h4 class="mb-1 no-mt"> By Region </h4>
-			                            <div class="form-group no-mt">
-				                            @foreach($acomps as $sal)
-							                    <div class="radio" onclick="window.location='{{ route('companies.index',$sal->name) }}'">
-							                        <label><input type="radio" @if($stype == $sal->name) checked @endif><i class="zmdi zmdi zmdi zmdi-male-female"></i> <span style="visibility: hidden;">p</span> {{ $sal->display_name }} </label>
-							                    </div>
-							                @endforeach
-			                            </div>
-			                          </fieldset>
+				                        <fieldset>
+	            							<!-- {{ $acomps = App\Models\Categories::where('type','company')->get() }} -->
+				                            <h4 class="mb-1 no-mt"> By Region </h4>
+				                            <div class="form-group no-mt">
+					                            @foreach($acomps as $sal)
+								                    <div class="radio" onclick="window.location='{{ route('companies.index',$sal->name) }}'">
+								                        <label><input type="radio" @if($stype == $sal->name) checked @endif><i class="zmdi zmdi zmdi zmdi-male-female"></i> <span style="visibility: hidden;">p</span> {{ $sal->display_name }} </label>
+								                    </div>
+								                @endforeach
+				                            </div>
+				                        </fieldset>
 			                        </div>
 			                        <div class="col-sm-6">
-            							<!-- {{ $bcomps = App\Models\Categories::where('type','more-company')->get() }} -->
 				                        <fieldset>
-				                            <h4 class="mb-0">Other Categories</h4>
+				                        	<!-- {{ $bcomps = App\Models\Categories::where('type','more-company')->get() }} -->
+				                            <h4 class="mb-1 no-mt">Other Categories</h4>
 				                            <div class="form-group no-mt">
 				                              	@foreach($bcomps as $sal)
 								                    <div class="radio" onclick="window.location='{{ route('companies.index',$sal->name) }}'">
@@ -62,12 +62,15 @@
                   		</div>
                   		<div class="col-lg-4">
 		                    <form class="form-horizontal">
-		                      	<h4>Sort by</h4>
+		                      	<h4 class="mb-1 no-mt">Sort by</h4>
 			                    <select id="SortSelect" class="form-control selectpicker" data-dropup-auto="false">
-			                        <option value="random">Name</option>
-			                        <option value="price:asc">Date Made</option>
-			                        <option value="price:desc">Ratings</option>
-			                        <option value="date:asc">Status</option>
+			                        <option value="">Date Registered</option>
+			                        <option value="">Name</option>
+			                        <option value="">Ratings</option>
+			                        <option value="">Status</option>
+			                        <option value="">Only Products</option>
+			                        <option value="">Only Services</option>
+			                        <option value="">Only products &amp; Services</option>
 			                    </select>
 		                    </form>
                     		<button class="btn btn-primary btn-block no-mb mt-1" onclick="window.location='{{ route('companies.index','all') }}'" id="Reset"><i class="zmdi zmdi-accounts"></i> All Companies </button>

@@ -74,7 +74,6 @@
 			                        </span>
 				                	<span class="mailbox-read-time pull-right"> {{ $message->created_at }}</span>
 				                </h5>
-				                <h3>{{ $message->title }}</h3>
 				            </div>
 				              <!-- /.mailbox-read-info -->
 				              	@if($message->receiver == Auth::user()->id)
@@ -112,14 +111,14 @@
 					              	</div>
 					            @else
 					            <br>
-					            @endif
-				              <!-- /.mailbox-controls -->
-				              <div class="mailbox-read-message">
-				                <p>Hello {{ explode(' ', trim(App\User::where('id',$message->receiver)->first()->name))[0] }},</p>
+					        @endif
+				            <!-- /.mailbox-controls -->
+				            <div class="mailbox-read-message">
+				                <p>@if($message->title )<big>{{ $message->title }}</big>@else <i>No title specified</i>@endif</p>
 
 				                <textarea class="form-control" rows="8" style="overflow-y: auto;border: none; background-color: #fff; color: #000; padding-top: 5px;" disabled>{{ $message->message }}</textarea>
-				              </div>
-				              <!-- /.mailbox-read-message -->
+				            </div>
+				            <!-- /.mailbox-read-message -->
 			            </div>
 			            <div class="box-footer">
 				            <div class="pull-right">

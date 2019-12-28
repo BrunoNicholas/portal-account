@@ -70,7 +70,7 @@ class GalleryController extends Controller
             $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
             Image::make($user_image)->save( public_path('/files/galleries/images/' . $filename) );
-            // $path = $request->file('image')->storeAs('public/gallery/', $filename);
+            // $user_image->move(public_path() . '/files/galleries/images/', $filename);
 
             $image_item->image      = $filename;
             $image_item->gallery_name = $request->gallery_name;

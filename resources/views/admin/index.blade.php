@@ -193,8 +193,8 @@
 		                        <div role="tabpanel" class="tab-pane fade" id="settings">
 		                          	<span class="text-danger">Still under developement</span>
 		                        </div>
-		                      </div>
 		                    </div>
+		                </div>
 		            </div> <!-- card -->
 		        </section>
 		    </div>

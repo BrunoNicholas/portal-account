@@ -83,7 +83,7 @@
 						                    <tbody>
 						                        @if(sizeof($messages) < 1)
 					                              	<tr>
-					                                  	<td class="chb text-center" colspan="6"> <i> No {{ $type }} message found! </i> </td>
+					                                  	<td class="chb text-center text-info" colspan="6" style="vertical-align: middle;"> <i> No {{ $type }} message found! </i> </td>
 					                              	</tr>
 						                        @endif
 						                        @foreach ($messages as $message)
@@ -93,18 +93,18 @@
 				                                            <td class="user-image" style="vertical-align: middle;">
 				                                                <img src="{{ App\User::where('id',$message->receiver)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->receiver)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
 				                                            </td>
-				                                            <td class="user-name">
+				                                            <td class="user-name" style="vertical-align: middle;">
 				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->receiver)->first())->name }}</h6>
 				                                            </td>
 				                                        @else
-				                                            <td class="user-image">
+				                                            <td class="user-image" style="vertical-align: middle;">
 				                                                <img src="{{ App\User::where('id',$message->sender)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->sender)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
 				                                            </td>
-				                                            <td class="user-name">
+				                                            <td class="user-name" style="vertical-align: middle;">
 				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->sender)->first())->name }}</h6>
 				                                            </td>
 				                                        @endif
-						                                <td class="contact pull-left">
+						                                <td class="contact pull-left" style="vertical-align: middle;">
 						                                    <a class="link pull-left" href="{{ route('messages.show',[$message->id,'details']) }}">
 				                                                @if($message->folder == 'important')
 				                                                    <span class="btn btn-xs btn-danger m-r-10">{{ $message->folder }}</span>
@@ -121,7 +121,7 @@
 				                                                @endif
 				                                            </a>
 				                                        </td>
-				                                        <td class="contact">
+				                                        <td class="contact" style="vertical-align: middle;">
 				                                          	<a  href="{{ route('messages.show',[$message->id,'details']) }}">
 				                                                <span class="blue-grey-text text-darken-4">
 				                                                    <b>{{ $message->title }}</b>
@@ -130,10 +130,10 @@
 				                                            </a>
 						                                </td>
 					                                  	@if($message->attachment) 
-				                                            <td class="clip" title="This is a public (group) message sent to all!"><i class="fa fa-users"></i></td> <!-- fa fa-paperclip -->
-				                                            <td class="time" title="This is a public (group) message sent to all!"> {{ $message->created_at }} </td>
+				                                            <td class="clip" title="This is a public (group) message sent to all!" style="vertical-align: middle;"><i class="fa fa-users"></i></td> <!-- fa fa-paperclip -->
+				                                            <td class="time" title="This is a public (group) message sent to all!" style="vertical-align: middle;"> {{ $message->created_at }} </td>
 				                                        @else
-				                                            <td colspan="2" class="time" title="{{ $message->created_at }}"> {{ $message->created_at }} </td>
+				                                            <td colspan="2" class="time" title="{{ explode(' ', trim($message->created_at))[0] . ', ' . explode(' ', trim($message->created_at))[1] }}" style="vertical-align: middle;"> {{ $message->created_at }} </td>
 				                                        @endif
 						                            </tr>
 						                        @endforeach

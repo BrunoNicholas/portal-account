@@ -102,7 +102,7 @@
 													                    <label class="col-md-4 col-form-label text-right"> Type <span class="text-danger">*</span>
 													                    </label>
 													                    <div class="col-md-8">
-													                        <input type="text" class="form-control" name="type" value="{{ $category->type }}" placeholder="company,shop,salon,hair,face,body">
+													                        <input type="text" class="form-control" name="type" value="{{ $category->type }}" placeholder="shop,salon,hair,face,body">
 													                    </div>
 													                </div>
 													                <div class="form-group row mt-0">
@@ -175,7 +175,7 @@
 					                    <label class="col-md-4 col-form-label text-right"> Type <span class="text-danger">*</span>
 					                    </label>
 					                    <div class="col-md-8">
-					                        <input type="text" class="form-control" name="type" placeholder="company,shop,salon,hair,face,body">
+					                        <input type="text" class="form-control" name="type" placeholder="shop,salon,hair,face,body">
 					                    </div>
 					                </div>
 					                <div class="form-group row mt-0">

@@ -35,6 +35,7 @@ class UserPageController extends Controller
     public function settings()
     {
         $user = Auth::user();
+        return redirect()->route('home')->with('info','Feature not yet released. We will notify you when it is.');
         return view('user.index', compact(['user']));
     }
     /**
