@@ -178,7 +178,7 @@ class CompanyController extends Controller
             'user_id'       => 'request',
         ]);
         Company::find($id)->update($request->all());
-        return redirect()->route('categories.index',$type)->with('success', "Category updated successfully");
+        return back()->with('success', "Account updated successfully");
     }
 
     /**

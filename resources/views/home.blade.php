@@ -74,7 +74,7 @@
                                                                         <h3 class="modal-title color-primary" id="edit{{ $i }}ModalLabel">Edit Multi Account Details</h3>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
                                                                     </div>
-                                                                    <form action="" method="POST">
+                                                                    <form enctype="multipart/form-data" action="{{ route('companies.update', ['all',$company->id]) }}" method="POST">
                                                                         <div class="modal-body">
                                                                             <div class="col-md-12">
                                                                                 @csrf
@@ -92,10 +92,78 @@
                                                                             </div>
 
                                                                             <div class="form-group row">
-                                                                                <label class="col-md-3 col-form-label text-right"> Email <span class="text-danger">*</span>
+                                                                                <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Email <span class="text-danger">*</span>
                                                                                 </label>
                                                                                 <div class="col-md-9">
                                                                                     <input type="email" class="form-control" value="{{ $company->company_email }}" name="company_email" required>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group row">
+                                                                                <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Main Category </label>
+                                                                                <div class="col-md-9">
+                                                                                    <select class="form-control" id="inputName" name="categories_id" required>
+                                                                                        <option value="{{ $company->categories_id }}"> Select to change</option>
+                                                                                        @foreach($cats as $category)
+                                                                                            <option value="{{ $category->id }}" title="{{ $category->description }}">{{ $category->display_name }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group row">
+                                                                                <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Telephone </label>
+                                                                                <div class="col-md-9">
+                                                                                    <input type="text" class="form-control" id="inputSubject" placeholder="Active Telephone Number" name="company_telephone" value="{{ $company->company_telephone }}">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group row">
+                                                                                <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Website </label>
+                                                                                <div class="col-md-9">
+                                                                                    <input type="url" class="form-control" id="inputSubject" name="company_website" value="{{ $company->company_website }}" placeholder="Copy and paste the full website link here">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group row">
+                                                                                <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Headquaters </label>
+                                                                                <div class="col-md-9">
+                                                                                    <input type="text" class="form-control" id="inputLoca" placeholder="City, Street, P.O.Box" name="company_location" value="{{ $company->company_location }}">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group row">
+                                                                                <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px; vertical-align: middle;"> Specialisations </label>
+                                                                                <div class="col-md-9 text-left">
+                                                                                    <div class="form-check radio">
+                                                                                        <label class="form-radio-label">
+                                                                                            <input type="radio" id="text22" value="products" name="products_services" @if ($company->products_services == 'products')
+                                                                                                checked 
+                                                                                            @endif> Products (Shops Only)
+                                                                                        </label>
+                                                                                    </div><br>
+                                                                                    <div class="form-check radio">
+                                                                                        <label class="form-radio-label">
+                                                                                            <input type="radio" id="text23" value="services" name="products_services" @if ($company->products_services == 'services')
+                                                                                                checked 
+                                                                                            @endif> Services (Salons &amp; Spa's Only)
+                                                                                        </label>
+                                                                                    </div><br>
+                                                                                    <div class="form-check radio">
+                                                                                        <label class="form-radio-label">
+                                                                                            <input type="radio" id="text24" value="products_and_services" name="products_services" @if ($company->products_services == 'products_and_services')
+                                                                                                checked 
+                                                                                            @endif> Products &amp; Services
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group row">
+                                                                                <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;">   </label>
+                                                                                <div class="col-md-9">
+                                                                                    
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>

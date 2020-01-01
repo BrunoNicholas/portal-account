@@ -43,12 +43,6 @@
 					            @foreach ($errors->all() as $error)
 					            	<p class="alert alert-danger">{{ $error }}</p>
 					            @endforeach
-
-					            @if (session('success'))
-					            	<div class="alert alert-success">
-					            		{{ session('success') }}
-					            	</div>
-					            @endif
 					                    
 					            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

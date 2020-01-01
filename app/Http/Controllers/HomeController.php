@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Categories;
 use App\Models\Message;
 use App\Models\Company;
 use App\Models\Salon;
@@ -41,8 +42,9 @@ class HomeController extends Controller
 
             $inboxCount = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->count();
             $messages   = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->latest()->paginate(10);
+            $cats       = Categories::where('type','company')->get();
 
-            return view('home',compact(['companies','salons','shops','inboxCount','messages']))->with('info','Welcome back, ' . ' - ' . Auth::user()->name . '!');
+            return view('home',compact(['companies','salons','shops','inboxCount','messages','cats']))->with('info','Welcome back, ' . ' - ' . Auth::user()->name . '!');
         }
         return view('index'); 
     }
@@ -61,10 +63,11 @@ class HomeController extends Controller
         $companies = Company::where('user_id',Auth::user()->id)->get();
         $shops = Shop::where('user_id',Auth::user()->id)->get();
         $salons = Salon::where('user_id',Auth::user()->id)->get();
+        $cats       = Categories::where('type','company')->get();
 
         $inboxCount = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->count();
         $messages   = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->latest()->paginate(10);
 
-        return view('home',compact(['companies','salons','shops','inboxCount','messages']));
+        return view('home',compact(['companies','salons','shops','inboxCount','messages','cats']));
     }
 }
