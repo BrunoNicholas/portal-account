@@ -116,7 +116,7 @@
 			                    <p>{{ strlen($company->description) > 20 ? substr($company->description, 0, 20) . '... ' : $company->description }}</p>
 			                    <div class="mt-1">
 				                    <input class="input-3-xs" name="input-3-xs" value="{{ $avgs_ratings }}" class="rating-loading" data-size="xs">
-				                    <span class="ms-tag ms-tag-success"> {{ $company->status }} </span>
+				                    @auth <span class="ms-tag ms-tag-success" style="text-transform: capitalize;"> {{ $company->status }} </span> @endauth
 			                    </div>
 		                    	<div class="row">
 		                    		<div class="col-md-6">

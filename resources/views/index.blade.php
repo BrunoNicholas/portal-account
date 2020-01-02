@@ -37,7 +37,7 @@
                             </div>
                             <div class="media-body no-mt">
                                 <h3 class="color-success no-mt">Your company expanded.</h3>
-                                <p>Multiple outlets of shops, salons and spas under one account.</p>
+                                <p>Multiple outlets of shops, salons and spas under one multi account.</p>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                   <div class="text-center card-body">
                       <span class="ms-icon ms-icon-circle ms-icon-white ms-icon-inverse ms-icon-xxlg "><i class="fa-thumbs-o-up fa"></i></span>
                       <h4 style="font-weight: bold;">Reviews &amp; Ratings</h4>
-                      <p class="">All companies, salons, spa's, shops rated and reviewed with products and services.</p>
+                      <p class="">All multi-accounts, salons, spa's, shops rated and reviewed with products and services.</p>
                       <a href="javascript:void(0)" class="btn btn-white color-royal btn-raised"> About Feature </a>
                   </div>
               </div>
@@ -159,10 +159,10 @@
     </div>
     <div class="container mt-6">
         <div class="text-center color-white mb-4 text-center">
-            <h1 class="color-primary">Companies</h1>
+            <h1 class="color-primary">Multi Accounts</h1>
             <p class="lead lead-lg color-danger text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">
-              With {{ config('app.name') }}, you can create more salons and shops under one profile as a company to brand your business outlets <br>
-              <small>Recent Companies</small>
+              With {{ config('app.name') }}, you can create salons and shops under one profile as a multi account for your business outlets. <br>
+              <small class="color-primary">Recently Added Multi Accounts</small>
             </p>
         </div><?php $companies = App\Models\Company::latest()->paginate(3); $i=0; ?>
         <div class="row d-flex justify-content-center">
