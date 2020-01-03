@@ -205,7 +205,7 @@
 					<h4 class="section-title no-margin-top text-center"> Activity </h4>
 					<div class="card">
 						<div class="card-header text-center">
-							Operations &amp; Counters
+							System Operations
 						</div>
 						<div class="card-body text-center">
 							<a href="{{ route('categories.index') }}">
@@ -215,8 +215,13 @@
 									</span> View Categories
 								</button>
 							</a>
-
-							<a href="{{ route('permissions.index') }}"><button class="btn btn-sm btn-warning">Permissions</button></a>
+							<a href="{{ route('permissions.index') }}">
+								<button class="btn btn-sm btn-primary">
+									<span class="ml-auto badge-pill bg-primary">
+										{{ App\Models\Permission::all()->count() }}
+									</span> All Permissions
+								</button>
+							</a>
 							
 						</div>
 					</div>

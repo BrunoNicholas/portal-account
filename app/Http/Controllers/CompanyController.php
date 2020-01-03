@@ -159,18 +159,6 @@ class CompanyController extends Controller
         if (!$company) {
             return redirect()->route('companies.index',$type)->with('danger','Account not found. It is either missing or deleted.');
         }
-        return view('system.companies.edit',compact(['company','type']));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $type=null, $id)
-    {
         
         request()->validate([
             'company_name'  => 'required',

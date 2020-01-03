@@ -114,10 +114,10 @@
 							                <div class="row">
 				                        		<div class="col-md-6">
 				                                	<select class="form-control block" name="receiver" id="example-email" required>
-				                                    	<option value="{{ Auth::user()->id }}">Select user to send to</option>
+				                                    	<option value="{{ Auth::user()->id }}">Select message receiver (Self)</option>
 					                                	@foreach($users as $user)
 					                                        @if($user->id != Auth::user()->id)
-					                                            <option value="{{ $user->id }}" title="{{ (App\Models\Role::where('name',$user->role)->get()->first())->display_name }}">{{ $user->name . ' - ' . $user->email }}</option>
+					                                            <option value="{{ $user->id }}" title="{{ (App\Models\Role::where('name',$user->role)->first())->display_name }}">{{ $user->name . ' - ' . $user->email }}</option>
 					                                        @endif
 					                                    @endforeach
 					                                </select>

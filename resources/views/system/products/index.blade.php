@@ -21,6 +21,18 @@
 @section('content')
 <div class="container">
    	<div class="row">
+   		@if(sizeof($products) < 1)
+   			<div class="col-lg-12 col-md-12 col-sm-12">
+	            <div class="card wow zoomIn">
+		            <h3 class="ms-thumbnail card-body pb-5 text-center color-danger">
+		            	Oups, No products recorded for this category yet! <br>
+		            	<small>
+		            		<a href="{{ route('products.index',['all',0]) }}" class="btn btn-sm btn-primary">All Products</a>
+		            	</small>
+		            </h3>
+		        </div>
+		    </div>
+   		@endif
    		@foreach($products as $product)
 	        <div class="col-lg-3 col-md-4 col-sm-6">
 	            <div class="card wow zoomIn">

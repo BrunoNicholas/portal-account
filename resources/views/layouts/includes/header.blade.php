@@ -61,7 +61,9 @@
 			                    <li class="nav-item"><a class="nav-link active" href="#tab-general" data-hover="tab" data-toggle="tab" role="tab"><i class="zmdi zmdi-male-female"></i> By Gender</a></li>
 			                    <li class="nav-item"><a class="nav-link" href="#tab-landing" data-hover="tab" data-toggle="tab" role="tab"><i class="zmdi zmdi-account"></i> By Style </a></li>
 			                    <li class="dropdown-divider"></li>
-			                    <li class="nav-item"><a class="nav-link" href="{{ route('salons.index','all') }}" role="tab"><i class="fa fa-list"></i> View All Salons &amp; Spa's </a></li>
+			                    <li class="nav-item">
+			                    	<a class="nav-link color-primary" href="{{ route('salons.index','all') }}" role="tab"><i class="fa fa-list"></i> View All Salons &amp; Spa's </a>
+			                    </li>
 			                </ul>
 			                    <!-- Tab panes -->
 			                <div class="tab-content ms-tab-menu-right">
@@ -82,22 +84,6 @@
 			                </div>
 	            		</li>
 	            	</ul>
-	            </li>
-	            {{-- shops and products --}}
-            	<!-- {{ $aproducts = App\Models\Categories::where('type','products-gender')->get() }} -->
-	            <li class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shop Products <i class="zmdi zmdi-chevron-down"></i></a>
-	                <ul class="dropdown-menu">
-	                	@foreach($aproducts as $prod)
-	                  	<li><a class="dropdown-item" href="{{ route('products.index',[$prod->name,0]) }}"><i class="zmdi zmdi-view-compact"></i> {{ $prod->display_name }} </a></li>
-	                  	@endforeach
-		                <li class="dropdown-divider"></li>
-		                <li><a class="dropdown-item" href="{{ route('products.index',['all','0']) }}"><i class="zmdi zmdi-card-membership"></i> View All Products</a></li>
-		                <li><a class="dropdown-item" href="{{ route('shops.index','all') }}"><i class="zmdi zmdi-view-dashboard"></i> All Shops</a></li>
-		                {{-- <li class="dropdown-divider"></li>
-		                <li><a class="dropdown-item" href="portfolio-item.html"><i class="zmdi zmdi-collection-item-1"></i> Portfolio Item 1</a></li>
-		                <li><a class="dropdown-item" href="portfolio-item2.html"><i class="zmdi zmdi-collection-item-2"></i> Portfolio Item 2</a></li> --}}
-	                </ul>
 	            </li>
 	            {{-- fashion styles --}}
             	<!-- {{ $cstyle = App\Models\Categories::where('type','children-style')->get() }} -->
@@ -177,6 +163,22 @@
 	                  	</li>
 	                </ul>
 	            </li>
+	            {{-- shops and products --}}
+            	<!-- {{ $aproducts = App\Models\Categories::where('type','products-gender')->get() }} -->
+	            <li class="nav-item dropdown">
+	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shops &amp; Products <i class="zmdi zmdi-chevron-down"></i></a>
+	                <ul class="dropdown-menu">
+	                	@foreach($aproducts as $prod)
+	                  	<li><a class="dropdown-item" href="{{ route('products.index',[$prod->name,0]) }}"><i class="zmdi zmdi-view-compact"></i> {{ $prod->display_name }} </a></li>
+	                  	@endforeach
+		                <li class="dropdown-divider"></li>
+		                <li><a class="dropdown-item" href="{{ route('products.index',['all','0']) }}"><i class="zmdi zmdi-card-membership"></i> View All Products</a></li>
+		                <li><a class="dropdown-item color-primary" href="{{ route('shops.index','all') }}"><i class="zmdi zmdi-view-dashboard"></i> View All Shops</a></li>
+		                {{-- <li class="dropdown-divider"></li>
+		                <li><a class="dropdown-item" href="portfolio-item.html"><i class="zmdi zmdi-collection-item-1"></i> Portfolio Item 1</a></li>
+		                <li><a class="dropdown-item" href="portfolio-item2.html"><i class="zmdi zmdi-collection-item-2"></i> Portfolio Item 2</a></li> --}}
+	                </ul>
+	            </li>
 	            {{-- app sections --}}
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="page">Sections <i class="zmdi zmdi-chevron-down"></i></a>
@@ -215,7 +217,9 @@
 		                    </ul>
 		                </li>
 		                @endauth
-                  		<li><a class="dropdown-item" href="{{ route('settings') }}" class="dropdown-link text-center"><i class="fa-gear fa"></i> Timeline</a></li>
+		                @auth
+                  			<li><a class="dropdown-item" href="{{ route('settings') }}" class="dropdown-link text-center"><i class="fa-gear fa" style="padding: 0px; margin: 0px;"></i> Timeline</a></li>
+                  		@endauth
                 	</ul>
 	            </li>
 	            @auth
