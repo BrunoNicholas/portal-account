@@ -30,13 +30,13 @@
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
 	            <div class="card card-body text-center">
 	                <!-- Wrapper for slides -->
-	                <div class="col-12" style="overflow-x: auto;">
-	                	<span class="badge badge-success mb-1" style="font-size: 20px; text-transform: capitalize; padding: 5px 10px; border-radius: 5px;">
+                	<span class="badge col-12 badge-success mb-1" style="overflow-x: auto; font-size: 20px; text-transform: capitalize; padding: 5px 10px; border-radius: 5px;">
+                		{{ $style->style_name }} | 
+                		<small>
 	                		{{ $salon->salon_name }} 
-	                		<small> - {{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }}
-	                		</small>
-	                	</span>
-	                </div>
+	                		({{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }})
+	                	</small>
+                	</span>
 	                <div class="carousel-inner" role="listbox">
 		                <div class="carousel-item active">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
@@ -93,7 +93,7 @@
 					                	@endif
 					                	@if($style->style_name)
 					                  		<tr>
-					                  			<td><strong>style Name: </strong></td><td> {{ $style->style_name }}</td>
+					                  			<td><strong>Style Name: </strong></td><td> {{ $style->style_name }}</td>
 					                  		</tr>
 					                  	@endif
 					                  	@if($style->description)
@@ -103,17 +103,20 @@
 					                  	@endif
 					                  	@if($style->previous_price)
 					                  		<tr>
-					                  			<td style="min-width: 150px;"><strong>Previous Price: </strong></td><td> <strike>UGX. {{ $style->previous_price }}</strike></td>
-					                  		</tr>
-					                  	@endif
-					                  	@if($style->current_price)
-					                  		<tr> 
-					                  			<td><strong>Current Price: </strong></td><td class="text-success">UGX. {{ $style->current_price }}</td>
+					                  			<td style="min-width: 150px;">
+					                  				<strong>Price: </strong></td><td> <strike class="color-danger">UGX. {{ $style->previous_price }}</strike>
+					                  				@if($style->current_price)
+					                  				<strong class="text-success pull-right">UGX. {{ $style->current_price }}
+					                  				@endif
+					                  			</td>
 					                  		</tr>
 					                  	@endif
 					                  	@if($style->categories_id)
 					                  		<tr>
-					                  			<td><strong>style Category:</strong></td><td> {{ App\Models\Categories::where('id',$style->categories_id)->first()->display_name }}</td>
+					                  			<td>
+					                  				<strong>Style Category:</strong>
+					                  			</td>
+					                  			<td> {{ App\Models\Categories::where('id',$style->categories_id)->first()->display_name }}</td>
 					                  		</tr>
 					                  	@endif
 					                  	<tr>
@@ -134,22 +137,96 @@
 		              		</div>
 		        		</div>
 		        		<div class="card-body">
-		        			<div class="row">
-		        				<div class="col-md-4 text-center" style="padding: 5px;">
-		        					<a href="#" class="btn btn-primary btn-raised"><span class="glyphicon glyphicon-book"></span> Book Now!</a>
-		        				</div>
-		        				<div class="col-md-4 text-center" style="padding: 5px;">
-		        					<a href="#" class="btn btn-success btn-raised"><span class="glyphicon glyphicon-book"></span> Order Now!</a>
-		        				</div>
-		        				<div class="col-md-4 text-center" style="padding: 5px;">
-		        					<a href="#" class="btn btn-primary btn-raised"><span class="glyphicon glyphicon-envelope"></span> Clarify!</a>
-		        				</div>
-		        			</div>
+	        				<div class="col-md-5 text-center pull-left" style="padding: 5px;">
+	        					<a href="#" class="btn btn-primary btn-block btn-raised"><span class="fa fa-cart-plus"></span> Book Now!</a>
+	        				</div>
+	        				<div class="col-md-5 text-center pull-right" style="padding: 5px;">
+	        					<button class="btn btn-info btn-block btn-raised" data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Message Shop!</button>
+	        				</div>
 		        		</div>
 		        	</div>
 		        </div>
         	</div>
+        	<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    	<form action="{{ route('messages.store','inbox') }}" method="POST">
+                            @csrf
+                            @foreach ($errors->all() as $error)
+                                <p class="alert alert-danger">{{ $error }}</p>
+                            @endforeach
+
+                            <div class="modal-body">
+                                <input type="hidden" name="sender" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="receiver" value="{{ $style->user_id }}">
+                                <input type="hidden" name="status" value="inbox">
+                                <input type="hidden" name="routers" value="{{ route('styles.show',['all',0,$style->id]) }}">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="recipient-name" class="control-label">Topic:</label>
+                                            <input type="text" class="form-control" id="recipient-name1" name="title">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="priority">Priority</label>
+                                            <select class="custom-select form-control" name="folder">
+                                                <option value="normal">Select priority</option>
+                                                <option value="important">Important</option>
+                                                <option value="urgent">Urgent</option>
+                                                <option value="official">Official</option>
+                                                <option value="unofficial">Unofficial</option>
+                                                <option value="normal">Normal</option>
+                                                <option value="">None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="control-label">Message:</label>
+                                    <textarea class="form-control" id="message-text1" name="message">
+
+
+
+
+
+--------------------
+Message from fashion style {{ $style->style_name }}
+Link: {{ route('styles.show',['all',0,$style->id]) }}
+                                	</textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+    <h3 class="mt-4 mb-4 right-line"> Other Styles From {{ $salon->salon_name }} | <a href="{{ route('shops.index','all') }}"> All Other Styles </a> </h3>
+    <div class="row"><?php $i=3; ?>
+    	@foreach($salon->styles as $sty)
+    		<div class="col-md-4">
+                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
+                    <div class="ms-thumbnail card-body p-05">
+                        <div class="withripple zoom-img">
+                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+                            <div class="col-md-12" style="padding: 0px;">
+	                            <div class="pull-left">
+	                            	<a href="btn btn-primary btn-xs" title="Add to the booking list">
+	                            		<i class="fa fa-cart-plus color-primary"></i> Add
+	                            	</a>
+	                                <a href="{{ route('styles.show',[($sty->categories_id ? App\Models\Categories::where('id',$sty->categories_id)->first()->name : 'all'),$sty->salon_id,$sty->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $sty->style_name }}</a>
+	                            </div>
+                                <a title="Go to Salon" href="{{ route('salons.show',['all',$sty->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$sty->salon_id)->first()->salon_name }}</a>
+                            </div>
+                        </div>
+                    </div>
+	            </div>
+	        </div>
+    	@endforeach
     </div>
 </div>
 @endsection

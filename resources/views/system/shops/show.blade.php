@@ -90,7 +90,11 @@
 			                          						</tr>
 			                          						<tr>
 			                          							@if($product->categories_id)<td class="text-left">{{ App\Models\Categories::where('id',$product->categories_id )->first()->display_name }}</td>@endif
-			                          							@if($product->status)<td class="text-right"><span class="badge badge-xs badge-success">{{ $product->status }}</td>@endif
+			                          							@if($product->status)
+			                          							<td class="text-right">
+			                          								<span class="badge badge-xs badge-success">{{ $product->status }}</span>
+			                          							</td>
+			                          							@endif
 			                          						</tr>
 				                          					@if($product->description)
 				                          						<tr>

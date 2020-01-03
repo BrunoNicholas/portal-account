@@ -150,9 +150,9 @@
 	                <div class="row">
 	                	<div class="col-md-6">
 	                		<div class="form-group row mt-0">
-				                <label for="textBio" class="col-lg-4 control-label">Company Bio</label>
+				                <label for="textBio" class="col-lg-4 control-label">Account Bio</label>
 				                <div class="col-lg-8">
-				                    <textarea class="form-control" rows="3" name="company_bio" id="textBio" placeholder="Company bio status ..."></textarea>
+				                    <textarea class="form-control" rows="3" name="company_bio" id="textBio" placeholder="Account bio status ..."></textarea>
 				                </div>
 				            </div>
 		                </div>
@@ -160,14 +160,14 @@
 		                	<div class="form-group row mt-0">
 				                <label for="descde" class="col-lg-4 control-label">Description</label>
 				                <div class="col-lg-8">
-				                    <textarea class="form-control" rows="3" name="description" id="descde" placeholder="Company description details ..."></textarea>
+				                    <textarea class="form-control" rows="3" name="description" id="descde" placeholder="Account description details ..."></textarea>
 				                </div>
 				            </div>
 			            </div>
 			        </div>
 	                <div class="form-group row justify-content-end mt-0">
 		                <div class="col-lg-10 offset-lg-2">
-		                    <button type="submit" class="btn btn-raised btn-primary">Create Company</button>
+		                    <button type="submit" class="btn btn-raised btn-primary">Create Account</button>
 		                    <a href="{{ route('home') }}" class="btn btn-danger">Cancel To Home</a>
 		                </div>
 	                </div>

@@ -21,7 +21,7 @@ class StyleController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('index','show');
-        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        $this->middleware('role:super-admin|admin|company-admin|salon-admin')->except('show','index');
         
         // $this->middleware('permission:can_view_questions',['only'=>'index']);
         // $this->middleware('permission:can_add_questions',['only'=>['create','store']]);

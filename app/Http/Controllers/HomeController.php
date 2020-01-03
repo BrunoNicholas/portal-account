@@ -41,7 +41,7 @@ class HomeController extends Controller
             $salons = Salon::where('user_id',Auth::user()->id)->get();
 
             $inboxCount = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->count();
-            $messages   = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->latest()->paginate(10);
+            $messages   = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->latest()->paginate(5);
             $cats       = Categories::where('type','company')->get();
 
             return view('home',compact(['companies','salons','shops','inboxCount','messages','cats']))->with('info','Welcome back, ' . ' - ' . Auth::user()->name . '!');
@@ -66,7 +66,7 @@ class HomeController extends Controller
         $cats       = Categories::where('type','company')->get();
 
         $inboxCount = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->count();
-        $messages   = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->latest()->paginate(10);
+        $messages   = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->latest()->paginate(5);
 
         return view('home',compact(['companies','salons','shops','inboxCount','messages','cats']));
     }

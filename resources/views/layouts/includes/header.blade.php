@@ -217,9 +217,9 @@
 		                    </ul>
 		                </li>
 		                @endauth
-		                @auth
+		                @role('super-admin')
                   			<li><a class="dropdown-item" href="{{ route('settings') }}" class="dropdown-link text-center"><i class="fa-gear fa" style="padding: 0px; margin: 0px;"></i> Timeline</a></li>
-                  		@endauth
+                  		@endrole
                 	</ul>
 	            </li>
 	            @auth

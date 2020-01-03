@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Company Details')
+@section('title', 'Multi Account Details')
 @section('styles')
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -18,13 +18,13 @@
 		                    <img src="{{ $company->company_logo ? asset('files/companies/images/' . $company->company_logo) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." class="img-avatar-circle">
 		                </div>
 		                <div class="card-body pt-4 text-center">
-		                    <h3 class="color-primary">Company Bio</h3>
+		                    <h3 class="color-primary">Account Bio</h3>
 		                    <div>
 		                    	<input class="input-3-xs" name="input-3-xs" value="{{ $avg }}" class="rating-loading" data-size="xs">
 		                    </div>
 		                    <p>{{ $company->company_bio }}</p>
 		                    <hr>
-		                    <b>Date Added: </b> {{ explode(' ', trim($company->created_at))[0] }}, <b> Time: </b> {{ explode(' ', trim($company->created_at))[1] }}
+		                    <b>Date Created: </b> {{ explode(' ', trim($company->created_at))[0] }}, <b> Time: </b> {{ explode(' ', trim($company->created_at))[1] }}
 		                    {{-- <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
 		                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
 		                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a> --}}
@@ -36,13 +36,13 @@
 		            <div class="col-lg-12 col-md-12 order-md-3 order-lg-2">
 		            	<div class="row">
 		            		<div class="col-lg-6">
-		                		<a href="javascript:void(0)" title="Edit my company profile" class="btn btn-warning btn-raised btn-block animated fadeInUp animation-delay-12"><i class="zmdi zmdi-edit" style="margin: 0px;"></i> Edit</a>
+		                		<a href="javascript:void(0)" title="Edit my multi accout profile" class="btn btn-warning btn-raised btn-block animated fadeInUp animation-delay-12"><i class="zmdi zmdi-edit" style="margin: 0px;"></i> Edit</a>
 		                	</div>
 		                	<div class="col-lg-6">
 		                		<form method="POST" action="{{ route('companies.destroy', ['all',$company->id]) }}">
 	                                {{ csrf_field() }}
 	                                {{ method_field('DELETE') }}
-		                			<button type="submit" title="Delete this company profile" class="btn btn-danger btn-raised btn-block animated fadeInUp animation-delay-12" onclick="return confirm('You are about to delete this company.\nThis is riskky and not reversible.')">
+		                			<button type="submit" title="Delete this account profile" class="btn btn-danger btn-raised btn-block animated fadeInUp animation-delay-12" onclick="return confirm('You are about to delete this multi.\nThis is riskky and not reversible.')">
 		                				<i class="zmdi zmdi-delete" style="margin: 0px;"></i> 
 		                				Delete 
 		                			</button>
@@ -67,20 +67,31 @@
                     		<div class="panel">
 		                    	<div class="panel-heading text-center"> {{ $company->shops->count() }} | Shops </div>
 			                    <div class="panel-body">
-			                    	<div class="row">
-				                        <div class="col-3 mr-1">
-				                          	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 50px; border-radius: 10%;" >
-				                        </div>
-				                        <div class="col-8">
-				                          	<h4 class="mt-0 mb-0 color-warning">Shop Name</h4>
-				                          	<a href="mailto:joe@example.com?subject=feedback">maria.sha@example.com</a>
-					                        <div class="">
-					                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-					                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-					                            <a href="javascript:void(0)" class="btn-circle btn-circle-xs no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
+			                    	@foreach($company->shops as $shop)
+				                    	<div style="padding: 0px;" class="row p-1" onclick="window.location='{{ route('shops.show',['all',$shop->id]) }}'">
+					                        <div class="col-3">
+					                          	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 50px; border-radius: 10%;" >
 					                        </div>
-				                        </div>
-				                    </div>
+					                        <div class="col-8 ml-2" style="padding-right: 0px;">
+					                          	<h4 class="mt-0 mb-0 color-info"> {{ $shop->shop_name }} </h4>
+					                          	<a href="mailto:{{ $shop->shop_email }}?subject=feedback" class="pull-left">{{ $shop->shop_email }}</a>
+						                        <?php
+									        		$ratings_num  = $company->ratings->count();
+											        $tot_sum      = 0;
+
+											        if ($ratings_num > 0) {
+											            foreach ($company->ratings as $rat) {
+											                $tot_sum += $rat->rate_number;
+											            }
+											            $avgs_ratings    = $tot_sum/$ratings_num;
+											        } else {
+											            $avgs_ratings    = $tot_sum;
+											        }
+									        	?>
+						                        <span class="pull-right"> <i class="zmdi zmdi-star color-warning"></i> {{ number_format((float)$avgs_ratings, 1, '.', '') }} </span>
+					                        </div>
+					                    </div>
+					                @endforeach
 			                    </div>
 			                </div>
 		                </div>
@@ -93,21 +104,21 @@
 	            <div class="col-sm-4">
 	                <div class="card card-info card-body overflow-hidden text-center wow zoomInUp animation-delay-2">
 	                  	<h2 class="counter color-info">{{ $company->shops->count() }}</h2>
-	                  	<i class="fa fa-4x fa-file-text color-info"></i>
-	                  	<p class="mt-2 no-mb lead small-caps color-info">company shops</p>
+	                  	<i class="zmdi zmdi-male-female color-info"></i>
+	                  	<p class="mt-2 no-mb lead small-caps color-info">account shops</p>
 	                </div>
 	            </div>
 	            <div class="col-sm-4">
 	                <div class="card card-success card-body overflow-hidden text-center wow zoomInUp animation-delay-5">
 	                  	<h2 class="counter color-success">{{ $company->salons->count() }}</h2>
-	                  	<i class="fa fa-4x fa-briefcase color-success"></i>
-	                  	<p class="mt-2 no-mb lead small-caps color-success">company salons</p>
+	                  	<i class="zmdi zmdi-male-female color-success"></i>
+	                  	<p class="mt-2 no-mb lead small-caps color-success">account salons</p>
 	                </div>
 	            </div>
 	            <div class="col-sm-4">
 	                <div class="card card-royal card-body overflow-hidden text-center wow zoomInUp animation-delay-4">
 	                  	<h2 class="counter color-royal">{{ $company->reviews->count() }}</h2>
-	                  	<i class="fa fa-4x fa-comments-o color-royal"></i>
+	                  	<i class="fa fa-1x fa-comments-o color-royal"></i>
 	                  	<p class="mt-2 no-mb lead small-caps color-royal">reviews</p>
 	                </div>
 	            </div>
@@ -115,19 +126,19 @@
             {{-- information table --}}
             <div class="card card-primary animated fadeInUp animation-delay-12">
 	            <div class="card-header">
-	                <h3 class="card-title"><i class="zmdi zmdi-account-circle"></i> Company Information </h3>
+	                <h3 class="card-title text-center"><i class="zmdi zmdi-accounts"></i> Account Information </h3>
 	            </div>
 	            <div class="table-responsive">
 		            <table class="table table-no-border table-striped">
 		            	@if($company->company_name)
 		                <tr>
-		                  	<th><i class="zmdi zmdi-account mr-1 color-success"></i> Company Name</th>
+		                  	<th><i class="zmdi zmdi-account mr-1 color-success"></i> Account Name</th>
 		                  	<td>{{ $company->company_name }}</td>
 		                </tr>
 		                @endif
 		                @if($company->company_email)
 		                <tr>
-		                  	<th><i class="fa fa-envelope mr-1 color-warning"></i> Company Email </th>
+		                  	<th><i class="fa fa-envelope mr-1 color-warning"></i> Contact Email </th>
 		                  	<td>{{ $company->company_email }}</td>
 		                </tr>
 		                @endif
@@ -144,7 +155,7 @@
 		                @endif
 		                @if($company->company_ID)
 		                <tr>
-		                  	<th><i class="zmdi zmdi-link mr-1 color-info"></i> Company ID</th>
+		                  	<th><i class="zmdi zmdi-link mr-1 color-info"></i> Registered Company ID</th>
 		                  	<td>{{ $company->company_ID }}</td>
 		                </tr>
 		                @endif
@@ -156,7 +167,7 @@
 		                @endif
 		                @if($company->products_services)
 		                <tr>
-		                  	<th><i class="zmdi zmdi-spinner mr-1 color-primary"></i> Specialism</th>
+		                  	<th><i class="zmdi zmdi-spinner mr-1 color-primary"></i> Specialism </th>
 		                  	<td style="text-transform: capitalize;">{{ count(explode('_', trim($company->products_services))) > 1 ? explode('_', trim($company->products_services))[0] . ' ' . explode('_', trim($company->products_services))[1]  : explode('_', trim($company->products_services))[0] }}</td>
 		                </tr>
 		                @endif

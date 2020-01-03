@@ -78,7 +78,7 @@
                                             <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $style->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
                                             <div class="col-md-12" style="padding: 0px;">
                                                 <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                                <a title="Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">View Salon</a>
+                                                <a title="Go to Salon" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
                                             <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $style->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
                                             <div class="col-md-12" style="padding: 0px;">
                                                 <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                                <a title="Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">View Salon</a>
+                                                <a title="Go to Salon Profile" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
                                             <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $style->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
                                             <div class="col-md-12" style="padding: 0px;">
                                                 <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                                <a title="Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">View Salon</a>
+                                                <a title="Go to Salon Profile" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@
                                             <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $style->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
                                             <div class="col-md-12" style="padding: 0px;">
                                                 <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                                <a title="Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">View Salon</a>
+                                                <a title="Go to provider Salon Profile" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                 <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $style->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
                                 <div class="col-md-12" style="padding: 0px;">
                                     <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                    <a title="Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">View Salon</a>
+                                    <a title="Go to provider Salon Profile" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">By: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                 </div>
                             </div>
                         </div>

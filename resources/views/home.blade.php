@@ -266,7 +266,7 @@
                         @endrole
                         <li class="nav-item"><a class="nav-link withoutripple active" href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><i class="zmdi zmdi-email"></i> <span class="d-none d-sm-inline"> Messages </span></a></li>
                     </ul>
-                    <div class="card-body">
+                    <div class="card-body" style="max-height: 600px; overflow-y: auto;">
                         <div class="tab-content">
                             @role(['super-admin','admin','company-admin','salon-admin'])
                                 <div role="tabpanel" class="tab-pane fade" id="bookings">
@@ -332,7 +332,7 @@
                                                     <span class="blue-grey-text text-darken-4">
                                                         <b>{{ $message->title }}</b>
                                                     </span> 
-                                                    {{ strlen($message->message) > 20 ? substr($message->message, 0, 20) . '... ' : $message->message }}
+                                                    {{ strlen($message->message) > 15 ? substr($message->message, 0, 15) . '... ' : $message->message }}
                                                 </td>
                                                 @if($message->attachment) 
                                                     <td class="clip" title="This is a public (group) message sent to all!" style="vertical-align: middle;"><i class="fa fa-users"></i></td> <!-- fa fa-paperclip -->
@@ -342,6 +342,9 @@
                                                 @endif
                                             </tr>
                                         @endforeach
+                                        <tr>
+                                            <td class="chb text-center color-primary" colspan="6"> <a href="{{ route('messages.index','inbox') }}">View All Messages</a> </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>

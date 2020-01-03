@@ -41,7 +41,7 @@
 		                  	<a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $product->product_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
 		                  	<div class="col-md-12" style="padding: 0px;">
 		                  		<a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-info btn-xs pull-left" title="View product details" style="padding-top: 5px;">{{ $product->product_name }}</a>
-		                  		<a title="Shop: {{ App\Models\Shop::where('id',$product->shop_id)->first()->shop_name }}" href="{{ route('shops.show',['all',$product->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">View Shop</a>
+		                  		<a title="Go to shop provider profile" href="{{ route('shops.show',['all',$product->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Shop: {{ App\Models\Shop::where('id',$product->shop_id)->first()->shop_name }}</a>
 		                  	</div>
 		                </div>
 		            </div>

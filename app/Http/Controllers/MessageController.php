@@ -173,6 +173,11 @@ class MessageController extends Controller
             return redirect()->route('messages.index', 'inbox')->with('success','Message saved successfully as draft!');
         }
         Message::create($request->all());
+        
+        if ($request->routers) {
+            return back()->with('success','Message sent succesfully!');
+        }
+
         if ($request->router) {
             if ($type) {
                 return redirect()->route($request->router, $type)->with('success','Message added successfully!');
@@ -218,6 +223,7 @@ class MessageController extends Controller
         foreach ($sendMessages as $key => $value) {
             Message::create($value);
         }
+
         if ($request->router) {
             if ($type) {
                 return redirect()->route($request->router, $type)->with('success','Message added successfully!');

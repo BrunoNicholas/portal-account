@@ -73,7 +73,7 @@
 			                        <option value="">Only products &amp; Services</option>
 			                    </select>
 		                    </form>
-                    		<button class="btn btn-primary btn-block no-mb mt-1" onclick="window.location='{{ route('companies.index','all') }}'" id="Reset"><i class="zmdi zmdi-accounts"></i> All Companies </button>
+                    		<button class="btn btn-primary btn-block no-mb mt-1" onclick="window.location='{{ route('companies.index','all') }}'" id="Reset"><i class="zmdi zmdi-accounts"></i> All Multi Accounts </button>
                   		</div>
                 	</div>
               	</div>
@@ -87,7 +87,7 @@
             		<div class="col-xl-12 col-md-6 mix laptop apple" data-price="1999.99" data-date="20160901">
             			<div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 			                <div class="card-body overflow-hidden text-center">
-			                	<span class="text-danger">No company found under that major category.</span> <br>
+			                	<span class="text-danger">No account found under that major category.</span> <br>
 			                	<button class="btn btn-primary no-mb mt-0" onclick="window.location='{{ route('companies.index','all') }}'"><i class="fa fa-tree"></i> View All <i class="fa fa-tree"></i> </button> 
 			                	@permission('can_add_company') Or <a href="{{ route('companies.create','all') }}" class="btn btn-warning no-mb mt-0"> Create One </a>  @endpermission
 			                </div>
