@@ -12,7 +12,6 @@
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
                     	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
-                    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="fa fa-address-book"></i> Companies</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('salons.index','all') }}"><i class="fa fa-address-book-o"></i> Salons</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('salons.show',['all',$salon->id]) }}"><i class="fa fa-address-book-o"></i> {{ $salon->salon_name }}</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('styles.index',['all',$salon->id]) }}"><i class="fa fa-list"></i> Style Details </a></li>
@@ -85,7 +84,7 @@
 		              				<tbody>
 					                	@if($style->company_id)
 					                		<tr>
-					                			<td><strong>Company: </strong> </td>
+					                			<td><strong>Group Account: </strong> </td>
 					                			<td><a href="{{ route('companies.show',['all',$style->company_id]) }}" target="_blank">
 					                				{{ App\Models\Company::where('id',$style->company_id)->first()->company_name }}
 					                			</a></td>
@@ -141,7 +140,7 @@
 	        					<a href="#" class="btn btn-primary btn-block btn-raised"><span class="fa fa-cart-plus"></span> Book Now!</a>
 	        				</div>
 	        				<div class="col-md-5 text-center pull-right" style="padding: 5px;">
-	        					<button class="btn btn-info btn-block btn-raised" data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Message Shop!</button>
+	        					<button class="btn btn-success btn-block btn-raised" data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Message Salon!</button>
 	        				</div>
 		        		</div>
 		        	</div>
@@ -205,27 +204,29 @@ Link: {{ route('styles.show',['all',0,$style->id]) }}
             </div>
         </div>
     </div>
-    <h3 class="mt-4 mb-4 right-line"> Other Styles From {{ $salon->salon_name }} | <a href="{{ route('shops.index','all') }}"> All Other Styles </a> </h3>
+    <h3 class="mt-4 mb-4 right-line"> Other Styles From {{ $salon->salon_name }} | <a href="{{ route('salons.index','all') }}"> All other styles </a> </h3>
     <div class="row"><?php $i=3; ?>
     	@foreach($salon->styles as $sty)
-    		<div class="col-md-4">
-                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
-                    <div class="ms-thumbnail card-body p-05">
-                        <div class="withripple zoom-img">
-                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
-                            <div class="col-md-12" style="padding: 0px;">
-	                            <div class="pull-left">
-	                            	<a href="btn btn-primary btn-xs" title="Add to the booking list">
-	                            		<i class="fa fa-cart-plus color-primary"></i> Add
-	                            	</a>
-	                                <a href="{{ route('styles.show',[($sty->categories_id ? App\Models\Categories::where('id',$sty->categories_id)->first()->name : 'all'),$sty->salon_id,$sty->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $sty->style_name }}</a>
+    		@if($sty != $style)
+	    		<div class="col-md-4">
+	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
+	                    <div class="ms-thumbnail card-body p-05">
+	                        <div class="withripple zoom-img">
+	                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+	                            <div class="col-md-12" style="padding: 0px;">
+		                            <div class="pull-left">
+		                            	<a href="btn btn-primary btn-xs" title="Add to the booking list">
+		                            		<i class="fa fa-cart-plus color-primary"></i> Add
+		                            	</a>
+		                                <a href="{{ route('styles.show',[($sty->categories_id ? App\Models\Categories::where('id',$sty->categories_id)->first()->name : 'all'),$sty->salon_id,$sty->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $sty->style_name }}</a>
+		                            </div>
+	                                <a title="Go to Salon" href="{{ route('salons.show',['all',$sty->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$sty->salon_id)->first()->salon_name }}</a>
 	                            </div>
-                                <a title="Go to Salon" href="{{ route('salons.show',['all',$sty->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$sty->salon_id)->first()->salon_name }}</a>
-                            </div>
-                        </div>
-                    </div>
-	            </div>
-	        </div>
+	                        </div>
+	                    </div>
+		            </div>
+		        </div>
+		    @endif
     	@endforeach
     </div>
 </div>

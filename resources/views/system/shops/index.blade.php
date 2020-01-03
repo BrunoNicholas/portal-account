@@ -97,7 +97,7 @@
 			                      	<option value="price:asc">Rating</option>
 			                      	<option value="price:desc">Aministrators</option>
 			                      	<option value="date:asc">Date Added</option>
-			                      	<option value="date:desc">Company</option>
+			                      	<option value="date:desc">Account Owner</option>
 			                    </select>
 			                </div>
 			            </div>

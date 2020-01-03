@@ -75,7 +75,7 @@
 				        </div>
 	                	<div class="col-md-6">
 	                		<div class="form-group row mt-0">
-	                			<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Owner Company</label>
+	                			<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Owner Account</label>
 				                <div class="col-lg-8">
 				                	@if(Auth::user()->hasRole('company-admin'))
 					                	<input type="hidden" name="company_id" value="{{ App\Models\Company::where('user_id',Auth::user()->id)->first()->id }}">

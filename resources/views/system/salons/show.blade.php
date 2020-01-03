@@ -138,7 +138,7 @@
 		                  	@endif
 		                	@if($salon->company_id)
 		                		<tr>
-		                			<td><strong>Company: </strong> </td>
+		                			<td><strong>Owner's Account: </strong> </td>
 		                			<td><a href="{{ route('companies.show',['all',$salon->company_id]) }}" target="_blank">
 		                				{{ App\Models\Company::where('id',$salon->company_id)->first()->company_name }}
 		                			</a></td>

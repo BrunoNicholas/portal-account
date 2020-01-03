@@ -75,7 +75,7 @@
 				        </div>
 	                	<div class="col-md-6">
 	                		<div class="form-group row mt-0">
-	                			<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Owner Company</label>
+	                			<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Owner Account</label>
 				                <div class="col-lg-8">
 				                    @if(Auth::user()->hasRole('company-admin'))
 					                	<input type="hidden" name="company_id" value="{{ App\Models\Company::where('user_id',Auth::user()->id)->first()->id }}">
@@ -172,7 +172,7 @@
 		                	<div class="form-group row mt-0">
 				                <label for="descde" class="col-lg-4 control-label">Description</label>
 				                <div class="col-lg-8">
-				                    <textarea class="form-control" rows="3" name="description" id="descde" placeholder="Company description details ..."></textarea>
+				                    <textarea class="form-control" rows="3" name="description" id="descde" placeholder="Salon description details ..."></textarea>
 				                </div>
 				            </div>
 			            </div>

@@ -12,7 +12,6 @@
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
                     <ol class="breadcrumb">
                     	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
-                    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="fa fa-address-book"></i> Companies</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('shops.index','all') }}"><i class="fa fa-address-book-o"></i> Shops</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('shops.show',['all',$shop->id]) }}"><i class="fa fa-address-book-o"></i> {{ $shop->shop_name }}</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('products.index',['all',$shop->id]) }}"><i class="fa fa-list"></i> Products</a></li>
@@ -102,12 +101,12 @@
 					                  	@endif
 					                  	@if($product->previous_price)
 					                  		<tr>
-					                  			<td><strong>Previous Price: </strong></td><td> <strike>UGX. {{ $product->previous_price }}</strike></td>
-					                  		</tr>
-					                  	@endif
-					                  	@if($product->current_price)
-					                  		<tr> 
-					                  			<td><strong>Current Price: </strong></td><td class="text-info">UGX. {{ $product->current_price }}</td>
+					                  			<td style="min-width: 150px;">
+					                  				<strong>Price: </strong></td><td> <strike class="color-danger">UGX. {{ $product->previous_price }}</strike>
+					                  				@if($product->current_price)
+					                  				<strong class="text-info pull-right">UGX. {{ $product->current_price }}
+					                  				@endif
+					                  			</td>
 					                  		</tr>
 					                  	@endif
 					                  	@if($product->categories_id)
@@ -128,27 +127,108 @@
 							                  	</a></td>
 							                </tr>
 					                  	@endif
+					                  	<tr>
+					                  		<td><strong> Provider (Shop): </strong></td>
+					                  		<td><span style="text-transform: capitalize;"> {{ $shop->shop_name }} </span></td>
+					                  	</tr>
 					                </tbody>
 				                </table>
 		              		</div>
 		        		</div>
 		        		<div class="card-body">
-		        			<div class="row">
-		        				<div class="col-md-4 text-center" style="padding: 5px;">
-		        					<a href="#" class="btn btn-primary btn-raised"><span class="glyphicon glyphicon-book"></span> Book Now!</a>
-		        				</div>
-		        				<div class="col-md-4 text-center" style="padding: 5px;">
-		        					<a href="#" class="btn btn-info btn-raised"><span class="glyphicon glyphicon-book"></span> Order Now!</a>
-		        				</div>
-		        				<div class="col-md-4 text-center" style="padding: 5px;">
-		        					<a href="#" class="btn btn-primary btn-raised"><span class="glyphicon glyphicon-envelope"></span> Clarify!</a>
-		        				</div>
-		        			</div>
-		        		</div>
+		        			<div class="col-md-5 text-center pull-left" style="padding: 5px;">
+	        					<a href="#" class="btn btn-primary btn-block btn-raised"><span class="fa fa-cart-plus"></span> Book Now!</a>
+	        				</div>
+	        				<div class="col-md-5 text-center pull-right" style="padding: 5px;">
+	        					<button class="btn btn-info btn-block btn-raised" data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Message Shop!</button>
+	        				</div>
+	        			</div>
 		        	</div>
 		        </div>
         	</div>
+        	<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    	<form action="{{ route('messages.store','inbox') }}" method="POST">
+                            @csrf
+                            @foreach ($errors->all() as $error)
+                                <p class="alert alert-danger">{{ $error }}</p>
+                            @endforeach
+
+                            <div class="modal-body">
+                                <input type="hidden" name="sender" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="receiver" value="{{ $product->user_id }}">
+                                <input type="hidden" name="status" value="inbox">
+                                <input type="hidden" name="routers" value="{{ route('styles.show',['all',0,$product->id]) }}">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="recipient-name" class="control-label">Topic:</label>
+                                            <input type="text" class="form-control" id="recipient-name1" name="title">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="priority">Priority</label>
+                                            <select class="custom-select form-control" name="folder">
+                                                <option value="normal">Select priority</option>
+                                                <option value="important">Important</option>
+                                                <option value="urgent">Urgent</option>
+                                                <option value="official">Official</option>
+                                                <option value="unofficial">Unofficial</option>
+                                                <option value="normal">Normal</option>
+                                                <option value="">None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="control-label">Message:</label>
+                                    <textarea class="form-control" id="message-text1" name="message">
+
+
+
+
+
+--------------------
+Message from fashion style {{ $product->style_name }}
+Link: {{ route('styles.show',['all',0,$product->id]) }}
+                                	</textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+    <h3 class="mt-4 mb-4 right-line"> Other products from {{ $shop->shop_name }} | <a href="{{ route('shops.index','all') }}"> All other products </a> </h3>
+    <div class="row"><?php $i=3; ?>
+    	@foreach($shop->products as $prod)
+    		@if($prod != $product)
+	    		<div class="col-md-4">
+	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
+	                	<div class="ms-thumbnail card-body p-05">
+	                        <div class="withripple zoom-img">
+	                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $prod->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+	                            <div class="col-md-12" style="padding: 0px;">
+		                            <div class="pull-left">
+		                            	<a href="btn btn-primary btn-xs" title="Add to the booking list">
+		                            		<i class="fa fa-cart-plus color-primary"></i> Add
+		                            	</a>
+		                                <a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $prod->product_name }}</a>
+		                            </div>
+	                                <a title="Go to provider shop" href="{{ route('shops.show',['all',$prod->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Shop: {{ App\Models\Shop::where('id',$prod->shop_id)->first()->shop_name }}</a>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                </div>
+	            </div>
+	        @endif
+        @endforeach
     </div>
 </div>
 @endsection
