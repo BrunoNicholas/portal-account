@@ -51,24 +51,25 @@
 	                                                            <div>
 	                                                                <div class="el-card-item">
 	                                                                    <div class="card-avatar el-overlay-1" style="text-align: center;"> 
-	                                                                        <div style="max-width: 450px; overflow-x: auto;">
+	                                                                        <div style="max-width: 450px; overflow-x: hidden;">
 	                                                                            <img src="{{ asset('files/others/images/'. $image->image) }}" alt="image" style=" height: 200px; width: auto; border-radius: 3px;"/>
 	                                                                        </div>
 	                                                                        <div class="el-overlay">
 	                                                                            <div class="row">
 	                                                                                <div class="col-md-6">
-	                                                                                    {{ explode(' ',trim($image->created_at))[0] }}
+	                                                                                    {{ explode(' ',trim($image->created_at))[1] }}
 	                                                                                </div>
 	                                                                                <div class="col-md-6">
-	                                                                                    {{ explode(' ',trim($image->created_at))[1] }}
+	                                                                                    {{ explode(' ',trim($image->created_at))[0] }}
 	                                                                                </div>
 	                                                                            </div>
 	                                                                        </div>
 	                                                                    </div>
 	                                                                    <div class="card-content">
 	                                                                        <div class="row">
-	                                                                            <div class="col-md-12 ml-1">
-	                                                                                <span class="pull-left">{{ substr($image->title, 0,17) . '...' }} 
+	                                                                            <div class="col-md-12 ml-2">
+	                                                                                <span class="pull-left">
+	                                                                                	{{ strlen($image->title) > 15 ? substr($image->title, 0, 15) . '... ' : $image->title }}
 	                                                                                    <small>
 	                                                                                    </small>
 	                                                                                </span> 

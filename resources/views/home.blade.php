@@ -66,10 +66,15 @@
                                                         <td class="text-left" style="vertical-align: middle;">{{ $company->categories_id ? App\Models\Categories::where('id',$company->categories_id)->first()->display_name: 'Uncategories' }}</td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $company->company_telephone }}</td>
                                                         <td class="text-left" style="text-transform: capitalize; vertical-align: middle;">{{ $company->status }}</td>
-                                                        <td class="row text-center mt-1" style="min-width: 115px; border: none;">
+                                                        <td class="text-center" style="border: none; vertical-align: middle;">
                                                             <div class="row">
-                                                                <a href="{{ route('companies.show', ['all',$company->id]) }}" class="col-5 btn btn-sm btn-info" style="font-size: 13px;" title="Company Details"><i class="fa fa-info-circle"></i></a>
-                                                                <button type="button" class="col-5 btn btn-sm btn-primary" style="font-size: 13px;"  data-toggle="modal" data-target="#edit{{ $i }}Modal"><i class="fa fa-edit" title="Edit Account"></i></a>
+                                                                <a href="{{ route('companies.show', ['all',$company->id]) }}" class="col-3 color-primary" style="font-size: 13px;" title="Company Details">
+                                                                    <i class="fa fa-users"></i>
+                                                                </a>
+                                                                <a href="{{ route('companies.show', ['all',$company->id]) }}" class="col-3 color-info" style="font-size: 13px;" title="Company Details">
+                                                                    <i class="fa fa-info-circle"></i>
+                                                                </a>
+                                                                <button type="button" class="col-3 color-primary" style="font-size: 13px; border: none;"  data-toggle="modal" data-target="#edit{{ $i }}Modal"><i class="fa fa-edit" title="Edit Account"></i></a>
                                                             </div>
                                                             <div class="modal" id="edit{{ $i }}Modal" tabindex="-1" role="dialog" aria-labelledby="edit{{ $i }}ModalLabel">
                                                                 <div class="modal-dialog animated zoomIn animated-3x" role="document">
@@ -184,7 +189,7 @@
                                                 <tr>
                                                     <td colspan="6" style="vertical-align: middle;">
                                                         <a href="{{ route('companies.index','all') }}">
-                                                            <button class="btn btn-sm btn-default btn-info">Multi Accounts</button>
+                                                            <button class="btn btn-sm btn-default btn-info">Other Multi Accounts</button>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -197,29 +202,38 @@
                                 <div role="tabpanel" class="tab-pane fade" id="salons">
                                     <div class="table-responsive">
                                         <table class="table table-hoverable">
-                                            <thead>
+                                            <thead class="color-success">
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th class="text-left">Salon Name</th>
-                                                    <th class="text-left">Main Category</th>
-                                                    <th class="text-left">Telephone</th>
+                                                    <th class="text-center">Salon Name</th>
+                                                    <th class="text-center">Main Category</th>
+                                                    <th class="text-center">Telephone</th>
                                                     <th class="text-center">Status</th>
+                                                    <th class="text-center">Styles</th>
                                                     <th class="text-center">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody><?php $i=0; ?>
                                                 @foreach($salons as $salon)
                                                     <tr>
-                                                        <td class="text-left" style="vertical-align: middle;">{{ ++$i }}.</td>
-                                                        <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 75px; border-radius: 10%;"><br>
-                                                            {{ $salon->salon_name }}</td>
+                                                        <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;">
+                                                            <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 80px; border-radius: 10%;"><br>
+                                                            {{ $salon->salon_name }}
+                                                        </td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name: 'Uncategories' }}</td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $salon->salon_telephone }}</td>
                                                         <td class="text-left" style="text-transform: capitalize; vertical-align: middle;">{{ $salon->status }}</td>
-                                                        <td class="row text-center mt-1" style="min-width: 115px; border: none;">
-                                                            <div class="row">
-                                                                <a href="{{ route('salons.show', ['all',$salon->id]) }}" class="col-5 btn btn-sm btn-info" style="font-size: 13px;" title="Salon Details"><i class="fa fa-info-circle"></i></a>
-                                                                <a href="{{ route('salons.edit', ['all',$salon->id]) }}" class="col-5 btn btn-sm btn-primary" style="font-size: 13px;"><i class="fa fa-edit" title="Edit Salon"></i></a>
+                                                        <td class="text-center" style="vertical-align: middle;">{{ count($salon->styles) }}</td>
+                                                        <td style="border: none; vertical-align: middle;">
+                                                            <div class="row text-right">
+                                                                <a href="{{ route('salons.show', ['all',$salon->id]) }}" class="col-3 color-success" style="font-size: 13px;" title="Public view">
+                                                                    <i class="fa fa-users"></i>
+                                                                </a>
+                                                                <a class="col-3 color-info" style="font-size: 13px;" title="Salon Details">
+                                                                    <i class="fa fa-info-circle"></i>
+                                                                </a>
+                                                                <a href="{{ route('salons.edit', ['all',$salon->id]) }}" class="col-3 color-primary" style="font-size: 13px;">
+                                                                    <i class="fa fa-edit" title="Edit Salon"></i>
+                                                                </a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -234,21 +248,109 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <h4 class="mt-3 mb-1 text-center"> Fashion Styles Registered | <a href="{{ route('styles.index',['all',0]) }}"> Other fashion styles </a> </h4>
+                                    @foreach($salons as $salon)
+                                        <p class="mt-4 mb-2 right-line color-success"> {{ $salon->salon_name }} </p>
+                                        <div class="row"><?php $i = 1; ?>
+                                            @foreach($salon->styles as $sty)
+                                                <div class="col-md-4">
+                                                    <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
+                                                        <div class="ms-thumbnail card-body p-05">
+                                                            <div class="withripple zoom-img">
+                                                                <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}">
+                                                                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;">
+                                                                </a>
+                                                                <div class="col-md-12" style="padding: 0px;">
+                                                                    <div class="pull-left">
+                                                                        <a href="{{ route('styles.show',[($sty->categories_id ? App\Models\Categories::where('id',$sty->categories_id)->first()->name : 'all'),$sty->salon_id,$sty->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $sty->style_name }} | 
+                                                                            <b class="color-success">UGX. {{ $sty->current_price  }}</b>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-md-12 pull-right">
+                                                                        <p class="btn btn-xs pull-left">
+                                                                            <i class="fa fa-image"></i>
+                                                                            @if(sizeof($sty->galleries) > 0)  @else No Gallery @endif
+                                                                        </p>
+                                                                        <a title="Go to Salon ({{ App\Models\Salon::where('id',$sty->salon_id)->first()->salon_name }})" href="{{ route('salons.show',['all',$sty->salon_id]) }}" class="btn btn-xs btn-success btn-raised pull-right"><i class="fa fa-shopping-basket" style="margin: 0px;"></i> </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
                                 </div>
                             @endrole
                             @role(['super-admin','admin','company-admin','shop-admin'])
                                 <div role="tabpanel" class="tab-pane fade" id="shops">
                                     <div class="table-responsive">
-                                        
+                                        <table class="table table-hoverable">
+                                            <thead class="color-info">
+                                                <tr>
+                                                    <th class="text-center">Shop Name</th>
+                                                    <th class="text-center">Main Category</th>
+                                                    <th class="text-center">Telephone</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Products</th>
+                                                    <th class="text-center">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody><?php $i=0; ?>
+                                                @foreach($shops as $shop)
+                                                    <tr>
+                                                        <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;">
+                                                            <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 80px; border-radius: 10%;"><br>
+                                                            {{ $shop->shop_name }}
+                                                        </td>
+                                                        <td class="text-left" style="vertical-align: middle;">{{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name: 'Uncategories' }}</td>
+                                                        <td class="text-left" style="vertical-align: middle;">{{ $shop->shop_telephone }}</td>
+                                                        <td class="text-left" style="text-transform: capitalize; vertical-align: middle;">{{ $shop->status }}</td>
+                                                        <td class="text-center" style="vertical-align: middle;">{{ count($shop->products) }}</td>
+                                                        <td style="border: none; vertical-align: middle;">
+                                                            <div class="row text-right">
+                                                                <a href="{{ route('shops.show', ['all',$shop->id]) }}" class="col-3 color-info" style="font-size: 13px;" title="Public view">
+                                                                    <i class="fa fa-users"></i>
+                                                                </a>
+                                                                <a class="col-3 color-success" style="font-size: 13px;" title="shop Details">
+                                                                    <i class="fa fa-info-circle"></i>
+                                                                </a>
+                                                                <a href="{{ route('shops.edit', ['all',$shop->id]) }}" class="col-3 color-primary" style="font-size: 13px;">
+                                                                    <i class="fa fa-edit" title="Edit shop detail"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td colspan="6" style="vertical-align: middle;">
+                                                        <a href="{{ route('shops.index','all') }}">
+                                                            <button class="btn btn-sm btn-default btn-success">Other Shops</button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
+                                    <h4 class="mt-4 mb-4 right-line"> Products Registered | <a href="{{ route('products.index',['all',0]) }}"> Other products </a> </h4>
+
+
                                 </div>
                             @endrole
                             <div role="tabpanel" class="tab-pane fade active show" id="settings">
                                 <div class="table-responsive">
-                                    <table class="table table-hoverable">
-                                        
-                                        set
-                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            
+                                        </div>
+                                        <div class="col-md-12">
+                                            
+                                        </div>
+                                        <div class="col-md-12">
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

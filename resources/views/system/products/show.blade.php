@@ -222,12 +222,15 @@ Link: {{ route('styles.show',['all',0,$product->id]) }}
 	                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $prod->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
 	                            <div class="col-md-12" style="padding: 0px;">
 		                            <div class="pull-left">
-		                            	<a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Add to the booking list">
-		                            		<i class="fa fa-cart-plus color-primary"></i> Add
+		                            	<a href="javascript:void(0)" class="btn btn-primary btn-raised btn-xs" title="Add to the booking list">
+		                            		<i class="fa fa-cart-plus"></i>
 		                            	</a>
-		                                <a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $prod->product_name }}</a>
+		                                <a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $prod->product_name }}  | 
+		                                	<strike class="color-danger">UGX. {{ $prod->current_price  }}</strike>
+		                                	<b class="color-success">UGX. {{ $prod->current_price  }}</b>
+		                                </a>
 		                            </div>
-	                                <a title="Go to provider shop" href="{{ route('shops.show',['all',$prod->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Shop: {{ App\Models\Shop::where('id',$prod->shop_id)->first()->shop_name }}</a>
+	                                <a title="Go to provider shop ({{ App\Models\Shop::where('id',$prod->shop_id)->first()->shop_name }})" href="{{ route('shops.show',['all',$prod->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right"><i class="fa fa-shopping-basket" style="margin: 0px;"></i></a>
 	                            </div>
 	                        </div>
 	                    </div>

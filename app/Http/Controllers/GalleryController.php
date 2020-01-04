@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 use Image;
 use File;
 
@@ -32,7 +33,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::latest()->paginate(20);
+        $galleries = Gallery::where('user_id',Auth::user()->id)->latest()->paginate(20);
         $countOthers = Gallery::whereNull('gallery_name')->whereNull('gallery_id')->get()->count();
         return view('system.galleries.index',compact(['galleries','countOthers']));
     }
@@ -43,7 +44,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        $galleries = Gallery::latest()->paginate(20);
+        $galleries = Gallery::where('user_id',Auth::user()->id)->latest()->paginate(20);
         return view('system.galleries.create',compact(['galleries']));
     }
     /**

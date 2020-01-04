@@ -223,11 +223,14 @@ Link: {{ route('styles.show',['all',0,$style->id]) }}
 	                            <div class="col-md-12" style="padding: 0px;">
 		                            <div class="pull-left">
 		                            	<a href="javascript:void(0)" class="btn btn-primary btn-xs btn-raised" title="Add to the booking list">
-		                            		<i class="fa fa-cart-plus"></i> Add
+		                            		<i class="fa fa-cart-plus" style="margin: 0px; padding: 0px;"></i>
 		                            	</a>
-		                                <a href="{{ route('styles.show',[($sty->categories_id ? App\Models\Categories::where('id',$sty->categories_id)->first()->name : 'all'),$sty->salon_id,$sty->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $sty->style_name }}</a>
+		                                <a href="{{ route('styles.show',[($sty->categories_id ? App\Models\Categories::where('id',$sty->categories_id)->first()->name : 'all'),$sty->salon_id,$sty->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $sty->style_name }} | 
+		                                	<strike class="color-danger">UGX. {{ $sty->current_price  }}</strike>
+		                                	<b class="color-success">UGX. {{ $sty->current_price  }}</b>
+		                                </a>
 		                            </div>
-	                                <a title="Go to Salon" href="{{ route('salons.show',['all',$sty->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$sty->salon_id)->first()->salon_name }}</a>
+	                                <a title="Go to Salon ({{ App\Models\Salon::where('id',$sty->salon_id)->first()->salon_name }})" href="{{ route('salons.show',['all',$sty->salon_id]) }}" class="btn btn-xs btn-success btn-raised pull-right"><i class="fa fa-shopping-basket" style="margin: 0px;"></i> </a>
 	                            </div>
 	                        </div>
 	                    </div>

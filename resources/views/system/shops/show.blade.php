@@ -13,7 +13,10 @@
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
 	            <div class="card card-body text-center">
 	                <!-- Wrapper for slides -->
-	                <span style="font-size: 20px; text-transform: capitalize;">{{ $shop->shop_name }} <small> - {{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name : 'No category selected' }}</small></span>
+	                <span class="col-12 btn btn-raised btn-info" style="font-size: 20px; text-transform: capitalize; overflow-x: auto;">
+	                	{{ $shop->shop_name }} 
+	                	<small> ({{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name : 'No category selected' }}) </small>
+	                </span>
 	                <div class="carousel-inner" role="listbox">
 		                <div class="carousel-item active">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
@@ -53,9 +56,9 @@
             </div>
             <div class="card card-info animated fadeInUp animation-delay-10">
             	<div class="card-header overflow-hidden text-center">
-            		Shop Products 
+            		Shop Products
             		@auth @if($shop->user_id == Auth::user()->id)
-        				<a class="btn btn-sm btn-raised btn-primary" href="{{ route('products.create',['all',$shop->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px; padding: 0px;"></i> New product </a>
+        				<a class="btn btn-sm btn-raised btn-primary btn-xs" href="{{ route('products.create',['all',$shop->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px; padding: 0px;"></i> New product </a>
         			@endif @endauth
             	</div>
 	            <div class="card-body overflow-hidden">
@@ -66,7 +69,7 @@
 	            			@endif @endauth
             			</div>
             		@endif
-	                <div class="row" style="height: 495px; text-align: center; overflow-y: auto;"><?php $i=0; ?>
+	                <div class="row" style="height: 500px; text-align: center; overflow-y: auto;"><?php $i=0; ?>
                 		@foreach($shop->products as $product)
                 			<div class="col-md-12" style="border-bottom: thin solid #e8e8e8;margin-bottom: 5px; padding-bottom: 5px;">
 	                			<div class="row" onclick="window.location='{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$shop->id,$product->id]) }}'">
@@ -85,8 +88,8 @@
 				                          						</tr>
 				                          					@endif
 			                          						<tr>
-			                          							@if($product->previous_price)<td class="text-left"><strike>UGX {{ $product->previous_price }}</strike></td>@endif
-			                          							@if($product->current_price)<td class="text-right text-info">UGX {{ $product->current_price }}</td>@endif
+			                          							@if($product->previous_price)<td class="text-left color-danger"><strike>UGX. {{ $product->previous_price }}</strike></td>@endif
+			                          							@if($product->current_price)<td class="text-right text-info">UGX. {{ $product->current_price }}</td>@endif
 			                          						</tr>
 			                          						<tr>
 			                          							@if($product->categories_id)<td class="text-left">{{ App\Models\Categories::where('id',$product->categories_id )->first()->display_name }}</td>@endif
@@ -118,7 +121,12 @@
             <div class="card animated zoomInDown animation-delay-5">
 	            <div class="card-body">
 	            	<div class="row">
-		                <div class="col-md-6"><h2>{{ $shop->shop_name }} <br><small>{{ number_format((float)$avg_ratings, 1, '.', '') }} Stars</small></h2></div>
+		                <div class="col-md-6 color-info">
+		                	<h2>
+		                		{{ $shop->shop_name }} <br>
+		                		<small>{{ number_format((float)$avg_ratings, 1, '.', '') }} Stars</small>
+		                	</h2>
+		                </div>
 		                <div class="col-md-6 mt-3 text-right">
 		                    <div>
 		                    	<input class="input-3-xs" name="input-3-xs" value="{{ $avg_ratings }}" class="rating-loading" data-size="xs">

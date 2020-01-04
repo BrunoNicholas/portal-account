@@ -6,6 +6,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use Image as IntervImage;
+use Auth;
 use File;
 
 class ImageController extends Controller
@@ -17,8 +18,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        $images = Image::latest()->paginate(20);
-        $galleries  = Gallery::latest()->paginate(50);
+        $images = Image::where('user_id',Auth::user()->id)->latest()->paginate(20);
+        $galleries  = Gallery::where('user_id',Auth::user()->id)->latest()->paginate(50);
         return view('system.images.index',compact(['images','galleries']));
     }
 
@@ -29,8 +30,8 @@ class ImageController extends Controller
      */
     public function create()
     {
-        $images     = Image::latest()->paginate(20);
-        $galleries  = Gallery::latest()->paginate(50);
+        $images     = Image::where('user_id',Auth::user()->id)->latest()->paginate(20);
+        $galleries  = Gallery::where('user_id',Auth::user()->id)->latest()->paginate(50);
         return view('system.images.create',compact(['images','galleries']));
     }
 

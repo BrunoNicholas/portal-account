@@ -116,7 +116,7 @@
                                             <div class="card" style="border: thin solid transparent;">
                                                 <div class="el-card-item">
                                                     <div class="el-card-avatar el-overlay-1" style="text-align: center;"> 
-                                                        <div style="max-width: 450px; overflow-x: auto;">
+                                                        <div style="max-width: 450px; overflow-x: hidden;">
                                                             <img src="{{ asset('files/others/images/'. $image->image) }}" alt="image" style=" height: 200px; width: auto; border-radius: 3px;"/>
                                                         </div>
                                                         <div class="el-overlay">
@@ -127,21 +127,6 @@
                                                                 <div class="col-md-6">
                                                                     {{ explode(' ',trim($image->created_at))[0] }}
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="el-card-content">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <h4 class="block">
-                                                                    <b class="pull-left">{{ substr($image->title, 0,17) . '...' }} 
-                                                                        <small>
-                                                                        </small>
-                                                                    </b> 
-                                                                    <small class="pull-right">
-                                                                        
-                                                                    </small>
-                                                                </h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -181,6 +166,48 @@
 	                        </div>
 	            		</div>
 	            	</div>
+                    <div class="card card-body">
+                        <form action="{{ route('images.store') }}" enctype="multipart/form-data" method="POST">
+                            @csrf
+
+                            @foreach ($errors->all() as $error)
+                                <p class="alert alert-danger">{{ $error }}</p>
+                            @endforeach
+                                    
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="gallery_id" value="{{ $gallery->id }}">
+
+                            <section class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mt-3">
+                                                <label for="file-item">Browse for image :</label>
+                                                <input type="file" id="file-item" name="image" accept=".jpg, .png, .jpeg" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="caption_text"> Image Title : </label>
+                                                <input type="text" name="title" class="form-control" id="caption_text" placeholder="Image Title">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="caption_text"> Image Caption : </label>
+                                                <input type="text" name="caption" class="form-control" id="caption_text" placeholder="Caption Text">
+                                            </div>
+                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-raised btn-sm btn-primary" style="min-width: 150px;">Upload Image</button>
+                            </div>
+                        </form>
+
+                    </div>
 	            </section>
 	        </div>
 	    </div>

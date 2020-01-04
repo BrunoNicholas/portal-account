@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories;
 use App\Models\Booking;
 use App\Models\Comment;
-use App\Models\Image;
+use App\Models\Gallery;
 use App\Models\Salon;
 use App\User;
 
@@ -80,8 +80,8 @@ class Style extends Model
     /**
      * The relationship method for images
      */
-    public function images()
+    public function galleries()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Gallery::class);
     }
 }

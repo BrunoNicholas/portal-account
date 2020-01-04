@@ -11,7 +11,7 @@
 		                <li><a href="{{ route('profile') }}"><i class="zmdi zmdi-image-o"></i> User Profile</a></li>
 		                <li><a href="{{ route('jobs.index') }}"><i class="zmdi zmdi-case"></i> Jobs </a></li>
 		                <li><a href="{{ route('bookings.index',['all',0]) }}"><i class="zmdi zmdi-time"></i> Bookings</a></li>
-		                <li><a href="{{ route('companies.index','all') }}"><i class="zmdi zmdi-money"></i> Companies</a></li>
+		                <li><a href="{{ route('companies.index','all') }}"><i class="zmdi zmdi-money"></i> Multi Accounts</a></li>
 		                <li><a href="{{ route('shops.index','all') }}"><i class="zmdi zmdi-favorite-outline"></i> Shops</a></li>
 		                <li><a href="{{ route('salons.index','all') }}"><i class="zmdi zmdi-accounts"></i> Salons</a></li>
 		                <li><a href="{{ route('galleries.index') }}"><i class="zmdi zmdi-image"></i> Galleries</a></li>
