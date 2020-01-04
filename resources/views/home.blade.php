@@ -326,7 +326,7 @@
                                                 <tr>
                                                     <td colspan="6" style="vertical-align: middle;">
                                                         <a href="{{ route('shops.index','all') }}">
-                                                            <button class="btn btn-sm btn-default btn-success">Other Shops</button>
+                                                            <button class="btn btn-sm btn-default btn-info">Other Shops</button>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -334,8 +334,38 @@
                                         </table>
                                     </div>
                                     <h4 class="mt-4 mb-4 right-line"> Products Registered | <a href="{{ route('products.index',['all',0]) }}"> Other products </a> </h4>
-
-
+                                    @foreach($shops as $shop)
+                                        <p class="mt-4 mb-2 right-line color-info"> {{ $shop->shop_name }} </p>
+                                        <div class="row"><?php $i = 1; ?>
+                                            @foreach($shop->products as $prod)
+                                                <div class="col-md-4">
+                                                    <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
+                                                        <div class="ms-thumbnail card-body p-05">
+                                                            <div class="withripple zoom-img">
+                                                                <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $prod->style_name }}">
+                                                                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;">
+                                                                </a>
+                                                                <div class="col-md-12" style="padding: 0px;">
+                                                                    <div class="pull-left">
+                                                                        <a href="{{ route('products.show',[($prod->categories_id ? App\Models\Categories::where('id',$prod->categories_id)->first()->name : 'all'),$prod->shop_id,$prod->id]) }}" class="btn btn-info btn-xs" title="View product details" style="padding-top: 5px;">{{ $prod->product_name }} | 
+                                                                            <b class="color-info">UGX. {{ $prod->current_price  }}</b>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-md-12 pull-right">
+                                                                        <p class="btn btn-xs pull-left">
+                                                                            <i class="fa fa-image"></i>
+                                                                            @if(sizeof($prod->galleries) > 0)  @else No Gallery @endif
+                                                                        </p>
+                                                                        <a title="Go to shop ({{ App\Models\Shop::where('id',$prod->shop_id)->first()->shop_name }})" href="{{ route('shops.show',['all',$prod->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right"><i class="fa fa-shopping-basket" style="margin: 0px;"></i> </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
                                 </div>
                             @endrole
                             <div role="tabpanel" class="tab-pane fade active show" id="settings">

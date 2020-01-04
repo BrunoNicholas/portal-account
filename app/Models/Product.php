@@ -7,7 +7,7 @@ use App\Models\Categories;
 use App\Models\Comment;
 use App\Models\Booking;
 use App\Models\Order;
-use App\Models\Image;
+use App\Models\Gallery;
 use App\Models\Shop;
 use App\User;
 
@@ -49,9 +49,9 @@ class Product extends Model
     /*
      * has many images
      */
-    public function images()
+    public function galleries()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Gallery::class);
     }
 
     /*

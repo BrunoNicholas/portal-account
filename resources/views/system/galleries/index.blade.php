@@ -44,10 +44,10 @@
                                                     <div class="el-overlay">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <span>{{ explode(' ', trim($gallery->created_at))[0] }}</span>
+                                                                <span class="text-muted"> {{ $gallery->images->count() }} Images </span>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <span class="text-muted"> {{ $gallery->images->count() }} Photos </span>
+                                                            <div class="col-md-6" title="Date the gallery was added. Time: {{ explode(' ', trim($gallery->created_at))[1] }}">
+                                                                <span>{{ explode(' ', trim($gallery->created_at))[0] }}</span>
                                                             </div>
                                                         </div>
                                                     </div>
