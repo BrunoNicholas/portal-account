@@ -57,11 +57,9 @@
 		                  	<label class="col-4" style="padding:0px; margin: 0px; vertical-align: middle;">Sort by</label>
 			                <div class="form-group col-8" style="padding:0px; margin: 0px; vertical-align: middle;">
 			                    <select id="SortSelect" class="form-control selectpicker" data-dropup-auto="false">
-			                      	<option value="random">Popular</option>
-			                      	<option value="price:asc">Price ASC</option>
-			                      	<option value="price:desc">Price DESC</option>
-			                      	<option value="date:asc">Release ASC</option>
-			                      	<option value="date:desc">Release DESC</option>
+			                      	<option value="date_sort">Date Added</option>
+			                      	<option value="rating_sort">Rating</option>
+			                      	<option value="style_rating">Styles Number</option>
 			                    </select>
 			                </div>
 			            </div>
@@ -105,7 +103,7 @@
 			                    <p>{{ strlen($salon->description) > 20 ? substr($salon->description, 0, 20) . '... ' : $salon->description }}</p>
 			                    <div class="mt-1" style="font-size: 8px;">
 			                      	<input class="input-3-xs" name="input-3-xs" value="{{ $avgs_ratings }}" class="rating-loading" data-size="xs">
-			                      	<span class="ms-tag ms-tag-success"> {{ $salon->status }} </span>
+			                      	@auth<span class="ms-tag ms-tag-success"> {{ $salon->status }} </span>@endauth
 			                    </div>
 			                    <button type="button" class="btn btn-primary btn-sm btn-block mt-0 no-mb">
 			                    	{{ $salon->styles->count() }} Registered Styles

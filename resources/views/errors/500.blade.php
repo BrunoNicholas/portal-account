@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', '500 - Page Expired')
+@section('title', '500 - Internal Error')
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('content')

@@ -81,7 +81,18 @@
 			            <div class="card-body">
 		        			<div class="table-responsive">
 		              			<table class="table">
+		              				<thead>
+		              					<tr>
+		              						<th class="text-center"> Category </th>
+		              						<th class="text-center"> Description </th>
+		              					</tr>
+		              				</thead>
 		              				<tbody>
+					                	@if($style->style_name)
+					                  		<tr>
+					                  			<td><strong>Style Name: </strong></td><td> {{ $style->style_name }}</td>
+					                  		</tr>
+					                  	@endif
 					                	@if($style->company_id)
 					                		<tr>
 					                			<td><strong>Group Account: </strong> </td>
@@ -90,11 +101,6 @@
 					                			</a></td>
 					                		</tr>
 					                	@endif
-					                	@if($style->style_name)
-					                  		<tr>
-					                  			<td><strong>Style Name: </strong></td><td> {{ $style->style_name }}</td>
-					                  		</tr>
-					                  	@endif
 					                  	@if($style->description)
 					                  		<tr>
 					                  			<td><strong>Description: </strong></td><td> {{ $style->description }}</td>
@@ -105,7 +111,7 @@
 					                  			<td style="min-width: 150px;">
 					                  				<strong>Price: </strong></td><td> <strike class="color-danger">UGX. {{ $style->previous_price }}</strike>
 					                  				@if($style->current_price)
-					                  				<strong class="text-success pull-right">UGX. {{ $style->current_price }}
+					                  				<strong class="text-success pull-right">UGX. {{ $style->current_price }}</strong>
 					                  				@endif
 					                  			</td>
 					                  		</tr>
@@ -140,12 +146,13 @@
 	        					<a href="#" class="btn btn-primary btn-block btn-raised"><span class="fa fa-cart-plus"></span> Book Now!</a>
 	        				</div>
 	        				<div class="col-md-5 text-center pull-right" style="padding: 5px;">
-	        					<button class="btn btn-success btn-block btn-raised" data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Message Salon!</button>
+	        					<button class="btn btn-success btn-block btn-raised" data-toggle="modal" data-target="#contactModal" @guest disabled title="You must be logged in to make a rating and review!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this salon" @endguest><span class="glyphicon glyphicon-envelope"></span> Message Salon!</button>
 	        				</div>
 		        		</div>
 		        	</div>
 		        </div>
         	</div>
+        	@auth
         	<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -201,7 +208,7 @@ Link: {{ route('styles.show',['all',0,$style->id]) }}
                         </form>
                     </div>
                 </div>
-            </div>
+            </div>@endauth
         </div>
     </div>
     <h3 class="mt-4 mb-4 right-line"> Other Styles From {{ $salon->salon_name }} | <a href="{{ route('salons.index','all') }}"> All other styles </a> </h3>
@@ -215,8 +222,8 @@ Link: {{ route('styles.show',['all',0,$style->id]) }}
 	                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
 	                            <div class="col-md-12" style="padding: 0px;">
 		                            <div class="pull-left">
-		                            	<a href="btn btn-primary btn-xs" title="Add to the booking list">
-		                            		<i class="fa fa-cart-plus color-primary"></i> Add
+		                            	<a href="javascript:void(0)" class="btn btn-primary btn-xs btn-raised" title="Add to the booking list">
+		                            		<i class="fa fa-cart-plus"></i> Add
 		                            	</a>
 		                                <a href="{{ route('styles.show',[($sty->categories_id ? App\Models\Categories::where('id',$sty->categories_id)->first()->name : 'all'),$sty->salon_id,$sty->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $sty->style_name }}</a>
 		                            </div>

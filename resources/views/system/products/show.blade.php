@@ -80,6 +80,12 @@
 			            <div class="card-body">
 		        			<div class="table-responsive">
 		              			<table class="table">
+		              				<thead>
+		              					<tr>
+		              						<th class="text-center"> Category </th>
+		              						<th class="text-center"> Description </th>
+		              					</tr>
+		              				</thead>
 		              				<tbody>
 					                	@if($product->company_id)
 					                		<tr>
@@ -104,7 +110,7 @@
 					                  			<td style="min-width: 150px;">
 					                  				<strong>Price: </strong></td><td> <strike class="color-danger">UGX. {{ $product->previous_price }}</strike>
 					                  				@if($product->current_price)
-					                  				<strong class="text-info pull-right">UGX. {{ $product->current_price }}
+					                  				<strong class="text-info pull-right">UGX. {{ $product->current_price }}</strong>
 					                  				@endif
 					                  			</td>
 					                  		</tr>
@@ -140,12 +146,13 @@
 	        					<a href="#" class="btn btn-primary btn-block btn-raised"><span class="fa fa-cart-plus"></span> Book Now!</a>
 	        				</div>
 	        				<div class="col-md-5 text-center pull-right" style="padding: 5px;">
-	        					<button class="btn btn-info btn-block btn-raised" data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Message Shop!</button>
+	        					<button class="btn btn-info btn-block btn-raised" data-toggle="modal" data-target="#contactModal" @guest disabled title="You must be logged in to send a message!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, You can send a message if you have any question for the product provider" @endguest><span class="glyphicon glyphicon-envelope"></span> Message Shop!</button>
 	        				</div>
 	        			</div>
 		        	</div>
 		        </div>
         	</div>
+        	@auth
         	<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -201,7 +208,7 @@ Link: {{ route('styles.show',['all',0,$product->id]) }}
                         </form>
                     </div>
                 </div>
-            </div>
+            </div>@endauth
         </div>
     </div>
     <h3 class="mt-4 mb-4 right-line"> Other products from {{ $shop->shop_name }} | <a href="{{ route('shops.index','all') }}"> All other products </a> </h3>
@@ -215,7 +222,7 @@ Link: {{ route('styles.show',['all',0,$product->id]) }}
 	                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $prod->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
 	                            <div class="col-md-12" style="padding: 0px;">
 		                            <div class="pull-left">
-		                            	<a href="btn btn-primary btn-xs" title="Add to the booking list">
+		                            	<a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Add to the booking list">
 		                            		<i class="fa fa-cart-plus color-primary"></i> Add
 		                            	</a>
 		                                <a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $prod->product_name }}</a>

@@ -58,12 +58,39 @@
 		                    <h3 class="color-white index-1 text-center pb-1 pt-1"> Salons, Spa's & Shops </h3>
 		                </div>
 		                <div class="card-body">
+		                	@if(sizeof($company->salons) > 0)
 		                    <div class="panel">
 		                    	<div class="panel-heading text-center"> {{ $company->salons->count() }}  | Salons &amp; Spa's </div>
 		                    	<div class="panel-body">
-		                    		
+		                    		@foreach($company->salons as $salon)
+				                    	<div style="padding: 0px;" class="row p-1" onclick="window.location='{{ route('salons.show',['all',$salon->id]) }}'">
+					                        <div class="col-3">
+					                          	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 50px; border-radius: 10%;" >
+					                        </div>
+					                        <div class="col-8 ml-2" style="padding-right: 0px;">
+					                          	<h4 class="mt-0 mb-0 color-info"> {{ $salon->salon_name }} </h4>
+					                          	<a href="mailto:{{ $salon->salon_email }}?subject=feedback" class="pull-left">{{ $salon->salon_email }}</a>
+						                        <?php
+									        		$ratings_num  = $salon->ratings->count();
+											        $tot_sum      = 0;
+
+											        if ($ratings_num > 0) {
+											            foreach ($salon->ratings as $rat) {
+											                $tot_sum += $rat->rate_number;
+											            }
+											            $avgs_ratings    = $tot_sum/$ratings_num;
+											        } else {
+											            $avgs_ratings    = $tot_sum;
+											        }
+									        	?>
+						                        <span class="pull-right"> <i class="zmdi zmdi-star color-warning"></i> {{ number_format((float)$avgs_ratings, 1, '.', '') }} </span>
+					                        </div>
+					                    </div>
+					                @endforeach
 		                    	</div>
 		                    </div>
+		                    @endif
+		                    @if(sizeof($company->shops) > 0)
                     		<div class="panel">
 		                    	<div class="panel-heading text-center"> {{ $company->shops->count() }} | Shops </div>
 			                    <div class="panel-body">
@@ -76,11 +103,11 @@
 					                          	<h4 class="mt-0 mb-0 color-info"> {{ $shop->shop_name }} </h4>
 					                          	<a href="mailto:{{ $shop->shop_email }}?subject=feedback" class="pull-left">{{ $shop->shop_email }}</a>
 						                        <?php
-									        		$ratings_num  = $company->ratings->count();
+									        		$ratings_num  = $shop->ratings->count();
 											        $tot_sum      = 0;
 
 											        if ($ratings_num > 0) {
-											            foreach ($company->ratings as $rat) {
+											            foreach ($shop->ratings as $rat) {
 											                $tot_sum += $rat->rate_number;
 											            }
 											            $avgs_ratings    = $tot_sum/$ratings_num;
@@ -94,6 +121,10 @@
 					                @endforeach
 			                    </div>
 			                </div>
+			                @endif
+			                @if(sizeof($company->salons) < 1 && sizeof($company->shops) < 1)
+			                	<span class="color-danger"> No salons or shops created yet under this account. </span>
+			                @endif
 		                </div>
 	                </div>
 	            </div>
