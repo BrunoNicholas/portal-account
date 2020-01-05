@@ -58,11 +58,17 @@
                 	<ul class="dropdown-menu">
 	                	<li class="ms-tab-menu">
 	                		<ul class="nav nav-tabs ms-tab-menu-left" role="tablist">
-			                    <li class="nav-item"><a class="nav-link active" href="#tab-general" data-hover="tab" data-toggle="tab" role="tab"><i class="zmdi zmdi-male-female"></i> By Gender</a></li>
-			                    <li class="nav-item"><a class="nav-link" href="#tab-landing" data-hover="tab" data-toggle="tab" role="tab"><i class="zmdi zmdi-account"></i> By Style </a></li>
-			                    <li class="dropdown-divider"></li>
 			                    <li class="nav-item">
-			                    	<a class="nav-link color-primary" href="{{ route('salons.index','all') }}" role="tab"><i class="fa fa-list"></i> View All Salons &amp; Spa's </a>
+			                    	<a class="nav-link active" href="#tab-general" data-hover="tab" data-toggle="tab" role="tab"><i class="zmdi zmdi-male-female"></i> By Gender
+			                    	</a>
+			                    </li>
+			                    <li class="nav-item">
+			                    	<a class="nav-link" href="#tab-landing" data-hover="tab" data-toggle="tab" role="tab"><i class="zmdi zmdi-accounts"></i> By Style 
+			                    	</a>
+			                    </li>
+			                    <li class="dropdown-divider"></li>
+			                    <li class="nav-item" onclick="window.location='{{ route('salons.index','all') }}'">
+			                    	<a class="nav-link" data-hover="tab" data-toggle="tab" role="tab"><i class="fa fa-list"></i> All Salons &amp; Spa's </a>
 			                    </li>
 			                </ul>
 			                    <!-- Tab panes -->
@@ -186,12 +192,14 @@
 		                <li class="dropdown-submenu">
 		                    <a href="javascript:void(0)" class="dropdown-item has_children">Posts</a>
 		                    <ul class="dropdown-menu dropdown-menu-left">
-		                      	<li><a class="dropdown-item" href="{{ route('posts.index') }}"> Users Posts </a></li>
-		                      	@permission('can_add_post')
-		                      	<li class="dropdown-divider"></li>
-		                      	<li><a class="dropdown-item text-center" href="{{ route('posts.create') }}"> Add Post </a></li>
+		                    	@permission('can_view_posts')
+			                      	<li><a class="dropdown-item" href="{{ route('posts.index') }}"> Users Posts </a></li>
+			                      	@permission('can_add_post')
+			                      	<li class="dropdown-divider"></li>
+			                      	<li><a class="dropdown-item text-center" href="{{ route('posts.create') }}"> Add Post </a></li>
+			                      	@endpermission
+			                      	<li class="dropdown-divider"></li>
 		                      	@endpermission
-		                      	<li class="dropdown-divider"></li>
 		                      	<li><a class="dropdown-item text-success" target="_blank" href="https://salonportal.000webhostapp.com/blog" ><i class="fa fa-link text-success" ></i> Portal Posts</a></li>
 		                    </ul>
 		                </li>

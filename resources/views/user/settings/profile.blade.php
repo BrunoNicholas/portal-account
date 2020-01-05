@@ -49,7 +49,7 @@
 					                    </small>
 				                    </h2>
 				                    <div class="card-title text-center mt-2 mb-2">
-				                    	<span>Update Profile Image (320 x 320) </span>
+				                    	<span>Update Image (320 x 320, Max 1.5 MBs) </span>
 				                    	<form enctype="multipart/form-data" action="{{ route('profile.update') }}" method="POST">
 			                                @csrf
 			                                <input type="hidden" name="_token" value="{{ csrf_token() }}">

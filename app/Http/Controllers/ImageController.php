@@ -12,6 +12,21 @@ use File;
 class ImageController extends Controller
 {
     /**
+     * Display the constructor of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        $this->middleware('permission:can_make_image_uploads',['only'=>['create','store','update']]);
+        // $this->middleware('permission:can_delete_salon',['only'=>'destroy']);
+        // $this->middleware('permission:can_edit_salon',['only'=>['update','edit']]);
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -44,7 +59,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'image'     => 'required',
+            'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
             'user_id'   => 'required',
         ]);
         

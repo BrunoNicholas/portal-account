@@ -75,7 +75,11 @@
 					                    </label>
 					                    <div class="col-md-9" style="max-height: 200px; overflow-y: auto;">
 					                    	@foreach($permissions as $perm)
-					                    		<input type="checkbox" name="permission[]" value="{{ $perm->id }}"> {{ $perm->display_name }} <br>
+					                    		<div class="form-check checkbox">
+			                                        <label class="form-check-label">
+					                    				<input type="checkbox" name="permission[]" value="{{ $perm->id }}"> {{ $perm->display_name }} <br>
+					                    			</label>
+					                    		</div>
 					                    	@endforeach
 					                    </div>
 					                </div>

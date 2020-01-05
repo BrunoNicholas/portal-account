@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         $this->middleware('role:super-admin|admin|editor')->except('index','show');
         
-        // $this->middleware('permission:can_view_posts',['only'=>'index']);
+        $this->middleware('permission:can_view_posts',['only'=>'index']);
         $this->middleware('permission:can_add_post',['only'=>['create','store']]);
         $this->middleware('permission:can_delete_post',['only'=>'destroy']);
         // $this->middleware('permission:can_respond_to_jobs',['only'=>['update','edit']]);

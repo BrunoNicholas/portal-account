@@ -25,8 +25,9 @@ class CompanyController extends Controller
         $this->middleware(['auth','verified'])->except('index','show');
         // $this->middleware('role:super-admin|admin|client')->except('show','index');
         
+        $this->middleware('permission:can_view_companies',['only'=>'index']);
         $this->middleware('permission:can_add_company',['only'=>['create','store']]);
-        $this->middleware('permission:can_delete_comment',['only'=>'destroy']);
+        $this->middleware('permission:can_delete_company',['only'=>'destroy']);
         $this->middleware('permission:can_update_company',['only'=>['update','edit']]);
     }
     

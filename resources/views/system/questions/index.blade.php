@@ -81,20 +81,20 @@
                 </div>
                 <div class="card-body">
                     <h3 class="color-primary"> Ask a question! </h3>
-                    <form class="" method="POST" action="{{ route('questions.store') }}">
+                    <form method="POST" action="{{ route('questions.store') }}">
                         @csrf
                         @auth <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> @endauth
                         <div class="form-group label-floating mt-0">
                             <label for="inputName" class="control-label">Subject</label>
-                            <input type="text" class="form-control" id="inputName" name="topic">
+                            <input type="text" class="form-control" id="inputName" name="topic" @permission('can_add_questions') @else disabled @endpermission>
                         </div>
                         <div class="form-group label-floating mt-0">
                             <label for="textArea" class="control-label">Question Content</label>
-                            <textarea class="form-control" rows="5" id="textArea" name="description" required></textarea>
+                            <textarea class="form-control" rows="5" id="textArea" name="description" required @permission('can_add_questions') @else disabled @endpermission></textarea>
                         </div>
                         <div class="form-group text-right mt-0">
-                            <button type="reset" class="btn btn-danger">Clear</button>
-                            <button type="submit" class="btn btn-raised btn-primary"><i class="fa-check fa" style="padding: 0px; margin: 0px;"></i> Send</button>
+                            <button type="reset" class="btn btn-danger" @permission('can_add_questions') @else disabled title="Inufficient rights to add a question" @endpermission>Clear</button>
+                            <button type="submit" class="btn btn-raised btn-primary" @permission('can_add_questions') @else disabled title="Inufficient rights to add a question" @endpermission><i class="fa-check fa" style="padding: 0px; margin: 0px;"></i> Send</button>
                         </div>
                     </form>
                 </div>

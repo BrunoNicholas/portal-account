@@ -57,6 +57,10 @@ class UserPageController extends Controller
      */
     public function update_image(Request $request)
     {
+        request()->validate([
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
+        ]);
+
         if ($request->hasFile('profile_image')) {
             // delete old image
             $oldUser = Auth::user();
@@ -74,8 +78,8 @@ class UserPageController extends Controller
         elseif(!$request->hasFile('profile_image')) 
         {
             $user = Auth::user();
-            return redirect()->route('profile',compact(['user']))->with('warning','It looks like nothing was uploaded.');
+            return redirect()->route('profile')->with('warning','It looks like nothing was uploaded.');
         }
-        return redirect()->route('profile',compact(['user']))->with('success','Profile Picture Updated Successfully!');
+        return redirect()->route('profile')->with('success','Profile Picture Updated Successfully!');
     }
 }

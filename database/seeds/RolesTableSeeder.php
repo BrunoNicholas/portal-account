@@ -37,13 +37,13 @@ class RolesTableSeeder extends Seeder
 
         $role_sa_admin = new Role();
         $role_sa_admin->name = 'salon-admin';
-        $role_sa_admin->display_name = 'Single Salon Account Holder';
+        $role_sa_admin->display_name = 'Salon Account Holder';
         $role_sa_admin->description = 'A user who manages a single salon account profile';
         $role_sa_admin->save();
 
         $role_sh_admin = new Role();
         $role_sh_admin->name = 'shop-admin';
-        $role_sh_admin->display_name = 'Single Shop Account Holder';
+        $role_sh_admin->display_name = 'Shop Account Holder';
         $role_sh_admin->description = 'A user who manages a shop single shop account';
         $role_sh_admin->save();
         //
