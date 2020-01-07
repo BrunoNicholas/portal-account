@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Salon;
+use App\Models\Shop;
+use App\Models\Style;
+use App\Models\Product;
 use Auth;
 use Image;
 use File;
@@ -98,7 +102,13 @@ class GalleryController extends Controller
         if (!$gallery) {
             return back()->with('danger', 'Gallery not found. It is either missing or deleted.');
         }
-        return view('system.galleries.show', compact(['gallery']));
+
+        $salons     = Salon::where('user_id',$gallery->user_id)->get();
+        $shops      = Shop::where('user_id',$gallery->user_id)->get();
+        $styles     = Style::where('user_id',$gallery->user_id)->get();
+        $products   = Product::where('user_id',$gallery->user_id)->get();
+
+        return view('system.galleries.show', compact(['gallery','salons','shops','styles','products']));
     }
     /**
      * Show the form for editing the specified resource.

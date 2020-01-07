@@ -153,14 +153,163 @@
                                 <a href="{{ asset('files/galleries/images/'. $gallery->image) }}" target="_blank">
                                     <img src="{{ asset('files/galleries/images/' . $gallery->image) }}" alt="Gallery Image" style="border-radius: 5px; max-width: 100%;">
                                 </a>
-                                <hr>
+                                <br><br>
                                 <a href="{{ route('galleries.edit', $gallery->id) }}"><i class="fa-edit fa"></i> Edit This Gallery </a>
-                                <hr>
+                                <br><br>
                                 <form method="POST" action="{{ route('galleries.destroy', $gallery->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button type="submit" onclick="return confirm('This will delete your album and it\'s image complately. It is not reversible.\nIs this okay?')" class="btn btn-sm btn-block btn-default text-danger">Delete Gallery</button>
                                 </form>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="panel panel-body">
+                                <h4 class="text-center pt-1">Attach gallery to Items</h4>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <button type="button" class="badge badge-success col-3" data-toggle="modal" data-target="#GalSalonModal">Salon</button>
+                                        <button type="button" class="badge badge-info col-3" data-toggle="modal" data-target="#GalShopModal">Shop</button>
+                                        <button type="button" class="badge badge-success col-3" data-toggle="modal" data-target="#GalStyleModal">Style</button>
+                                        <button type="button" class="badge badge-info col-3" data-toggle="modal" data-target="#GalProductModal">Product</button>
+                                    </div>
+                                </div>
+                                {{-- modals for gallery attachment --}}
+                                <div class="modal" id="GalSalonModal" tabindex="-1" role="dialog" aria-labelledby="GalSalonModal">
+                                    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title color-primary" id="edit{{ $i }}ModalLabel">Attach this gallery to your salon</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                                            </div>
+                                            <form enctype="multipart/form-data" action="{{ route('galleries.update',$gallery->id) }}" method="POST">
+                                                <div class="modal-body">
+                                                    <div class="col-md-12">
+                                                        @csrf
+                                                        {{ method_field('PATCH') }}
+
+                                                        @foreach ($errors->all() as $error)
+                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Account Name </label>
+                                                        <div class="col-md-9">
+                                                            <input type="text" class="form-control" name="" value="" required>
+                                                        </div>
+                                                    </div>
+
+                                                
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary btn-raised">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal" id="GalShopModal" tabindex="-1" role="dialog" aria-labelledby="GalShopModal">
+                                    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title color-primary" id="edit{{ $i }}ModalLabel">Attach this salon to your shop</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                                            </div>
+                                            <form enctype="multipart/form-data" action="{{ route('galleries.update',$gallery->id) }}" method="POST">
+                                                <div class="modal-body">
+                                                    <div class="col-md-12">
+                                                        @csrf
+                                                        {{ method_field('PATCH') }}
+
+                                                        @foreach ($errors->all() as $error)
+                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Account Name </label>
+                                                        <div class="col-md-9">
+                                                            <input type="text" class="form-control" name="" value="" required>
+                                                        </div>
+                                                    </div>
+
+                                                
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary btn-raised">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal" id="GalStyleModal" tabindex="-1" role="dialog" aria-labelledby="GalStyleModal">
+                                    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title color-primary" id="edit{{ $i }}ModalLabel">Attack gallery to fashion style</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                                            </div>
+                                            <form enctype="multipart/form-data" action="{{ route('galleries.update',$gallery->id) }}" method="POST">
+                                                <div class="modal-body">
+                                                    <div class="col-md-12">
+                                                        @csrf
+                                                        {{ method_field('PATCH') }}
+
+                                                        @foreach ($errors->all() as $error)
+                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Account Name </label>
+                                                        <div class="col-md-9">
+                                                            <input type="text" class="form-control" name="" value="" required>
+                                                        </div>
+                                                    </div>
+
+                                                
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary btn-raised">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal" id="GalProductModal" tabindex="-1" role="dialog" aria-labelledby="GalProductModal">
+                                    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title color-primary" id="edit{{ $i }}ModalLabel">Attach this gallery to a shop product</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                                            </div>
+                                            <form enctype="multipart/form-data" action="{{ route('galleries.update',$gallery->id) }}" method="POST">
+                                                <div class="modal-body">
+                                                    <div class="col-md-12">
+                                                        @csrf
+                                                        {{ method_field('PATCH') }}
+
+                                                        @foreach ($errors->all() as $error)
+                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Account Name </label>
+                                                        <div class="col-md-9">
+                                                            <input type="text" class="form-control" name="" value="" required>
+                                                        </div>
+                                                    </div>
+
+                                                
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary btn-raised">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 	            		</div>
 	            	</div>
