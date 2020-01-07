@@ -104,22 +104,20 @@
 				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->sender)->first())->name }}</h6>
 				                                            </td>
 				                                        @endif
-						                                <td class="contact pull-left" style="vertical-align: middle;">
-						                                    <a class="link pull-left" href="{{ route('messages.show',[$message->id,'details']) }}">
-				                                                @if($message->folder == 'important')
-				                                                    <span class="badge badge-danger m-r-10">{{ $message->folder }}</span>
-				                                                @elseif($message->folder == 'urgent')
-				                                                    <span class="badge badge-success m-r-10">{{ $message->folder }}</span>
-				                                                @elseif($message->folder == 'official')
-				                                                    <span class="badge badge-warning m-r-10">{{ $message->folder }}</span>
-				                                                @elseif($message->folder == 'unofficial')
-				                                                    <span class="badge badge-info m-r-10">{{ $message->folder }}</span>
-				                                                @elseif($message->folder == 'normal')
-				                                                    <span class="badge badge-default m-r-10">{{ $message->folder }}</span>
-				                                                @else
-				                                                    <span class="btn btn-xs btn-primary m-r-10 text-primary">{{ $message->folder }}</span>
-				                                                @endif
-				                                            </a>
+						                                <td class="contact pull-left" style="vertical-align: middle;" onclick="window.location='{{ route('messages.show',[$message->id,'details']) }}'">
+			                                                @if($message->folder == 'important')
+			                                                    <span class="badge badge-danger m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @elseif($message->folder == 'urgent')
+			                                                    <span class="badge badge-success m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @elseif($message->folder == 'official')
+			                                                    <span class="badge badge-warning m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @elseif($message->folder == 'unofficial')
+			                                                    <span class="badge badge-info m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @elseif($message->folder == 'normal')
+			                                                    <span class="badge badge-default m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @else
+			                                                    <span class="btn btn-xs btn-primary m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @endif
 				                                        </td>
 				                                        <td class="contact" style="vertical-align: middle;">
 				                                          	<a  href="{{ route('messages.show',[$message->id,'details']) }}">

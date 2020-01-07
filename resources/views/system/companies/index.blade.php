@@ -119,12 +119,12 @@
 				                    @auth <span class="ms-tag ms-tag-success" style="text-transform: capitalize;"> {{ $company->status }} </span> @endauth
 			                    </div>
 		                    	<div class="row">
-		                    		<div class="col-md-6">
+		                    		<div class="col-6">
 		                    			<button type="button" class="btn btn-primary btn-sm btn-block mt-0 no-mb">
 					                    	{{ $company->salons->count() }} Salons
 					                    </button>
 		                    		</div>
-		                    		<div class="col-md-6">
+		                    		<div class="col-6">
 		                    			<button type="button" class="btn btn-primary btn-sm btn-block mt-0 no-mb">
 					                    	{{ $company->shops->count() }} Shops
 					                    </button>

@@ -13,11 +13,9 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"> <i class="fa fa-home"></i> Home</a></li>
-			                <li class="breadcrumb-item"><a href="{{ route('admin') }}"> <i class="fa fa-user-plus"></i> Administrator </a></li>
-			                <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-lock"></i> User Roles </li>
-				        </ol>
+                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"> <i class="fa fa-home"></i> Home</a></li>
+		                <li class="breadcrumb-item"><a href="{{ route('admin') }}"> <i class="fa fa-user-plus"></i> Administrator </a></li>
+		                <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-lock"></i> User Roles </li>
 	                </ol>
 	            </nav>
 	        </div>

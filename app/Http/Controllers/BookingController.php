@@ -79,21 +79,7 @@ class BookingController extends Controller
      */
     public function create($type=null, $id)
     {
-        $booking = Booking::latest()->paginate(50);
-
-        $user   = User::where('id',$booking->user_id)->first();
-
-        // mailing to user who has made booking
-        Mail::to($user->email)->send(
-            new BookingCreated($booking)
-        );
-
-        // // mailing to salon or shop manager has the products
-        // Mail::to($user->email)->send(
-        //     new BookingCreated($booking)
-        // );
-
-        return view('system.bookings.create',compact(['booking','type','item_id']));
+        return view('system.bookings.create');
     }
 
     /**
@@ -108,9 +94,18 @@ class BookingController extends Controller
             'user_id' => 'required',
         ]);
         Booking::create($request->all());
+
+        $user   = User::where('id',$booking->user_id)->first();
+
+        // mailing to user who has made booking
+        Mail::to($user->email)->send(
+            new BookingCreated($booking)
+        );
+        
         if ($type && $item_id) {
             return redirect()->route('bookings.index',[$type,$item_id])->with('success','Booking created successfully!');
         }
+
         return redirect()->back()->with('success','Booking created successfully!');
     }
 
