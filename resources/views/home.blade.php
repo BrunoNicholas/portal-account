@@ -230,7 +230,11 @@
                                                         <td class="text-left" style="vertical-align: middle;">{{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name: 'Uncategories' }}</td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $salon->salon_telephone }}</td>
                                                         <td class="text-left" style="text-transform: capitalize; vertical-align: middle;">{{ $salon->status }}</td>
-                                                        <td class="text-center" style="vertical-align: middle;">{{ count($salon->styles) }}</td>
+                                                        <td class="text-center" style="vertical-align: middle;">
+                                                            {{ count($salon->styles) }}
+                                                            <br>
+                                                            <a class="btn btn-xs btn-raised btn-success" href="{{ route('styles.create',['all',$salon->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px; padding: 0px;"></i> New Style </a>
+                                                        </td>
                                                         <td style="border: none; vertical-align: middle;">
                                                             <div class="row text-right">
                                                                 <a href="{{ route('salons.show', ['all',$salon->id]) }}" class="col-3 color-success" style="font-size: 13px;" title="Public view">
@@ -315,7 +319,11 @@
                                                         <td class="text-left" style="vertical-align: middle;">{{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name: 'Uncategories' }}</td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $shop->shop_telephone }}</td>
                                                         <td class="text-left" style="text-transform: capitalize; vertical-align: middle;">{{ $shop->status }}</td>
-                                                        <td class="text-center" style="vertical-align: middle;">{{ count($shop->products) }}</td>
+                                                        <td class="text-center" style="vertical-align: middle;">
+                                                            {{ count($shop->products) }}
+                                                            <br>
+                                                            <a class="btn btn-xs btn-raised btn-info btn-xs" href="{{ route('products.create',['all',$shop->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px; padding: 0px;"></i> New product </a>
+                                                        </td>
                                                         <td style="border: none; vertical-align: middle;">
                                                             <div class="row text-right">
                                                                 <a href="{{ route('shops.show', ['all',$shop->id]) }}" class="col-3 color-info" style="font-size: 13px;" title="Public view">

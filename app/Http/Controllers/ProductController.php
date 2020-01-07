@@ -33,8 +33,26 @@ class ProductController extends Controller
      */
     public function index($type=null, $item_id)
     {
-        $products   = Product::latest()->paginate(20);
+        if ($type != 'all') {
+
+            $category = Categories::where('name',$type)->first();
+
+            if ($category) {
+                $type = $category->display_name;
+                $stype= $category->name;
+
+                $products = Product::where('categories_id',$category->id)->latest()->paginate(12);
+
+                return view('system.products.index',compact(['products','type','stype']));
+            }
+            
+            $type = 'all';
+
+            return redirect()->route('products.index',[$type,0])->with('warning','Product category does not exist here!');
+        }
+
         // sort from categories
+        $products   = Product::latest()->paginate(20);
 
         return view('system.products.index',compact(['products','type','item_id']));
     }

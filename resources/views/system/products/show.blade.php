@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Product Details')
+@section('title', $product->product_name . ' | Product Details')
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')

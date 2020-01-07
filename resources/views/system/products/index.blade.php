@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'All Styles')
+@section('title', $type . ' Products')
 @section('styles')
 <link href="{{ asset('assets/plugins/datatables/media/css/dataTables.bootstrap.css') }}" rel="stylesheet">
 @endsection

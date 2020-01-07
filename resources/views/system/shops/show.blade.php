@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Shop Details')
+@section('title') {{ $shop->shop_name }} | Shop Details @endsection
 @section('styles')
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -25,7 +25,7 @@
 		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-height: 350px;" alt="...">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">

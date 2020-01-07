@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Edit Style')
+@section('title', 'Edit Shop Product')
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')

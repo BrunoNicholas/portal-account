@@ -37,7 +37,9 @@ class StyleController extends Controller
     public function index($type=null,$item_id)
     {
         if ($type != 'all') {
+
             $category = Categories::where('name',$type)->first();
+
             if ($category) {
                 $type = $category->display_name;
                 $stype= $category->name;
@@ -46,6 +48,7 @@ class StyleController extends Controller
 
                 return view('system.styles.index',compact(['styles','type','stype']));
             }
+            
             $type = 'all';
 
             return redirect()->route('styles.index',[$type,0])->with('warning','Fashion style category does not exist here!');

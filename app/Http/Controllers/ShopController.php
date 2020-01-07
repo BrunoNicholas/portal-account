@@ -156,7 +156,7 @@ class ShopController extends Controller
         if (!$shop) {
             return back()->with('danger','Shop not found. It is either deleted or it is missing.');
         }
-        return view('system.shops.show', compact(['all','shop']));
+        return view('system.shops.edit', compact(['all','shop']));
     }
 
     /**
