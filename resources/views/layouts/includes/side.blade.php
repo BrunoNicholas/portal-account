@@ -25,7 +25,7 @@
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc1" aria-expanded="false" aria-controls="sc1">
 	            <i class="zmdi zmdi-home"></i> Home Sections </a>
 	            <ul id="sc1" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch1" data-parent="#slidebar-menu">
-	              	<li><a href="{{ url('/') }}"><i class="fa-angle-double-right fa"></i> {{ config('app.name') }}</a></li>
+	              	<li><a href="{{ url('/') }}"><i class="fa-angle-double-right fa"></i> {{ config('app.name') }} <i class="fa-users fa"></i> </a></li>
 	              	@auth
 	              	@role(['client']) @else
 	              	<li><a href="{{ route('home') }}"><i class="fa-angle-double-right fa"></i> Home Dashboard</a></li>
@@ -42,15 +42,16 @@
 	        @auth
 	        <li class="card" role="tab" id="sch2">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc2" aria-expanded="false" aria-controls="sc2">
-	              	<i class="zmdi zmdi-account"></i> My Sections 
-	            </a>
+	              	<i class="zmdi zmdi-account"></i> My Sections <i class="fa-user-plus fa"></i> <i class="fa-image fa"></i>
 	            <ul id="sc2" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch2" data-parent="#slidebar-menu">
 	              	<li><a href="{{ route('profile') }}"><i class="fa-angle-double-right fa"></i> My Profile</a></li>
 	              	<li><a href="{{ route('messages.index', 'inbox') }}"><i class="fa-angle-double-right fa"></i>  Inbox </a></li>
+	              	@role('super-admin')
 	              	<li><a href="{{ route('settings') }}"><i class="fa-angle-double-right fa"></i> Timeline</a></li>
+	              	@endrole
 	              	<li class="dropdown-divider"></li>
-	              	<li><a href="{{ route('galleries.index') }}"><i class="fa-angle-double-right fa"></i> Galleries</a></li>
-	              	<li><a href="{{ route('images.index') }}"><i class="fa-angle-double-right fa"></i> Images </a></li>
+	              	<li><a href="{{ route('galleries.index') }}"><i class="fa-angle-double-right fa"></i> Galleries <i class="fa-image fa"></i> </a></li>
+	              	<li><a href="{{ route('images.index') }}"><i class="fa-angle-double-right fa"></i> Images <i class="fa-image fa"></i> </a></li>
 	            </ul>
 	        </li>@endauth
 	        @permission('can_view_companies')

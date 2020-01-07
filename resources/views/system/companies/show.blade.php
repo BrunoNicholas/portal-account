@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Multi Account Details')
+@section('title') {{ $company->company_name }} | Account Details @endsection
 @section('styles')
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -36,13 +36,13 @@
 		            <div class="col-lg-12 col-md-12 order-md-3 order-lg-2">
 		            	<div class="row">
 		            		<div class="col-lg-6">
-		                		<a href="javascript:void(0)" title="Edit my multi accout profile" class="btn btn-warning btn-raised btn-block animated fadeInUp animation-delay-12"><i class="zmdi zmdi-edit" style="margin: 0px;"></i> Edit</a>
+		                		<a href="javascript:void(0)" title="Edit my accout profile" class="btn btn-warning btn-raised btn-block animated fadeInUp animation-delay-12"><i class="zmdi zmdi-edit" style="margin: 0px;"></i> Edit</a>
 		                	</div>
 		                	<div class="col-lg-6">
 		                		<form method="POST" action="{{ route('companies.destroy', ['all',$company->id]) }}">
 	                                {{ csrf_field() }}
 	                                {{ method_field('DELETE') }}
-		                			<button type="submit" title="Delete this account profile" class="btn btn-danger btn-raised btn-block animated fadeInUp animation-delay-12" onclick="return confirm('You are about to delete this multi.\nThis is riskky and not reversible.')">
+		                			<button type="submit" title="Delete this account profile" class="btn btn-danger btn-raised btn-block animated fadeInUp animation-delay-12" onclick="return confirm('You are about to delete this .\nThis is riskky and not reversible.')">
 		                				<i class="zmdi zmdi-delete" style="margin: 0px;"></i> 
 		                				Delete 
 		                			</button>

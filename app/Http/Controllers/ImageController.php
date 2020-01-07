@@ -87,8 +87,8 @@ class ImageController extends Controller
         {
             return back('danger','Looks like no image was uploaded!');
         }
-
-        return redirect()->route('images.index')->with('success','Image saved successfully!');
+        // redirect()->route('images.index')
+        return back()->with('success','Image saved successfully!');
     }
 
     /**

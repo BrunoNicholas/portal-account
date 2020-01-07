@@ -111,7 +111,7 @@
             		<div class="col-xl-4 col-md-6 mix laptop apple" data-price="1999.99" data-date="20160901" onclick="window.location='{{ route('companies.show',['all',$company->id]) }}'">
 		                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 			                <div class="card-body overflow-hidden text-center">
-			                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 400px;" class="img-fluid center-block">
+			                    <img src="{{ $company->company_logo ? asset('files/companies/images/' . $company->company_logo) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="height: 200px; width: auto; overflow-x: hidden;" class="img-fluid center-block">
 			                    <h4 class="text-normal text-center">{{ $company->company_name }}</h4>
 			                    <p>{{ strlen($company->description) > 20 ? substr($company->description, 0, 20) . '... ' : $company->description }}</p>
 			                    <div class="mt-1">

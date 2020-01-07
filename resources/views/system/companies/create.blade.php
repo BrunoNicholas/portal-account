@@ -62,7 +62,12 @@
 	                		<div class="form-group row mt-0">
 			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label"> Email </label>
 				                <div class="col-lg-8">
+				                	@role('company-admin')
+				                	<input type="hidden" name="company_email" value="{{ Auth::user()->email }}">
+				                	<input class="form-control" value="{{ Auth::user()->email }}" id="inputEmail" disabled>
+				                	@else
 				                    <input type="email" class="form-control" name="company_email" value="{{ Auth::user()->email }}" id="inputEmail" placeholder="Email">
+				                    @endif
 				                </div>
 				            </div>
 				        </div>

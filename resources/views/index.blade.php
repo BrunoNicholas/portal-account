@@ -1,6 +1,10 @@
 @extends('layouts.site')
 @section('title', 'Home')
-@section('styles') @endsection
+@section('styles')
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+@endsection
 @section('content')
     <header class="wrap wrap-mountain mt--40">
         <div class="container">
@@ -166,64 +170,29 @@
             </p>
         </div><?php $companies = App\Models\Company::latest()->paginate(3); $i=0; ?>
         <div class="row d-flex justify-content-center">
-            {{-- <div class="col-lg-4 col-md-6">
-                <div class="card card-royal wow zoomInUp animation-delay-7">
-                    <div class="ms-hero-bg-royal ms-hero-img-city">
-                        <img src="{{ asset('assets/img/demo/avatar4.jpg') }}" alt="..." class="img-avatar-circle">
-                    </div>
-                    <div class="card-body pt-6 text-center">
-                        <h3 class="color-royal">Sophie Marks</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur alter adipisicing elit. Facilis, natuse inse voluptates officia repudiandae beatae magni es magnam autem molestias.</p>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card card-success wow zoomInUp animation-delay-7">
-                    <div class="ms-hero-bg-success ms-hero-img-city">
-                        <img src="assets/img/demo/avatar5.jpg" alt="..." class="img-avatar-circle">
-                    </div>
-                    <div class="card-body pt-6 text-center">
-                        <h3 class="color-success">Cris Polner</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur alter adipisicing elit. Facilis, natuse inse voluptates officia repudiandae beatae magni es magnam autem molestias.</p>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card card-primary wow zoomInUp animation-delay-7">
-                    <div class="ms-hero-bg-primary ms-hero-img-city">
-                        <img src="assets/img/demo/avatar6.jpg" alt="..." class="img-avatar-circle">
-                    </div>
-                    <div class="card-body pt-6 text-center">
-                        <h3 class="color-primary">Julia Robert</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur alter adipisicing elit. Facilis, natuse inse voluptates officia repudiandae beatae magni es magnam autem molestias.</p>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-facebook"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-twitter"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-xs mt-1 mr-1 no-mr-md btn-instagram"><i class="zmdi zmdi-instagram"></i></a>
-                    </div>
-                </div>
-            </div> --}}
             @foreach($companies as $company)
+                <?php
+                    $ratings_num  = $company->ratings->count();
+                    $tot_sum      = 0;
+
+                    if ($ratings_num > 0) {
+                        foreach ($company->ratings as $rat) {
+                            $tot_sum += $rat->rate_number;
+                        }
+                        $avgs_ratings    = $tot_sum/$ratings_num;
+                    } else {
+                        $avgs_ratings    = $tot_sum;
+                    }
+                  ?>
                 <div class="col-xl-4 col-md-6 mix laptop apple" data-price="1999.99" data-date="20160901" onclick="window.location='{{ route('companies.show',['all',$company->id]) }}'">
                     <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
                       <div class="card-body overflow-hidden text-center">
-                          <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 400px;" class="img-fluid center-block">
+                          <img src="{{ $company->company_logo ? asset('files/companies/images/' . $company->company_logo) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 400px;" class="img-fluid center-block">
                           <h4 class="text-normal text-center">{{ $company->company_name }}</h4>
                           <p>{{ strlen($company->description) > 20 ? substr($company->description, 0, 20) . '... ' : $company->description }}</p>
-                          <div class="mt-2">
-                            <span class="mr-2">
-                                <i class="zmdi zmdi-star color-warning"></i>
-                                <i class="zmdi zmdi-star color-warning"></i>
-                                <i class="zmdi zmdi-star color-warning"></i>
-                                <i class="zmdi zmdi-star color-warning"></i>
-                                <i class="zmdi zmdi-star"></i>
-                            </span>
-                            <span class="ms-tag ms-tag-success"> {{ $company->status }} </span>
+                          <div class="mt-1">
+                            <input class="input-3-xs" name="input-3-xs" value="{{ $avgs_ratings }}" class="rating-loading" data-size="xs">
+                            @auth <span class="ms-tag ms-tag-success" style="text-transform: capitalize;"> {{ $company->status }} </span> @endauth
                           </div>
                           <div class="row">
                             <div class="col-md-6">
@@ -240,9 +209,16 @@
                       </div>
                     </div>
                 </div>
-                @endforeach
+            @endforeach
         </div>
     </div> <!-- container -->
 @endsection
 @section('footer') @include('layouts.includes.footer') @endsection
-@section('scripts') @endsection
+@section('scripts')
+<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+    <script>
+    $(document).ready(function(){
+        $('.input-3-xs').rating({displayOnly: true, step: 0.5});
+    });
+  </script>
+@endsection

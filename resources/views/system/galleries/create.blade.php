@@ -44,7 +44,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Names"> Gallery Name (If new): </label>
-                                                    <input type="text" name="gallery_name" class="form-control" id="Names" placeholder="Fill this for a new gallery" autofocus>
+                                                    <input type="text" name="gallery_name" class="form-control" id="Names" placeholder="Fill this for a new gallery" required autofocus>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -65,13 +65,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="image-title"> Title : </label>
-                                                    <input type="text" name="title" class="form-control" id="image-title" placeholder="Title of image" required>
+                                                    <input type="text" name="title" class="form-control" id="image-title" placeholder="Title of image">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="">
                                                     <label for="file-item">Add Image :</label>
-                                                    <input type="file" id="file-item" name="image" accept=".jpg, .png, .jpeg, .gif" required>
+                                                    <input type="file" id="file-item" name="image" accept=".jpg, .png, .jpeg, .gif" >
                                                 </div>
                                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                             </div>
@@ -80,7 +80,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="item-description">Item Description : </label>
-                                            <textarea name="description" placeholder="Gallery description  details here!" class="form-control" id="item-description" required></textarea>
+                                            <textarea name="description" placeholder="Gallery description  details here!" class="form-control" id="item-description"></textarea>
                                         </div>
                                     </div>
                                 </section>

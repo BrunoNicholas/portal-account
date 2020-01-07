@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'View Gallery')
+@section('title') @if($gallery->gallery_name) {{ $gallery->gallery_name }} | @endif View Gallery @endsection
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')
@@ -14,7 +14,7 @@
 	                    <ol class="breadcrumb">
 	                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
 			                <li class="breadcrumb-item"><a href="{{ route('galleries.index') }}"> <i class="fa fa-image"></i> Galleries </a></li>
-			                <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-image"></i> View Gallery </li>
+			                <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-image"></i> {{ $gallery->gallery_name }} </li>
 				        </ol>
 	                </ol>
 	            </nav>
@@ -149,21 +149,19 @@
 	            			<h3>Gallery Options</h3>
 	            		</div>
 	            		<div class="card-body">
-	            			<div class="row">
-	                            <div class="col-md-12"> 
-	                                <a href="{{ asset('files/galleries/images/'. $gallery->image) }}" target="_blank">
-	                                    <img src="{{ asset('files/galleries/images/' . $gallery->image) }}" alt="Gallery Image" style="border-radius: 5px; max-width: 100%;">
-	                                </a>
-	                                <hr>
-	                                <a href="{{ route('galleries.edit', $gallery->id) }}"><i class="fa-edit fa"></i> Edit This Gallery </a>
-	                                <hr>
-	                                <form method="POST" action="{{ route('galleries.destroy', $gallery->id) }}">
-	                                    {{ csrf_field() }}
-	                                    {{ method_field('DELETE') }}
-	                                    <button type="submit" onclick="return confirm('This will delete your album and it\'s image complately. It is not reversible.\nIs this okay?')" class="btn btn-sm btn-block btn-default text-danger">Delete Gallery</button>
-	                                </form>
-	                            </div>
-	                        </div>
+                            <div class="col-md-12 text-center"> 
+                                <a href="{{ asset('files/galleries/images/'. $gallery->image) }}" target="_blank">
+                                    <img src="{{ asset('files/galleries/images/' . $gallery->image) }}" alt="Gallery Image" style="border-radius: 5px; max-width: 100%;">
+                                </a>
+                                <hr>
+                                <a href="{{ route('galleries.edit', $gallery->id) }}"><i class="fa-edit fa"></i> Edit This Gallery </a>
+                                <hr>
+                                <form method="POST" action="{{ route('galleries.destroy', $gallery->id) }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" onclick="return confirm('This will delete your album and it\'s image complately. It is not reversible.\nIs this okay?')" class="btn btn-sm btn-block btn-default text-danger">Delete Gallery</button>
+                                </form>
+                            </div>
 	            		</div>
 	            	</div>
                     <div class="card card-body">

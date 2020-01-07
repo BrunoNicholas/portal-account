@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Role Details')
+@section('title') {{ $role->display_name }} | Role Details @endsection 
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')

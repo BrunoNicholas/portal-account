@@ -58,6 +58,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody><?php $i=0; ?>
+                                                @if(sizeof($companies) < 1)
+                                                    <tr>
+                                                        <td colspan="5" class="color-info text-center">
+                                                            Your account has been set up, continue by setting the account profile for salons and shops.<br>
+                                                            <a href="{{ route('companies.create','all') }}">Click here to create the profile</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                                 @foreach($companies as $company)
                                                     <tr>
                                                         <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;"><img src="
@@ -189,7 +197,7 @@
                                                 <tr>
                                                     <td colspan="6" style="vertical-align: middle;">
                                                         <a href="{{ route('companies.index','all') }}">
-                                                            <button class="btn btn-sm btn-default btn-info">Other Multi Accounts</button>
+                                                            <button class="btn btn-sm btn-default color-primary">Other Multi Accounts</button>
                                                         </a>
                                                     </td>
                                                 </tr>

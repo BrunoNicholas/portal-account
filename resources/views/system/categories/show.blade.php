@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Category Details')
+@section('title') {{ $category->display_name }} | Category Details @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')
 	<div class="container mt-0">

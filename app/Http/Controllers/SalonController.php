@@ -81,6 +81,10 @@ class SalonController extends Controller
             'salon_email'   => 'required|unique:salons',
             'user_id'       => 'required',
         ]);
+
+        // if (!Auth::user()->hasRole(['super-admin','admin','company-admin'])) {
+        //     // 
+        // }
         Salon::create($request->all());
 
         $salon = Salon::where('salon_email',$request->salon_email)->first();

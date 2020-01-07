@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'User Details')
+@section('title') {{ $user->name }} | User Details @endsection
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')

@@ -38,7 +38,7 @@
                                         <div class="" style="border: thin solid transparent;">
                                             <div class="el-card-item">
                                                 <div class="el-card-avatar el-overlay-1" style="text-align: center;"> 
-                                                    <div style="max-width: 450px; overflow-x: auto;">
+                                                    <div style="max-width: 450px; overflow-x: hidden;">
                                                         <img src="{{ asset('files/galleries/images/'. $gallery->image) }}" alt="image" style=" height: 200px; width: auto; border-radius: 5px;"/>
                                                     </div>
                                                     <div class="el-overlay">
