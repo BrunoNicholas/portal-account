@@ -107,15 +107,15 @@
 						                                <td class="contact pull-left" style="vertical-align: middle;">
 						                                    <a class="link pull-left" href="{{ route('messages.show',[$message->id,'details']) }}">
 				                                                @if($message->folder == 'important')
-				                                                    <span class="btn btn-xs btn-danger m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="badge badge-danger m-r-10">{{ $message->folder }}</span>
 				                                                @elseif($message->folder == 'urgent')
-				                                                    <span class="btn btn-xs btn-success m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="badge badge-success m-r-10">{{ $message->folder }}</span>
 				                                                @elseif($message->folder == 'official')
-				                                                    <span class="btn btn-xs btn-warning m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="badge badge-warning m-r-10">{{ $message->folder }}</span>
 				                                                @elseif($message->folder == 'unofficial')
-				                                                    <span class="btn btn-xs btn-info m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="badge badge-info m-r-10">{{ $message->folder }}</span>
 				                                                @elseif($message->folder == 'normal')
-				                                                    <span class="btn btn-xs btn-default m-r-10">{{ $message->folder }}</span>
+				                                                    <span class="badge badge-default m-r-10">{{ $message->folder }}</span>
 				                                                @else
 				                                                    <span class="btn btn-xs btn-primary m-r-10 text-primary">{{ $message->folder }}</span>
 				                                                @endif

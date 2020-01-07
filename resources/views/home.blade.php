@@ -463,17 +463,17 @@
                                                 @endif
                                                 <td class="contact" onclick="window.location='{{ route('messages.show',[$message->id,'details']) }}'" style="vertical-align: middle;">
                                                     @if($message->folder == 'important')
-                                                        <i class="contact mt-2 color-danger">{{ $message->folder }}</i>
+                                                        <i class="contact mt-2 badge badge-danger">{{ $message->folder }}</i>
                                                     @elseif($message->folder == 'urgent')
-                                                        <i class="contact mt-2 color-success">{{ $message->folder }}</i>
+                                                        <i class="contact mt-2 badge badge-success">{{ $message->folder }}</i>
                                                     @elseif($message->folder == 'official')
-                                                        <i class="contact mt-2 color-warning">{{ $message->folder }}</i>
+                                                        <i class="contact mt-2 badge badge-warning">{{ $message->folder }}</i>
                                                     @elseif($message->folder == 'unofficial')
-                                                        <i class="contact mt-2 color-info">{{ $message->folder }}</i>
+                                                        <i class="contact mt-2 badge badge-info">{{ $message->folder }}</i>
                                                     @elseif($message->folder == 'normal')
-                                                        <i class="contact mt-2 color-default">{{ $message->folder }}</i>
+                                                        <i class="contact mt-2 badge badge-default">{{ $message->folder }}</i>
                                                     @else
-                                                        <i class="contact mt-2 color-primary">{{ $message->folder }}</i>
+                                                        <i class="contact mt-2 badge badge-primary">{{ $message->folder }}</i>
                                                     @endif
                                                 </td>
                                                 <td class="contact" style="vertical-align: middle;" onclick="window.location='{{ route('messages.show',[$message->id,'details']) }}'">
