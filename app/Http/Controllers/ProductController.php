@@ -71,7 +71,7 @@ class ProductController extends Controller
         if (Auth::user()->id != $shop->user_id) {
             return back()->with('warning','You can only add shop item to your shop. Operation Blocked!');
         }
-        $cats       = Categories::where('type','products-gender')->get();
+        $cats       = Categories::where([['type','products-gender'],['status','active']])->get();
         $products   = Product::latest()->paginate(30);
         return view('system.products.create',compact(['item_id','type','shop','cats','products']));
     }

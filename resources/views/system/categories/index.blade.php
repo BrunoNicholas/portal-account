@@ -38,6 +38,7 @@
 		                                    <th class="text-left;">Main</th>
 		                                    <th class="text-left;">Type</th>
 		                                    <th class="text-left;">Display name</th>
+		                                    <th class="text-center;">Status</th>
 		                                    <th class="text-center;">Actions</th>
 		                                </tr>
 		                            </thead>
@@ -50,10 +51,18 @@
 		                                		<td class="text-left;">{{ $category->categories_id }}</td>
 		                                		<td class="text-left;">{{ $category->type }}</td>
 		                                		<td class="text-left;">{{ $category->display_name }}</td>
-		                                		<td class="text-center">
-		                                			<a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-success" title="Category Details"><i class="fa fa-info-circle" style="font-size: 15px;"></i></a>
-			                                        <button class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#my{{ $category->id }}Modal">
-			                                        	<i class="fa fa-edit" title="Edit category details" style="font-size: 15px;"></i></button>
+		                                		<td class="text-center"> {{ $category->status }} </td>
+		                                		<td class="text-center" style="min-width: 110px;">
+		                                			<div class="col-md-12">
+			                                			<div class="row" style="">
+			                                				<a href="{{ route('categories.show', $category->id) }}" class="color-success col-6" title="Category Details" style="">
+			                                					<i class="fa fa-info-circle" style="font-size: 15px;"></i>
+			                                				</a>
+				                                        	<button class="color-primary col-6"  data-toggle="modal" data-target="#my{{ $category->id }}Modal" style="border: none;">
+				                                        		<i class="fa fa-edit" title="Edit category details" style="font-size: 15px;"></i>
+				                                        	</button>
+				                                        </div>
+				                                    </div>
 		                                		</td>
 		                                		<div class="modal" id="my{{ $category->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 												    <div class="modal-dialog animated zoomIn animated-3x" role="document">
@@ -74,8 +83,7 @@
 														            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 														            <input type="hidden" name="user_id" value="{{ $category->user_id }}">
 													                <div class="form-group row mt-0">
-													                    <label class="col-md-4 col-form-label text-right"> Category Name <span class="text-danger">*</span>
-													                    </label>
+													                    <label class="col-md-4 col-form-label text-right"> Category Name </label>
 													                    <div class="col-md-8">
 													                        <input type="text" class="form-control" name="name" value="{{ $category->name }}" autofocus required>
 													                    </div>
@@ -92,15 +100,13 @@
 													                    </div>
 													                </div>
 													                <div class="form-group row mt-0">
-													                    <label class="col-md-4 col-form-label text-right">Display Name <span class="text-danger">*</span>
-													                    </label>
+													                    <label class="col-md-4 col-form-label text-right">Display Name </label>
 													                    <div class="col-md-8">
 													                        <input type="text" class="form-control" name="display_name" value="{{ $category->display_name }}" required>
 													                    </div>
 													                </div>
 													                <div class="form-group row mt-0">
-													                    <label class="col-md-4 col-form-label text-right"> Type <span class="text-danger">*</span>
-													                    </label>
+													                    <label class="col-md-4 col-form-label text-right"> Type </label>
 													                    <div class="col-md-8">
 													                        <input type="text" class="form-control" name="type" value="{{ $category->type }}" placeholder="shop,salon,hair,face,body">
 													                    </div>
@@ -109,6 +115,31 @@
 													                    <label class="col-md-4 col-form-label text-right"> Description </label>
 													                    <div class="col-md-8">
 													                        <textarea class="form-control" name="description" placeholder="Describe category">{{ $category->description }}</textarea>
+													                    </div>
+													                </div>
+													                <div class="form-group row mt-0">
+													                    <label class="col-md-4 col-form-label text-right"> Status </label>
+													                    <div class="col-md-8">
+													                    	<div class="row">
+													                    		<div class="col-md-5">
+													                    			<div class="form-check radio pt-2">
+			                                        									<label class="form-radio-label">
+			                                        										<input type="radio" name="status" value="active" @if ($category->status == 'active')
+			                                        											checked
+			                                        										@endif> Active
+			                                        									</label>
+			                                        								</div>
+													                    		</div>
+													                    		<div class="col-md-5">
+													                    			<div class="form-check radio pt-2">
+			                                        									<label class="form-radio-label">
+			                                        										<input type="radio" name="status" value="pending" @if ($category->status == 'pending')
+			                                        											checked
+			                                        										@endif> Pending
+			                                        									</label>
+			                                        								</div>
+													                    		</div>
+													                    	</div>
 													                    </div>
 													                </div>
 													            </div>

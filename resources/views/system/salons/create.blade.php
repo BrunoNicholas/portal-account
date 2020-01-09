@@ -69,8 +69,14 @@
 	                		<div class="form-group row mt-0">
 			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Email</label>
 				                <div class="col-lg-8">
+				                    @role('company-admin')
+				                	<input type="hidden" name="salon_email" value="{{ Auth::user()->email }}">
+				                	<input class="form-control" value="{{ Auth::user()->email }}" id="inputEmail" disabled>
+				                	@else
 				                    <input type="email" class="form-control" name="salon_email" value="{{ Auth::user()->email }}" id="inputEmail" placeholder="Email">
+				                    @endif
 				                </div>
+
 				            </div>
 				        </div>
 	                	<div class="col-md-6">
@@ -172,7 +178,7 @@
 		                	<div class="form-group row mt-0">
 				                <label for="descde" class="col-lg-4 control-label">Description</label>
 				                <div class="col-lg-8">
-				                    <textarea class="form-control" rows="3" name="description" id="descde" placeholder="Salon description details ..."></textarea>
+				                    <textarea class="form-control" rows="3" name="description" id="descde" placeholder="Salon bio or description details ..."></textarea>
 				                </div>
 				            </div>
 			            </div>

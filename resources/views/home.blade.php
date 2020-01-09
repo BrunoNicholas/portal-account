@@ -221,6 +221,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody><?php $i=0; ?>
+                                                @if(sizeof($salons) < 1)
+                                                    <tr>
+                                                        <td colspan="5" class="color-info text-center">
+                                                            Your account has been set up successfully, continue by registering your salon or spa and your exciting fashion styles.<hr>
+                                                            <a href="{{ route('salons.create','all') }}">Click here to create salon profile</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                                 @foreach($salons as $salon)
                                                     <tr>
                                                         <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;">
@@ -310,6 +318,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody><?php $i=0; ?>
+                                                @if(sizeof($shops) < 1)
+                                                    <tr>
+                                                        <td colspan="5" class="color-info text-center">
+                                                            Your account has been set up successfully, continue by registering your shop and your exciting products.<hr>
+                                                            <a href="{{ route('shops.create','all') }}">Click here to create shop profile</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                                 @foreach($shops as $shop)
                                                     <tr>
                                                         <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;">

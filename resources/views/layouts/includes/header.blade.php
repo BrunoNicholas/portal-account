@@ -50,8 +50,8 @@
                 	<a href="@guest {{ url('/') }} @else {{ route('home') }} @endguest" class="nav-link animated fadeIn animation-delay-7" role="button" aria-haspopup="true" aria-expanded="false" data-name="home">Home {{-- <i class="zmdi zmdi-chevron-down"></i> --}} </a>
             	</li>
             	{{-- salons and spas --}}
-            	<!-- {{ $asalons = App\Models\Categories::where('type','salon-gender')->get() }} -->
-            	<!-- {{ $bsalons = App\Models\Categories::where('type','salon-style')->get() }} -->
+            	<!-- {{ $asalons = App\Models\Categories::where([['type','salon-gender'],['status','active']])->get() }} -->
+            	<!-- {{ $bsalons = App\Models\Categories::where([['type','salon-style'],['status','active']])->get() }} -->
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="blog">
 	                	Salons &amp; Spas <i class="zmdi zmdi-chevron-down"></i></a>
@@ -92,10 +92,10 @@
 	            	</ul>
 	            </li>
 	            {{-- fashion styles --}}
-            	<!-- {{ $cstyle = App\Models\Categories::where('type','children-style')->get() }} -->
-            	<!-- {{ $mstyle = App\Models\Categories::where('type','male-style')->get() }} -->
-            	<!-- {{ $fstyle = App\Models\Categories::where('type','female-style')->get() }} -->
-            	<!-- {{ $ustyle = App\Models\Categories::where('type','unisex-style')->get() }} -->
+            	<!-- {{ $cstyle = App\Models\Categories::where([['type','children-style'],['status','active']])->get() }} -->
+            	<!-- {{ $mstyle = App\Models\Categories::where([['type','male-style'],['status','active']])->get() }} -->
+            	<!-- {{ $fstyle = App\Models\Categories::where([['type','female-style'],['status','active']])->get() }} -->
+            	<!-- {{ $ustyle = App\Models\Categories::where([['type','unisex-style'],['status','active']])->get() }} -->
 	            <li class="nav-item dropdown dropdown-megamenu-container">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="component">
 	                	Fashion Styles <i class="zmdi zmdi-chevron-down"></i>
@@ -170,7 +170,7 @@
 	                </ul>
 	            </li>
 	            {{-- shops and products --}}
-            	<!-- {{ $aproducts = App\Models\Categories::where('type','products-gender')->get() }} -->
+            	<!-- {{ $aproducts = App\Models\Categories::where([['type','products-gender'],['status','active']])->get() }} -->
 	            <li class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">Shops &amp; Products <i class="zmdi zmdi-chevron-down"></i></a>
 	                <ul class="dropdown-menu">

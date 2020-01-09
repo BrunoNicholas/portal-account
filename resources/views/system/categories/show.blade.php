@@ -34,7 +34,7 @@
 						                    <label class="col-md-4 col-form-label text-right"> Category Name
 						                    </label>
 						                    <div class="col-md-8">
-						                        <input type="text" class="form-control" name="name" value="{{ $category->name }}" disabled>
+						                        <input type="text" class="form-control" value="{{ $category->name }}" disabled>
 						                    </div>
 						                </div>
 					                @endif
@@ -42,7 +42,7 @@
 						                <div class="form-group row mt-0">
 						                    <label class="col-md-4 col-form-label text-right"> Major Category </label>
 						                    <div class="col-md-8">
-						                        <input type="text" class="form-control" name="name" value="{{ App\Models\Categories::where('id',$category->categories_id)->first()->display_name }}" disabled>
+						                        <input type="text" class="form-control" value="{{ App\Models\Categories::where('id',$category->categories_id)->first()->display_name }}" disabled>
 						                    </div>
 						                </div>
 					                @endif
@@ -50,7 +50,7 @@
 						                <div class="form-group row mt-0">
 						                    <label class="col-md-4 col-form-label text-right"> Display Name </label>
 						                    <div class="col-md-8">
-						                        <input type="text" class="form-control" name="display_name" value="{{ $category->display_name }}" disabled>
+						                        <input type="text" class="form-control" value="{{ $category->display_name }}" disabled>
 						                    </div>
 						                </div>
 					                @endif
@@ -58,7 +58,15 @@
 						                <div class="form-group row mt-0">
 						                    <label class="col-md-4 col-form-label text-right"> Type </label>
 						                    <div class="col-md-8">
-						                        <input type="text" class="form-control" name="type" value="{{ $category->type }}" disabled>
+						                        <input type="text" class="form-control" value="{{ $category->type }}" disabled>
+						                    </div>
+						                </div>
+					                @endif
+					                @if($category->status)
+						                <div class="form-group row mt-0">
+						                    <label class="col-md-4 col-form-label text-right"> Status </label>
+						                    <div class="col-md-8">
+						                        <input type="text" class="form-control" style="text-transform: capitalize;" value="{{ $category->status }}" disabled>
 						                    </div>
 						                </div>
 					                @endif
@@ -66,7 +74,7 @@
 						                <div class="form-group row mt-0">
 						                    <label class="col-md-4 col-form-label text-right"> Description </label>
 						                    <div class="col-md-8">
-						                        <textarea class="form-control" name="description" disabled>{{ $category->description }}</textarea>
+						                        <textarea class="form-control" disabled>{{ $category->description }}</textarea>
 						                    </div>
 						                </div>
 					                @endif
@@ -75,7 +83,7 @@
 						                <div class="form-group row mt-0">
 						                    <label class="col-md-4 col-form-label text-right"> Added By </label>
 						                    <div class="col-md-8">
-						                        <input type="text" class="form-control" name="type" value="{{ App\User::where('id',$category->user_id)->first()->name }}" disabled>
+						                        <input type="text" class="form-control" value="{{ App\User::where('id',$category->user_id)->first()->name }}" disabled>
 						                    </div>
 						                </div>
 					                @endif
@@ -83,7 +91,7 @@
 						                <div class="form-group row mt-0">
 						                    <label class="col-md-4 col-form-label text-right"> Date Added </label>
 						                    <div class="col-md-8">
-						                        <input type="text" class="form-control" name="type" value="{{ $category->created_at }}" disabled>
+						                        <input type="text" class="form-control" value="{{ $category->created_at }}" disabled>
 						                    </div>
 						                </div>
 					                @endif
@@ -91,7 +99,7 @@
 						                <div class="form-group row mt-0">
 						                    <label class="col-md-4 col-form-label text-right"> Previously Updated </label>
 						                    <div class="col-md-8">
-						                        <input type="text" class="form-control" name="type" value="{{ $category->updated_at }}" disabled>
+						                        <input type="text" class="form-control" value="{{ $category->updated_at }}" disabled>
 						                    </div>
 						                </div>
 					                @endif

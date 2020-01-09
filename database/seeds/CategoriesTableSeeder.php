@@ -22,6 +22,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Central Uganda',
 	        	'description'	=> 'Based in central Uganda',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'western-uganda',
@@ -29,6 +30,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Western Uganda',
 	        	'description'	=> 'Based in western Uganda',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'nothern-uganda',
@@ -36,6 +38,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Northern Uganda',
 	        	'description'	=> 'Based in northern Uganda',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'eastern-uganda',
@@ -43,6 +46,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Eastern Uganda',
 	        	'description'	=> 'Based in eastern Uganda',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'children-salon',
@@ -50,6 +54,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Children Salon',
 	        	'description'	=> 'A salon for children',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'men-salon',
@@ -57,6 +62,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Men Salon',
 	        	'description'	=> 'A salon for men services',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'women-salon',
@@ -64,6 +70,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Women Salon',
 	        	'description'	=> 'A salon for women services',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'unisex-salon',
@@ -71,6 +78,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Unisex Salon',
 	        	'description'	=> 'A unisex salon for unisex services',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'party-dressing',
@@ -78,6 +86,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Party Dressing',
 	        	'description'	=> 'A salon for ceremony and parties like events',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'hair-salon',
@@ -85,6 +94,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Hair Salon',
 	        	'description'	=> 'A salon providing hair services and more',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'face-salon',
@@ -92,6 +102,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Face Salon',
 	        	'description'	=> 'A salon providing face services and more',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'nails-salon',
@@ -99,6 +110,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Nails Salon',
 	        	'description'	=> 'A salon providing nail services and more',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'hand-body',
@@ -106,6 +118,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Hand & Body',
 	        	'description'	=> 'A salon providing hands, legs and a few body services and more',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'full-body',
@@ -113,6 +126,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Full Body',
 	        	'description'	=> 'A salon providing full body services and more',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'massage-salon',
@@ -120,6 +134,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Massage Service',
 	        	'description'	=> 'A salon providing massage services and more',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'tattoo-service',
@@ -127,6 +142,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Tattoo Service',
 	        	'description'	=> 'A salon providing tattoo services and more',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'children-products',
@@ -134,6 +150,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Children Products',
 	        	'description'	=> 'Children salon and fashion products sold and are available',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'men-products',
@@ -141,6 +158,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Male Products',
 	        	'description'	=> 'Men salon and fashion products sold and are available',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'female-products',
@@ -148,6 +166,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Women Products',
 	        	'description'	=> 'Women salon and fashion products sold and are available',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'unisex-products',
@@ -155,6 +174,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Unisex Products',
 	        	'description'	=> 'Other products sold for unisex salon and fashion services',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'children',
@@ -162,6 +182,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Children Styles',
 	        	'description'	=> 'Fashion styles for children',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'male-styles',
@@ -169,6 +190,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Men Styles',
 	        	'description'	=> 'Fashion styles for men',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'female-styles',
@@ -176,6 +198,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Women Styles',
 	        	'description'	=> 'Fashion Styles for women',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         	[
         		'name'			=> 'unisex-styles',
@@ -183,6 +206,7 @@ class CategoriesTableSeeder extends Seeder
 	        	'display_name'	=> 'Other Styles',
 	        	'description'	=> 'Fashion styles for unisex and others',
 	        	'user_id' 		=> $user_id,
+	        	'status'		=> 'active',
         	],
         ];
 

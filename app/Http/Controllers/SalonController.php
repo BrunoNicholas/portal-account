@@ -63,7 +63,7 @@ class SalonController extends Controller
      */
     public function create($type=null)
     {
-        $cats       = Categories::where('type','salon-style')->orWhere('type', 'salon-gender')->get();
+        $cats       = Categories::where([['type','salon-style'],['status','active']])->orWhere('type', 'salon-gender')->get();
         $companies  = Company::latest()->paginate();
         return view('system.salons.create',compact(['type','cats','companies']));
     }
@@ -162,7 +162,7 @@ class SalonController extends Controller
         if (!$salon) {
             return back()->with('danger','Salon not found. It is either deleted or it is missing.');
         }
-        $cats       = Categories::where('type','salon-style')->orWhere('type', 'salon-gender')->get();
+        $cats       = Categories::where([['type','salon-style'],['status','active']])->orWhere('type', 'salon-gender')->get();
         $companies  = Company::latest()->paginate();
         return view('system.salons.edit', compact(['salon','type','cats','companies']));
     }

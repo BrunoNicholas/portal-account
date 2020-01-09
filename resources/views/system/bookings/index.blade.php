@@ -40,8 +40,12 @@
 							@for($b=1; $b<=$i; $b++)
 							<div role="tabpanel" class="tab-pane fade {{ $b == 1 ? 'active show' : '' }}" id="{{ 'home' . $b . 'a' }}">
 								<div class="card" style="min-height: 520px;">
-									This is shop {{ $b }}
+									<div class="card-body">
+										This is shop {{ $b }}
 
+
+
+									</div>
 								</div>
 							</div>
 							@endfor

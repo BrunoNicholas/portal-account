@@ -63,7 +63,7 @@ class CompanyController extends Controller
      */
     public function create($type=null)
     {
-        $cats       = Categories::where('type','company')->get();
+        $cats       = Categories::where([['type','company'],['status','active']])->get();
         return view('system.companies.create',compact(['cats','type']));
     }
 

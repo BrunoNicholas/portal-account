@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->string('description')->nullable();
             $table->bigInteger('categories_id')->nullable()->unsigned()->index();
             $table->bigInteger('user_id')->nullable()->unsigned()->index();
+            $table->string('status')->default('pending');
             $table->timestamps();
 
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');

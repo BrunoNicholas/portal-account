@@ -11,6 +11,7 @@ use App\Models\Salon;
 use App\Models\Style;
 use App\Models\Product;
 use App\User;
+use Auth;
 
 class BookingController extends Controller
 {

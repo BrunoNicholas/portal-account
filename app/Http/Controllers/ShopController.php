@@ -64,7 +64,7 @@ class ShopController extends Controller
      */
     public function create($type=null)
     {
-        $cats       = Categories::where('type','products-gender')->get();
+        $cats       = Categories::where([['type','products-gender'],['status','active']])->get();
         $companies  = Company::latest()->paginate();
         return view('system.shops.create',compact(['type','cats','companies']));
     }

@@ -21,7 +21,7 @@ class Categories extends Model
      */
     protected $fillable = [
     	'name','display_name','description',
-    	'categories_id','user_id','type'
+    	'categories_id','user_id','type','status'
     ];
 
     /**
