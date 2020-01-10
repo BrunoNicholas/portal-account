@@ -1,6 +1,13 @@
 @extends('layouts.site')
 @section('title', 'Home')
-@section('styles') @endsection
+@section('styles')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" 
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" 
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" 
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" 
+        crossorigin=""></script>
+@endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')
     <div class="ms-hero-page ms-hero-img-city2 ms-hero-bg-info mb-1" style="padding: 0px;">
@@ -26,6 +33,7 @@
     </div>
 @endsection
 @section('content')
+    <p style="display: none;"><?php $remove[] = "'"; $remove[] = '"'; $remove[] = "-";?></p>
     <div class="mt-0 pl-2 pr-2">
         <div class="row">
             <div class="col-md-7">
@@ -71,7 +79,7 @@
                                                         <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;"><img src="
                                                             {{ $company->company_logo ? asset('files/companies/images/' . $company->company_logo) : asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 75px; border-radius: 10%;"><br>
                                                             {{ $company->company_name }}</td>
-                                                        <td class="text-left" style="vertical-align: middle;">{{ $company->categories_id ? App\Models\Categories::where('id',$company->categories_id)->first()->display_name: 'Uncategories' }}</td>
+                                                        <td class="text-left" style="vertical-align: middle;">{{ $company->categories_id ? App\Models\Categories::where('id',$company->categories_id)->first()->display_name: 'Uncategorised' }}</td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $company->company_telephone }}</td>
                                                         <td class="text-left" style="text-transform: capitalize; vertical-align: middle;">{{ $company->status }}</td>
                                                         <td class="text-center" style="border: none; vertical-align: middle;">
@@ -235,7 +243,7 @@
                                                             <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 80px; border-radius: 10%;"><br>
                                                             {{ $salon->salon_name }}
                                                         </td>
-                                                        <td class="text-left" style="vertical-align: middle;">{{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name: 'Uncategories' }}</td>
+                                                        <td class="text-left" style="vertical-align: middle;">{{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name: 'Uncategorised' }}</td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $salon->salon_telephone }}</td>
                                                         <td class="text-left" style="text-transform: capitalize; vertical-align: middle;">{{ $salon->status }}</td>
                                                         <td class="text-center" style="vertical-align: middle;">
@@ -332,7 +340,7 @@
                                                             <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 80px; border-radius: 10%;"><br>
                                                             {{ $shop->shop_name }}
                                                         </td>
-                                                        <td class="text-left" style="vertical-align: middle;">{{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name: 'Uncategories' }}</td>
+                                                        <td class="text-left" style="vertical-align: middle;">{{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name: 'Uncategorised' }}</td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $shop->shop_telephone }}</td>
                                                         <td class="text-left" style="text-transform: capitalize; vertical-align: middle;">{{ $shop->status }}</td>
                                                         <td class="text-center" style="vertical-align: middle;">
@@ -401,16 +409,21 @@
                                 </div>
                             @endrole
                             <div role="tabpanel" class="tab-pane fade active show" id="settings">
-                                <div class="table-responsive">
+                                <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            
+                                        <div class="col-md-6">
+                                               
+                                        </div>
+                                        <div class="col-md-6">
+                                               
                                         </div>
                                         <div class="col-md-12">
                                             
                                         </div>
-                                        <div class="col-md-12">
-                                            
+                                        <div class="col-md-12" style="padding: 0px;">
+                                            <h4 class="text-center"> Multi Accounts & Locations </h4>
+                                            <div id="map" style="width: 100%; height: 400px;"></div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -519,4 +532,68 @@
         </div>
     </div>
 @endsection
-@section('scripts') @endsection
+@section('scripts')
+    <script>
+        // for companies
+        var cities = L.layerGroup();
+
+        regions = {{ str_replace( $remove, "", $gpsponts) }};
+
+        @for ($i = 0; $i<$ptNum; $i++)
+        L.marker(regions[{{ $i }}]).bindPopup('{{ $gpsNames[$i] }}.').addTo(cities)@if($i<($ptNum-1)),
+@else;
+@endif
+        @endfor
+
+        // end of companies
+        // for salons
+
+        var salonCords = L.layerGroup();
+
+        regions = {{ str_replace( $remove, "", $gps1ponts) }};
+
+        @for ($i = 0; $i<$pt1Num; $i++)
+        L.marker(regions[{{ $i }}]).bindPopup('{{ $salgpsNames[$i] }}.').addTo(salonCords)@if($i<($pt1Num-1)),
+@else;
+@endif
+        @endfor
+
+        // end of salons
+        // for shops
+
+        var shopCords = L.layerGroup();
+
+        regions = {{ str_replace( $remove, "", $gps2ponts) }};
+
+        @for ($i = 0; $i<$pt2Num; $i++)
+        L.marker(regions[{{ $i }}]).bindPopup('{{ $shogpsNames[$i] }}.').addTo(shopCords)@if($i<($pt2Num-1)),
+@else;
+@endif
+        @endfor
+
+        // end of shops
+
+        var mbAttr = '&copy; {{ config('app.name') }}, ' +
+                '<a href="mailto:sbnibro256@gmail.com">Developer</a> ',
+            mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+        var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+            streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+        var map = L.map('map', {
+            center: [1.735574, 32.662354],
+            zoom: 5.5,
+            layers: [grayscale, cities, salonCords, shopCords]
+        });
+        var baseLayers = {
+            "Grayscale": grayscale,
+            "Streets": streets
+        };
+        var overlays = {
+            "Accounts": cities,
+            "Salons": salonCords,
+            "Shops": shopCords
+        };
+        L.control.layers(baseLayers, overlays).addTo(map);
+
+    </script>
+
+@endsection

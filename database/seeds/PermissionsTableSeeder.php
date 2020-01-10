@@ -131,7 +131,7 @@ class PermissionsTableSeeder extends Seeder
             // salons and shops
             [
                 'name'          => 'can_add_salon',
-                'display_name'  => 'Can craete a salon',
+                'display_name'  => 'Can create a salon',
                 'description'   => 'A user can add a a new salon and make themselves salon admin',
             ],
             [
@@ -239,9 +239,12 @@ class PermissionsTableSeeder extends Seeder
                 'name'          => 'can_make_teams',
                 'display_name'  => 'Can make a team',
                 'description'   => 'A user can make a team of users on the platform',
+            ],            
+            [
+                'name'          => 'can_view_map',
+                'display_name'  => 'Can view records map',
+                'description'   => 'User can see the map with accounts, shops and salons',
             ],
-
-            // 
             // [
             //     'name'          => '',
             //     'display_name'  => '',

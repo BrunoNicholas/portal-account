@@ -167,7 +167,7 @@
 	            	<div class="card">
 		                <div class="card-body">
 		                	<h4 class="text-center">Create new category</h4>
-		                	<form action="{{ route('categories.store') }}" class="form-horizontal form-bordered" method="post">
+		                	<form action="{{ route('categories.store') }}" class="form-horizontal form-bordered" method="post" style="padding: 0px;">
 					            @csrf
 					            @foreach ($errors->all() as $error)
 					            	<p class="alert alert-danger">{{ $error }}</p>
@@ -178,15 +178,15 @@
 
 					            <div class="form-body">
 					                <div class="form-group row mt-0">
-					                    <label class="col-md-4 col-form-label text-right"> Name <span class="text-danger">*</span>
+					                    <label class="col-md-5 col-form-label text-right"> Name <span class="text-danger">*</span>
 					                    </label>
-					                    <div class="col-md-8">
+					                    <div class="col-md-7">
 					                        <input type="text" class="form-control" name="name" autofocus required>
 					                    </div>
 					                </div>
 					                <div class="form-group row mt-0">
-					                    <label class="col-md-4 col-form-label text-right"> Major </label>
-					                    <div class="col-md-8">
+					                    <label class="col-md-5 col-form-label text-right"> Major </label>
+					                    <div class="col-md-7">
 					                        <select class="form-control" name="categories_id">
 					                        	<option value="">Leave empty if major</option>
 					                        	@foreach($categories as $cat)
@@ -196,22 +196,22 @@
 					                    </div>
 					                </div>
 					                <div class="form-group row mt-0">
-					                    <label class="col-md-4 col-form-label text-right">Display Name <span class="text-danger">*</span>
+					                    <label class="col-md-5 col-form-label text-right">Display Name <span class="text-danger">*</span>
 					                    </label>
-					                    <div class="col-md-8">
+					                    <div class="col-md-7">
 					                        <input type="text" class="form-control" name="display_name" required>
 					                    </div>
 					                </div>
 					                <div class="form-group row mt-0">
-					                    <label class="col-md-4 col-form-label text-right"> Type <span class="text-danger">*</span>
+					                    <label class="col-md-5 col-form-label text-right"> Type <span class="text-danger">*</span>
 					                    </label>
-					                    <div class="col-md-8">
+					                    <div class="col-md-7">
 					                        <input type="text" class="form-control" name="type" placeholder="shop,salon,hair,face,body">
 					                    </div>
 					                </div>
 					                <div class="form-group row mt-0">
-					                    <label class="col-md-4 col-form-label text-right"> Description </label>
-					                    <div class="col-md-8">
+					                    <label class="col-md-5 col-form-label text-right"> Description </label>
+					                    <div class="col-md-7">
 					                        <textarea class="form-control" name="description" placeholder="Describe category"></textarea>
 					                    </div>
 					                </div>

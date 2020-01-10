@@ -73,16 +73,16 @@
 			                                        </div>
 		                                        </td>
 		                                        <td class="text-center"> {{ sizeof($user->companies) > 0 ? 'Yes' : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->salons) > 1 ? $user->salons->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->shops) > 1 ? $user->shops->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->bookings) > 1 ? $user->bookings->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->orders) > 1 ? $user->orders->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->posts) > 1 ? $user->posts->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->questions) > 1 ? $user->questions->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->reviews) > 1 ? $user->reviews->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->ratings) > 1 ? $user->ratings->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->galleries) > 1 ? $user->galleries->count() : '' }} </td>
-		                                        <td class="text-center"> {{ sizeof($user->images) > 1 ? $user->images->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->salons) > 0 ? $user->salons->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->shops) > 0 ? $user->shops->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->bookings) > 0 ? $user->bookings->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->orders) > 0 ? $user->orders->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->posts) > 0 ? $user->posts->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->questions) > 0 ? $user->questions->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->reviews) > 0 ? $user->reviews->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->ratings) > 0 ? $user->ratings->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->galleries) > 0 ? $user->galleries->count() : '' }} </td>
+		                                        <td class="text-center"> {{ sizeof($user->images) > 0 ? $user->images->count() : '' }} </td>
 		                                    </tr>
 		                                @endforeach
 		                            </tbody>

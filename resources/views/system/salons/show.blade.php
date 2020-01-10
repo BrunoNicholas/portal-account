@@ -13,7 +13,10 @@
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
 	            <div class="card card-body text-center">
 	                <!-- Wrapper for slides -->
-	                <span style="font-size: 20px; text-transform: capitalize;">{{ $salon->salon_name }} <small> - {{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }}</small></span>
+	                <span class="col-12 btn btn-raised btn-success" style="font-size: 20px; text-transform: capitalize; overflow-x: auto;">
+	                	{{ $salon->salon_name }} 
+	                	<small> - {{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }}</small>
+	                </span>
 	                <div class="carousel-inner" role="listbox">
 		                <div class="carousel-item active">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
@@ -116,7 +119,7 @@
         <div class="col-md-6">
             <div class="card animated zoomInDown animation-delay-5">
 	            <div class="card-body">
-	            	<div class="row">
+	            	<div class="row color-success">
 		                <div class="col-md-6"><h2>{{ $salon->salon_name }} <br><small>{{ number_format((float)$avg_ratings, 1, '.', '') }} Stars</small></h2></div>
 		                <div class="col-md-6 mt-3 text-right">
 		                    <div>

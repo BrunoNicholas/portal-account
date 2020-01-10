@@ -184,7 +184,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     public function salons()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Salon::class);
     }
 
     /**
@@ -204,6 +204,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     public function teams()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Team::class);
     }
 }
