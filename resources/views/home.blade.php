@@ -1,12 +1,14 @@
 @extends('layouts.site')
 @section('title', 'Home')
 @section('styles')
+@permission('can_view_map')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" 
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" 
         crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" 
         integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" 
         crossorigin=""></script>
+@endpermission
 @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')
@@ -33,7 +35,9 @@
     </div>
 @endsection
 @section('content')
-    <p style="display: none;"><?php $remove[] = "'"; $remove[] = '"'; $remove[] = "-";?></p>
+    @permission('can_view_map')
+        <p style="display: none;"><?php $remove[] = "'"; $remove[] = '"'; $remove[] = "-";?></p>
+    @endpermission
     <div class="mt-0 pl-2 pr-2">
         <div class="row">
             <div class="col-md-7">
@@ -412,19 +416,59 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
-                                               
+                                            Suggest category 
                                         </div>
                                         <div class="col-md-6">
-                                               
+                                            Logged in as
                                         </div>
+                                        @permission('can_make_teams')
                                         <div class="col-md-12">
-                                            
+                                            <h4 class="text-center"> Team Members </h4>
+                                            <div class="table-responsive">
+                                                <table class="table table-hoverable">
+                                                    <thead class="color-info">
+                                                        <tr>
+                                                            <th class="text-center">Team</th>
+                                                            <th class="text-center">Team Owner</th>
+                                                            <th class="text-center">Members</th>
+                                                            <th class="text-center">Status</th>
+                                                            <th class="text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody><?php $i=0; ?>
+                                                        @if(sizeof(Auth::user()->teams) < 1)
+                                                            <tr>
+                                                                <td colspan="5" class="color-primary text-center">
+                                                                    Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, you are able to create team members for your business.<br>
+                                                                    <a href="{{ route('teams.create') }}"><u>Click to create a team</u></a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                        @foreach(Auth::user()->teams as $team)
+                                                            <tr>
+                                                                
+                                                            </tr>
+                                                        @endforeach
+                                                        <tr>
+                                                            <td colspan="6" style="vertical-align: middle;">
+                                                                <a href="{{ route('shops.index','all') }}">
+                                                                    <button class="btn btn-sm btn-default btn-info">Other Shops</button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
                                         </div>
+                                        @endpermission
+                                        @permission('can_view_map')
                                         <div class="col-md-12" style="padding: 0px;">
-                                            <h4 class="text-center"> Multi Accounts & Locations </h4>
+                                            <h4 class="text-center"> Map Accounts, salons, shops locations </h4>
                                             <div id="map" style="width: 100%; height: 400px;"></div>
 
                                         </div>
+                                        @endpermission
                                     </div>
                                 </div>
                             </div>
@@ -533,6 +577,7 @@
     </div>
 @endsection
 @section('scripts')
+@permission('can_view_map')
     <script>
         // for companies
         var cities = L.layerGroup();
@@ -595,5 +640,5 @@
         L.control.layers(baseLayers, overlays).addTo(map);
 
     </script>
-
+@endpermission
 @endsection

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Gallery;
 use App\Models\Rating;
 use App\Models\Review;
+use App\Models\TeamUser;
 use App\User;
 
 class Shop extends Model
@@ -101,5 +102,13 @@ class Shop extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * The relationship method for images
+     */
+    public function team_users()
+    {
+        return $this->hasMany(TeamUser::class);
     }
 }

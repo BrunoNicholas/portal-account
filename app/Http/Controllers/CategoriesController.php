@@ -14,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:super-admin|admin|company-admin|salon-admin')->except('update','store','show');
+        $this->middleware('role:super-admin|admin|company-admin|salon-admin|shop-admin')->except('update','store','show');
         
         // $this->middleware('permission:can_make_booking',['only'=>['create','store']]);
         // $this->middleware('permission:delete_user',['only'=>'destroy']);

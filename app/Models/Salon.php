@@ -9,6 +9,7 @@ use App\Models\Review;
 use App\Models\Rating;
 use App\Models\Gallery;
 use App\Models\Style;
+use App\Models\TeamUser;
 use App\User;
 
 class Salon extends Model
@@ -100,5 +101,13 @@ class Salon extends Model
     public function styles()
     {
         return $this->hasMany(Style::class);
+    }
+
+    /**
+     * The relationship method for images
+     */
+    public function team_users()
+    {
+        return $this->hasMany(TeamUser::class);
     }
 }

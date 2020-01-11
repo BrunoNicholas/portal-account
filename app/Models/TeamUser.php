@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Salon;
+use App\Models\Shop;
+use App\User;
 
 class TeamUser extends Model
 {
@@ -31,6 +34,26 @@ class TeamUser extends Model
     public function teams()
     {
         return $this->belongsTo(Team::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function shops()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function salons()
+    {
+        return $this->belongsTo(Salon::class);
     }
 
     /**
