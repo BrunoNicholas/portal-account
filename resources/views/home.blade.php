@@ -42,20 +42,18 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="card card-primary" style="min-height: 400px;">
-                    <div class="table-responsive">
-                        <ul class="nav nav-tabs  shadow-2dp" role="tablist">
-                            @role(['super-admin','admin','company-admin'])
-                            <li class="nav-item"><a class="nav-link withoutripple" href="#companies" aria-controls="companies" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Account Profile </span></a></li>
-                            @endrole
-                            @role(['super-admin','admin','company-admin','salon-admin'])
-                            <li class="nav-item"><a class="nav-link withoutripple" href="#salons" aria-controls="salons" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline"> My Salons(s)/Spa's</span></a></li>
-                            @endrole
-                            @role(['company-admin','shop-admin'])
-                            <li class="nav-item"><a class="nav-link withoutripple" href="#shops" aria-controls="shops" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline"> My Shops </span></a></li>
-                            @endrole
-                            <li class="nav-item"><a class="nav-link withoutripple active" href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="zmdi zmdi-settings"></i> <span class="d-none d-sm-inline">Portal Stats</span></a></li>
-                        </ul>
-                    </div>
+                    <ul class="nav nav-tabs shadow-2dp" role="tablist" style="overflow-x: auto;">
+                        @role(['super-admin','admin','company-admin'])
+                        <li class="nav-item"><a class="nav-link withoutripple" href="#companies" aria-controls="companies" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Account Profile </span></a></li>
+                        @endrole
+                        @role(['super-admin','admin','company-admin','salon-admin'])
+                        <li class="nav-item"><a class="nav-link withoutripple" href="#salons" aria-controls="salons" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline"> My Salons(s)/Spa's</span></a></li>
+                        @endrole
+                        @role(['company-admin','shop-admin'])
+                        <li class="nav-item"><a class="nav-link withoutripple" href="#shops" aria-controls="shops" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline"> My Shops </span></a></li>
+                        @endrole
+                        <li class="nav-item"><a class="nav-link withoutripple active" href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="zmdi zmdi-settings"></i> <span class="d-none d-sm-inline">Portal Stats</span></a></li>
+                    </ul>
                     <div class="card-body">
                         <div class="tab-content">
                             @role(['super-admin','admin','company-admin'])
@@ -542,7 +540,7 @@
             </div>
             <div class="col-md-5">
                 <div class="card card-primary" style="min-height: 400px;">
-                    <ul class="nav nav-tabs  shadow-2dp" role="tablist">
+                    <ul class="nav nav-tabs shadow-2dp" role="tablist" style="overflow-x: auto;">
                         @role(['super-admin','admin','company-admin','salon-admin'])
                         <li class="nav-item"><a class="nav-link withoutripple" href="#bookings" aria-controls="bookings" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Service Bookings </span></a></li>
                         @endrole
