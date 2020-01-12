@@ -47,7 +47,7 @@
 	      	<ul class="navbar-nav">
 	      		{{-- home --}}
               	<li class="nav-item dropdown active">
-                	<a href="@guest {{ url('/') }} @else {{ route('home') }} @endguest" class="nav-link animated fadeIn animation-delay-7" role="button" aria-haspopup="true" aria-expanded="false" data-name="home">Home {{-- <i class="zmdi zmdi-chevron-down"></i> --}} </a>
+                	<a href="@guest {{ url('/') }} @else {{ route('home') }} @endguest" class="nav-link animated fadeIn animation-delay-7" role="button" aria-haspopup="true" aria-expanded="false" data-name="home"> Home </a>
             	</li>
             	{{-- salons and spas --}}
             	<!-- {{ $asalons = App\Models\Categories::where([['type','salon-gender'],['status','active']])->get() }} -->
@@ -288,13 +288,11 @@
 	            <li class="nav-item dropdown">
 		        	<a href="javascript:void(0)" class="btn-ms-menu btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10"><i class="zmdi zmdi-menu"></i></a>
 	            </li>
+	            @if(URL::previous() != Request::fullUrl())
+		            <a href="{{ URL::previous() }}" class="btn btn-sm btn-info btn-rounded text-white"><i class="fa-angle-double-left fa text-white" style="font-size: 15px;"></i> Back </a>
+		        @endif
 	      	</ul>
         </div>
-      	@if(URL::previous() != Request::fullUrl())
-            <div class="mr-4">
-                <a href="{{ URL::previous() }}" class="btn btn-sm btn-info btn-rounded text-white"><i class="fa-angle-double-left fa text-white" style="font-size: 15px;"></i> Back </a>
-            </div>
-        @endif
         <a href="javascript:void(0)" class="ms-toggle-left btn-navbar-menu"><i class="zmdi zmdi-menu"></i></a>
     </div> <!-- container -->
 </nav>

@@ -15,7 +15,7 @@
     <div class="ms-hero-page ms-hero-img-city2 ms-hero-bg-info mb-1" style="padding: 0px;">
         <div class="text-center color-white mt-0 mb-1 index-1" style="padding-top: 5px;">
             <h3>
-                <i class="fa fa-home text-white"></i>  My Control Panel
+                <i class="fa fa-home text-white"></i>  Control Panel
                 <small> - 
                     {{ Auth::user()->name }} 
                     <img src="{{ Auth::user()->profile_image ? asset('files/profile/images/' . Auth::user()->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 30px; border-radius: 50%;">
@@ -42,18 +42,20 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="card card-primary" style="min-height: 400px;">
-                    <ul class="nav nav-tabs  shadow-2dp" role="tablist">
-                        @role(['super-admin','admin','company-admin'])
-                        <li class="nav-item"><a class="nav-link withoutripple" href="#companies" aria-controls="companies" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Account Group Profile </span></a></li>
-                        @endrole
-                        @role(['super-admin','admin','company-admin','salon-admin'])
-                        <li class="nav-item"><a class="nav-link withoutripple" href="#salons" aria-controls="salons" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline"> Account Salons(s)/Spa's</span></a></li>
-                        @endrole
-                        @role(['company-admin','shop-admin'])
-                        <li class="nav-item"><a class="nav-link withoutripple" href="#shops" aria-controls="shops" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline"> Account Shops </span></a></li>
-                        @endrole
-                        <li class="nav-item"><a class="nav-link withoutripple active" href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="zmdi zmdi-settings"></i> <span class="d-none d-sm-inline">Stas</span></a></li>
-                    </ul>
+                    <div class="table-responsive">
+                        <ul class="nav nav-tabs  shadow-2dp" role="tablist">
+                            @role(['super-admin','admin','company-admin'])
+                            <li class="nav-item"><a class="nav-link withoutripple" href="#companies" aria-controls="companies" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Account Profile </span></a></li>
+                            @endrole
+                            @role(['super-admin','admin','company-admin','salon-admin'])
+                            <li class="nav-item"><a class="nav-link withoutripple" href="#salons" aria-controls="salons" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline"> My Salons(s)/Spa's</span></a></li>
+                            @endrole
+                            @role(['company-admin','shop-admin'])
+                            <li class="nav-item"><a class="nav-link withoutripple" href="#shops" aria-controls="shops" role="tab" data-toggle="tab"><i class="zmdi zmdi-male-female"></i> <span class="d-none d-sm-inline"> My Shops </span></a></li>
+                            @endrole
+                            <li class="nav-item"><a class="nav-link withoutripple active" href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="zmdi zmdi-settings"></i> <span class="d-none d-sm-inline">Portal Stats</span></a></li>
+                        </ul>
+                    </div>
                     <div class="card-body">
                         <div class="tab-content">
                             @role(['super-admin','admin','company-admin'])
@@ -61,12 +63,12 @@
                                     <div class="table-responsive">
                                         <table class="table table-hoverable">
                                             <thead>
-                                                <tr>
-                                                    <th class="text-center">Account Name</th>
-                                                    <th class="text-center">Main Category</th>
-                                                    <th class="text-center">Telephone</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Actions</th>
+                                                <tr class="color-primary">
+                                                    <th class="text-center" style="vertical-align: middle;">Account Name</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Main Category</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Telephone</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Status</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody><?php $i=0; ?>
@@ -224,12 +226,12 @@
                                         <table class="table table-hoverable">
                                             <thead class="color-success">
                                                 <tr>
-                                                    <th class="text-center">Salon Name</th>
-                                                    <th class="text-center">Main Category</th>
-                                                    <th class="text-center">Telephone</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Styles</th>
-                                                    <th class="text-center">Actions</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Salon Name</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Main Category</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Telephone</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Status</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Styles</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody><?php $i=0; ?>
@@ -321,12 +323,12 @@
                                         <table class="table table-hoverable">
                                             <thead class="color-info">
                                                 <tr>
-                                                    <th class="text-center">Shop Name</th>
-                                                    <th class="text-center">Main Category</th>
-                                                    <th class="text-center">Telephone</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Products</th>
-                                                    <th class="text-center">Actions</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Shop Name</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Main Category</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Telephone</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Status</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Products</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody><?php $i=0; ?>
@@ -334,7 +336,7 @@
                                                     <tr>
                                                         <td colspan="5" class="color-info text-center">
                                                             Your account has been set up successfully, continue by registering your shop and your exciting products.<hr>
-                                                            <a href="{{ route('shops.create','all') }}">Click here to create shop profile</a>
+                                                            <a href="{{ route('shops.create','all') }}">Click here to register your shop</a>
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -415,11 +417,74 @@
                             <div role="tabpanel" class="tab-pane fade active show" id="settings">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            Suggest category 
-                                        </div>
-                                        <div class="col-md-6">
-                                            Logged in as
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                @permission('can_suggest_categories')
+                                                <div class="col-md-3 col-md-6 col-sm-6 pt-1">
+                                                    <div class="panel panel-body">
+                                                        <div class="row color-primary ml-0 mr-0">
+                                                            <i class="fa fa-3x fa-tree primary-color text-success text-center col-3" style="padding-top: 20px; padding: 0px; padding-top: 30px; padding-bottom: 30px;"></i>
+                                                            <div class="col-9 table-responsive">
+                                                                <div class="row pt-1">
+                                                                    @role(['super-admin','admin','company-admin'])
+                                                                    <div class="col-md-12" style="padding: 2px;">
+                                                                        <button class="btn btn-block btn-primary" style="margin: 0px; padding: 5px 10px;" title="Suggest missing company location category"> Account Location </button>
+                                                                    </div>
+                                                                    @endrole
+                                                                    @role(['super-admin','admin','company-admin','salon-admin'])
+                                                                    <div class="col-md-12" style="padding: 2px;">
+                                                                        <button class="btn btn-block btn-success" style="margin: 0px; padding: 5px 10px;" title="Suggest salon category that is not listed"> Salon Type </button>
+                                                                    </div>
+                                                                    @endrole
+                                                                    @role(['super-admin','admin','company-admin','shop-admin'])
+                                                                    <div class="col-md-12" style="padding: 2px;">
+                                                                        <button class="btn btn-block btn-info" style="margin: 0px; padding: 5px 10px;" title="Suggest shop category that is not listed"> Shop Type </button>
+                                                                    </div>
+                                                                    @endrole
+                                                                    @role(['super-admin','admin','company-admin','salon-admin'])
+                                                                    <div class="col-md-12" style="padding: 2px;">
+                                                                        <button class="btn btn-block btn-success" style="margin: 0px; padding: 5px 10px;" title="Suggest a fashion style category that is not listed"> Fashion Style </button>
+                                                                    </div>
+                                                                    @endrole
+                                                                    @role(['super-admin','admin','company-admin','shop-admin'])
+                                                                    <div class="col-md-12" style="padding: 2px;">
+                                                                        <button class="btn btn-block btn-info" style="margin: 0px; padding: 5px 10px;"> Product Type </button>
+                                                                    </div>
+                                                                    @endrole
+                                                                </div>
+                                                                <br>
+                                                                <p class="mt-2 no-mb lead small-caps text-center" style="font-size: 17px;">suggest missing category</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endpermission
+                                                <div class="col-md-3 col-md-6 col-sm-6 pt-1">
+                                                    <div class="panel panel-body">
+                                                        <div class="row color-primary ml-0 mr-0">
+                                                            <div class="text-center col-4">
+                                                                <i class="fa fa-4x fa-user primary-color color-primary" style="padding-top: 20px; padding: 0px; padding-top: 30px; padding-bottom: 30px;"></i>
+                                                                <a href="{{ route('users.show',Auth::user()->id) }}" class="btn btn-primary btn-xs btn-block" target="_blank" title="Your Public Profile">
+                                                                    <i class="fa fa-group" style="margin: 0px;"></i> View 
+                                                                </a>
+                                                                <a href="{{ route('profile') }}" class="btn btn-info btn-xs btn-block" target="_blank" title="Your your profile">
+                                                                    <i class="fa fa-user" style="margin: 0px;"></i> Profile 
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <div class="row pt-1">
+                                                                    <div class="col-md-12 text-center" style="padding: 2px;">
+                                                                        <img 
+                                                                            src="{{ Auth::user()->profile_image ? asset('files/profile/images/' . Auth::user()->profile_image) : asset('files/defaults/images/profile.jpg') }}" 
+                                                                            style="width: 100%; border-radius: 5%;">
+                                                                    </div>
+                                                                </div>
+                                                                <p class="mt-2 no-mb lead small-caps text-center" style="font-size: 17px;">suggest missing category</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         @permission('can_make_teams')
                                         <div class="col-md-12">
@@ -428,11 +493,11 @@
                                                 <table class="table table-hoverable">
                                                     <thead class="color-info">
                                                         <tr>
-                                                            <th class="text-center">Team</th>
-                                                            <th class="text-center">Team Owner</th>
-                                                            <th class="text-center">Members</th>
-                                                            <th class="text-center">Status</th>
-                                                            <th class="text-center">Actions</th>
+                                                            <th class="text-center" style="vertical-align: middle;">Team</th>
+                                                            <th class="text-center" style="vertical-align: middle;">Team Owner</th>
+                                                            <th class="text-center" style="vertical-align: middle;">Members</th>
+                                                            <th class="text-center" style="vertical-align: middle;">Status</th>
+                                                            <th class="text-center" style="vertical-align: middle;">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody><?php $i=0; ?>
@@ -449,17 +514,16 @@
                                                                 
                                                             </tr>
                                                         @endforeach
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <td colspan="6" style="vertical-align: middle;">
                                                                 <a href="{{ route('shops.index','all') }}">
                                                                     <button class="btn btn-sm btn-default btn-info">Other Shops</button>
                                                                 </a>
                                                             </td>
-                                                        </tr>
+                                                        </tr> --}}
                                                     </tbody>
                                                 </table>
                                             </div>
-
                                         </div>
                                         @endpermission
                                         @permission('can_view_map')

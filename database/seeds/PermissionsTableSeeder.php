@@ -86,6 +86,12 @@ class PermissionsTableSeeder extends Seeder
 	        	'display_name'	=> 'Can send a public message',
 	        	'description'	=> 'User can send a public message to all',
         	],
+            // categories
+            [
+                'name'          => 'can_suggest_categories',
+                'display_name'  => 'Can suggest missing categories',
+                'description'   => 'A user can suggest a missing category on system items',
+            ],
         	// comments
             [
                 'name'          => 'can_make_comment',
