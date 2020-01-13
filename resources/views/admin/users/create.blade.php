@@ -109,7 +109,7 @@
 			                                <select class="form-control custom-select" name="role">
 			                                    <option value="client">Please select</option>
 			                                    @foreach($roles as $role)
-			                                        <option value="{{ $role->name }}"><b>{{  $role->display_name . ' - ' . $role->description }}</b></option>
+			                                        <option value="{{ $role->name }}"><b>{{  $role->display_name }}</b> - <i>{{ $role->description }}</i></option>
 			                                    @endforeach
 			                                </select>
 					                    </div>
