@@ -25,7 +25,7 @@ class GalleryController extends Controller
         $this->middleware(['auth','verified']);
         // $this->middleware('role:super-admin|admin|client')->except('show','index');
         
-        $this->middleware('permission:can_make_image_uploads',['only'=>['create','store','update']]);
+        $this->middleware('permission:can_make_image_uploads',['only'=>['index','create','store','update']]);
         // $this->middleware('permission:can_delete_salon',['only'=>'destroy']);
         // $this->middleware('permission:can_edit_salon',['only'=>['update','edit']]);
     }

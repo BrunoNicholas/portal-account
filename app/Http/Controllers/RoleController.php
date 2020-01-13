@@ -54,8 +54,8 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required',
-            'permission' => 'required',
+            'name'          => 'required',
+            'permission'    => 'required',
         ]);
         $role = Role::create($request->except(['permission','_token']));
 

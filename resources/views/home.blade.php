@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="card card-primary" style="min-height: 400px;">
-                    <ul class="nav nav-tabs shadow-2dp" role="tablist" style="overflow-x: auto;">
+                    <ul class="nav nav-tabs shadow-2dp" role="tablist" style="overflow-x: hidden; overflow-y: hidden;">
                         @role(['super-admin','admin','company-admin'])
                         <li class="nav-item"><a class="nav-link withoutripple" href="#companies" aria-controls="companies" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Account Profile </span></a></li>
                         @endrole
@@ -450,7 +450,6 @@
                                                                     </div>
                                                                     @endrole
                                                                 </div>
-                                                                <br>
                                                                 <p class="mt-2 no-mb lead small-caps text-center" style="font-size: 17px;">suggest missing category</p>
                                                             </div>
                                                         </div>
@@ -477,7 +476,7 @@
                                                                             style="width: 100%; border-radius: 5%;">
                                                                     </div>
                                                                 </div>
-                                                                <p class="mt-2 no-mb lead small-caps text-center" style="font-size: 17px;">suggest missing category</p>
+                                                                <p class="mt-2 no-mb lead small-caps text-center" style="font-size: 17px;"><b style="text-transform: lowercase;">{{ Auth::user()->name }}</b></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -540,7 +539,7 @@
             </div>
             <div class="col-md-5">
                 <div class="card card-primary" style="min-height: 400px;">
-                    <ul class="nav nav-tabs shadow-2dp" role="tablist" style="overflow-x: auto;">
+                    <ul class="nav nav-tabs shadow-2dp" role="tablist" style="overflow-x: hidden; overflow-y: hidden;">
                         @role(['super-admin','admin','company-admin','salon-admin'])
                         <li class="nav-item"><a class="nav-link withoutripple" href="#bookings" aria-controls="bookings" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Service Bookings </span></a></li>
                         @endrole
@@ -554,9 +553,37 @@
                             @role(['super-admin','admin','company-admin','salon-admin'])
                                 <div role="tabpanel" class="tab-pane fade" id="bookings">
                                     <div class="table-responsive">
-                                        
-
-
+                                        <table class="table table-hoverable">
+                                            <thead class="color-success">
+                                                <tr>
+                                                    <th class="text-center" style="vertical-align: middle;">Item</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Quantity</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Requester</th>
+                                                    <th class="text-center" style="vertical-align: middle;">From</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Dates</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody><?php $i=0; ?>
+                                                @if(sizeof($bookings) < 1)
+                                                    <tr>
+                                                        <td colspan="6" class="color-primary text-center">
+                                                            No bookings made yet
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                                @foreach($bookings as $booking)
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             @endrole
@@ -564,8 +591,35 @@
                                 <div role="tabpanel" class="tab-pane fade" id="orders">
                                     <div class="table-responsive">
                                         <table class="table table-hoverable">
-                                            ord
-
+                                            <thead class="color-info">
+                                                <tr>
+                                                    <th class="text-center" style="vertical-align: middle;">Item</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Quantity</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Requester</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Date To Collect</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Collection Dates</th>
+                                                    <th class="text-center" style="vertical-align: middle;">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody><?php $i=0; ?>
+                                                @if(sizeof($orders) < 1)
+                                                    <tr>
+                                                        <td colspan="6" class="color-primary text-center">
+                                                            No orders made yet
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                                @foreach($orders as $order)
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

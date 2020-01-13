@@ -83,7 +83,7 @@
 					                    	@foreach($users as $user)
 					                    		<div class="form-check checkbox">
 			                                        <label class="form-check-label">
-					                    				<input type="checkbox" name="user[]" value="{{ $user->id }}"> {{ $user->name . ' | ' . $user->email }} <br>
+					                    				<input type="checkbox" name="team_user[]" value="{{ $user->id }}"> {{ $user->name . ' | ' . $user->email }} <br>
 					                    			</label>
 					                    		</div>
 					                    	@endforeach

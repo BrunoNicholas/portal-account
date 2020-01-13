@@ -78,7 +78,7 @@
             	<!-- {{ $aproducts = App\Models\Categories::where('type','products-gender')->get() }} -->
 	                <form class="form-horizontal" id="Filters">
 	                  	<h4 class="mb-1 no-mt">Gender Category</h4>
-		                <fieldset>
+		                <fieldset style="max-height: 300px; overflow-y: auto;">
 		                    <div class="form-group no-mt">
 		                    	@foreach($aproducts as $prod)
 			                    <div class="radio" onclick="window.location='{{ route('shops.index',$prod->name) }}'">

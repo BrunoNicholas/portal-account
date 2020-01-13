@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\Booking;
+use App\Models\Order;
 use Image;
 use File;
 use Auth;
@@ -45,8 +47,10 @@ class UserPageController extends Controller
      */
     public function profile()
     {
-        $user = Auth::user();
-        return view('user.settings.profile', compact(['user']));
+        $user       = Auth::user();
+        $bookings   = Booking::where('user_id',$user->id)->latest()->get();
+        $orders     = Order::where('user_id',$user->id)->latest()->get();
+        return view('user.settings.profile', compact(['user','bookings','orders']));
     }
     /**
      * Update the specified resource in storage.
@@ -58,7 +62,7 @@ class UserPageController extends Controller
     public function update_image(Request $request)
     {
         request()->validate([
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($request->hasFile('profile_image')) {

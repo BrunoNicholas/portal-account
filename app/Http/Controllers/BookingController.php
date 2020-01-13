@@ -22,7 +22,7 @@ class BookingController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('role:super-admin|admin|company-admin|salon-admin|shop-admin|attendant|client')->except('show','index');
+        $this->middleware('role:super-admin|admin|company-admin|salon-admin|shop-admin|attendant')->except('show','store','update');
 
         $this->middleware('permission:can_make_booking',['only'=>['create','store']]);
         // $this->middleware('permission:delete_user',['only'=>'destroy']);
@@ -70,7 +70,7 @@ class BookingController extends Controller
         }
 
         $bookings = Booking::latest()->paginate(50);
-        return view('system.bookings.index',compact(['bookings','type','id']));
+        return view('system.bookings.index',compact(['bookings','type','item_id']));
     }
 
     /**

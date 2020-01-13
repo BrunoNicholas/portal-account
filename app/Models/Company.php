@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories;
 use App\Models\Comment;
+use App\Models\TeamUser;
 use App\Models\Review;
 use App\Models\Rating;
 use App\Models\Salon;
@@ -81,6 +82,14 @@ class Company extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    /*
+     * Has many relationship to table
+     */
+    public function team_users()
+    {
+        return $this->hasMany(TeamUser::class);
     }
 
     /*

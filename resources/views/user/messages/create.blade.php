@@ -32,9 +32,12 @@
 			            <section class="card-primary" style="padding: 5px 15px;">
 			                <h3 class="card-title"> <i class="fa-envelope fa text-red"></i> Compose New Message 
 			                	<small class="pull-right">
-			                		<a href="javascript:void(0)" data-toggle="modal" data-target="#createModal" data-whatever="@mdo"> <button class="btn btn-danger btn-sm"><i class="fa-users fa"></i> Send Public Message</button></a>
+			                		@permission('can_send_send_public_message')
+			                		<a href="javascript:void(0)" data-toggle="modal" data-target="#createModal" data-whatever="@mdo">
+			                		<button class="btn btn-danger btn-sm"><i class="fa-users fa"></i> Send Public Message</button></a>
+			                		@endpermission
 			                	</small>
-			                </h3>
+			                </h3>@permission('can_send_send_public_message')
 			                <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
 			                    <div class="modal-dialog" role="document">
 			                        <div class="modal-content">
@@ -89,7 +92,7 @@
 			                            </form>
 			                        </div>
 			                    </div>
-			                </div>
+			                </div>@endpermission
 			            </section>
 			            <hr>
 			            <div class="col-md-12" style="overflow-x: auto;">

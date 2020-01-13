@@ -42,16 +42,23 @@
 	        @auth
 	        <li class="card" role="tab" id="sch2">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc2" aria-expanded="false" aria-controls="sc2">
-	              	<i class="zmdi zmdi-account"></i> My Sections <i class="fa-user-plus fa"></i> <i class="fa-image fa"></i>
+	              	<i class="zmdi zmdi-account"></i> My Sections 
+	              	<i class="fa-user-plus fa"></i> 
+	              	<i class="fa-envelope fa"></i>
+	              	<i class="fa-image fa"></i>
 	            <ul id="sc2" class="card-collapse collapse" role="tabpanel" aria-labelledby="sch2" data-parent="#slidebar-menu">
 	              	<li><a href="{{ route('profile') }}"><i class="fa-angle-double-right fa"></i> My Profile</a></li>
+	              	@permission('can_message')
 	              	<li><a href="{{ route('messages.index', 'inbox') }}"><i class="fa-angle-double-right fa"></i>  Inbox </a></li>
+	              	@endpermission
 	              	@role('super-admin')
 	              	<li><a href="{{ route('settings') }}"><i class="fa-angle-double-right fa"></i> Timeline</a></li>
 	              	@endrole
+	              	@permission('can_make_image_uploads')
 	              	<li class="dropdown-divider"></li>
 	              	<li><a href="{{ route('galleries.index') }}"><i class="fa-angle-double-right fa"></i> Galleries <i class="fa-image fa"></i> </a></li>
 	              	<li><a href="{{ route('images.index') }}"><i class="fa-angle-double-right fa"></i> Images <i class="fa-image fa"></i> </a></li>
+	              	@endpermission
 	            </ul>
 	        </li>@endauth
 	        @permission('can_view_companies')
@@ -89,7 +96,7 @@
 	              	@endpermission
 	            </ul>
 	        </li>
-	        @auth
+	        @role('client') @else
 	        <li class="card" role="tab" id="sch6">
 	            <a class="collapsed" role="button" data-toggle="collapse" href="#sc7" aria-expanded="false" aria-controls="sc7">
 	              	<i class="zmdi zmdi-plus-square"></i> Bookings 
@@ -108,13 +115,15 @@
 	              	<li><a href="{{ route('orders.create', ['all',0]) }}"><i class="fa-angle-double-right fa"></i> Order Now </a></li>
 	            </ul>
 	        </li>
-	        @endauth
+	        @endrole
 	        <li>
 	            <a class="link" href="{{ route('questions.index') }}"><i class="fa-question-circle fa"></i> Questions</a>
 	        </li>
+	        @permission('can_view_posts')
 	        <li>
 	            <a class="link" href="{{ route('posts.index') }}"><i class="zmdi zmdi-view-compact"></i> Posts</a>
 	        </li>
+	        @endpermission
 	        @permission('can_view_jobs')
 	        <li>
 	            <a class="link" href="{{ route('jobs.index') }}"><i class="zmdi zmdi-link"></i> Job Applications </a>

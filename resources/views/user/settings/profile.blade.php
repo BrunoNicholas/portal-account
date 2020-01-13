@@ -131,15 +131,59 @@
                             	</div>
                             	<div class="col-12"><hr></div>
                             	<div class="col-12">
-                            		<h3>Account Stats</h3>
-                            		<table>
-                            			<thead>
-                            				<th></th>
-                            				<th></th>
-                            				<th></th>
-                            			</thead>
-
-                            		</table>
+                            		<h3 class="text-center color-primary">Account Stats</h3>
+                            		<div class="row">
+                                        <div class="col-md-6" style="max-height: 500px; overflow-y: auto;">
+                                            <div class="table-responsive text-center">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="3"> Previous Bookings </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> Item </th>
+                                                            <th>Provider</th>
+                                                            <th>Status & Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($bookings as $booking)
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" style="max-height: 500px; overflow-y: auto;">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="3"> Previous Orders </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Provider</th>
+                                                            <th>Status & Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($orders as $order)
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                             	</div>
                             	<div class="col-12"><hr></div>
                             	<div class="col-md-6">

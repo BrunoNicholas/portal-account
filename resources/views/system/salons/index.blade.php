@@ -32,7 +32,7 @@
             		<!-- {{ $bsalons = App\Models\Categories::where('type','salon-style')->get() }} -->
 	                <form class="form-horizontal" id="Filters">
 	                  	<h4 class="mb-1 no-mt">Gender Category</h4>
-		                <fieldset>
+		                <fieldset style="max-height: 300px; overflow-y: auto;">
 		                    <div class="form-group no-mt">
 		                    	@foreach($asalons as $sal)
 			                    <div class="radio" onclick="window.location='{{ route('salons.index',$sal->name) }}'">
@@ -41,7 +41,7 @@
 			                    @endforeach			                  	
 		                    </div>
 		                </fieldset>
-		                <fieldset>
+		                <fieldset style="max-height: 300px; overflow-y: auto;">
 		                    <h4 class="mb-0">Style Category</h4>
 		                    <div class="form-group no-mt">
 			                    @foreach($bsalons as $sal)

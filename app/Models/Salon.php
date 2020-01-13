@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories;
 use App\Models\Booking;
+use App\Models\Order;
 use App\Models\Review;
 use App\Models\Rating;
 use App\Models\Gallery;
@@ -68,6 +69,15 @@ class Salon extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    /**
+     * The relationship method for.
+     * as this table.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Orders::class);
     }
 
     /**
