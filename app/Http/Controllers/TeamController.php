@@ -1,9 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Team;
+use App\Models\TeamUser;
 use Illuminate\Http\Request;
+use App\Models\Salon;
+use App\Models\Shop;
+use App\User;
+use Auth;
 
 class TeamController extends Controller
 {
@@ -17,7 +20,6 @@ class TeamController extends Controller
         $teams = Team::latest()->paginate(20);
         return view('system.teams.index',compact(['teams']));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -25,10 +27,12 @@ class TeamController extends Controller
      */
     public function create()
     {
-        $teams = Team::latest()->paginate(20);
-        return view('system.teams.create',compact(['teams']));
+        $teams  = Team::where('user_id',Auth::user()->id)->latest()->paginate(20);
+        $users  = User::where('role','client')->latest()->paginate(50);
+        $salons = Salon::where('user_id',Auth::user()->id)->latest()->get();
+        $shops  = Shop::where('user_id',Auth::user()->id)->latest()->get();
+        return view('system.teams.create',compact(['teams','users','salons','shops']));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -38,16 +42,30 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'project_id'  => 'required',
+            'team_name'     => 'required"unique:teams',
             'user_id'       => 'required',
             'status'        => 'required',
+            'team_user'     => 'required',
         ]);
+        Team::create($request->except(['team_user','_token']));
 
-        Team::create($request->all());
+        // finding team
+        $team   = Team::where('team_name',$request->team_name)->first();
+        $a      = 0;
 
-        return redirect()->route('teams.index')->with('success','Team saved successfully!');
+        foreach ($request->team_user as $key => $value) {
+            ++$a;
+            $teamuser[$a]   = new TeamUser();
+            $teamuser[$a]->user_id      = $value;
+            $teamuser[$a]->team_id      = $team->id;
+            $teamuser[$a]->salon_id     = $request->salon_id;
+            $teamuser[$a]->shop_id      = $request->shop_id;
+            $teamuser[$a]->company_id   = $request->company_id;
+            $teamuser[$a]->status = $request->status;
+            $teamuser[$a]->save();
+        }
+        return redirect()->route('home')->with('success','Team saved successfully!');
     }
-
     /**
      * Display the specified resource.
      *
@@ -62,7 +80,6 @@ class TeamController extends Controller
         }
         return view('system.teams.show',compact(['team']));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -77,7 +94,6 @@ class TeamController extends Controller
         }
         return view('system.teams.edit',compact(['team']));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -92,11 +108,9 @@ class TeamController extends Controller
             'user_id'       => 'required',
             'status'        => 'required',
         ]);
-
         Team::find($id)->update($request->all());
         return redirect()->route('teams.index')->with('success','Team saved successfully!');
     }
-
     /**
      * Remove the specified resource from storage.
      *

@@ -11,12 +11,10 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
-				            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
-				            <li class="breadcrumb-item"><a href="{{ route('messages.index','inbox') }}">  <i class="fa fa-envelope"></i> Messages </a></li>
-				            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-plus"></i> Create Message </li>
-				        </ol>
+                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
+			            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
+			            <li class="breadcrumb-item"><a href="{{ route('messages.index','inbox') }}">  <i class="fa fa-envelope"></i> Messages </a></li>
+			            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-plus"></i> Create Message </li>
 	                </ol>
 	            </nav>
 	        </div>
@@ -34,9 +32,12 @@
 			            <section class="card-primary" style="padding: 5px 15px;">
 			                <h3 class="card-title"> <i class="fa-envelope fa text-red"></i> Compose New Message 
 			                	<small class="pull-right">
-			                		<a href="javascript:void(0)" data-toggle="modal" data-target="#createModal" data-whatever="@mdo"> <button class="btn btn-danger btn-sm"><i class="fa-users fa"></i> Send Public Message</button></a>
+			                		@permission('can_send_send_public_message')
+			                		<a href="javascript:void(0)" data-toggle="modal" data-target="#createModal" data-whatever="@mdo">
+			                		<button class="btn btn-danger btn-sm"><i class="fa-users fa"></i> Send Public Message</button></a>
+			                		@endpermission
 			                	</small>
-			                </h3>
+			                </h3>@permission('can_send_send_public_message')
 			                <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
 			                    <div class="modal-dialog" role="document">
 			                        <div class="modal-content">
@@ -91,7 +92,7 @@
 			                            </form>
 			                        </div>
 			                    </div>
-			                </div>
+			                </div>@endpermission
 			            </section>
 			            <hr>
 			            <div class="col-md-12" style="overflow-x: auto;">
@@ -116,10 +117,10 @@
 							                <div class="row">
 				                        		<div class="col-md-6">
 				                                	<select class="form-control block" name="receiver" id="example-email" required>
-				                                    	<option value="{{ Auth::user()->id }}">Select user to send to</option>
+				                                    	<option value="{{ Auth::user()->id }}">Select message receiver (Self)</option>
 					                                	@foreach($users as $user)
 					                                        @if($user->id != Auth::user()->id)
-					                                            <option value="{{ $user->id }}" title="{{ (App\Models\Role::where('name',$user->role)->get()->first())->display_name }}">{{ $user->name . ' - ' . $user->email }}</option>
+					                                            <option value="{{ $user->id }}" title="{{ (App\Models\Role::where('name',$user->role)->first())->display_name }}">{{ $user->name . ' - ' . $user->email }}</option>
 					                                        @endif
 					                                    @endforeach
 					                                </select>

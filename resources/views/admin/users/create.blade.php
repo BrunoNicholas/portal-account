@@ -11,12 +11,10 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-				            <li class="breadcrumb-item"><a href="{{ route('userhome') }}"> <i class="fa fa-home"></i> Home</a></li>
-				            <li class="breadcrumb-item"><a href="{{ route('admin') }}"> <i class="fa fa-user-plus"></i> Administrator </a></li>
-				            <li class="breadcrumb-item"><a href="{{ route('users.index') }}"> <i class="fa fa-users"></i> System Users </a></li>
-				            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-user"></i> Add User </li>
-				        </ol>
+			            <li class="breadcrumb-item"><a href="{{ route('userhome') }}"> <i class="fa fa-home"></i> Home</a></li>
+			            <li class="breadcrumb-item"><a href="{{ route('admin') }}"> <i class="fa fa-user-plus"></i> Administrator </a></li>
+			            <li class="breadcrumb-item"><a href="{{ route('users.index') }}"> <i class="fa fa-users"></i> System Users </a></li>
+			            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-user"></i> Add User </li>
 	                </ol>
 	            </nav>
 	        </div>
@@ -24,7 +22,7 @@
     </div>
 @endsection
 @section('content')
-<div class="container mt-0" style="min-height: 500px;">
+<div class="card card-body container mt-0" style="min-height: 500px;">
 	<div class="row mt-0 pl-0">
 		<div class="col-lg-8 ms-paper-content-container">
 			<div class="ms-paper-content">
@@ -39,12 +37,6 @@
 					            @foreach ($errors->all() as $error)
 					            	<p class="alert alert-danger">{{ $error }}</p>
 					            @endforeach
-
-					            @if (session('success'))
-					            	<div class="alert alert-success">
-					            		{{ session('success') }}
-					            	</div>
-					            @endif
 					                    
 					            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -117,7 +109,7 @@
 			                                <select class="form-control custom-select" name="role">
 			                                    <option value="client">Please select</option>
 			                                    @foreach($roles as $role)
-			                                        <option value="{{ $role->name }}"><b>{{  $role->display_name . ' - ' . $role->description }}</b></option>
+			                                        <option value="{{ $role->name }}"><b>{{  $role->display_name }}</b> - <i>{{ $role->description }}</i></option>
 			                                    @endforeach
 			                                </select>
 					                    </div>

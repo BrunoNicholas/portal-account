@@ -11,14 +11,16 @@ class JobCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $job;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($job)
     {
-        //
+        $this->job = $job;
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingCreated;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Models\Shop;
@@ -9,6 +11,7 @@ use App\Models\Salon;
 use App\Models\Style;
 use App\Models\Product;
 use App\User;
+use Auth;
 
 class BookingController extends Controller
 {
@@ -19,7 +22,7 @@ class BookingController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('role:super-admin|admin|company-admin|salon-admin|shop-admin|attendant|client')->except('show','index');
+        $this->middleware('role:super-admin|admin|company-admin|salon-admin|shop-admin|attendant')->except('show','store','update');
 
         $this->middleware('permission:can_make_booking',['only'=>['create','store']]);
         // $this->middleware('permission:delete_user',['only'=>'destroy']);
@@ -67,7 +70,7 @@ class BookingController extends Controller
         }
 
         $bookings = Booking::latest()->paginate(50);
-        return view('system.bookings.index',compact(['bookings','type','id']));
+        return view('system.bookings.index',compact(['bookings','type','item_id']));
     }
 
     /**
@@ -77,8 +80,7 @@ class BookingController extends Controller
      */
     public function create($type=null, $id)
     {
-        $bookings = Booking::latest()->paginate(50);
-        return view('system.bookings.create',compact(['bookings','type','item_id']));
+        return view('system.bookings.create');
     }
 
     /**
@@ -93,9 +95,18 @@ class BookingController extends Controller
             'user_id' => 'required',
         ]);
         Booking::create($request->all());
+
+        $user   = User::where('id',$booking->user_id)->first();
+
+        // mailing to user who has made booking
+        Mail::to($user->email)->send(
+            new BookingCreated($booking)
+        );
+        
         if ($type && $item_id) {
             return redirect()->route('bookings.index',[$type,$item_id])->with('success','Booking created successfully!');
         }
+
         return redirect()->back()->with('success','Booking created successfully!');
     }
 

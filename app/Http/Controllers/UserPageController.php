@@ -2,7 +2,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Question;
-use App\Models\Message;
+use App\Models\Booking;
+use App\Models\Order;
 use Image;
 use File;
 use Auth;
@@ -36,6 +37,7 @@ class UserPageController extends Controller
     public function settings()
     {
         $user = Auth::user();
+        return redirect()->route('home')->with('info','Feature not yet released. We will notify you when it is.');
         return view('user.index', compact(['user']));
     }
     /**
@@ -45,8 +47,10 @@ class UserPageController extends Controller
      */
     public function profile()
     {
-        $user = Auth::user();
-        return view('user.settings.profile', compact(['user']));
+        $user       = Auth::user();
+        $bookings   = Booking::where('user_id',$user->id)->latest()->get();
+        $orders     = Order::where('user_id',$user->id)->latest()->get();
+        return view('user.settings.profile', compact(['user','bookings','orders']));
     }
     /**
      * Update the specified resource in storage.
@@ -57,6 +61,10 @@ class UserPageController extends Controller
      */
     public function update_image(Request $request)
     {
+        request()->validate([
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         if ($request->hasFile('profile_image')) {
             // delete old image
             $oldUser = Auth::user();
@@ -66,7 +74,7 @@ class UserPageController extends Controller
             }
             $user_image = $request->file('profile_image');
             $filename = time() . '.' . $user_image->getClientOriginalExtension();
-            Image::make($user_image)->resize(300,300)->save( public_path('/files/profile/images/' . $filename) );
+            Image::make($user_image)->resize(320,320)->save( public_path('/files/profile/images/' . $filename) );
             $user = Auth::user();
             $user->profile_image = $filename;
             $user->save();
@@ -74,8 +82,8 @@ class UserPageController extends Controller
         elseif(!$request->hasFile('profile_image')) 
         {
             $user = Auth::user();
-            return redirect()->route('profile',compact(['user']))->with('warning','It looks like nothing was uploaded.');
+            return redirect()->route('profile')->with('warning','It looks like nothing was uploaded.');
         }
-        return redirect()->route('profile',compact(['user']))->with('success','Profile Picture Updated Successfully!');
+        return redirect()->route('profile')->with('success','Profile Picture Updated Successfully!');
     }
 }

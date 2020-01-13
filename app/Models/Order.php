@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories;
 use App\Models\Product;
 use App\Models\Comment;
+use App\Models\Style;
+use App\Models\Salon;
+use App\Models\Shop;
 use App\User;
 
 class Order extends Model
@@ -17,8 +20,8 @@ class Order extends Model
      */
     protected $fillable = [
         'categories_id',
-        'product_id',
-        'date_time',
+        'product_id','style_id','shop_id','salon_id',
+        'date_time','start_time','end_time',
         'quantity',
         'description',
         'user_id',
@@ -32,6 +35,22 @@ class Order extends Model
      */
     protected $table = 'orders';
 
+    /*
+     * belongs to table
+     */
+    public function shops()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    /*
+     * belongs to table
+     */
+    public function salons()
+    {
+        return $this->belongsTo(Salon::class);
+    }
+
     /**
      * The relationship method
      *
@@ -40,6 +59,16 @@ class Order extends Model
     public function products()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * The relationship method
+     *
+     * as this table.
+     */
+    public function styles()
+    {
+        return $this->belongsTo(Style::class);
     }
     
     /**

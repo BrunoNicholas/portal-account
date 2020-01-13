@@ -11,12 +11,10 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"> <i class="fa fa-home"></i> Home</a></li>
-			                <li class="breadcrumb-item"><a href="{{ route('admin') }}"> <i class="fa fa-user-plus"></i> Administrator </a></li>
-			                <li class="breadcrumb-item"><a href="{{ route('roles.index') }}"> <i class="fa fa-user-plus"></i> User Roles </a></li>
-			                <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-plus"></i> Edit Role </li>
-				        </ol>
+                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"> <i class="fa fa-home"></i> Home</a></li>
+		                <li class="breadcrumb-item"><a href="{{ route('admin') }}"> <i class="fa fa-user-plus"></i> Administrator </a></li>
+		                <li class="breadcrumb-item"><a href="{{ route('roles.index') }}"> <i class="fa fa-user-plus"></i> User Roles </a></li>
+		                <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-plus"></i> Edit Role </li>
 	                </ol>
 	            </nav>
 	        </div>
@@ -24,7 +22,7 @@
     </div>
 @endsection
 @section('content')
-<div class="container mt-0" style="min-height: 500px;">
+<div class="card card-body container mt-0" style="min-height: 500px;">
 	<div class="row mt-0 pl-0">
 		<div class="col-lg-8 ms-paper-content-container">
 			<div class="ms-paper-content">
@@ -70,20 +68,22 @@
 					                <div class="form-group row">
 					                    <label class="col-lg-3 col-form-label"> Description </label>
 					                    <div class="col-lg-9">
-					                    	<textarea class="form-control" rows="3" name="description">
-					                    		{{ $role->description }}
-					                    	</textarea>
+					                    	<textarea class="form-control" rows="3" name="description">{{ $role->description }}</textarea>
 					                    </div>
 					                </div>
 
 					                <div class="form-group row">
-					                    <label class="col-lg-4 col-form-label"> Permissions <span class="text-danger">*</span>
+					                    <label class="col-lg-3 col-form-label"> Permissions <span class="text-danger">*</span>
 					                    </label>
-					                    <div class="col-lg-6" style="max-height: 100px; overflow-y: auto;">
+					                    <div class="col-lg-8" style="max-height: 200px; overflow-y: auto;">
 					                    	@foreach($permissions as $perm)
-					                    		<input type="checkbox" 
-					                    		{{ in_array($perm->id, $permission_role)?"checked":"" }}
-					                    		name="permission[]" value="{{ $perm->id }}"> {{ $perm->display_name }} <br>
+					                    		<div class="form-check checkbox">
+			                                        <label class="form-check-label">
+								                    	<input type="checkbox" class="form-check-input" 
+								                    		{{ in_array($perm->id, $permission_role)?"checked":"" }}
+								                    		name="permission[]" value="{{ $perm->id }}"> {{ $perm->display_name }} <br>
+								                    </label>
+								                </div>
 					                    	@endforeach
 					                    </div>
 					                </div>

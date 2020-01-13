@@ -15,6 +15,11 @@ class CreateGalleriesTable extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('company_id')->nullable()->unsigned()->index();
+            $table->bigInteger('shop_id')->nullable()->unsigned()->index();
+            $table->bigInteger('salon_id')->nullable()->unsigned()->index();
+            $table->bigInteger('style_id')->nullable()->unsigned()->index();
+            $table->bigInteger('product_id')->nullable()->unsigned()->index();
             $table->string('gallery_name');
             $table->text('description')->nullable();
             $table->bigInteger('gallery_id')->nullable()->unsigned()->index();
@@ -24,7 +29,11 @@ class CreateGalleriesTable extends Migration
             $table->string('status')->default('visible');
             $table->timestamps();
 
-            $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
+            $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');$table->foreign('company_id')->references('id')->on('styles')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('styles')->onDelete('cascade');
+            $table->foreign('salon_id')->references('id')->on('styles')->onDelete('cascade');
+            $table->foreign('style_id')->references('id')->on('styles')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

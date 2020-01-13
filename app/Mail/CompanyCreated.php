@@ -11,14 +11,18 @@ class CompanyCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $company;
+    public $type;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($new_company)
     {
-        //
+        $this->company = $new_company;
+        $this->type = 'all';
     }
 
     /**

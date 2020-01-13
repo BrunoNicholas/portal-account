@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Booking;
 use App\Models\Categories;
 use App\Models\Product;
-use App\Models\Image;
+use App\Models\Gallery;
+use App\Models\Rating;
+use App\Models\Review;
+use App\Models\TeamUser;
 use App\User;
 
 class Shop extends Model
@@ -40,7 +43,7 @@ class Shop extends Model
      *
      * @var array
      */
-    protected $table = 'reviews';
+    protected $table = 'shops';
 
     /*
      * belongs to table
@@ -68,11 +71,29 @@ class Shop extends Model
     }
 
     /**
+     * The relationship method for.
+     * as this table.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * The relationship method for.
+     * as this table.
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    /**
      * The relationship method for images
      */
-    public function images()
+    public function galleries()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Gallery::class);
     }
 
     /**
@@ -81,5 +102,13 @@ class Shop extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * The relationship method for images
+     */
+    public function team_users()
+    {
+        return $this->hasMany(TeamUser::class);
     }
 }

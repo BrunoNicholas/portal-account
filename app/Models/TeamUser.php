@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Company;
+use App\Models\Salon;
+use App\Models\Shop;
+use App\User;
 
 class TeamUser extends Model
 {
@@ -14,6 +18,10 @@ class TeamUser extends Model
     protected $fillable = [
         'team_id',
         'user_id',
+        'salon_id',
+        'shop_id',
+        'company_id',
+        'status',
     ];
 
     /**
@@ -21,7 +29,7 @@ class TeamUser extends Model
      *
      * @var array
      */
-    protected $table = 'teams';
+    protected $table = 'team_users';
 
     /**
      * Belonds to relationship connects both 
@@ -31,6 +39,36 @@ class TeamUser extends Model
     public function teams()
     {
         return $this->belongsTo(Team::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function shops()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function salons()
+    {
+        return $this->belongsTo(Salon::class);
+    }
+
+    /**
+     * Belonds to relationship connects both 
+     * the user table and the books table
+     *
+     */
+    public function companies()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     /**

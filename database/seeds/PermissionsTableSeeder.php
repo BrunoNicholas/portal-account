@@ -86,6 +86,12 @@ class PermissionsTableSeeder extends Seeder
 	        	'display_name'	=> 'Can send a public message',
 	        	'description'	=> 'User can send a public message to all',
         	],
+            // categories
+            [
+                'name'          => 'can_suggest_categories',
+                'display_name'  => 'Can suggest missing categories',
+                'description'   => 'A user can suggest a missing category on system items',
+            ],
         	// comments
             [
                 'name'          => 'can_make_comment',
@@ -128,10 +134,10 @@ class PermissionsTableSeeder extends Seeder
                 'display_name'  => 'Can upload images to the system',
                 'description'   => 'A user can upload images to system',
             ],
-            // salons
+            // salons and shops
             [
                 'name'          => 'can_add_salon',
-                'display_name'  => 'Can craete a salon',
+                'display_name'  => 'Can create a salon',
                 'description'   => 'A user can add a a new salon and make themselves salon admin',
             ],
             [
@@ -239,9 +245,12 @@ class PermissionsTableSeeder extends Seeder
                 'name'          => 'can_make_teams',
                 'display_name'  => 'Can make a team',
                 'description'   => 'A user can make a team of users on the platform',
+            ],            
+            [
+                'name'          => 'can_view_map',
+                'display_name'  => 'Can view records map',
+                'description'   => 'User can see the map with accounts, shops and salons',
             ],
-
-            // 
             // [
             //     'name'          => '',
             //     'display_name'  => '',

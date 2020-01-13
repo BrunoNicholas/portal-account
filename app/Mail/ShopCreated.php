@@ -11,14 +11,17 @@ class ShopCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $shop;
+    public $type;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($shop)
     {
-        //
+        $this->shop = $shop;
+        $this->type = 'all';
     }
 
     /**

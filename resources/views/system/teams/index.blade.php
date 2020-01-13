@@ -13,12 +13,9 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
-	                    	<li><a href="{{ route('users.index') }}"><i class="fa fa-home text-primary"></i>Users</a></li>
-					        <li class="active"><a href="javascript:void(0)"><i class="fa fa-users"></i> Teams </a></li>
-
-				        </ol>
+                    	<li><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
+                    	<li><a href="{{ route('users.index') }}"><i class="fa fa-home text-primary"></i>Users</a></li>
+				        <li class="active"><a href="javascript:void(0)"><i class="fa fa-users"></i> Teams </a></li>
 	                </ol>
 	            </nav>
 	        </div>
@@ -38,6 +35,7 @@
 	    </div>
 	</div>
 </div>
+@include('layouts.includes.footer')
 @endsection
 @section('scripts') 
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

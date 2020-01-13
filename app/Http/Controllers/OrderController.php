@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderCreated;
 use App\Models\Shop;
 use App\Models\Product;
 use App\User;
@@ -27,7 +29,7 @@ class OrderController extends Controller
 
             return view('system.orders.index',compact(['orders','type','item_id']));
         }
-        $orders = Booking::latest()->paginate(50);
+        $orders = Order::latest()->paginate(50);
         return view('system.orders.index',compact(['orders','type','id']));
     }
 
@@ -38,7 +40,7 @@ class OrderController extends Controller
      */
     public function create($type=null,$item_id)
     {
-        return view('system.bookings.create',compact(['bookings','type','item_id']));
+        return view('system.orders.create',compact(['type','item_id']));
     }
 
     /**
@@ -53,7 +55,15 @@ class OrderController extends Controller
             'user_id'   => 'required',
             'status'    => 'required',
         ]);
-        Order::create($request->all());
+        $order = Order::create($request->all());
+
+        $user   = User::where('id',$order->user_id)->first();
+
+        // mailing to user who has made booking
+        Mail::to($user->email)->send(
+            new OrderCreated($order)
+        );
+
         if ($type && $item_id) {
             return redirect()->route('orders.index',[$type,$item_id])->with('success','Order made successfully!');
         }

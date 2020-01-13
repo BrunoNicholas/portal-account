@@ -13,11 +13,9 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
-				            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
-				            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-envelope"></i> Messages </li>
-				        </ol>
+                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
+			            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
+			            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-envelope"></i> Messages </li>
 	                </ol>
 	            </nav>
 	        </div>
@@ -64,9 +62,9 @@
 			                </h3>
 			            </section>
 			            <div class="col-md-12" style="overflow-x: auto;">
-			                <div class="panel panel-primary">
+			                <div class="box box-primary">
 				                <!-- /.box-header -->
-				                <div class="panel-body no-padding">
+				                <div class="no-padding">
 				                  	<div class="mailbox-controls">
 					                    <!-- Check all button -->
 					                    <div class="btn-group">
@@ -85,52 +83,43 @@
 						                    <tbody>
 						                        @if(sizeof($messages) < 1)
 					                              	<tr>
-					                                  	<td class="chb text-center" colspan="6"> <i> No {{ $type }} message found! </i> </td>
+					                                  	<td class="chb text-center text-info" colspan="6" style="vertical-align: middle;"> <i> No {{ $type }} message found! </i> </td>
 					                              	</tr>
 						                        @endif
 						                        @foreach ($messages as $message)
 						                            <tr class="@if($message->priority == 'seen') unread @else read @endif" @if ($message->priority == 'seen') style="background-color: #e9f9f9;" @endif>
-						                                <td class="check chb">
-						                                    {{-- <input type="checkbox" class="icheck" name="checkbox1" /> --}}
-						                                    <div class="custom-control custom-checkbox">
-				                                              	<input type="checkbox" name="checker" class="custom-control-input" id="cst{{ $message->id }}">
-				                                              	<label class="custom-control-label" for="cst{{ $message->id }}">&nbsp;</label>
-				                                          	</div>
-						                                </td>
 
 				                                        @if($message->sender == Auth::user()->id)
-				                                            <td class="user-image">
-				                                                <img src="{{ App\User::where('id',$message->receiver)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->receiver)->get()->first())->profile_image : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
+				                                            <td class="user-image" style="vertical-align: middle;">
+				                                                <img src="{{ App\User::where('id',$message->receiver)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->receiver)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
 				                                            </td>
-				                                            <td class="user-name">
-				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->receiver)->get()->first())->name }}</h6>
+				                                            <td class="user-name" style="vertical-align: middle;">
+				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->receiver)->first())->name }}</h6>
 				                                            </td>
 				                                        @else
-				                                            <td class="user-image">
-				                                                <img src="{{ asset('/files/profile/images/'. (App\User::where('id',$message->sender)->get()->first())->profile_image) }}" alt="user" class="rounded-circle" width="30">
+				                                            <td class="user-image" style="vertical-align: middle;">
+				                                                <img src="{{ App\User::where('id',$message->sender)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->sender)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="30">
 				                                            </td>
-				                                            <td class="user-name">
-				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->sender)->get()->first())->name }}</h6>
+				                                            <td class="user-name" style="vertical-align: middle;">
+				                                                <h6 class="m-b-0">{{ (App\User::where('id',$message->sender)->first())->name }}</h6>
 				                                            </td>
 				                                        @endif
-						                                <td class="contact pull-left">
-						                                    <a class="link pull-left" href="{{ route('messages.show',[$message->id,'details']) }}">
-				                                                @if($message->folder == 'important')
-				                                                    <span class="btn btn-sm btn-danger m-r-10">{{ $message->folder }}</span>
-				                                                @elseif($message->folder == 'urgent')
-				                                                    <span class="btn btn-sm btn-success m-r-10">{{ $message->folder }}</span>
-				                                                @elseif($message->folder == 'official')
-				                                                    <span class="btn btn-sm btn-warning m-r-10">{{ $message->folder }}</span>
-				                                                @elseif($message->folder == 'unofficial')
-				                                                    <span class="btn btn-sm btn-info m-r-10">{{ $message->folder }}</span>
-				                                                @elseif($message->folder == 'normal')
-				                                                    <span class="btn btn-sm btn-default m-r-10">{{ $message->folder }}</span>
-				                                                @else
-				                                                    <span class="btn btn-sm btn-primary m-r-10 text-primary">{{ $message->folder }}</span>
-				                                                @endif
-				                                            </a>
+						                                <td class="contact pull-left" style="vertical-align: middle;" onclick="window.location='{{ route('messages.show',[$message->id,'details']) }}'">
+			                                                @if($message->folder == 'important')
+			                                                    <span class="badge badge-danger m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @elseif($message->folder == 'urgent')
+			                                                    <span class="badge badge-success m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @elseif($message->folder == 'official')
+			                                                    <span class="badge badge-warning m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @elseif($message->folder == 'unofficial')
+			                                                    <span class="badge badge-info m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @elseif($message->folder == 'normal')
+			                                                    <span class="badge badge-default m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @else
+			                                                    <span class="btn btn-xs btn-primary m-r-10 mt-1">{{ $message->folder }}</span>
+			                                                @endif
 				                                        </td>
-				                                        <td class="contact">
+				                                        <td class="contact" style="vertical-align: middle;">
 				                                          	<a  href="{{ route('messages.show',[$message->id,'details']) }}">
 				                                                <span class="blue-grey-text text-darken-4">
 				                                                    <b>{{ $message->title }}</b>
@@ -139,10 +128,10 @@
 				                                            </a>
 						                                </td>
 					                                  	@if($message->attachment) 
-				                                            <td class="clip" title="This is a public (group) message sent to all!"><i class="fa fa-users"></i></td> <!-- fa fa-paperclip -->
-				                                            <td class="time" title="This is a public (group) message sent to all!"> {{ $message->created_at }} </td>
+				                                            <td class="clip" title="This is a public (group) message sent to all!" style="vertical-align: middle;"><i class="fa fa-users"></i></td> <!-- fa fa-paperclip -->
+				                                            <td class="time" title="This is a public (group) message sent to all!" style="vertical-align: middle;"> {{ $message->created_at }} </td>
 				                                        @else
-				                                            <td colspan="2" class="time" title="{{ $message->created_at }}"> {{ $message->created_at }} </td>
+				                                            <td colspan="2" class="time" title="{{ explode(' ', trim($message->created_at))[0] . ', ' . explode(' ', trim($message->created_at))[1] }}" style="vertical-align: middle;"> {{ $message->created_at }} </td>
 				                                        @endif
 						                            </tr>
 						                        @endforeach
@@ -170,12 +159,12 @@
 				            </div>
 			            </div>
 			        </div>
-
 	            </section>
 	        </div>
 	    </div>
 	</div>
 </div>
+@include('layouts.includes.footer')
 @endsection
 @section('scripts')
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories;
 use App\Models\Booking;
+use App\Models\Order;
 use App\Models\Comment;
-use App\Models\Image;
+use App\Models\Gallery;
 use App\Models\Salon;
 use App\User;
 
@@ -70,6 +71,15 @@ class Style extends Model
     }
 
     /**
+     * The relationship method for.
+     * as this table.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
      * The relationship method for comments
      */
     public function comments()
@@ -80,8 +90,8 @@ class Style extends Model
     /**
      * The relationship method for images
      */
-    public function images()
+    public function galleries()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Gallery::class);
     }
 }

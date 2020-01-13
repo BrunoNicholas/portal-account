@@ -1,20 +1,18 @@
 @extends('layouts.site')
-@section('title', 'Edit Company')
+@section('title', 'Edit Account')
 @section('styles') @endsection
 @section('navigator')
 	<div class="container mt-0">
 		<div class="row">
 			<div class="d-flex no-block align-items-center col-md-4">
-				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">Edit Company</span>
+				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">Edit Account</span>
 			</div>
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
-					    	<li class="breadcrumb-item"><a href="{{ route('companies.index') }}"><i class="ion ion-ios-toggle-outline text-primary"></i>Companies</a></li>
-					        <li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="fa fa-edit"></i>Edit Company</a></li>
-				        </ol>
+                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
+				    	<li class="breadcrumb-item"><a href="{{ route('companies.index','all') }}"><i class="ion ion-ios-toggle-outline text-primary"></i>Multi Accounts</a></li>
+				        <li class="breadcrumb-item active"><a href="javascript:void(0)"><i class="fa fa-edit"></i>Edit Account</a></li>
 	                </ol>
 	            </nav>
 	        </div>

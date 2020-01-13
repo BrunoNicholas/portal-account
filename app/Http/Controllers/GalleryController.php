@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Salon;
+use App\Models\Shop;
+use App\Models\Style;
+use App\Models\Product;
+use Auth;
 use Image;
 use File;
 
@@ -17,7 +22,12 @@ class GalleryController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('role:super-admin|admin|patron|chaiperson|cu-leader|editor')->except('index','show','album');
+        $this->middleware(['auth','verified']);
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        $this->middleware('permission:can_make_image_uploads',['only'=>['index','create','store','update']]);
+        // $this->middleware('permission:can_delete_salon',['only'=>'destroy']);
+        // $this->middleware('permission:can_edit_salon',['only'=>['update','edit']]);
     }
 
     /**
@@ -27,7 +37,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::latest()->paginate(20);
+        $galleries = Gallery::where('user_id',Auth::user()->id)->latest()->paginate(20);
         $countOthers = Gallery::whereNull('gallery_name')->whereNull('gallery_id')->get()->count();
         return view('system.galleries.index',compact(['galleries','countOthers']));
     }
@@ -38,7 +48,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        $galleries = Gallery::latest()->paginate(20);
+        $galleries = Gallery::where('user_id',Auth::user()->id)->latest()->paginate(20);
         return view('system.galleries.create',compact(['galleries']));
     }
     /**
@@ -50,9 +60,8 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'image'     => 'required',
+            'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
             'user_id'   => 'required',
-            'status'    => 'required',
         ]);
 
         $image_item = new Gallery();
@@ -65,13 +74,13 @@ class GalleryController extends Controller
             $user_image = $request->file('image');
             $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            Image::make($user_image)->save( public_path('/files/storage/images/' . $filename) );
-            // $path = $request->file('image')->storeAs('public/gallery/', $filename);
+            Image::make($user_image)->save( public_path('/files/galleries/images/' . $filename) );
+            // $user_image->move(public_path() . '/files/galleries/images/', $filename);
 
             $image_item->image      = $filename;
             $image_item->gallery_name = $request->gallery_name;
             $image_item->gallery_id = $request->gallery_id;
-            $image_item->caption    = $request->caption;
+            $image_item->description    = $request->description;
             $image_item->user_id    = $request->user_id;
             $image_item->title      = $request->title;
             $image_item->save();
@@ -93,7 +102,13 @@ class GalleryController extends Controller
         if (!$gallery) {
             return back()->with('danger', 'Gallery not found. It is either missing or deleted.');
         }
-        return view('system.galleries.show', compact(['gallery']));
+
+        $salons     = Salon::where('user_id',$gallery->user_id)->get();
+        $shops      = Shop::where('user_id',$gallery->user_id)->get();
+        $styles     = Style::where('user_id',$gallery->user_id)->get();
+        $products   = Product::where('user_id',$gallery->user_id)->get();
+
+        return view('system.galleries.show', compact(['gallery','salons','shops','styles','products']));
     }
     /**
      * Show the form for editing the specified resource.
@@ -120,7 +135,6 @@ class GalleryController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-            'image'     => 'required',
             'user_id'   => 'required',
             'status'    => 'required',
         ]);
@@ -128,30 +142,34 @@ class GalleryController extends Controller
         $gallery_item = Gallery::find($id);
         
         // if ($request->hasFile('image')) {
-        if ($request->file('image')->isValid()) {
-            $fileWithExtension = $request->file('image')->getClientOriginalName();
-            $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
+        if($request->image){
+            if ($request->file('image')->isValid()) {
 
-            $user_image = $request->file('image');
-            $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
+                $pathToImage = public_path('files/galleries/images/').$gallery_item->image;
+                File::delete($pathToImage);
 
-            Image::make($user_image)->save( public_path('/files/storage/gallery/' . $filename) );
-            // $path = $request->file('image')->storeAs('public/gallery/', $filename);
+                $fileWithExtension = $request->file('image')->getClientOriginalName();
+                $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
 
-            $gallery_item->image = $filename;
+                $user_image = $request->file('image');
+                $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
+
+                Image::make($user_image)->save( public_path('/files/galleries/gallery/' . $filename) );
+                // $path = $request->file('image')->storeAs('public/gallery/', $filename);
+
+                $gallery_item->image = $filename;
+            }
         }
+
 
         $gallery_item->gallery_name = $request->gallery_name;
         $gallery_item->description  = $request->description;
         $gallery_item->gallery_id = $request->gallery_id;
-        $gallery_item->caption  = $request->caption;
         $gallery_item->title    = $request->title;
-        $gallery_item->size     = $request->size;
         $gallery_item->user_id = $request->user_id;
-        $gallery_item->status = $request->status;
         $gallery_item->save();
 
-        return redirect()->route('galleries.index')->with('success','Gallery saved successfully!');
+        return redirect()->route('galleries.index')->with('success','Gallery details updated successfully!');
     }
     /**
      * Remove the specified resource from storage.
@@ -163,7 +181,7 @@ class GalleryController extends Controller
     {
         $item = Gallery::find($id);
 
-        $pathToImage = public_path('files/storage/images/').$item->image;
+        $pathToImage = public_path('files/galleries/images/').$item->image;
         File::delete($pathToImage);
 
         $item->delete();

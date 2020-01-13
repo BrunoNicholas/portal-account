@@ -20,7 +20,7 @@
     </div>
 @endsection
 @section('content')
-<div class="container" style="min-height: 500px;">
+<div class="card card-body container" style="min-height: 500px;">
 	<div class="row mt-0 pl-0">
 		<div class="col-lg-12 ms-paper-content-container">
 			<div class="row">
@@ -38,7 +38,7 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('companies.index') }}'">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('companies.index','all') }}'">
                     <div class="panel panel-body text-center">
                     	<div class="row pl-2 text-warning">                    	
                         	<i class="fa fa-4x fa-id-card-o primary-color text-warning text-center col-4" style="padding-top: 20px;"></i>
@@ -52,7 +52,7 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('salons.index') }}'">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('salons.index','all') }}'">
                     <div class="panel panel-body text-center">
                     	<div class="row pl-2 text-info">                    	
                         	<i class="fa fa-4x fa-address-book primary-color text-info text-center col-4" style="padding-top: 20px;"></i>
@@ -66,7 +66,7 @@
 		                </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('shops.index') }}'">
+                <div class="col-lg-3 col-md-6 col-sm-6 pt-1" onclick="window.location='{{ route('shops.index','all') }}'">
                     <div class="panel panel-body text-center">
                     	<div class="row pl-2 text-danger">                    	
                         	<i class="fa fa-4x fa-address-card primary-color text-danger text-center col-4" style="padding-top: 20px;"></i>
@@ -193,8 +193,8 @@
 		                        <div role="tabpanel" class="tab-pane fade" id="settings">
 		                          	<span class="text-danger">Still under developement</span>
 		                        </div>
-		                      </div>
 		                    </div>
+		                </div>
 		            </div> <!-- card -->
 		        </section>
 		    </div>
@@ -205,10 +205,23 @@
 					<h4 class="section-title no-margin-top text-center"> Activity </h4>
 					<div class="card">
 						<div class="card-header text-center">
-							Operations &amp; Counters
+							System Operations
 						</div>
 						<div class="card-body text-center">
-							<a href="{{ route('permissions.index') }}"><button class="btn btn-sm btn-warning">Permissions</button></a>
+							<a href="{{ route('categories.index') }}">
+								<button class="btn btn-sm btn-info">
+									<span class="ml-auto badge-pill bg-info">
+										{{ App\Models\Categories::all()->count() }}
+									</span> View Categories
+								</button>
+							</a>
+							<a href="{{ route('permissions.index') }}">
+								<button class="btn btn-sm btn-primary">
+									<span class="ml-auto badge-pill bg-primary">
+										{{ App\Models\Permission::all()->count() }}
+									</span> All Permissions
+								</button>
+							</a>
 							
 						</div>
 					</div>

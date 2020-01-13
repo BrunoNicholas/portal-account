@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
+use App\Models\Message;
 use App\Models\Role;
 use App\User;
 use Auth;
@@ -194,6 +195,8 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         DB::table('role_user')->where('user_id',$id)->delete();
+        DB::table('messages')->where('sender',$id)->delete();
+        DB::table('messages')->where('receiver',$id)->delete();
         return redirect()->route('users.index')->with('danger', 'User Profile Deleted Successfully');
     }
 }

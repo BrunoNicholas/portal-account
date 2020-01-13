@@ -21,7 +21,7 @@ class MessageController extends Controller
         
         $this->middleware('permission:can_message',['only'=>'index']);
         $this->middleware('permission:can_send_message',['only'=>['create','store']]);
-        // $this->middleware('permission:can_delete_job_opening',['only'=>'destroy']);
+        $this->middleware('permission:can_send_send_public_message',['only'=>'storeAll']);
         // $this->middleware('permission:can_respond_to_jobs',['only'=>['update','edit']]);
     }
 
@@ -173,6 +173,11 @@ class MessageController extends Controller
             return redirect()->route('messages.index', 'inbox')->with('success','Message saved successfully as draft!');
         }
         Message::create($request->all());
+        
+        if ($request->routers) {
+            return back()->with('success','Message sent succesfully!');
+        }
+
         if ($request->router) {
             if ($type) {
                 return redirect()->route($request->router, $type)->with('success','Message added successfully!');
@@ -218,6 +223,7 @@ class MessageController extends Controller
         foreach ($sendMessages as $key => $value) {
             Message::create($value);
         }
+
         if ($request->router) {
             if ($type) {
                 return redirect()->route($request->router, $type)->with('success','Message added successfully!');
@@ -235,23 +241,50 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        $allCount   = DB::table('messages')->where('sender', Auth::user()->id)->orWhere('receiver', Auth::user()->id)->count();
-        $inboxCount = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->count();
-        $trashCount = DB::table('messages')->where([['status', 'trash'],['receiver', Auth::user()->id]])->count();
-        $draftCount = DB::table('messages')->where([['status', 'draft'],['receiver', Auth::user()->id]])->count();
-        $sentCount  = DB::table('messages')->where('sender', Auth::user()->id)->whereNull('attachment')->count();
-        $spamCount  = DB::table('messages')->where([['status', 'spam'],['receiver', Auth::user()->id]])->count();
-        $impCount   = DB::table('messages')->where([['priority', 'important'],['receiver', Auth::user()->id]])->count();
-        $urgCount   = DB::table('messages')->where([['priority', 'urgent'],['receiver', Auth::user()->id]])->count();
-        $offCount   = DB::table('messages')->where([['priority', 'official'],['receiver', Auth::user()->id]])->count();
-        $unoffCount = DB::table('messages')->where([['priority', 'unofficial'],['receiver', Auth::user()->id]])->count();
-        $normalCount= DB::table('messages')->where([['priority', 'normal'],['receiver', Auth::user()->id]])->count();
-        $users      = User::all();
         $message    = Message::find($id);
         $type       = 'inbox';
+        
         if (!$message) {
             return redirect()->route('messages.index',$type)->with('danger', 'Message Not Found!');
         }
+
+        if ($message->sender != Auth::user()->id && $message->receiver != Auth::user()->id) {
+            return back()->with('warning','Access to resources not directed to you might lead to account suspense. Access Denied!');
+        }
+
+        $allCount   = DB::table('messages')->where('sender', Auth::user()->id)->orWhere('receiver', Auth::user()->id)->count();
+        $inboxCount = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->count();
+        $trashCount = DB::table('messages')->where([['status', 'trash'],['receiver', Auth::user()->id]])->count();
+        $draftCount = DB::table('messages')->where([['status', 'draft'],['sender', Auth::user()->id]])->count();
+        $spamCount  = DB::table('messages')->where([['status', 'spam'],['receiver', Auth::user()->id]])->count();
+        $sentCount  = DB::table('messages')->where('sender', Auth::user()->id)->whereNull('attachment')->count();
+        $impCount   = DB::table('messages')->where([
+            ['folder', 'important'],
+            ['sender', Auth::user()->id]])->orWhere([
+                ['folder', 'important'],
+                ['receiver', Auth::user()->id]])->count();
+        $urgCount   = DB::table('messages')->where([
+            ['folder', 'urgent'],
+            ['sender', Auth::user()->id]])->orWhere([
+                ['folder', 'urgent'],
+                ['receiver', Auth::user()->id]])->count();
+        $offCount   = DB::table('messages')->where([
+            ['folder', 'official'],
+            ['sender', Auth::user()->id]])->orWhere([
+                ['folder', 'official'],
+                ['receiver', Auth::user()->id]])->count();
+        $unoffCount = DB::table('messages')->where([
+            ['folder', 'unofficial'],
+            ['sender', Auth::user()->id]])->orWhere([
+                ['folder', 'unofficial'],
+                ['receiver', Auth::user()->id]])->count();
+        $normalCount= DB::table('messages')->where([
+            ['folder', 'normal'],
+            ['sender', Auth::user()->id]])->orWhere([
+                ['folder', 'normal'],
+                ['receiver', Auth::user()->id]])->count();
+        $users      = User::all();
+
         if ($message->sender == Auth::user()->id) {
             return view('user.messages.show', compact(['message','type','id','users','allCount','inboxCount','trashCount','draftCount','sentCount','spamCount','impCount','urgCount','offCount','unoffCount','normalCount']));
         }
@@ -290,7 +323,7 @@ class MessageController extends Controller
         ]);
         Message::find($id)->update($request->all());
         $type = 'inbox';
-        return redirect()->route('messages.index','type')->with('success','Message updated successfully.');
+        return redirect()->route('messages.index','inbox')->with('success','Message updated successfully.');
     }
 
     /**

@@ -6,10 +6,26 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use Image as IntervImage;
+use Auth;
 use File;
 
 class ImageController extends Controller
 {
+    /**
+     * Display the constructor of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        // $this->middleware('role:super-admin|admin|client')->except('show','index');
+        
+        $this->middleware('permission:can_make_image_uploads',['only'=>['create','store','update']]);
+        // $this->middleware('permission:can_delete_salon',['only'=>'destroy']);
+        // $this->middleware('permission:can_edit_salon',['only'=>['update','edit']]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +33,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        $images = Image::latest()->paginate(20);
-        $galleries  = Gallery::latest()->paginate(50);
+        $images = Image::where('user_id',Auth::user()->id)->latest()->paginate(20);
+        $galleries  = Gallery::where('user_id',Auth::user()->id)->latest()->paginate(50);
         return view('system.images.index',compact(['images','galleries']));
     }
 
@@ -29,8 +45,8 @@ class ImageController extends Controller
      */
     public function create()
     {
-        $images     = Image::latest()->paginate(20);
-        $galleries  = Gallery::latest()->paginate(50);
+        $images     = Image::where('user_id',Auth::user()->id)->latest()->paginate(20);
+        $galleries  = Gallery::where('user_id',Auth::user()->id)->latest()->paginate(50);
         return view('system.images.create',compact(['images','galleries']));
     }
 
@@ -43,7 +59,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'image'     => 'required',
+            'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
             'user_id'   => 'required',
         ]);
         
@@ -57,7 +73,7 @@ class ImageController extends Controller
             $user_image = $request->file('image');
             $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            IntervImage::make($user_image)->save( public_path('files/storage/images/' . $filename) );
+            IntervImage::make($user_image)->save( public_path('files/others/images/' . $filename) );
             // $path = $request->file('image')->storeAs('public/gallery/', $filename);
 
             $gallery_item->image = $filename;
@@ -71,8 +87,8 @@ class ImageController extends Controller
         {
             return back('danger','Looks like no image was uploaded!');
         }
-
-        return redirect()->route('images.index')->with('success','Image saved successfully!');
+        // redirect()->route('images.index')
+        return back()->with('success','Image saved successfully!');
     }
 
     /**
@@ -122,27 +138,32 @@ class ImageController extends Controller
         $gallery_item = Image::find($id);
         
         // if ($request->hasFile('image')) {
-        if ($request->file('image')->isValid()) {
+        if($request->image){
+            if ($request->file('image')->isValid()) {
 
-            $pathToImage = public_path('files/profile/images/').$gallery_item->image;
-            File::delete($pathToImage);
+                $pathToImage = public_path('files/others/images/').$gallery_item->image;
+                File::delete($pathToImage);
 
-            $fileWithExtension = $request->file('image')->getClientOriginalName();
-            $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
+                $fileWithExtension = $request->file('image')->getClientOriginalName();
+                $fileWithoutExtension = pathinfo($fileWithExtension, PATHINFO_FILENAME);
 
-            $user_image = $request->file('image');
-            $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
+                $user_image = $request->file('image');
+                $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            IntervImage::make($user_image)->save( public_path('files/storage/images/' . $filename) );
-            // $path = $request->file('image')->storeAs('public/gallery/', $filename);
+                IntervImage::make($user_image)->save( public_path('files/others/images/' . $filename) );
+                // $path = $request->file('image')->storeAs('public/gallery/', $filename);
 
-            $gallery_item->image = $filename;
+                $gallery_item->image = $filename;
+            }
         }
+
         $gallery_item->gallery_id   = $request->gallery_id;
         $gallery_item->caption      = $request->caption;
         $gallery_item->title        = $request->title;
         $gallery_item->user_id      = $request->user_id;
         $gallery_item->save();
+
+        return redirect()->route('images.index')->with('success','Image details updated successfully!');
     }
 
     /**
@@ -156,7 +177,7 @@ class ImageController extends Controller
         $item = Image::find($id);
         // delete old image
         
-        $pathToImage = public_path('files/storage/images/').$item->image;
+        $pathToImage = public_path('files/others/images/').$item->image;
         File::delete($pathToImage);
 
         $item->delete();

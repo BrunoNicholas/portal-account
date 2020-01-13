@@ -11,12 +11,10 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-	                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
-				            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
-				            <li class="breadcrumb-item"><a href="{{ route('messages.index','inbox') }}">  <i class="fa fa-envelope"></i> Messages </a></li>
-				            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-plus"></i> Message Details </li>
-				        </ol>
+                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
+			            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
+			            <li class="breadcrumb-item"><a href="{{ route('messages.index','inbox') }}">  <i class="fa fa-envelope"></i> Messages </a></li>
+			            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-plus"></i> Message Details </li>
 	                </ol>
 	            </nav>
 	        </div>
@@ -32,7 +30,7 @@
 	            <section class="ms-component-section">
 	            	<div class="card">
 			            <section class="card-primary" style="padding: 5px 15px;">
-			                <h3 class="card-title"> <i class="fa-envelope-open fa text-info"></i> Read Message </h3>
+			                <h3 class="card-title"> <i class="fa-envelope-open fa text-info"></i> Message Details <small> (<span class="text-primary">{{ $message->status }}ed, {{ $message->folder }}</span>)</small></h3>
 			            </section>
 			            <div class="col-md-12" style="overflow-x: auto;">
 			            	<div class="box box-primary">
@@ -45,7 +43,6 @@
 			            <!-- /.box-header -->
 			            <div class="box-body no-padding">
 				            <div class="mailbox-read-info">
-				                <h3>{{ $message->title }} <small> - {{ $message->status }}ed ({{ $message->folder }})</small></h3>
 				                <h5>
 			                        @if($message->receiver == Auth::user()->id)
 			                            <h5 class="m-b-0 font-16 font-medium">
@@ -71,7 +68,7 @@
 			                            	<img src="{{ App\User::where('id',$message->sender)->first()->profile_image ? asset('/files/profile/images/'. (App\User::where('id',$message->sender)->first())->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="25" style="border-radius: 50%;">
 			                                <a href="{{ route('profile') }}"> <b>Me</b> </a>
 			                            @else
-			                            	<img src="{{ asset('/files/profile/images/'. (App\User::where('id',$message->sender)->first())->profile_image) }}" alt="user" class="rounded-circle" width="35" style="border-radius: 50%;">
+			                            	<img src="{{ App\User::where('id',$message->sender)->first()->profile_image ? asset('/files/profile/images/'. App\User::where('id',$message->sender)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}" alt="user" class="rounded-circle" width="35" style="border-radius: 50%;">
 			                                <a href="{{ route('users.show',$message->sender) }}"><b>{{ (App\User::where('id',$message->sender)->get()->first())->email . ' - ' . (App\User::where('id',$message->sender)->get()->first())->name  }}</b></a>
 			                            @endif
 			                        </span>
@@ -112,14 +109,16 @@
 						                    </form>
 						                </div>
 					              	</div>
-					            @endif
-				              <!-- /.mailbox-controls -->
-				              <div class="mailbox-read-message">
-				                <p>Hello {{ App\User::where('id',$message->receiver)->first()->name }},</p>
+					            @else
+					            <br>
+					        @endif
+				            <!-- /.mailbox-controls -->
+				            <div class="mailbox-read-message">
+				                <p>@if($message->title )<big>{{ $message->title }}</big>@else <i>No title specified</i>@endif</p>
 
-				                <textarea class="form-control" rows="8" style="overflow-y: auto;border: none; background-color: #fff; color: #005; padding-top: 5px;" disabled>{{ $message->message }}</textarea>
-				              </div>
-				              <!-- /.mailbox-read-message -->
+				                <textarea class="form-control" rows="8" style="overflow-y: auto;border: none; background-color: #fff; color: #000; padding-top: 5px;" disabled>{{ $message->message }}</textarea>
+				            </div>
+				            <!-- /.mailbox-read-message -->
 			            </div>
 			            <div class="box-footer">
 				            <div class="pull-right">
@@ -235,10 +234,12 @@ Forwarded from {{ App\User::where('id',$message->sender)->get()->first()->name }
 				                    </div>
 				                </div>
 				            </div>
-				            <form action="{{ route('messages.destroy',[$message->id,'delete']) }}" method="post">
-			                	{{ csrf_field() }} {{ method_field('DELETE') }}
-			                	<button type="submit" class="btn btn-danger" onclick="return confirm('You are about to delete this message completely from all viewers!\nThis is not reversible!')" title="This lets you delete this message completely."><i class="fa fa-trash-o"></i> Delete</button>
-			                </form>
+				            @if($message->receiver == Auth::user()->id || $message->priority == 'unseen')
+					            <form action="{{ route('messages.destroy',[$message->id,'delete']) }}" method="post">
+				                	{{ csrf_field() }} {{ method_field('DELETE') }}
+				                	<button type="submit" class="btn btn-danger" onclick="return confirm('You are about to delete this message completely from all viewers!\nThis is not reversible!')" title="This lets you delete this message completely."><i class="fa fa-trash-o"></i> Delete</button>
+				                </form>
+			                @endif
 			            </div>
 			        </div>
 			            </div>

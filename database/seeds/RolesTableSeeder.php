@@ -31,20 +31,20 @@ class RolesTableSeeder extends Seeder
 
         $role_co_admin = new Role();
         $role_co_admin->name = 'company-admin';
-        $role_co_admin->display_name = 'Company Admin';
-        $role_co_admin->description = 'User who is an administrator of a company';
+        $role_co_admin->display_name = 'Multi Account Holder';
+        $role_co_admin->description = 'User who is owns more than one salons, shops or more.';
         $role_co_admin->save();
 
         $role_sa_admin = new Role();
         $role_sa_admin->name = 'salon-admin';
-        $role_sa_admin->display_name = 'Salon Administrator';
-        $role_sa_admin->description = 'A user who manages a salon account under a company';
+        $role_sa_admin->display_name = 'Salon Account Holder';
+        $role_sa_admin->description = 'A user who manages a single salon account profile';
         $role_sa_admin->save();
 
         $role_sh_admin = new Role();
         $role_sh_admin->name = 'shop-admin';
-        $role_sh_admin->display_name = 'Shop Administrator';
-        $role_sh_admin->description = 'A user who manages a shop account under a company';
+        $role_sh_admin->display_name = 'Shop Account Holder';
+        $role_sh_admin->description = 'A user who manages a shop single shop account';
         $role_sh_admin->save();
         //
         $role_editor = new Role();

@@ -1,11 +1,11 @@
-<div class="col-lg-3 ms-paper-content-container">
+<div class="card card-body col-lg-3 ms-paper-content-container">
 	@if(route('messages.create','all') == Request::fullUrl())
 	    <a href="{{ route('messages.index', 'inbox') }}" class="btn btn-primary btn-block btn-raised animated margin-bottom"><i class="fa-envelope-o fa"></i> Inbox</a>
 	@else
 		<a href="{{ route('messages.create', 'all') }}" class="btn btn-primary btn-block btn-raised animated margin-bottom"><i class="fa-edit fa"></i> Compose</a>
 	@endif
 
-	<div class="box box-solid" style="margin-top: 10px; margin-bottom: 10px;">
+	<div class="box box-solid" style="margin-top: 10px; margin-bottom: 5px;">
 	    <div class="box-header with-border">
 		    <button type="button" class="btn btn-box-tool pull-right" style="padding: 2px;" data-widget="collapse"><i class="fa fa-minus"></i></button>
 	      	<h4 class="box-title text-center pull-left">Message Sections</h4>
@@ -46,7 +46,7 @@
 	        </ul>
 	    </div>
 	</div>
-	<div class="box box-solid" style="margin-top: 10px; margin-bottom: 10px;">
+	<div class="box box-solid" style="margin-top: 10px; margin-bottom: 5px;">
 	    <div class="box-header with-border">
 	    	<button type="button" class="btn btn-box-tool pull-right" style="padding: 2px;" data-widget="collapse"><i class="fa fa-minus"></i></button>
 	      	<h4 class="box-title">Message Categories</h4>

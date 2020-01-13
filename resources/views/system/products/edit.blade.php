@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Edit Style')
+@section('title', 'Edit Shop Product')
 @section('styles') @endsection
 @section('top_menu') style="display: none;" @endsection
 @section('navigator')
@@ -11,10 +11,9 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
+	                    
 
-
-				        </ol>
+	                    
 	                </ol>
 	            </nav>
 	        </div>

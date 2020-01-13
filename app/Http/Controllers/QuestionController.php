@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\User;
 
 class QuestionController extends Controller
 {
@@ -14,10 +15,10 @@ class QuestionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except('index','show');
         // $this->middleware('role:super-admin|admin|client')->except('show','index');
         
-        $this->middleware('permission:can_view_questions',['only'=>'index']);
+        // $this->middleware('permission:can_view_questions',['only'=>'index']);
         $this->middleware('permission:can_add_questions',['only'=>['create','store']]);
         $this->middleware('permission:can_delete_post',['only'=>'destroy']);
         // $this->middleware('permission:can_update_questions',['only'=>['update','edit']]);
@@ -57,7 +58,7 @@ class QuestionController extends Controller
     {
         request()->validate([
             'description'   => 'required',
-            'asked_by'      => 'required',
+            'user_id'      => 'required',
         ]);
         Question::create($request->all());
         return redirect()->route('questions.index')->with('success','Your question is sent successfully! Please come back later once it has been responded to.');
@@ -107,8 +108,7 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
-            'description'   => 'required',
-            'asked_by'      => 'required',
+            'description'   => 'required'
         ]);
         Question::find($id)->update($request->all());
         return redirect()->route('questions.index')->with('success','Question Updated Successfully');

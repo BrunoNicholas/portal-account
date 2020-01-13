@@ -5,15 +5,14 @@
 	<div class="container mt-0">
 		<div class="row">
 			<div class="d-flex no-block align-items-center col-md-4">
-				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">Edit Shop</span>
+				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">Edit {{ $shop->shop_name }} Details</span>
 			</div>
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    <ol class="breadcrumb">
-
-
-				        </ol>
+	                	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
+						<li class="breadcrumb-item"><a href="{{ route('shops.index','all') }}"><i class="zmdi zmdi-male-female"></i> Shops</a></li>
+						<li class="breadcrumb-item active"><i class="fa fa-edit"></i> Edit Shop</li>
 	                </ol>
 	            </nav>
 	        </div>
