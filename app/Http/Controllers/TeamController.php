@@ -42,11 +42,16 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'team_name'     => 'required"unique:teams',
+            'team_name'     => 'required|unique:teams',
             'user_id'       => 'required',
             'status'        => 'required',
             'team_user'     => 'required',
         ]);
+
+        if (!$request->shop_id && !$request->salon_id && !$request->company_id) {
+            return back()->with('danger','You should specify where the team is to function whether salon, shop or account.');
+        }
+
         Team::create($request->except(['team_user','_token']));
 
         // finding team
@@ -63,6 +68,11 @@ class TeamController extends Controller
             $teamuser[$a]->company_id   = $request->company_id;
             $teamuser[$a]->status = $request->status;
             $teamuser[$a]->save();
+
+            $m_user = User::where('id',$value)->first();
+
+            DB::table('role_user')->where('user_id',$m_user->id)->delete();
+            $m_user->attachRole(Role::where('name','attendant')->first());
         }
         return redirect()->route('home')->with('success','Team saved successfully!');
     }

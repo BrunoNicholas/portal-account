@@ -71,7 +71,7 @@
     <div class="container mt-6">
         <h2 class="text-center color-primary mb-2 wow fadeInDown animation-delay-4">{{ config('app.name') }} Features</h2>
         <p class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"> 
-            Why, <span class="color-primary">{{ config('app.name') }}</span> is your ultimate choice.<br>
+            Why, <span class="color-primary">{{ config('app.name') }}</span>!<br>
             A result of the market demands, fashion and design salon &amp; shop businesses to provide the best for the service and product providers with their clients.
         </p>
         <div class="row">

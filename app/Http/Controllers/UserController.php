@@ -99,7 +99,7 @@ class UserController extends Controller
         request()->validate([
             'name'      => 'required',
             'email'     => 'required',
-            'role' => 'required',
+            'role'      => 'required',
 
         ]);
         $user = User::create($request->all());

@@ -426,27 +426,287 @@
                                                                 <div class="row pt-1">
                                                                     @role(['super-admin','admin','company-admin'])
                                                                     <div class="col-md-12" style="padding: 2px;">
-                                                                        <button class="btn btn-block btn-primary" style="margin: 0px; padding: 5px 10px;" title="Suggest missing company location category"> Account Location </button>
+                                                                        <button class="btn btn-block btn-primary" style="margin: 0px; padding: 5px 10px;" title="Suggest missing company location category" data-toggle="modal" data-target="#contactModal">
+                                                                            Account Location
+                                                                        </button>
+                                                                        {{-- modal --}}
+                                                                        <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <h3 class="text-center color-primary">Suggest missing company location</h3>
+                                                                                    <form action="{{ route('messages.store','inbox') }}" method="POST">
+                                                                                        @csrf
+                                                                                        @foreach ($errors->all() as $error)
+                                                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                                                        @endforeach
+
+                                                                                        <div class="modal-body">
+                                                                                            <input type="hidden" name="sender" value="{{ Auth::user()->id }}">
+                                                                                            <input type="hidden" name="receiver" value="">
+                                                                                            <input type="hidden" name="status" value="inbox">
+                                                                                            <input type="hidden" name="routers" value="{">
+                                                                                            <div class="form-group">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="recipient-name" class="control-label">Topic:</label>
+                                                                                                        <input type="text" class="form-control" id="recipient-name1" name="title">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="priority">Priority</label>
+                                                                                                        <select class="custom-select form-control" name="folder">
+                                                                                                            <option value="normal">Select priority</option>
+                                                                                                            <option value="important">Important</option>
+                                                                                                            <option value="urgent">Urgent</option>
+                                                                                                            <option value="official">Official</option>
+                                                                                                            <option value="unofficial">Unofficial</option>
+                                                                                                            <option value="normal">Normal</option>
+                                                                                                            <option value="">None</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="message-text" class="control-label">Message:</label>
+                                                                                                <textarea class="form-control" id="message-text1" name="message"></textarea>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                            <button type="submit" class="btn btn-primary">Send</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {{-- /end of modal --}}
                                                                     </div>
                                                                     @endrole
                                                                     @role(['super-admin','admin','company-admin','salon-admin'])
                                                                     <div class="col-md-12" style="padding: 2px;">
-                                                                        <button class="btn btn-block btn-success" style="margin: 0px; padding: 5px 10px;" title="Suggest salon category that is not listed"> Salon Type </button>
+                                                                        <button class="btn btn-block btn-success" style="margin: 0px; padding: 5px 10px;" title="Suggest salon category that is not listed" data-toggle="modal" data-target="#salonCatModal"> 
+                                                                            Salon Type 
+                                                                        </button>
+                                                                        {{-- modal --}}
+                                                                        <div class="modal fade" id="salonCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <h3 class="text-center color-success">Suggest new salon category</h3>
+                                                                                    <form action="{{ route('messages.store','inbox') }}" method="POST">
+                                                                                        @csrf
+                                                                                        @foreach ($errors->all() as $error)
+                                                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                                                        @endforeach
+
+                                                                                        <div class="modal-body">
+                                                                                            <input type="hidden" name="sender" value="{{ Auth::user()->id }}">
+                                                                                            <input type="hidden" name="receiver" value="">
+                                                                                            <input type="hidden" name="status" value="inbox">
+                                                                                            <input type="hidden" name="routers" value="{">
+                                                                                            <div class="form-group">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="recipient-name" class="control-label">Topic:</label>
+                                                                                                        <input type="text" class="form-control" id="recipient-name1" name="title">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="priority">Priority</label>
+                                                                                                        <select class="custom-select form-control" name="folder">
+                                                                                                            <option value="normal">Select priority</option>
+                                                                                                            <option value="important">Important</option>
+                                                                                                            <option value="urgent">Urgent</option>
+                                                                                                            <option value="official">Official</option>
+                                                                                                            <option value="unofficial">Unofficial</option>
+                                                                                                            <option value="normal">Normal</option>
+                                                                                                            <option value="">None</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="message-text" class="control-label">Message:</label>
+                                                                                                <textarea class="form-control" id="message-text1" name="message"></textarea>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                            <button type="submit" class="btn btn-primary">Send</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {{-- /end of modal --}}
                                                                     </div>
                                                                     @endrole
                                                                     @role(['super-admin','admin','company-admin','shop-admin'])
                                                                     <div class="col-md-12" style="padding: 2px;">
-                                                                        <button class="btn btn-block btn-info" style="margin: 0px; padding: 5px 10px;" title="Suggest shop category that is not listed"> Shop Type </button>
+                                                                        <button class="btn btn-block btn-info" style="margin: 0px; padding: 5px 10px;" title="Suggest shop category that is not listed" data-toggle="modal" data-target="#shopCatModal"> 
+                                                                            Shop Type
+                                                                        </button>
+                                                                        {{-- modal --}}
+                                                                        <div class="modal fade" id="shopCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <h2 class="text-center color-info">Suggest new shop category</h2>
+                                                                                    <form action="{{ route('messages.store','inbox') }}" method="POST">
+                                                                                        @csrf
+                                                                                        @foreach ($errors->all() as $error)
+                                                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                                                        @endforeach
+
+                                                                                        <div class="modal-body">
+                                                                                            <input type="hidden" name="sender" value="{{ Auth::user()->id }}">
+                                                                                            <input type="hidden" name="receiver" value="">
+                                                                                            <input type="hidden" name="status" value="inbox">
+                                                                                            <input type="hidden" name="routers" value="{">
+                                                                                            <div class="form-group">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="recipient-name" class="control-label">Topic:</label>
+                                                                                                        <input type="text" class="form-control" id="recipient-name1" name="title">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="priority">Priority</label>
+                                                                                                        <select class="custom-select form-control" name="folder">
+                                                                                                            <option value="normal">Select priority</option>
+                                                                                                            <option value="important">Important</option>
+                                                                                                            <option value="urgent">Urgent</option>
+                                                                                                            <option value="official">Official</option>
+                                                                                                            <option value="unofficial">Unofficial</option>
+                                                                                                            <option value="normal">Normal</option>
+                                                                                                            <option value="">None</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="message-text" class="control-label">Message:</label>
+                                                                                                <textarea class="form-control" id="message-text1" name="message"></textarea>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                            <button type="submit" class="btn btn-primary">Send</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {{-- /end of modal --}}
                                                                     </div>
                                                                     @endrole
                                                                     @role(['super-admin','admin','company-admin','salon-admin'])
                                                                     <div class="col-md-12" style="padding: 2px;">
-                                                                        <button class="btn btn-block btn-success" style="margin: 0px; padding: 5px 10px;" title="Suggest a fashion style category that is not listed"> Fashion Style </button>
+                                                                        <button class="btn btn-block btn-success" style="margin: 0px; padding: 5px 10px;" title="Suggest a fashion style category that is not listed" data-toggle="modal" data-target="#fasStyleCatModal">
+                                                                            Fashion Style
+                                                                        </button>
+                                                                        {{-- modal --}}
+                                                                        <div class="modal fade" id="fasStyleCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <h3 class="text-center color-success">Suggest mising fashion style category</h3>
+                                                                                    <form action="{{ route('messages.store','inbox') }}" method="POST">
+                                                                                        @csrf
+                                                                                        @foreach ($errors->all() as $error)
+                                                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                                                        @endforeach
+
+                                                                                        <div class="modal-body">
+                                                                                            <input type="hidden" name="sender" value="{{ Auth::user()->id }}">
+                                                                                            <input type="hidden" name="receiver" value="">
+                                                                                            <input type="hidden" name="status" value="inbox">
+                                                                                            <input type="hidden" name="routers" value="{">
+                                                                                            <div class="form-group">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="recipient-name" class="control-label">Topic:</label>
+                                                                                                        <input type="text" class="form-control" id="recipient-name1" name="title">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="priority">Priority</label>
+                                                                                                        <select class="custom-select form-control" name="folder">
+                                                                                                            <option value="normal">Select priority</option>
+                                                                                                            <option value="important">Important</option>
+                                                                                                            <option value="urgent">Urgent</option>
+                                                                                                            <option value="official">Official</option>
+                                                                                                            <option value="unofficial">Unofficial</option>
+                                                                                                            <option value="normal">Normal</option>
+                                                                                                            <option value="">None</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="message-text" class="control-label">Message:</label>
+                                                                                                <textarea class="form-control" id="message-text1" name="message"></textarea>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                            <button type="submit" class="btn btn-primary">Send</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {{-- /end of modal --}}
                                                                     </div>
                                                                     @endrole
                                                                     @role(['super-admin','admin','company-admin','shop-admin'])
                                                                     <div class="col-md-12" style="padding: 2px;">
-                                                                        <button class="btn btn-block btn-info" style="margin: 0px; padding: 5px 10px;"> Product Type </button>
+                                                                        <button class="btn btn-block btn-info" style="margin: 0px; padding: 5px 10px;" data-toggle="modal" data-target="#prodCatModal">
+                                                                            Product Type 
+                                                                        </button>
+                                                                        {{-- modal --}}
+                                                                        <div class="modal fade" id="prodCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <h3 class="text-center color-info">Suggest mising product category</h3>
+                                                                                    <form action="{{ route('messages.store','inbox') }}" method="POST">
+                                                                                        @csrf
+                                                                                        @foreach ($errors->all() as $error)
+                                                                                            <p class="alert alert-danger">{{ $error }}</p>
+                                                                                        @endforeach
+
+                                                                                        <div class="modal-body">
+                                                                                            <input type="hidden" name="sender" value="{{ Auth::user()->id }}">
+                                                                                            <input type="hidden" name="receiver" value="">
+                                                                                            <input type="hidden" name="status" value="inbox">
+                                                                                            <input type="hidden" name="routers" value="{">
+                                                                                            <div class="form-group">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="recipient-name" class="control-label">Topic:</label>
+                                                                                                        <input type="text" class="form-control" id="recipient-name1" name="title">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-6">
+                                                                                                        <label for="priority">Priority</label>
+                                                                                                        <select class="custom-select form-control" name="folder">
+                                                                                                            <option value="normal">Select priority</option>
+                                                                                                            <option value="important">Important</option>
+                                                                                                            <option value="urgent">Urgent</option>
+                                                                                                            <option value="official">Official</option>
+                                                                                                            <option value="unofficial">Unofficial</option>
+                                                                                                            <option value="normal">Normal</option>
+                                                                                                            <option value="">None</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="message-text" class="control-label">Message:</label>
+                                                                                                <textarea class="form-control" id="message-text1" name="message"></textarea>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                            <button type="submit" class="btn btn-primary">Send</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {{-- /end of modal --}}
                                                                     </div>
                                                                     @endrole
                                                                 </div>

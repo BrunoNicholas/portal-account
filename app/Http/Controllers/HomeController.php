@@ -140,14 +140,36 @@ class HomeController extends Controller
         $gpspont    = array();
         $gpsNames   = array();
 
+        $gpsSalons = Salon::whereNotNull('salon_gps')->get();
+        $salgpspont    = array();
+        $salgpsNames   = array();
+
+        $gpsShops = Shop::whereNotNull('shop_gps')->get();
+        $shogpspont    = array();
+        $shogpsNames   = array();
+
         foreach ($gpsCompanies as $val) {
             array_push($gpspont, explode(' ', $val->company_gps));
-            array_push($gpsNames, ($val->company_name . ' | ' . $val->company_location));
+        array_push($gpsNames, ($val->company_name . ' | ' . $val->company_location));
         }
 
-        $gpsponts = json_encode($gpspont);
+        foreach ($gpsSalons as $val) {
+            array_push($salgpspont, explode(' ', $val->salon_gps));
+        array_push($salgpsNames, ($val->salon_name . ' | ' . $val->salon_location));
+        }
 
-        $ptNum = sizeof($gpspont);
+        foreach ($gpsShops as $val) {
+            array_push($shogpspont, explode(' ', $val->shop_gps));
+        array_push($shogpsNames, ($val->shop_name . ' | ' . $val->shop_location));
+        }
+
+        $gpsponts   = json_encode($gpspont);
+        $gps1ponts  = json_encode($salgpspont);
+        $gps2ponts  = json_encode($shogpspont);
+
+        $ptNum  = sizeof($gpspont);
+        $pt1Num = sizeof($salgpspont);
+        $pt2Num = sizeof($shogpspont);
 
         // end of getting cordinates
 
@@ -191,6 +213,6 @@ class HomeController extends Controller
         $inboxCount = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->count();
         $messages   = DB::table('messages')->where([['status', 'inbox'],['receiver', Auth::user()->id]])->latest()->paginate(5);
 
-        return view('home',compact(['companies','salons','shops','inboxCount','messages','cats','gpsponts','ptNum','gpsNames','bookings','orders']));
+        return view('home',compact(['companies','salons','shops','inboxCount','messages','cats','gpsponts','gps1ponts','gps2ponts','ptNum','pt1Num','pt2Num','gpsNames','salgpsNames','shogpsNames','bookings','orders']));
     }
 }
