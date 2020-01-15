@@ -69,12 +69,12 @@
 	                		<div class="form-group row mt-0">
 			                  	<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Email</label>
 				                <div class="col-lg-8">
-				                    @role('company-admin')
+				                    @role(['salon-admin','shop-admin'])
 				                	<input type="hidden" name="shop_email" value="{{ Auth::user()->email }}">
 				                	<input class="form-control" value="{{ Auth::user()->email }}" id="inputEmail" disabled>
 				                	@else
 				                    <input type="email" class="form-control" name="shop_email" value="{{ Auth::user()->email }}" id="inputEmail" placeholder="Email">
-				                    @endif
+				                    @endrole
 				                </div>
 				            </div>
 				        </div>

@@ -87,7 +87,7 @@
 					                              	</tr>
 						                        @endif
 						                        @foreach ($messages as $message)
-						                            <tr class="@if($message->priority == 'seen') unread @else read @endif" @if ($message->priority == 'seen') style="background-color: #e9f9f9;" @endif>
+						                            <tr class="@if($message->priority == 'seen') unread @else read color-primary @endif" @if ($message->priority == 'seen') style="background-color: #e9f9f9;" @endif>
 
 				                                        @if($message->sender == Auth::user()->id)
 				                                            <td class="user-image" style="vertical-align: middle;">
@@ -121,7 +121,7 @@
 				                                        </td>
 				                                        <td class="contact" style="vertical-align: middle;">
 				                                          	<a  href="{{ route('messages.show',[$message->id,'details']) }}">
-				                                                <span class="blue-grey-text text-darken-4">
+				                                                <span class="text-darken-4" style="@if($message->priority == 'seen') color: black; @else  @endif">
 				                                                    <b>{{ $message->title }}</b>
 				                                                </span> 
 				                                                {{ strlen($message->message) > 20 ? substr($message->message, 0, 20) . '... ' : $message->message }}

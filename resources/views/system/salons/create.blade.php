@@ -74,7 +74,7 @@
 				                	<input class="form-control" value="{{ Auth::user()->email }}" id="inputEmail" disabled>
 				                	@else
 				                    <input type="email" class="form-control" name="salon_email" value="{{ Auth::user()->email }}" id="inputEmail" placeholder="Email">
-				                    @endif
+				                    @endrole
 				                </div>
 
 				            </div>

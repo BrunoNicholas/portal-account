@@ -745,13 +745,13 @@
                                         </div>
                                         @permission('can_make_teams')
                                         <div class="col-md-12">
-                                            <h4 class="text-center"> Team Members </h4>
+                                            <h4 class="text-center"> Teams &amp; Members </h4>
                                             <div class="table-responsive">
                                                 <table class="table table-hoverable">
                                                     <thead class="color-info">
                                                         <tr>
-                                                            <th class="text-center" style="vertical-align: middle;">Team</th>
-                                                            <th class="text-center" style="vertical-align: middle;">Team Owner</th>
+                                                            <th class="text-left" style="vertical-align: middle;">Team</th>
+                                                            <th class="text-left" style="vertical-align: middle;">Team Owner</th>
                                                             <th class="text-center" style="vertical-align: middle;">Members</th>
                                                             <th class="text-center" style="vertical-align: middle;">Status</th>
                                                             <th class="text-center" style="vertical-align: middle;">Actions</th>
@@ -768,16 +768,33 @@
                                                         @endif
                                                         @foreach(Auth::user()->teams as $team)
                                                             <tr>
-                                                                
+                                                                <td class="text-left" style="vertical-align: middle;">{{ $team->team_name }}</td>
+                                                                <td style="vertical-align: middle;">
+                                                                    <img 
+                                                                        src="{{ App\User::where('id',$team->user_id)->first()->profile_image ? asset('files/profile/images/' . App\User::where('id',$team->user_id)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}"
+                                                                        style="max-width: 25px; border-radius: 40%;">
+                                                                        {{ App\User::where('id',$team->user_id)->first()->name }}
+                                                                    </td>
+                                                                <td class="text-center" style="vertical-align: middle;">{{ $team->team_users->count() }}</td>
+                                                                <td class="text-center" style="text-transform: capitalize; vertical-align: middle;">{{ $team->status }}</td>
+                                                                <td class="text-center" style="vertical-align: middle;">
+                                                                    <div class="col-12">
+                                                                        <div class="row">
+                                                                            <div class="col-6" style="padding:0px;">
+                                                                                <button class="btn btn-xm btn-primary btn-raised" style="padding: 2px 10px;">
+                                                                                    <i class="fa fa-info-circle" style="margin: 0px;"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="col-6" style="padding:0px;">
+                                                                                <button class="btn btn-xm btn-primary btn-raised" style="padding: 2px 10px;">
+                                                                                    <i class="fa fa-edit" style="margin: 0px;"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
-                                                        {{-- <tr>
-                                                            <td colspan="6" style="vertical-align: middle;">
-                                                                <a href="{{ route('shops.index','all') }}">
-                                                                    <button class="btn btn-sm btn-default btn-info">Other Shops</button>
-                                                                </a>
-                                                            </td>
-                                                        </tr> --}}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -787,7 +804,6 @@
                                         <div class="col-md-12" style="padding: 0px;">
                                             <h4 class="text-center"> Map Accounts, salons, shops locations </h4>
                                             <div id="map" style="width: 100%; height: 400px;"></div>
-
                                         </div>
                                         @endpermission
                                     </div>
@@ -801,10 +817,10 @@
                 <div class="card card-primary" style="min-height: 400px;">
                     <ul class="nav nav-tabs shadow-2dp" role="tablist" style="overflow-x: hidden; overflow-y: hidden;">
                         @role(['super-admin','admin','company-admin','salon-admin'])
-                        <li class="nav-item"><a class="nav-link withoutripple" href="#bookings" aria-controls="bookings" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Service Bookings </span></a></li>
+                        <li class="nav-item"><a class="nav-link withoutripple" href="#bookings" aria-controls="bookings" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> <span class="d-none d-sm-inline"> Salon Bookings </span></a></li>
                         @endrole
                         @role(['super-admin','admin','company-admin','shop-admin'])
-                        <li class="nav-item"><a class="nav-link withoutripple" href="#orders" aria-controls="orders" role="tab" data-toggle="tab"><i class="fa fa-address-book-o"></i> <span class="d-none d-sm-inline"> Product Orders </span></a></li>
+                        <li class="nav-item"><a class="nav-link withoutripple" href="#orders" aria-controls="orders" role="tab" data-toggle="tab"><i class="fa fa-address-book-o"></i> <span class="d-none d-sm-inline"> Shop Orders </span></a></li>
                         @endrole
                         <li class="nav-item"><a class="nav-link withoutripple active" href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><i class="zmdi zmdi-email"></i> <span class="d-none d-sm-inline"> Messages </span></a></li>
                     </ul>

@@ -199,7 +199,8 @@
 		                @if($company->products_services)
 		                <tr>
 		                  	<th><i class="zmdi zmdi-spinner mr-1 color-primary"></i> Specialism </th>
-		                  	<td style="text-transform: capitalize;">{{ count(explode('_', trim($company->products_services))) > 1 ? explode('_', trim($company->products_services))[0] . ' ' . explode('_', trim($company->products_services))[1]  : explode('_', trim($company->products_services))[0] }}</td>
+		                  	<td style="text-transform: capitalize;">
+		                  		{{ count(explode('_', trim($company->products_services))) > 1 ? explode('_', trim($company->products_services))[0] . ' ' . explode('_', trim($company->products_services))[1] . ' ' . explode('_', trim($company->products_services))[2]  : explode('_', trim($company->products_services))[0] }}</td>
 		                </tr>
 		                @endif
 		                @if($company->company_website)

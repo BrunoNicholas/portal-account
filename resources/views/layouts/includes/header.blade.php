@@ -260,7 +260,8 @@
 		                @permission('can_message')
 		                <li>
 		                	<a class="dropdown-item" style="min-width: 250px;" href="{{ route('messages.index', 'inbox') }}">
-		                		<b class="float-left"><i class="zmdi zmdi-email" style="font-size: 23px;"></i> Messages &amp; Info </b> 
+		                		<i class="zmdi zmdi-email" style="font-size: 23px; margin: 0px;"></i> 
+		                			Messages &amp; Info 
 		                		@if (sizeof($mess) > 0)
 		                			<b class="ml-auto badge-pill bg-success float-right">
 		                				{{ (App\Models\Message::where([['receiver',Auth::user()->id],['status','inbox'],['priority','unseen']])->get())->count() }}
@@ -272,7 +273,7 @@
 		                <li class="dropdown-divider"></li>
 		                <li>
 		                	<a class="dropdown-item" href="{{ route('questions.index') }}">
-		                		<i class="fa fa-question-circle" style="font-size: 23px;"></i> My Questions </a>
+		                		<i class="fa fa-question-circle" style="font-size: 23px; margin: 0px;"></i> My Questions </a>
 		                </li>
 		                <li class="dropdown-divider"></li>
 		                <li class="text-center">
