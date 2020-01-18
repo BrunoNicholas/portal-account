@@ -36,24 +36,24 @@
 		                        <table id="example23" class="table table-striped table-bordered table-hoverable" width="100%" cellspacing="0">
 		                            <thead>
 		                                <tr>
-		                                    <th class="text-center;">#</th>
-		                                    <th class="text-center;">Name</th>
-		                                    <th class="text-center;">Email</th>
-		                                    <th class="text-center;">Privillege</th>
-		                                    <th class="text-center;">Status</th>
-		                                    <th class="text-center;">Actions</th>
+		                                    <th class="text-center;" style="vertical-align: middle;">#</th>
+		                                    <th class="text-center;" style="vertical-align: middle;">Name</th>
+		                                    <th class="text-center;" style="vertical-align: middle;">Email</th>
+		                                    <th class="text-center;" style="vertical-align: middle;">Privillege</th>
+		                                    <th class="text-center;" style="vertical-align: middle;">Status</th>
+		                                    <th class="text-center;" style="vertical-align: middle;">Actions</th>
 
-		                                    <th class="">Account Owner</th>
-		                                    <th class="">Salons</th>
-		                                    <th class="">Shops</th>
-		                                    <th class="">Bookings</th>
-		                                    <th class="">Orders</th>
-		                                    <th class="">Posts Made</th>
-		                                    <th class="">Questions Asked</th>
-		                                    <th class="">Reviews</th>
-		                                    <th class="">Ratingss</th>
-		                                    <th class="">Galleries</th>
-		                                    <th class="">Images Uploaded</th>
+		                                    <th style="vertical-align: middle;">Multi Account</th>
+		                                    <th style="vertical-align: middle;">Salons</th>
+		                                    <th style="vertical-align: middle;">Shops</th>
+		                                    <th style="vertical-align: middle;">Bookings</th>
+		                                    <th style="vertical-align: middle;">Orders</th>
+		                                    <th style="vertical-align: middle;">Posts Made</th>
+		                                    <th style="vertical-align: middle;">Questions Asked</th>
+		                                    <th style="vertical-align: middle;">Reviews</th>
+		                                    <th style="vertical-align: middle;">Ratingss</th>
+		                                    <th style="vertical-align: middle;">Galleries</th>
+		                                    <th style="vertical-align: middle;">Images Uploaded</th>
 		                                </tr>
 		                            </thead>
 		                            <tbody>

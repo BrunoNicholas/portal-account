@@ -8,7 +8,7 @@
 	<div class="container mt-0">
 		<div class="row">
 			<div class="d-flex no-block align-items-center col-md-4">
-				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">My Galleries  @permission('can_make_image_uploads') <button class="btn btn-xs btn raised btn-success text-primary" onclick="window.location='{{ route('galleries.create') }}'"> Add New </button> @endpermission</span>
+				<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">My Account Galleries  @permission('can_make_image_uploads') <button class="btn btn-xs btn raised btn-success text-primary" onclick="window.location='{{ route('galleries.create') }}'"> Add New </button> @endpermission</span>
 			</div>
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
@@ -34,7 +34,7 @@
                                     <p class="col-md-12 alert alert-danger text-center" style="padding-left: 50px;"> No gallery items found! @permission('can_make_image_uploads')<button class="btn btn-xs btn raised btn-success pull-right text-white" onclick="window.location='{{ route('galleries.create') }}'">Add New</button>@endpermission</p>
                                 @endif
                                 @foreach($galleries as $gallery)
-                                    <div class="col-md-4" style="padding-top: 10px;" onclick="window.location='{{ route('galleries.show', $gallery->id) }}'">
+                                    <div class="col-md-3" style="padding-top: 10px;" onclick="window.location='{{ route('galleries.show', $gallery->id) }}'">
                                         <div class="" style="border: thin solid transparent;">
                                             <div class="el-card-item">
                                                 <div class="el-card-avatar el-overlay-1" style="text-align: center;"> 

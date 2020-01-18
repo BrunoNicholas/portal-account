@@ -52,7 +52,7 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'          => 'can_delete_perm',
                 'display_name'  => 'Can delete a permission',
-                'description'   => 'A user ca delete a system permission',
+                'description'   => 'A user can delete a system permission',
             ],
         	// users
         	[

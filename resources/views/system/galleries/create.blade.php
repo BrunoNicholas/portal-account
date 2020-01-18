@@ -29,66 +29,68 @@
 					<div class="card">
                         <div class="card-header"><h4 style="width: 100%; text-align: center;"> Create Gallery </h4></div>
                         <div class="card-body">
-                            <form action="{{ route('galleries.store') }}" enctype="multipart/form-data" method="POST">
-                                @csrf
+                            <div class="table-responsive">
+                                <form action="{{ route('galleries.store') }}" enctype="multipart/form-data" method="POST">
+                                    @csrf
 
-                                @foreach ($errors->all() as $error)
-                                    <p class="alert alert-danger">{{ $error }}</p>
-                                @endforeach
-                                        
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    @foreach ($errors->all() as $error)
+                                        <p class="alert alert-danger">{{ $error }}</p>
+                                    @endforeach
+                                            
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                <section class="row">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Names"> Gallery Name (If new): </label>
-                                                    <input type="text" name="gallery_name" class="form-control" id="Names" placeholder="Fill this for a new gallery" required autofocus>
+                                    <section class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="Names"> Gallery Name (If new): </label>
+                                                        <input type="text" name="gallery_name" class="form-control" id="Names" placeholder="Fill this for a new gallery" required autofocus>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="main"> Main Gallery : </label>
-                                                    <select class="custom-select form-control" name="gallery_id">
-                                                        <option value="">Chose from Existing</option>
-                                                        @foreach($galleries as $gallery)
-                                                            <option value="{{ $gallery->id }}">{{ $gallery->gallery_name . ' ('. $gallery->title . ') ' }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="main"> Main Gallery : </label>
+                                                        <select class="custom-select form-control" name="gallery_id">
+                                                            <option value="">Chose from Existing</option>
+                                                            @foreach($galleries as $gallery)
+                                                                <option value="{{ $gallery->id }}">{{ $gallery->gallery_name . ' ('. $gallery->title . ') ' }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="image-title"> Title : </label>
+                                                        <input type="text" name="title" class="form-control" id="image-title" placeholder="Title of image">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="">
+                                                        <label for="file-item">Add Image :</label>
+                                                        <input type="file" id="file-item" name="image" accept=".jpg, .png, .jpeg, .gif" >
+                                                    </div>
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                </div>
+                                            </div>
+                                        </div>                                      
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-description">Item Description : </label>
+                                                <textarea name="description" placeholder="Gallery description  details here!" class="form-control" id="item-description"></textarea>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div div class="col-md-12 text-center">
+                                        <a href="{{ route('galleries.index') }}" class="btn btn-rounded btn-info" style="min-width: 150px;">Back</a>
+                                        <button type="submit" class="btn btn-rounded btn-raised btn-primary" style="min-width: 150px;">Add Gallery</button>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="image-title"> Title : </label>
-                                                    <input type="text" name="title" class="form-control" id="image-title" placeholder="Title of image">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="">
-                                                    <label for="file-item">Add Image :</label>
-                                                    <input type="file" id="file-item" name="image" accept=".jpg, .png, .jpeg, .gif" >
-                                                </div>
-                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                            </div>
-                                        </div>
-                                    </div>                                      
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="item-description">Item Description : </label>
-                                            <textarea name="description" placeholder="Gallery description  details here!" class="form-control" id="item-description"></textarea>
-                                        </div>
-                                    </div>
-                                </section>
-                                <div div class="col-md-12 text-center">
-                                    <a href="{{ route('galleries.index') }}" class="btn btn-rounded btn-info" style="min-width: 150px;">Back</a>
-                                    <button type="submit" class="btn btn-rounded btn-raised btn-primary" style="min-width: 150px;">Add Gallery</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </section>
