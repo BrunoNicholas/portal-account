@@ -9,8 +9,9 @@ use App\Models\Salon;
 use App\Models\Shop;
 use App\Models\Style;
 use App\Models\Product;
+use App\Models\Image;
+use Image as IntervImage;
 use Auth;
-use Image;
 use File;
 
 class GalleryController extends Controller
@@ -60,6 +61,7 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         request()->validate([
+            'gallery_name' => 'required|unique:galleries',
             'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
             'user_id'   => 'required',
         ]);
@@ -74,7 +76,7 @@ class GalleryController extends Controller
             $user_image = $request->file('image');
             $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-            Image::make($user_image)->save( public_path('/files/galleries/images/' . $filename) );
+            IntervImage::make($user_image)->save( public_path('/files/galleries/images/' . $filename) );
             // $user_image->move(public_path() . '/files/galleries/images/', $filename);
 
             $image_item->image      = $filename;
@@ -84,6 +86,20 @@ class GalleryController extends Controller
             $image_item->user_id    = $request->user_id;
             $image_item->title      = $request->title;
             $image_item->save();
+
+
+            // saving the uploaded image as an image in this gallery
+
+            $gallery_item = new Image();
+            $this_gallery = Gallery::where('gallery_name',$request->gallery_name)->first();
+
+            IntervImage::make($user_image)->save( public_path('files/others/images/' . $filename) );
+
+            $gallery_item->image    = $filename;
+
+            $gallery_item->gallery_id = $this_gallery->id;
+            $gallery_item->user_id  = $this_gallery->user_id;
+            $gallery_item->save();
 
             return back()->with('success','Gallery saved successfully!');
         }
@@ -154,7 +170,7 @@ class GalleryController extends Controller
                 $user_image = $request->file('image');
                 $filename = $fileWithoutExtension . '_' .time() . '.' . $user_image->getClientOriginalExtension();
 
-                Image::make($user_image)->save( public_path('/files/galleries/gallery/' . $filename) );
+                IntervImage::make($user_image)->save( public_path('/files/galleries/gallery/' . $filename) );
                 // $path = $request->file('image')->storeAs('public/gallery/', $filename);
 
                 $gallery_item->image = $filename;
