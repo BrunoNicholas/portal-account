@@ -9,7 +9,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-4 col-md-7 col-xs-8">
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
 	            <div class="card card-body text-center">
 	                <!-- Wrapper for slides -->
@@ -17,7 +17,7 @@
 	                	{{ $salon->salon_name }} 
 	                	<small> - {{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }}</small>
 	                </span>
-	                <div class="carousel-inner" role="listbox"><?php $x=0; ?>
+	                <div class="carousel-inner" role="listbox"> <!--<?php $x=0; ?>-->
 	                	@if($images)
 	                		@foreach($images as $image) <!--{{  ++$x }} -->
 	                		<div class="carousel-item @if($x == 1) active @endif" 
@@ -30,13 +30,13 @@
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-height: 350px;" alt="...">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
@@ -57,13 +57,13 @@
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="1">
-	                  	<img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="" style="max-height: 45px;">
+	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="2">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="3">
-	                  	<img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="" style="max-height: 45px;">
+	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="4">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
@@ -120,7 +120,7 @@
 						                          					@if($style->description)
 						                          						<tr>
 						                          							<td colspan="2" class="text-left">
-						                          								{{ strlen($style->description) > 100 ? substr($style->description, 0, 100) . '... ' : $style->description }}
+						                          								{{ strlen($style->description) > 60 ? substr($style->description, 0, 60) . '... ' : $style->description }}
 						                          							</td>
 						                          						</tr>
 						                          					@endif
@@ -139,15 +139,20 @@
 	            </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-8 col-md-5 col-xs-4">
             <div class="card animated zoomInDown animation-delay-5">
 	            <div class="card-body">
 	            	<div class="row color-success">
-		                <div class="col-md-6"><h2>{{ $salon->salon_name }} <br><small>{{ number_format((float)$avg_ratings, 1, '.', '') }} Stars</small></h2></div>
-		                <div class="col-md-6 mt-3 text-right">
-		                    <div>
-			                    <input class="input-3-xs" name="input-3-xs" value="{{ $avg_ratings }}" class="rating-loading" data-size="xs">
-		                    </div>
+		                <div class="col-md-6">
+		                	<h3 class=""> {{ $salon->salon_name }} </h3>
+		                </div>
+		                <div class="col-md-6 mt-2 text-right">
+	                    	<span class="table-responsive">
+		                    	<input class="input-3-xs" name="input-3-xs" value="{{ $avg_ratings }}" class="rating-loading" data-size="xs">
+		                    </span>
+		                    <small class="color-primary">
+	                			{{ strlen($avg_ratings) > 3 ? substr($sal->description, 0, 3) : $avg_ratings }} Stars
+	                		</small>
 		                </div>
 			        </div>
 	                <p class="lead"> {{ $salon->description }} </p>
@@ -155,7 +160,7 @@
 		                <table class="table">
 		                	@if($salon->user_id)
 			                  	<tr>
-			                  		<td><strong>Administrator: </strong></td>
+			                  		<td><strong>Conatct Person: </strong></td>
 			                  		<td><a href="{{ route('users.show',$salon->user_id) }}" target="_blank">
 				                  		<img src="{{ App\User::where('id',$salon->user_id)->first()->profile_image ? asset('files/profile/images/' . App\User::where('id',$salon->user_id)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 25px; border-radius: 50%;">
 				                  		{{ App\User::where('id',$salon->user_id)->first()->name }}
@@ -214,18 +219,25 @@
 		                  		<td><strong>Availability: </strong></td>
 		                  		<td><span class="ms-tag ms-tag-success" style="text-transform: capitalize;"> {{ $salon->status }} </span></td>
 		                  	</tr>
-		                  	{{-- <tr>
-		                  		<td><strong>Shipping costs: </strong></td>
-		                  		<td><span class="color-warning">$5.25</span></li></td>
-		                  		</td>
-		                  	</tr> --}}
 		                </table>
 		            </div>
-	                <button type="button" class="btn btn-success btn-block btn-raised mt-2 no-mb" data-toggle="modal" data-target="#myRatingModal" @guest disabled title="You must be logged in to make a rating and review!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this salon" @endguest><i class="zmdi zmdi-plus"></i> Add Review</button>
+	                {{-- <button type="button" class="btn btn-success btn-block btn-raised mt-2 no-mb" data-toggle="modal" data-target="#myRatingModal" @guest disabled title="You must be logged in to make a rating and review!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this salon" @endguest><i class="zmdi zmdi-plus"></i> Add Review</button> --}}
 	            </div>
             </div>
             <div class="card card-success animated fadeInUp animation-delay-10">
-            	<div class="card-header overflow-hidden text-center">Reviews | &amp; | Ratings</div>
+            	<div class="card-header overflow-hidden text-center">
+            		<button 
+            			type="button" 
+            			class="btn btn-primary btn-xs btn-raised mt-0 pull-right" 
+            			data-toggle="modal" 
+            			data-target="#myRatingModal" 
+            			@guest disabled title="You must be logged in to make a rating and review!" 
+            			@else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this shop" 
+            			@endguest>
+            			<i class="zmdi zmdi-plus" style="margin: 0px;"></i> Add 
+            		</button>
+            		<b class="pull-left">Reviews | &amp; | Ratings </b>
+            	</div>
 	            <div class="card-body overflow-hidden">
 	            	@if(sizeof($revs) < 1)
 	            		<div class="col-md-12 text-center text-danger">

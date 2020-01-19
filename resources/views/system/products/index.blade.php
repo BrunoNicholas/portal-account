@@ -38,10 +38,22 @@
 	            <div class="card wow zoomIn">
 		            <div class="ms-thumbnail card-body p-05">
 		                <div class="withripple zoom-img">
-		                  	<a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $product->product_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+		                  	<a href="{{ sizeof($product->galleries) > 0 ? asset('files/galleries/images/'.$product->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" 
+		                  		data-lightbox="gallery" 
+		                  		data-title="{{ $product->product_name }}"
+		                  		style="height: 150px;width: auto;overflow-x: hidden; overflow-y: hidden;">
+		                  		<img src="{{ sizeof($product->galleries) > 0 ? asset('files/galleries/images/'.$product->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="width: 100%;"></a>
 		                  	<div class="col-md-12" style="padding: 0px;">
-		                  		<a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-info btn-xs pull-left" title="View product details" style="padding-top: 5px;">{{ $product->product_name }}</a>
-		                  		<a title="Go to shop provider profile" href="{{ route('shops.show',['all',$product->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Shop: {{ App\Models\Shop::where('id',$product->shop_id)->first()->shop_name }}</a>
+		                  		<a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" 
+		                  			class="btn btn-info btn-xs pull-left" 
+		                  			title="View product details" 
+		                  			style="padding-top: 5px;">
+		                  			{{ $product->product_name }} | 
+		                            <strike class="color-danger">UGX. {{ $product->current_price  }}</strike>
+		                            <b class="color-success">UGX. {{ $product->current_price  }}</b>
+		                        </a>
+		                  		<a title="Go to shop provider profile" href="{{ route('shops.show',['all',$product->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">
+		                  			<i class="zmdi zmdi-male-female" style="margin: 0px;"></i>: {{ App\Models\Shop::where('id',$product->shop_id)->first()->shop_name }}</a>
 		                  	</div>
 		                </div>
 		            </div>

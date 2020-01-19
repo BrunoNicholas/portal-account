@@ -11,8 +11,6 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
-                    	<li class="breadcrumb-item"><a href="{{ route('salons.index','all') }}"><i class="fa fa-address-book-o"></i> Salons</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('salons.show',['all',$salon->id]) }}"><i class="fa fa-address-book-o"></i> {{ $salon->salon_name }}</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('styles.index',['all',$salon->id]) }}"><i class="fa fa-list"></i> Style Details </a></li>
 						<li class="breadcrumb-item active"><i class=""></i> {{ $style->style_name }}</li>
@@ -49,13 +47,13 @@
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-height: 350px;" alt="...">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
@@ -76,13 +74,13 @@
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="1">
-	                  	<img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="" style="max-height: 45px;">
+	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="2">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="3">
-	                  	<img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="" style="max-height: 45px;">
+	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="4">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
@@ -158,12 +156,12 @@
 				                </table>
 		              		</div>
 		        		</div>
-		        		<div class="card-body">
-	        				<div class="col-md-5 text-center pull-left" style="padding: 5px;">
+		        		<div class="card-body row">
+	        				<div class="col-md-6 text-center pull-left" style="padding: 5px;">
 	        					<a href="#" class="btn btn-primary btn-block btn-raised"><span class="fa fa-cart-plus"></span> Book Now!</a>
 	        				</div>
-	        				<div class="col-md-5 text-center pull-right" style="padding: 5px;">
-	        					<button class="btn btn-success btn-block btn-raised" data-toggle="modal" data-target="#contactModal" @guest disabled title="You must be logged in to make a rating and review!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this salon" @endguest><span class="glyphicon glyphicon-envelope"></span> Message Salon!</button>
+	        				<div class="col-md-6 text-center pull-right" style="padding: 5px;">
+	        					<button class="btn btn-success btn-block btn-raised" data-toggle="modal" data-target="#contactModal" @guest disabled title="You must be logged in to make a rating and review!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this salon" @endguest><span class="glyphicon glyphicon-envelope"></span> Contact!</button>
 	        				</div>
 		        		</div>
 		        	</div>
@@ -231,7 +229,7 @@ Link: {{ route('styles.show',['all',0,$style->id]) }}
     <h3 class="mt-4 mb-4 right-line"> Other Styles From {{ $salon->salon_name }} | <a href="{{ route('salons.index','all') }}"> All other styles </a> </h3>
     <div class="row"><?php $i=3; ?>
     	@foreach($salon->styles as $sty)
-    		@if($sty != $style)
+    		@if($sty->id != $style->id)
 	    		<div class="col-md-4">
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 	                    <div class="ms-thumbnail card-body p-05">

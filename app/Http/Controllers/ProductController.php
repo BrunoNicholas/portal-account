@@ -111,7 +111,15 @@ class ProductController extends Controller
         if (!$shop) {
             return back()->with('warning','Looks like a broken link or the referenced shop does not exist.');
         }
-        return view('system.products.show', compact(['product','shop','type']));
+
+        $gallery    = array();
+        $images     = array();
+
+        sizeof($product->galleries) > 0 ? $gallery = $product->galleries->first() : $gallery = [];
+
+        sizeof($product->galleries) > 0 ? $images = $gallery->images : $images = [];
+
+        return view('system.products.show', compact(['product','shop','type','images']));
     }
 
     /**

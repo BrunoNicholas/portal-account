@@ -22,7 +22,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-4 col-xs-5">
             <div class="card card-primary">
 	            <div class="card-header">
 	                <h3 class="card-title text-center">Salon Categories</h3>
@@ -68,7 +68,7 @@
               	</div>
         	</div>
   		</div>
-        <div class="col-lg-9">
+        <div class="col-lg-9 col-md-8 col-xs-7">
             <div class="row" id="container"><?php $i=0  ?>
             	@if(sizeof($salons) < 1)
             		<div class="col-xl-12 col-md-6 mix laptop apple" data-price="1999.99" data-date="20160901">

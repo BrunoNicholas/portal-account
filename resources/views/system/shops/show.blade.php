@@ -9,7 +9,7 @@
 @section('content')
 <div class="container">
 	<div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-4 col-md-7 col-xs-8">
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
 	            <div class="card card-body text-center">
 	                <!-- Wrapper for slides -->
@@ -17,49 +17,68 @@
 	                	{{ $shop->shop_name }} 
 	                	<small> ({{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name : 'No category selected' }}) </small>
 	                </span>
-	                <div class="carousel-inner" role="listbox">
+	                <div class="carousel-inner" role="listbox"><?php $x=0; ?>
+	                	@if($images)
+	                		@foreach($images as $image) <!--{{  ++$x }} -->
+	                		<div class="carousel-item @if($x == 1) active @endif" 
+	                			style="text-align: center; background-color: #e5e5e5;">
+			                    <img src="{{ asset('files/others/images/' . $image->image) }}" alt="..." style="max-height: 350px;">
+			                </div>
+			                @endforeach
+	                	@else
 		                <div class="carousel-item active">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
+		                @endif
 	                </div>
 	            </div>
               	<!-- Indicators -->
-	            <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside">
+	            <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside"> <!-- <?php $z=0?> -->
+	            	@if($images)
+	            		@foreach($images as $image)
+	            		<li data-target="#carousel-product" data-slide-to="{{  $z++ }}" class="active">
+		                  	<img src="{{ asset('files/others/images/' . $image->image) }}" alt="" style="max-height: 45px;">
+		                </li>
+		                @endforeach
+	                @else
 	                <li data-target="#carousel-product" data-slide-to="0" class="active">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="1">
-	                  	<img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="" style="max-height: 45px;">
+	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="2">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="3">
-	                  	<img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="" style="max-height: 45px;">
+	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="4">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
+	                @endif
 	            </ol>
             </div>
             <div class="card card-info animated fadeInUp animation-delay-10">
             	<div class="card-header overflow-hidden text-center">
             		Shop Products
-            		@auth @if($shop->user_id == Auth::user()->id)
-        				<a class="btn btn-sm btn-raised btn-primary btn-xs" href="{{ route('products.create',['all',$shop->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px; padding: 0px;"></i> New product </a>
-        			@endif @endauth
+            		@auth 
+	            		@if($shop->user_id == Auth::user()->id)
+	        				<a class="btn btn-sm btn-raised btn-primary btn-xs" href="{{ route('products.create',['all',$shop->id]) }}" style="padding: 5px 10px;"><i class="fa-plus fa" style="margin: 0px; padding: 0px;"></i> New product </a>
+	        			@endif 
+        			@endauth
             	</div>
 	            <div class="card-body overflow-hidden">
 	            	@if(sizeof($shop->products) < 1)
@@ -74,7 +93,9 @@
                 			<div class="col-md-12" style="border-bottom: thin solid #e8e8e8;margin-bottom: 5px; padding-bottom: 5px;">
 	                			<div class="row" onclick="window.location='{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$shop->id,$product->id]) }}'">
 			                        <div class="col-md-6 text-center">
-			                        	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; border-radius: 5px;">
+			                        	<img src="{{ sizeof($product->galleries) > 0 ? asset('files/galleries/images/'.$product->galleries->first()->image) :asset('files/defaults/images/cover_bg_2.jpg') }}" 
+			                        		alt="" 
+			                        		style="width: 100%; border-radius: 5px;">
 			                        </div>
 			                        <div class="col-md-6">
 			                        	<div class="row">
@@ -117,20 +138,20 @@
 	            </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-8 col-md-5 col-xs-4">
             <div class="card animated zoomInDown animation-delay-5">
 	            <div class="card-body">
 	            	<div class="row">
-		                <div class="col-md-6 color-info">
-		                	<h2>
-		                		{{ $shop->shop_name }} <br>
-		                		<small>{{ number_format((float)$avg_ratings, 1, '.', '') }} Stars</small>
-		                	</h2>
+		                <div class="col-md-6">
+		                	<h3 class=""> {{ $shop->shop_name }} </h3>
 		                </div>
-		                <div class="col-md-6 mt-3 text-right">
-		                    <div>
+		                <div class="col-md-6 mt-2 text-right">
+	                    	<span class="table-responsive">
 		                    	<input class="input-3-xs" name="input-3-xs" value="{{ $avg_ratings }}" class="rating-loading" data-size="xs">
-		                    </div>
+		                    </span>
+		                    <small class="color-primary">
+	                			{{ strlen($avg_ratings) > 3 ? substr($sal->description, 0, 3) : $avg_ratings }} Stars
+	                		</small>
 		                </div>
 			        </div>
 	                <p class="lead"> {{ $shop->description }} </p>
@@ -204,11 +225,22 @@
 		                  	</tr> --}}
 		                </table>
 		            </div>
-	                <button type="button" class="btn btn-info btn-block btn-raised mt-2 no-mb" data-toggle="modal" data-target="#myRatingModal" @guest disabled title="You must be logged in to make a rating and review!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this shop" @endguest><i class="zmdi zmdi-plus"></i> Add Review</button>
 	            </div>
             </div>
             <div class="card card-info animated fadeInUp animation-delay-10">
-            	<div class="card-header overflow-hidden text-center"> Reviews | &amp; | Ratings </div>
+            	<div class="card-header overflow-hidden text-center"> 
+            		<button 
+            			type="button" 
+            			class="btn btn-primary btn-xs btn-raised mt-0 pull-right" 
+            			data-toggle="modal" 
+            			data-target="#myRatingModal" 
+            			@guest disabled title="You must be logged in to make a rating and review!" 
+            			@else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, please do not leave minus reviewing this shop" 
+            			@endguest>
+            			<i class="zmdi zmdi-plus" style="margin: 0px;"></i> Add 
+            		</button>
+            		<b class="pull-left">Reviews | &amp; | Ratings </b>
+            	</div>
 	            <div class="card-body overflow-hidden">
 	            	@if(sizeof($revs) < 1)
 	            		<div class="col-md-12 text-center text-danger">
@@ -311,7 +343,7 @@
 	            <div class="col-md-4" onclick="window.location='{{ route('shops.show',['all',$sal->id]) }}'">
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 		                <div class="card-body overflow-hidden text-center">
-		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid center-block" style="max-height: 250px;">
+		                    <img src="{{ sizeof($sal->galleries) > 0 ? asset('files/galleries/images/'.$sal->galleries->firt()->image) :asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid center-block" style="max-height: 250px;">
 		                    <h4 class="text-normal text-center">{{ $sal->shop_name }}</h4>
 		                    <p>{{ strlen($sal->description) > 20 ? substr($sal->description, 0, 20) . '... ' : $sal->description }}</p>
 		                    <div class="mt-1" style="font-size: 8px;">

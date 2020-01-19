@@ -11,8 +11,6 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
                     <ol class="breadcrumb">
-                    	<li class="breadcrumb-item"><a href="{{ route('userhome') }}"><i class="fa fa-home"></i> Home</a></li>
-                    	<li class="breadcrumb-item"><a href="{{ route('shops.index','all') }}"><i class="fa fa-address-book-o"></i> Shops</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('shops.show',['all',$shop->id]) }}"><i class="fa fa-address-book-o"></i> {{ $shop->shop_name }}</a></li>
                     	<li class="breadcrumb-item"><a href="{{ route('products.index',['all',$shop->id]) }}"><i class="fa fa-list"></i> Products</a></li>
 						<li class="breadcrumb-item active"><i class=""></i> {{ $product->product_name }}</li>
@@ -35,41 +33,58 @@
 	                		{{ $shop->shop_name }} ({{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name : 'No category selected' }})
 	                	</small>
 	                </span>
-	                <div class="carousel-inner" role="listbox">
+	                <div class="carousel-inner" role="listbox"><?php $x=0; ?>
+	                	@if($images)
+	                		@foreach($images as $image) <!--{{  ++$x }} -->
+	                		<div class="carousel-item @if($x == 1) active @endif" 
+	                			style="text-align: center; background-color: #e5e5e5;">
+			                    <img src="{{ asset('files/others/images/' . $image->image) }}" alt="..." style="width: auto; max-height: 350px;">
+			                </div>
+			                @endforeach
+	                	@else
 		                <div class="carousel-item active">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-height: 350px;" alt="...">
 		                </div>
 		                <div class="carousel-item">
-		                    <img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="..." style="max-height: 350px;">
+		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
+		                @endif
 	                </div>
 	            </div>
               	<!-- Indicators -->
-	            <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside">
+	            <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside"><!-- <?php $z=0?> -->
+	            	@if($images)
+	            		@foreach($images as $image)
+	            		<li data-target="#carousel-product" data-slide-to="{{  $z++ }}" class="active">
+		                  	<img src="{{ asset('files/others/images/' . $image->image) }}" alt="" style="max-height: 45px;">
+		                </li>
+		                @endforeach
+	                @else
 	                <li data-target="#carousel-product" data-slide-to="0" class="active">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="1">
-	                  	<img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="" style="max-height: 45px;">
+	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="2">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="3">
-	                  	<img src="{{ asset('files/defaults/images/blank_light.jpg') }}" alt="" style="max-height: 45px;">
+	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
 	                <li data-target="#carousel-product" data-slide-to="4">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
+	                @endif
 	            </ol>
             </div>
         </div>
@@ -141,12 +156,12 @@
 				                </table>
 		              		</div>
 		        		</div>
-		        		<div class="card-body">
-		        			<div class="col-md-5 text-center pull-left" style="padding: 5px;">
+		        		<div class="card-body row">
+		        			<div class="col-6 text-center pull-left" style="padding: 5px;">
 	        					<a href="#" class="btn btn-primary btn-block btn-raised"><span class="fa fa-cart-plus"></span> Book Now!</a>
 	        				</div>
-	        				<div class="col-md-5 text-center pull-right" style="padding: 5px;">
-	        					<button class="btn btn-info btn-block btn-raised" data-toggle="modal" data-target="#contactModal" @guest disabled title="You must be logged in to send a message!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, You can send a message if you have any question for the product provider" @endguest><span class="glyphicon glyphicon-envelope"></span> Message Shop!</button>
+	        				<div class="col-6 text-center pull-right" style="padding: 5px;">
+	        					<button class="btn btn-info btn-block btn-raised" data-toggle="modal" data-target="#contactModal" @guest disabled title="You must be logged in to send a message!" @else title="Hello {{ explode(' ', trim(Auth::user()->name))[0] }}, You can send a message if you have any question for the product provider" @endguest><span class="glyphicon glyphicon-envelope"></span> Contact!</button>
 	        				</div>
 	        			</div>
 		        	</div>
@@ -214,12 +229,15 @@ Link: {{ route('styles.show',['all',0,$product->id]) }}
     <h3 class="mt-4 mb-4 right-line"> Other products from {{ $shop->shop_name }} | <a href="{{ route('shops.index','all') }}"> All other products </a> </h3>
     <div class="row"><?php $i=3; ?>
     	@foreach($shop->products as $prod)
-    		@if($prod != $product)
+    		@if($prod->id != $product->id)
 	    		<div class="col-md-4">
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 	                	<div class="ms-thumbnail card-body p-05">
 	                        <div class="withripple zoom-img">
-	                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $prod->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+	                            <a href="{{ sizeof($prod->galleries) > 0 ? asset('files/galleries/images/'.$prod->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" 
+	                            	data-lightbox="gallery" 
+	                            	data-title="{{ $prod->product_name }}">
+	                            	<img src="{{ sizeof($prod->galleries) > 0 ? asset('files/galleries/images/'.$prod->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
 	                            <div class="col-md-12" style="padding: 0px;">
 		                            <div class="pull-left">
 		                            	<a href="javascript:void(0)" class="btn btn-primary btn-raised btn-xs" title="Add to the booking list">

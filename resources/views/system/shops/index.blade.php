@@ -53,7 +53,10 @@
 		            <div class="col-xl-4 col-md-6 mix laptop apple" data-price="1999.99" data-date="20160901" onclick="window.location='{{ route('shops.show',['all',$shop->id]) }}'">
 		                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 			                <div class="card-body overflow-hidden text-center">
-			                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 400px;" class="img-fluid center-block">
+			                    <img src="{{ sizeof($shop->galleries) > 0 ? asset('files/galleries/images/'.$shop->galleries->first()->image)  : asset('files/defaults/images/cover_bg_2.jpg') }}" 
+			                    alt="" 
+			                    style="max-height: 200px; width: auto; overflow-x: hidden;overflow-y: hidden;" 
+			                    class="img-fluid center-block">
 			                    <h4 class="text-normal text-center">{{ $shop->shop_name }}</h4>
 			                    <p>{{ strlen($shop->description) > 20 ? substr($shop->description, 0, 20) . '... ' : $shop->description }}</p>
 			                    <div class="mt-1" style="font-size: 8px;">

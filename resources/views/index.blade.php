@@ -128,11 +128,15 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="ms-thumbnail-container wow fadeInUp">
                         <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
-                            <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; alt="" class="img-fluid">
+                            <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/' . $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" 
+                              alt="" 
+                              style="width: 100%; max-height: 200px; overflow-y: auto;" 
+                              class="img-fluid">
                             <figcaption class="ms-thumbnail-caption text-center">
                                 <div class="ms-thumbnail-caption-content">
                                     <h3 class="ms-thumbnail-caption-title">{{ $style->style_name }}</h3>
-                                    <p>{{ $style->description }}</p>
+                                    <p> UGX. {{ $style->current_price }} </p>
+                                    <p>{{ strlen($style->description) > 20 ? substr($style->description, 0, 20) . '... ' : $style->description }}</p>
                                     <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-raised btn-success"><i class="zmdi zmdi-eye"></i> Fashion Style Details</a>
                                 </div>
                             </figcaption>
@@ -146,11 +150,16 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="ms-thumbnail-container wow fadeInUp">
                         <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
-                            <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; alt="" class="img-fluid">
+                            <img src="{{ sizeof($product->galleries) > 0 ? asset('files/galleries/images/' . $product->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" 
+                              alt="" 
+                              style="width: 100%; max-height: 200px; overflow-y: auto;" class="img-fluid">
                             <figcaption class="ms-thumbnail-caption text-center">
                                 <div class="ms-thumbnail-caption-content">
                                     <h3 class="ms-thumbnail-caption-title">{{ $product->product_name }}</h3>
-                                    <p>{{ $product->description }}</p>
+                                    <p> UGX. {{ $product->current_price }} </p>
+                                    <p>
+                                      {{ strlen($product->description) > 20 ? substr($product->description, 0, 20) . '... ' : $product->description }}
+                                    </p>
                                     <a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-raised btn-info"><i class="zmdi zmdi-eye"></i> View Product </a>
                                 </div>
                             </figcaption>

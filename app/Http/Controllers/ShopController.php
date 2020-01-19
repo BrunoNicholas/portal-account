@@ -137,7 +137,15 @@ class ShopController extends Controller
 
         $shops = Shop::latest()->paginate(3);
         $revs = $shop->reviews;
-        return view('system.shops.show', compact(['shops','type','shop','revs','avg_ratings']));
+
+        $gallery    = array();
+        $images     = array();
+
+        sizeof($shop->galleries) > 0 ? $gallery = $shop->galleries->first() : $gallery = [];
+
+        sizeof($shop->galleries) > 0 ? $images = $gallery->images : $images = [];
+
+        return view('system.shops.show', compact(['shops','type','shop','revs','avg_ratings','images']));
     }
 
     /**
