@@ -17,7 +17,15 @@
 	                	{{ $salon->salon_name }} 
 	                	<small> - {{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }}</small>
 	                </span>
-	                <div class="carousel-inner" role="listbox">
+	                <div class="carousel-inner" role="listbox"><?php $x=0; ?>
+	                	@if($images)
+	                		@foreach($images as $image) <!--{{  ++$x }} -->
+	                		<div class="carousel-item @if($x == 1) active @endif" 
+	                			style="text-align: center; background-color: #e5e5e5;">
+			                    <img src="{{ asset('files/others/images/' . $image->image) }}" alt="..." style="max-height: 350px;">
+			                </div>
+			                @endforeach
+	                	@else
 		                <div class="carousel-item active">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
@@ -33,10 +41,18 @@
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
+		                @endif
 	                </div>
 	            </div>
               	<!-- Indicators -->
-	            <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside">
+	            <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside"> <!-- <?php $z=0?> -->
+	            	@if($images)
+	            		@foreach($images as $image)
+	            		<li data-target="#carousel-product" data-slide-to="{{  $z++ }}" class="active">
+		                  	<img src="{{ asset('files/others/images/' . $image->image) }}" alt="" style="max-height: 45px;">
+		                </li>
+		                @endforeach
+	                @else
 	                <li data-target="#carousel-product" data-slide-to="0" class="active">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
@@ -52,6 +68,7 @@
 	                <li data-target="#carousel-product" data-slide-to="4">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
+	                @endif
 	            </ol>
             </div>
             <div class="card card-primary animated fadeInUp animation-delay-10">
@@ -75,13 +92,13 @@
 		                			<div class="col-md-12" style="border-bottom: thin solid #e8e8e8;margin-bottom: 5px; padding-bottom: 5px;">
 		                				<div class="row" onclick="window.location='{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$salon->id,$style->id]) }}'">
 					                        <div class="col-md-6 text-center">
-					                        	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; border-radius: 5px;">
+					                        	<img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'.$style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="width: 100%; border-radius: 5px;">
 					                        </div>
 					                        <div class="col-md-6">
 					                        	<div class="row">
 						                          	<div class="col-12">
 						                          		<div class="table-responsive">
-						                          			<table style="width: 100%;">
+						                          			<table style="width: 100%; height: auto;">
 						                          				<tbody>
 						                          					@if($style->style_name)
 						                          						<tr>
@@ -89,16 +106,22 @@
 						                          						</tr>
 						                          					@endif
 					                          						<tr>
-					                          							@if($style->previous_price)<td class="text-left"><strike>UGX {{ $style->previous_price }}</strike></td>@endif
+					                          							@if($style->previous_price)<td class="text-left text-danger"><strike>UGX {{ $style->previous_price }}</strike></td>@endif
 					                          							@if($style->current_price)<td class="text-right text-info">UGX {{ $style->current_price }}</td>@endif
 					                          						</tr>
 					                          						<tr>
-					                          							@if($style->categories_id)<td class="text-left">{{ App\Models\Categories::where('id',$style->categories_id )->first()->display_name }}</td>@endif
+					                          							@if($style->categories_id)
+					                          							<td class="text-left">
+					                          								<i>{{ App\Models\Categories::where('id',$style->categories_id )->first()->display_name }}</i>
+					                          							</td>
+					                          							@endif
 					                          							@if($style->status)<td class="text-right"><span class="badge badge-xs badge-success">{{ $style->status }}</td>@endif
 					                          						</tr>
 						                          					@if($style->description)
 						                          						<tr>
-						                          							<td colspan="2" class="text-left"><i>{{ strlen($style->description) > 60 ? substr($style->description, 0, 60) . '... ' : $style->description }}</i></td>
+						                          							<td colspan="2" class="text-left">
+						                          								{{ strlen($style->description) > 100 ? substr($style->description, 0, 100) . '... ' : $style->description }}
+						                          							</td>
 						                          						</tr>
 						                          					@endif
 						                          				</tbody>
@@ -304,7 +327,7 @@
 	            <div class="col-md-4" onclick="window.location='{{ route('salons.show',['all',$sal->id]) }}'">
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 		                <div class="card-body overflow-hidden text-center">
-		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid center-block" style="max-height: 250px;">
+		                    <img src="{{ sizeof($sal->galleries) > 0 ? asset('files/galleries/images/'. $sal->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid center-block" style="max-height: 250px;">
 		                    <h4 class="text-normal text-center">{{ $sal->salon_name }}</h4>
 		                    <p>{{ strlen($sal->description) > 20 ? substr($sal->description, 0, 20) . '... ' : $sal->description }}</p>
 		                    <div class="mt-1" style="font-size: 8px;">

@@ -142,8 +142,16 @@ class SalonController extends Controller
             $type = 'all';
         }
         $salons = Salon::latest()->paginate(3);
-        $revs = $salon->reviews;
-        return view('system.salons.show', compact(['type','salon','salons','revs','avg_ratings']));
+        $revs   = $salon->reviews;
+
+        $gallery    = array();
+        $images     = array();
+
+        sizeof($salon->galleries) > 0 ? $gallery = $salon->galleries->first() : $gallery = [];
+
+        sizeof($salon->galleries) > 0 ? $images = $gallery->images : $images = [];
+
+        return view('system.salons.show', compact(['type','salon','salons','revs','avg_ratings','images']));
     }
 
     /**

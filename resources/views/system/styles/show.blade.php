@@ -36,7 +36,15 @@
 	                		({{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name : 'No category selected' }})
 	                	</small>
                 	</span>
-	                <div class="carousel-inner" role="listbox">
+	                <div class="carousel-inner" role="listbox"><?php $x=0; ?>
+	                	@if($images)
+	                		@foreach($images as $image) <!--{{  ++$x }} -->
+	                		<div class="carousel-item @if($x == 1) active @endif" 
+	                			style="text-align: center; background-color: #e5e5e5;">
+			                    <img src="{{ asset('files/others/images/' . $image->image) }}" alt="..." style="width: auto; max-height: 350px;">
+			                </div>
+			                @endforeach
+	                	@else
 		                <div class="carousel-item active">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
@@ -52,10 +60,18 @@
 		                <div class="carousel-item">
 		                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="..." style="max-height: 350px;">
 		                </div>
+		                @endif
 	                </div>
 	            </div>
               	<!-- Indicators -->
-	            <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside">
+	            <ol class="carousel-indicators carousel-indicators-tumbs carousel-indicators-tumbs-outside"><!-- <?php $z=0?> -->
+	            	@if($images)
+	            		@foreach($images as $image)
+	            		<li data-target="#carousel-product" data-slide-to="{{  $z++ }}" class="active">
+		                  	<img src="{{ asset('files/others/images/' . $image->image) }}" alt="" style="max-height: 45px;">
+		                </li>
+		                @endforeach
+	                @else
 	                <li data-target="#carousel-product" data-slide-to="0" class="active">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
@@ -71,6 +87,7 @@
 	                <li data-target="#carousel-product" data-slide-to="4">
 	                  	<img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" style="max-height: 45px;">
 	                </li>
+	                @endif
 	            </ol>
             </div>
         </div>
@@ -219,7 +236,7 @@ Link: {{ route('styles.show',['all',0,$style->id]) }}
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 	                    <div class="ms-thumbnail card-body p-05">
 	                        <div class="withripple zoom-img">
-	                            <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}"><img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+	                            <a href="{{ sizeof($sty->galleries) > 0 ? asset('files/galleries/images/'. $sty->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}"><img src="{{ sizeof($sty->galleries) > 0 ? asset('files/galleries/images/'. $sty->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
 	                            <div class="col-md-12" style="padding: 0px;">
 		                            <div class="pull-left">
 		                            	<a href="javascript:void(0)" class="btn btn-primary btn-xs btn-raised" title="Add to the booking list">

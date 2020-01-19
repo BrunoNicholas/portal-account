@@ -101,7 +101,7 @@ class GalleryController extends Controller
             $gallery_item->user_id  = $this_gallery->user_id;
             $gallery_item->save();
 
-            return back()->with('success','Gallery saved successfully!');
+            return redirect()->route('galleries.show',$this_gallery->id)->with('success','Gallery saved successfully! You can add more pictures to suite.');
         }
         return back()->with('danger','You have not attached an image.\n Please do so and try again');
         
@@ -151,6 +151,7 @@ class GalleryController extends Controller
     public function update(Request $request, $id)
     {
         request()->validate([
+            'gallery_name' => 'required',
             'user_id'   => 'required',
             'status'    => 'required',
         ]);
@@ -178,6 +179,11 @@ class GalleryController extends Controller
         }
 
 
+        $gallery_item->company_id = $request->company_id;
+        $gallery_item->shop_id = $request->shop_id;
+        $gallery_item->salon_id = $request->salon_id;
+        $gallery_item->style_id = $request->style_id;
+        $gallery_item->product_id = $request->product_id;
         $gallery_item->gallery_name = $request->gallery_name;
         $gallery_item->description  = $request->description;
         $gallery_item->gallery_id = $request->gallery_id;
@@ -185,7 +191,7 @@ class GalleryController extends Controller
         $gallery_item->user_id = $request->user_id;
         $gallery_item->save();
 
-        return redirect()->route('galleries.index')->with('success','Gallery details updated successfully!');
+        return back()->with('success','Gallery updated successfully!');
     }
     /**
      * Remove the specified resource from storage.

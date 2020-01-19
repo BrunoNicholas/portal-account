@@ -167,10 +167,48 @@
                                 <h4 class="text-center pt-1">Attach gallery to Items</h4>
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <button type="button" class="badge badge-success col-3" data-toggle="modal" data-target="#GalSalonModal">Salon</button>
-                                        <button type="button" class="badge badge-info col-3" data-toggle="modal" data-target="#GalShopModal">Shop</button>
-                                        <button type="button" class="badge badge-success col-3" data-toggle="modal" data-target="#GalStyleModal">Style</button>
-                                        <button type="button" class="badge badge-info col-3" data-toggle="modal" data-target="#GalProductModal">Product</button>
+                                        @if(sizeof($salons) > 0 && $gallery->salon_id == null)
+                                            <button type="button" class="badge badge-success col-3" data-toggle="modal" data-target="#GalSalonModal">Salon</button>
+                                        @endif
+                                        @if(sizeof($shops) > 0 && $gallery->shop_id == null)
+                                            <button type="button" class="badge badge-info col-3" data-toggle="modal" data-target="#GalShopModal">Shop</button>
+                                        @endif
+                                        @if(sizeof($styles) > 0 && $gallery->style_id == null)
+                                            <button type="button" class="badge badge-success col-3" data-toggle="modal" data-target="#GalStyleModal">Style</button>
+                                        @endif
+                                        @if(sizeof($products) > 0 && $gallery->product_id == null)
+                                            <button type="button" class="badge badge-info col-3" data-toggle="modal" data-target="#GalProductModal">Product</button>
+                                        @endif
+                                        @if(sizeof($salons) < 1 && sizeof($shops) < 1 && sizeof($styles) < 1 && sizeof($products) < 1)
+                                            <span class="col-12 text-center text-info">No salon, shop, style or product found</span>
+                                        @endif
+                                        <span class="col-12 text-center">
+                                            Gallery connected to <br>
+                                            @if($gallery->salon_id)
+                                                Salon: 
+                                                <a href="{{ route('salons.show',['all',$gallery->salon_id]) }}" class="color-primary">
+                                                    {{ App\Models\Salon::where('id',$gallery->salon_id)->first()->salon_name }}.
+                                                </a>
+                                            @endif
+                                            @if($gallery->shop_id)
+                                                Shop: 
+                                                <a href="{{ route('shops.show',['all',$gallery->shop_id]) }}" class="color-primary">
+                                                    {{ App\Models\Shop::where('id',$gallery->shop_id)->first()->shop_name }}.
+                                                </a>
+                                            @endif
+                                            @if($gallery->style_id)
+                                                Fashion Style: 
+                                                <a href="{{ route('styles.show',['all',0,$gallery->style_id]) }}" class="color-primary">
+                                                    {{ App\Models\Style::where('id',$gallery->style_id)->first()->style_name }}.
+                                                </a>
+                                            @endif
+                                            @if($gallery->product_id)
+                                                Product: 
+                                                <a href="{{ route('products.show',['all',0,$gallery->product_id]) }}" class="color-primary">
+                                                    {{ App\Models\Product::where('id',$gallery->product_id)->first()->product_name }}.
+                                                </a>
+                                            @endif
+                                        </span>
                                     </div>
                                 </div>
                                 {{-- modals for gallery attachment --}}
@@ -190,15 +228,23 @@
                                                         @foreach ($errors->all() as $error)
                                                             <p class="alert alert-danger">{{ $error }}</p>
                                                         @endforeach
+                                                        <input type="hidden" name="user_id" value="{{ $gallery->user_id }}">
+                                                        <input type="hidden" name="gallery_name" value="{{ $gallery->gallery_name }}">
+                                                        <input type="hidden" name="status" value="filled">
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Account Name </label>
+                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Select Salon </label>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="" value="" required>
+                                                            @foreach($salons as $salon)
+                                                                <div class="form-check radio">
+                                                                    <label class="form-check-label">
+                                                                        <input type="radio" name="salon_id" value="{{ $salon->id }}"> {{ $salon->salon_name . ' | ' . $salon->salon_email }} 
+                                                                        @if(sizeof($salon->galleries) > 0) <i class="fa-check fa color-primary" title="Already connected to a gallery"></i>@endif
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
-                                                    </div>
-
-                                                
+                                                    </div>                                                
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -212,7 +258,7 @@
                                     <div class="modal-dialog animated zoomIn animated-3x" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h3 class="modal-title color-primary" id="edit{{ $i }}ModalLabel">Attach this salon to your shop</h3>
+                                                <h3 class="modal-title color-primary" id="edit{{ $i }}ModalLabel">Attach this gallery to your shop</h3>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
                                             </div>
                                             <form enctype="multipart/form-data" action="{{ route('galleries.update',$gallery->id) }}" method="POST">
@@ -224,15 +270,23 @@
                                                         @foreach ($errors->all() as $error)
                                                             <p class="alert alert-danger">{{ $error }}</p>
                                                         @endforeach
+                                                        <input type="hidden" name="user_id" value="{{ $gallery->user_id }}">
+                                                        <input type="hidden" name="gallery_name" value="{{ $gallery->gallery_name }}">
+                                                        <input type="hidden" name="status" value="filled">
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Account Name </label>
+                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Select Shop </label>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="" value="" required>
+                                                            @foreach($shops as $shop)
+                                                                <div class="form-check radio">
+                                                                    <label class="form-check-label">
+                                                                        <input type="radio" name="shop_id" value="{{ $shop->id }}"> {{ $shop->shop_name . ' | ' . $shop->shop_email }}
+                                                                        @if(sizeof($shop->galleries) > 0) <i class="fa-check fa color-primary" title="Already connected to a gallery"></i>@endif
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
-
-                                                
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -258,15 +312,23 @@
                                                         @foreach ($errors->all() as $error)
                                                             <p class="alert alert-danger">{{ $error }}</p>
                                                         @endforeach
+                                                        <input type="hidden" name="user_id" value="{{ $gallery->user_id }}">
+                                                        <input type="hidden" name="gallery_name" value="{{ $gallery->gallery_name }}">
+                                                        <input type="hidden" name="status" value="filled">
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Account Name </label>
+                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Select Style </label>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="" value="" required>
+                                                            @foreach($styles as $style)
+                                                                <div class="form-check radio">
+                                                                    <label class="form-check-label">
+                                                                        <input type="radio" name="style_id" value="{{ $style->id }}"> {{ $style->style_name . ' | ' . $style->current_price }}
+                                                                        @if(sizeof($style->galleries) > 0) <i class="fa-check fa color-primary" title="Already connected to a gallery"></i>@endif
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
-
-                                                
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -292,15 +354,23 @@
                                                         @foreach ($errors->all() as $error)
                                                             <p class="alert alert-danger">{{ $error }}</p>
                                                         @endforeach
+                                                        <input type="hidden" name="user_id" value="{{ $gallery->user_id }}">
+                                                        <input type="hidden" name="gallery_name" value="{{ $gallery->gallery_name }}">
+                                                        <input type="hidden" name="status" value="filled">
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Account Name </label>
+                                                        <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Select Product </label>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="" value="" required>
+                                                            @foreach($products as $product)
+                                                                <div class="form-check radio">
+                                                                    <label class="form-check-label">
+                                                                        <input type="radio" name="product_id" value="{{ $product->id }}"> {{ $product->product_name . ' | ' . $product->current_price }}
+                                                                        @if(sizeof($product->galleries) > 0) <i class="fa-check fa color-primary" title="Already connected to a gallery"></i>@endif
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
-
-                                                
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -314,46 +384,47 @@
 	            		</div>
 	            	</div>
                     <div class="card card-body">
-                        <form action="{{ route('images.store') }}" enctype="multipart/form-data" method="POST">
-                            @csrf
+                        <div class="table-responsive">
+                            <form action="{{ route('images.store') }}" enctype="multipart/form-data" method="POST">
+                                @csrf
 
-                            @foreach ($errors->all() as $error)
-                                <p class="alert alert-danger">{{ $error }}</p>
-                            @endforeach
-                                    
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="gallery_id" value="{{ $gallery->id }}">
+                                @foreach ($errors->all() as $error)
+                                    <p class="alert alert-danger">{{ $error }}</p>
+                                @endforeach
+                                        
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="gallery_id" value="{{ $gallery->id }}">
 
-                            <section class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mt-3">
-                                                <label for="file-item">Browse for image :</label>
-                                                <input type="file" id="file-item" name="image" accept=".jpg, .png, .jpeg" required>
+                                <section class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mt-3">
+                                                    <label for="file-item">Browse for image :</label>
+                                                    <input type="file" id="file-item" name="image" accept=".jpg, .png, .jpeg" required>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="caption_text"> Image Title : </label>
-                                                <input type="text" name="title" class="form-control" id="caption_text" placeholder="Image Title">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="caption_text"> Image Title : </label>
+                                                    <input type="text" name="title" class="form-control" id="caption_text" placeholder="Image Title">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="caption_text"> Image Caption : </label>
-                                                <input type="text" name="caption" class="form-control" id="caption_text" placeholder="Caption Text">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="caption_text"> Image Caption : </label>
+                                                    <input type="text" name="caption" class="form-control" id="caption_text" placeholder="Caption Text">
+                                                </div>
+                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                             </div>
-                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                         </div>
                                     </div>
+                                </section>
+                                <div div class="col-md-12 text-center">
+                                    <button type="submit" class="btn btn-raised btn-sm btn-primary" style="min-width: 150px;">Upload Image</button>
                                 </div>
-                            </section>
-                            <div div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-raised btn-sm btn-primary" style="min-width: 150px;">Upload Image</button>
-                            </div>
-                        </form>
-
+                            </form>
+                        </div>
                     </div>
 	            </section>
 	        </div>

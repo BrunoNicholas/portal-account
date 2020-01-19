@@ -44,7 +44,12 @@
                                                     <div class="el-overlay">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <span class="text-muted"> {{ $gallery->images->count() }} Images </span>
+                                                                <span class="text-muted">
+                                                                    {{ $gallery->images->count() }} Images 
+                                                                    @if($gallery->company_id || $gallery->shop_id || $gallery->salon_id || $gallery->style_id || $gallery->product_id)
+                                                                    <i class="fa fa-check color-primary"></i>
+                                                                    @endif
+                                                                </span>
                                                             </div>
                                                             <div class="col-md-6" title="Date the gallery was added. Time: {{ explode(' ', trim($gallery->created_at))[1] }}">
                                                                 <span>{{ explode(' ', trim($gallery->created_at))[0] }}</span>

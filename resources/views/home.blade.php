@@ -244,7 +244,7 @@
                                                 @foreach($salons as $salon)
                                                     <tr>
                                                         <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;">
-                                                            <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 80px; border-radius: 10%;"><br>
+                                                            <img src="{{ sizeof($salon->galleries) > 0 ? asset('files/galleries/images/'. $salon->galleries->first()->image) :asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 80px; border-radius: 10%;"><br>
                                                             {{ $salon->salon_name }}
                                                         </td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $salon->categories_id ? App\Models\Categories::where('id',$salon->categories_id)->first()->display_name: 'Uncategorised' }}</td>
@@ -289,8 +289,8 @@
                                                     <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
                                                         <div class="ms-thumbnail card-body p-05">
                                                             <div class="withripple zoom-img">
-                                                                <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}">
-                                                                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;">
+                                                                <a href="{{ sizeof($sty->galleries) > 0 ? asset('files/galleries/images/' . $sty->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}">
+                                                                    <img src="{{ sizeof($sty->galleries) > 0 ? asset('files/galleries/images/' . $sty->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;">
                                                                 </a>
                                                                 <div class="col-md-12" style="padding: 0px;">
                                                                     <div class="pull-left">
@@ -301,7 +301,10 @@
                                                                     <div class="col-md-12 pull-right">
                                                                         <p class="btn btn-xs pull-left">
                                                                             <i class="fa fa-image"></i>
-                                                                            @if(sizeof($sty->galleries) > 0)  @else No Gallery @endif
+                                                                            @if(sizeof($sty->galleries) > 0) 
+                                                                                <i class="fa-check fa color-primary" style="margin: 0px;"></i> 
+                                                                                <a class="color-primary" href="{{ route('galleries.show',($sty->galleries->first()->id)) }}">View </a>
+                                                                            @else No Gallery @endif
                                                                         </p>
                                                                         <a title="Go to Salon ({{ App\Models\Salon::where('id',$sty->salon_id)->first()->salon_name }})" href="{{ route('salons.show',['all',$sty->salon_id]) }}" class="btn btn-xs btn-success btn-raised pull-right"><i class="fa fa-shopping-basket" style="margin: 0px;"></i> </a>
                                                                     </div>
@@ -341,7 +344,7 @@
                                                 @foreach($shops as $shop)
                                                     <tr>
                                                         <td class="text-left text-center" style="min-width: 150px; vertical-align: middle;">
-                                                            <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 80px; border-radius: 10%;"><br>
+                                                            <img src="{{ sizeof($shop->galleries) > 0 ? asset('files/galleries/images/'. $shop->galleries->first()->image) :asset('files/defaults/images/cover_bg_2.jpg') }}" style="max-width: 80px; border-radius: 10%;"><br>
                                                             {{ $shop->shop_name }}
                                                         </td>
                                                         <td class="text-left" style="vertical-align: middle;">{{ $shop->categories_id ? App\Models\Categories::where('id',$shop->categories_id)->first()->display_name: 'Uncategorised' }}</td>
@@ -386,8 +389,9 @@
                                                     <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
                                                         <div class="ms-thumbnail card-body p-05">
                                                             <div class="withripple zoom-img">
-                                                                <a href="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $prod->style_name }}">
-                                                                    <img src="{{ asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;">
+                                                                <a href="{{ sizeof($prod->galleries) > 0 ? asset('files/galleries/images/'. $prod->galleries->first()->image) :asset('files/defaults/images/cover_bg_2.jpg') }}" 
+                                                                    data-lightbox="prod-gallery" data-title="{{ $prod->product_name }}">
+                                                                    <img src="{{ sizeof($prod->galleries) > 0 ? asset('files/galleries/images/'. $prod->galleries->first()->image) :asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;">
                                                                 </a>
                                                                 <div class="col-md-12" style="padding: 0px;">
                                                                     <div class="pull-left">
@@ -398,7 +402,10 @@
                                                                     <div class="col-md-12 pull-right">
                                                                         <p class="btn btn-xs pull-left">
                                                                             <i class="fa fa-image"></i>
-                                                                            @if(sizeof($prod->galleries) > 0)  @else No Gallery @endif
+                                                                            @if(sizeof($prod->galleries) > 0) 
+                                                                                <i class="fa-check fa color-primary" style="margin: 0px;"></i> 
+                                                                                <a class="color-primary" href="{{ route('galleries.show',($prod->galleries->first()->id)) }}">View </a>
+                                                                            @else No Gallery @endif
                                                                         </p>
                                                                         <a title="Go to shop ({{ App\Models\Shop::where('id',$prod->shop_id)->first()->shop_name }})" href="{{ route('shops.show',['all',$prod->shop_id]) }}" class="btn btn-xs btn-info btn-raised pull-right"><i class="fa fa-shopping-basket" style="margin: 0px;"></i> </a>
                                                                     </div>

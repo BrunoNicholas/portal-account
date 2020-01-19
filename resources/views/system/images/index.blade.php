@@ -42,6 +42,9 @@
                                                     <h3>
                                                     	<img src="{{ asset('files/galleries/images/' . $gallery->image) }}" style="width: 35px; border-radius: 50%;" alt="g-img">
                                                     	{{ $gallery->gallery_name }}
+                                                    	@if($gallery->company_id || $gallery->shop_id || $gallery->salon_id || $gallery->style_id || $gallery->product_id)
+                                                        <i class="fa fa-check color-primary"></i>
+                                                        @endif
                                                     </h3>
                                                 </div>
                                                 <div class="card-body">

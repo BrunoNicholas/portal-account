@@ -91,12 +91,12 @@
 					                </div>
 
 					                <div class="form-group row">
-					                    <label class="col-md-3 col-form-label text-right"> Select Salon </label>
-					                    <div class="col-md-9" style="max-height: 200px; overflow-y: auto;">
+					                    <label class="col-md-2 col-form-label text-right"> Select Salon </label>
+					                    <div class="col-md-10" style="max-height: 200px; overflow-y: auto;">
 					                    	@foreach($salons as $salon)
 					                    		<div class="form-check radio">
 			                                        <label class="form-check-label">
-					                    				<input type="radio" name="shop_id" value="{{ $salon->id }}"> {{ $salon->salon_name . ' | ' . $salon->salon_email }}
+					                    				<input type="radio" name="salon_id" value="{{ $salon->id }}" title="{{ $salon->salon_email }}"> {{ $salon->salon_name }}
 					                    			</label>
 					                    		</div>
 					                    	@endforeach

@@ -158,7 +158,15 @@ class StyleController extends Controller
         if (!$salon) {
             return back()->with('warning','Looks like a broken link or the referenced salon does not exist.');
         }
-        return view('system.styles.show', compact(['style','salon','type']));
+
+        $gallery    = array();
+        $images     = array();
+
+        sizeof($style->galleries) > 0 ? $gallery = $style->galleries->first() : $gallery = [];
+
+        sizeof($style->galleries) > 0 ? $images = $gallery->images : $images = [];
+
+        return view('system.styles.show', compact(['style','salon','type','images']));
     }
 
     /**

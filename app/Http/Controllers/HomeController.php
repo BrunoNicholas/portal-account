@@ -41,40 +41,40 @@ class HomeController extends Controller
 
             // getting cordinates
 
-            $gpsCompanies = Company::whereNotNull('company_gps')->get();
-            $gpspont    = array();
-            $gpsNames   = array();
+                $gpsCompanies = Company::whereNotNull('company_gps')->get();
+                $gpspont    = array();
+                $gpsNames   = array();
 
-            $gpsSalons = Salon::whereNotNull('salon_gps')->get();
-            $salgpspont    = array();
-            $salgpsNames   = array();
+                $gpsSalons = Salon::whereNotNull('salon_gps')->get();
+                $salgpspont    = array();
+                $salgpsNames   = array();
 
-            $gpsShops = Shop::whereNotNull('shop_gps')->get();
-            $shogpspont    = array();
-            $shogpsNames   = array();
+                $gpsShops = Shop::whereNotNull('shop_gps')->get();
+                $shogpspont    = array();
+                $shogpsNames   = array();
 
-            foreach ($gpsCompanies as $val) {
-                array_push($gpspont, explode(' ', $val->company_gps));
-            array_push($gpsNames, ($val->company_name . ' | ' . $val->company_location));
-            }
+                foreach ($gpsCompanies as $val) {
+                    array_push($gpspont, explode(' ', $val->company_gps));
+                array_push($gpsNames, ($val->company_name . ' | ' . $val->company_location));
+                }
 
-            foreach ($gpsSalons as $val) {
-                array_push($salgpspont, explode(' ', $val->salon_gps));
-            array_push($salgpsNames, ($val->salon_name . ' | ' . $val->salon_location));
-            }
+                foreach ($gpsSalons as $val) {
+                    array_push($salgpspont, explode(' ', $val->salon_gps));
+                array_push($salgpsNames, ($val->salon_name . ' | ' . $val->salon_location));
+                }
 
-            foreach ($gpsShops as $val) {
-                array_push($shogpspont, explode(' ', $val->shop_gps));
-            array_push($shogpsNames, ($val->shop_name . ' | ' . $val->shop_location));
-            }
+                foreach ($gpsShops as $val) {
+                    array_push($shogpspont, explode(' ', $val->shop_gps));
+                array_push($shogpsNames, ($val->shop_name . ' | ' . $val->shop_location));
+                }
 
-            $gpsponts   = json_encode($gpspont);
-            $gps1ponts  = json_encode($salgpspont);
-            $gps2ponts  = json_encode($shogpspont);
+                $gpsponts   = json_encode($gpspont);
+                $gps1ponts  = json_encode($salgpspont);
+                $gps2ponts  = json_encode($shogpspont);
 
-            $ptNum  = sizeof($gpspont);
-            $pt1Num = sizeof($salgpspont);
-            $pt2Num = sizeof($shogpspont);
+                $ptNum  = sizeof($gpspont);
+                $pt1Num = sizeof($salgpspont);
+                $pt2Num = sizeof($shogpspont);
 
             // end of getting cordinates
 
