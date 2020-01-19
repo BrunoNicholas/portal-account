@@ -26,7 +26,7 @@
 <div class="container mt-0" style="min-height: 500px;">
 	<div class="row mt-0 pl-0">
 		@include('layouts.includes.left_message')
-		<div class="col-lg-9 ms-paper-content-container">
+		<div class="col-lg-9 col-md-8 col-xs-9 ms-paper-content-container">
 			<div class="ms-paper-content">
 	            <section class="ms-component-section">
 	            	<div class="card">

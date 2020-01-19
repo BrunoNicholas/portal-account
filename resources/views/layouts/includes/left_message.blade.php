@@ -1,4 +1,4 @@
-<div class="card card-body col-lg-3 ms-paper-content-container">
+<div class="card card-body col-lg-3 col-md-4 col-xs-3 ms-paper-content-container">
 	@if(route('messages.create','all') == Request::fullUrl())
 	    <a href="{{ route('messages.index', 'inbox') }}" class="btn btn-primary btn-block btn-raised animated margin-bottom"><i class="fa-envelope-o fa"></i> Inbox</a>
 	@else
