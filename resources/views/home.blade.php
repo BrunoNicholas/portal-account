@@ -775,8 +775,8 @@
                                                         @endif
                                                         @foreach(Auth::user()->teams as $team)
                                                             <tr>
-                                                                <td class="text-left" style="vertical-align: middle;">{{ $team->team_name }}</td>
-                                                                <td style="vertical-align: middle;">
+                                                                <td class="text-left" style="vertical-align: middle; min-width: 120px;">{{ $team->team_name }}</td>
+                                                                <td style="vertical-align: middle; min-width: 120px;">
                                                                     <img 
                                                                         src="{{ App\User::where('id',$team->user_id)->first()->profile_image ? asset('files/profile/images/' . App\User::where('id',$team->user_id)->first()->profile_image) : asset('files/defaults/images/profile.jpg') }}"
                                                                         style="max-width: 25px; border-radius: 40%;">
@@ -784,7 +784,7 @@
                                                                     </td>
                                                                 <td class="text-center" style="vertical-align: middle;">{{ $team->team_users->count() }}</td>
                                                                 <td class="text-center" style="text-transform: capitalize; vertical-align: middle;">{{ $team->status }}</td>
-                                                                <td class="text-center" style="vertical-align: middle;">
+                                                                <td class="text-center" style="vertical-align: middle; min-width: 120px;">
                                                                     <div class="col-12">
                                                                         <div class="row">
                                                                             <div class="col-6" style="padding:0px;">

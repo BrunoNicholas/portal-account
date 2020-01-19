@@ -62,6 +62,11 @@
 
         @media only screen and (max-width: 600px) {
             .justify-content-end > nav { display: none; }
+            .back-button { display: none; }
+        }
+
+        @media only screen and (max-width: 900px) {
+            .backmenu-button { display: none; }
         }
     </style>
     <!--[if lt IE 9]>

@@ -149,10 +149,11 @@
                 @foreach($products as $product)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="ms-thumbnail-container wow fadeInUp">
-                        <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
+                        <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info"
+                          style="background-color: #e5e5e5; width: auto; height: 200px; overflow-y: hidden; overflow-x: hidden;">
                             <img src="{{ sizeof($product->galleries) > 0 ? asset('files/galleries/images/' . $product->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" 
                               alt="" 
-                              style="width: 100%; max-height: 200px; overflow-y: auto;" class="img-fluid">
+                              class="img-fluid">
                             <figcaption class="ms-thumbnail-caption text-center">
                                 <div class="ms-thumbnail-caption-content">
                                     <h3 class="ms-thumbnail-caption-title">{{ $product->product_name }}</h3>

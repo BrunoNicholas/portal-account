@@ -290,7 +290,9 @@
 		        	<a href="javascript:void(0)" class="btn-ms-menu btn-circle-primary ms-toggle-left animated zoomInDown animation-delay-10"><i class="zmdi zmdi-menu"></i></a>
 	            </li>
 	            @if(URL::previous() != Request::fullUrl())
-		            <a href="{{ URL::previous() }}" class="btn btn-sm btn-info btn-rounded text-white"><i class="fa-angle-double-left fa text-white" style="font-size: 15px;"></i> Back </a>
+		            <a href="{{ URL::previous() }}" class="btn btn-sm btn-info btn-rounded text-white backmenu-button">
+		            	<i class="fa-angle-double-left fa text-white" style="font-size: 15px;"></i> Back 
+		            </a>
 		        @endif
 	      	</ul>
         </div>

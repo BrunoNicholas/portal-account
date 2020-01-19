@@ -79,12 +79,6 @@
 				              	@if($message->receiver == Auth::user()->id)
 					              	<div class="mailbox-controls with-border text-center">
 						                <div class="btn-group">
-						                  {{-- <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Delete">
-						                    <i class="fa fa-trash-o"></i></button>
-						                  <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
-						                    <i class="fa fa-reply"></i></button>
-						                  <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
-						                    <i class="fa fa-share"></i></button> --}}
 						                    <form action="{{ route('messages.update',[$message->id,'delete']) }}" method="post" style="margin: 2px;" class="pull-left">
 						                        {{ csrf_field() }}
 						                        {{ method_field('PATCH') }}
@@ -168,7 +162,18 @@
 					                                    </div>
 					                                    <div class="form-group">
 					                                        <label for="message-text" class="control-label">Message:</label>
-					                                        <textarea class="form-control" id="message-text1" name="message"></textarea>
+					                                        <textarea class="form-control" id="message-text1" name="message">
+
+
+
+                                	
+-----------------------------------
+Reply from {{ explode(' ', trim(App\User::where('id',$message->sender)->get()->first()->name))[0] }}'s sent message.
+{{ $message->message }}
+------
+{{ $message->created_at }}
+___________________________________
+					                                        </textarea>
 					                                    </div>
 					                                </div>
 					                                <div class="modal-footer">
