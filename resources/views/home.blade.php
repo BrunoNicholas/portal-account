@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('title', 'Home')
+@section('title', 'Control Panel')
 @section('styles')
 @permission('can_view_map')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" 

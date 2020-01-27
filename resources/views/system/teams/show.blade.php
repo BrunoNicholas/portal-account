@@ -12,7 +12,9 @@
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
                     	<li><a href="{{ route('userhome') }}"><i class="fa fa-home text-primary"></i>Home</a></li>
+				    	@permission('create_user')
 				    	<li><a href="{{ route('users.index') }}"><i class="fa fa-users text-primary"></i>Users</a></li>
+				    	@endpermission
 				    	<li><a href="{{ route('teams.index') }}"><i class="fa fa-users text-primary"></i>Teams</a></li>
 				        <li class="active"><a href="javascript:void(0)"><i class="fa fa-users"></i> View Team </a></li>
 	                </ol>

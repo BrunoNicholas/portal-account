@@ -11,9 +11,9 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-	                    
-
-	                    
+	                    <li class="breadcrumb-item"><a href="{{ route('salons.show',['all',$salon->id]) }}"><i class="fa fa-address-book-o"></i> {{ $salon->salon_name }}</a></li>
+                    	<li class="breadcrumb-item"><a href="{{ route('styles.index',['all',$salon->id]) }}"><i class="fa fa-list"></i> Style Details </a></li>
+						<li class="breadcrumb-item active"><i class=""></i> Edit {{ $style->style_name }}</li>	                    
 	                </ol>
 	            </nav>
 	        </div>

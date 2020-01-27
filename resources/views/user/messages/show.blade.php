@@ -11,7 +11,6 @@
 	        <div class="d-flex no-block justify-content-end col-md-8">
 	            <nav aria-label="breadcrumb" style="padding: 0px; height: 43px;">
 	                <ol class="breadcrumb">
-                    	<li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home</a></li>
 			            <li class="breadcrumb-item"><a href="{{ route('profile') }}"> <i class="fa fa-user"></i> Profile </a></li>
 			            <li class="breadcrumb-item"><a href="{{ route('messages.index','inbox') }}">  <i class="fa fa-envelope"></i> Messages </a></li>
 			            <li class="breadcrumb-item active" aria-current="page"> <i class="fa fa-plus"></i> Message Details </li>
@@ -110,7 +109,7 @@
 				            <div class="mailbox-read-message">
 				                <p>@if($message->title )<big>{{ $message->title }}</big>@else <i>No title specified</i>@endif</p>
 
-				                <textarea class="form-control" rows="11" style="overflow-y: auto;border: none; background-color: #fff; color: #000; padding-top: 5px;" disabled>{{ $message->message }}</textarea>
+				                <textarea class="form-control" rows="12" style="overflow-y: auto;border: none; background-color: #fff; color: #000; padding-top: 5px;" disabled>{{ $message->message }}</textarea>
 				            </div>
 				            <!-- /.mailbox-read-message -->
 			            </div>
