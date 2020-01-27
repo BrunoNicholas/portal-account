@@ -169,8 +169,8 @@
                                 	
 -----------------------------------
 - [ Reply from {{ explode(' ', trim(App\User::where('id', $message->sender)->get()->first()->name))[0] }}'s sent message. ]
+
 - {{ $message->message }}
-- >>{{ $message->created_at }}
 ___________________________________
 					                                        </textarea>
 					                                    </div>

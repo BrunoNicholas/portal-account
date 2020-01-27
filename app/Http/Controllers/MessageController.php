@@ -283,7 +283,7 @@ class MessageController extends Controller
             ['sender', Auth::user()->id]])->orWhere([
                 ['folder', 'normal'],
                 ['receiver', Auth::user()->id]])->count();
-        $users      = User::all();
+        $users      = User::latest()->paginate(50);
 
         if ($message->sender == Auth::user()->id) {
             return view('user.messages.show', compact(['message','type','id','users','allCount','inboxCount','trashCount','draftCount','sentCount','spamCount','impCount','urgCount','offCount','unoffCount','normalCount']));
