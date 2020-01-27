@@ -108,7 +108,7 @@ class UserController extends Controller
 
         $user->attachRole(Role::where('name',($request->role))->first());
 
-        return redirect()->route('users.index')->with('success','User Profile Created Successfully');
+        return redirect()->route('users.create')->with('success',$request->name . '\'s User Profile is Created Successfully');
     }
 
     /**

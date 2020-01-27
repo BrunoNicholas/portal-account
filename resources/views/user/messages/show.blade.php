@@ -30,7 +30,7 @@
 	            <section class="ms-component-section">
 	            	<div class="card">
 			            <section class="card-primary" style="padding: 5px 15px;">
-			                <h3 class="card-title"> <i class="fa-envelope-open fa text-info"></i> Message Details <small> (<span class="text-primary">{{ $message->status }}ed, {{ $message->folder }}</span>)</small></h3>
+			                <h3 class="card-title"> <i class="fa-envelope-open fa text-info"></i> Message Details <small> (<span class="text-primary">{{ $message->folder }}</span>)</small></h3>
 			            </section>
 			            <div class="col-md-12" style="overflow-x: auto;">
 			            	<div class="box box-primary">
@@ -72,7 +72,7 @@
 			                                <a href="{{ route('users.show',$message->sender) }}"><b>{{ (App\User::where('id',$message->sender)->get()->first())->email . ' - ' . (App\User::where('id',$message->sender)->get()->first())->name  }}</b></a>
 			                            @endif
 			                        </span>
-				                	<span class="mailbox-read-time pull-right"> {{ $message->created_at }}</span>
+				                	<span class="mailbox-read-time pull-right"> <b>{{ explode(' ', trim($message->created_at))[1] }}</b>, {{ explode(' ', trim($message->created_at))[0]  }}</span>
 				                </h5>
 				            </div>
 				              <!-- /.mailbox-read-info -->
@@ -110,7 +110,7 @@
 				            <div class="mailbox-read-message">
 				                <p>@if($message->title )<big>{{ $message->title }}</big>@else <i>No title specified</i>@endif</p>
 
-				                <textarea class="form-control" rows="8" style="overflow-y: auto;border: none; background-color: #fff; color: #000; padding-top: 5px;" disabled>{{ $message->message }}</textarea>
+				                <textarea class="form-control" rows="11" style="overflow-y: auto;border: none; background-color: #fff; color: #000; padding-top: 5px;" disabled>{{ $message->message }}</textarea>
 				            </div>
 				            <!-- /.mailbox-read-message -->
 			            </div>

@@ -36,31 +36,31 @@
 		                        <table id="example23" class="table table-striped table-bordered table-hoverable" width="100%" cellspacing="0">
 		                            <thead>
 		                                <tr>
-		                                    <th class="text-center;" style="vertical-align: middle;">#</th>
-		                                    <th class="text-center;" style="vertical-align: middle;">Name</th>
-		                                    <th class="text-center;" style="vertical-align: middle;">Email</th>
-		                                    <th class="text-center;" style="vertical-align: middle;">Privillege</th>
-		                                    <th class="text-center;" style="vertical-align: middle;">Status</th>
-		                                    <th class="text-center;" style="vertical-align: middle;">Actions</th>
+		                                    <th class="text-center;" style="vertical-align: middle; min-width: 50px;">#</th>
+		                                    <th class="text-center;" style="vertical-align: middle; min-width: 50px;">Name</th>
+		                                    <th class="text-center;" style="vertical-align: middle; min-width: 50px;">Email</th>
+		                                    <th class="text-center;" style="vertical-align: middle; min-width: 50px;">Privillege</th>
+		                                    <th class="text-center;" style="vertical-align: middle; min-width: 50px;">Status</th>
+		                                    <th class="text-center;" style="vertical-align: middle; min-width: 50px;">Actions</th>
 
-		                                    <th style="vertical-align: middle;">Multi Account</th>
+		                                    <th style="vertical-align: middle; min-width: 100px;">Multi Account</th>
 		                                    <th style="vertical-align: middle;">Salons</th>
 		                                    <th style="vertical-align: middle;">Shops</th>
 		                                    <th style="vertical-align: middle;">Bookings</th>
 		                                    <th style="vertical-align: middle;">Orders</th>
-		                                    <th style="vertical-align: middle;">Posts Made</th>
-		                                    <th style="vertical-align: middle;">Questions Asked</th>
+		                                    <th style="vertical-align: middle;">Posts</th>
+		                                    <th style="vertical-align: middle;">Questions</th>
 		                                    <th style="vertical-align: middle;">Reviews</th>
-		                                    <th style="vertical-align: middle;">Ratingss</th>
+		                                    <th style="vertical-align: middle;">Ratings</th>
 		                                    <th style="vertical-align: middle;">Galleries</th>
-		                                    <th style="vertical-align: middle;">Images Uploaded</th>
+		                                    <th style="vertical-align: middle;">Images</th>
 		                                </tr>
 		                            </thead>
 		                            <tbody>
 		                                <?php $i=0; ?>
 		                                @foreach($users as $user)
 		                                    <tr>
-		                                        <td>{{ ++$i }}</td>
+		                                        <td class="text-center">{{ ++$i }}</td>
 		                                        <td style="min-width: 150px; text-align: right;">
 	                                                {{ $user->name }} <img src="{{ $user->profile_image ? asset('files/profile/images/' . $user->profile_image) : asset('files/defaults/images/profile.jpg') }}" style="max-width: 25px; border-radius: 40%;"></td>
 		                                        <td class="text-left;">{{ $user->email }}</td>

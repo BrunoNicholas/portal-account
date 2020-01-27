@@ -304,7 +304,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success btn-raised"><i class="fa-check fa"></i> Update Profile</button>
+                                        <button type="submit" class="btn btn-success btn-raised" @permission('edit_user') @else disabled @endpermission><i class="fa-check fa"></i> Update Profile</button>
                                     </div>
                                 </div>
                             </form>
