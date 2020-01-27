@@ -168,10 +168,9 @@
 
                                 	
 -----------------------------------
-Reply from {{ explode(' ', trim(App\User::where('id',$message->sender)->get()->first()->name))[0] }}'s sent message.
-{{ $message->message }}
-------
-{{ $message->created_at }}
+- [ Reply from {{ explode(' ', trim(App\User::where('id', $message->sender)->get()->first()->name))[0] }}'s sent message. ]
+- {{ $message->message }}
+- >>{{ $message->created_at }}
 ___________________________________
 					                                        </textarea>
 					                                    </div>
@@ -225,8 +224,11 @@ ___________________________________
 				                                        <textarea class="form-control" id="message-text1" name="message">{{ $message->message }}
 
 
+
 -----
-Forwarded from {{ App\User::where('id',$message->sender)->get()->first()->name }}
+- [ Forwarded from {{ App\User::where('id',$message->sender)->get()->first()->name }} ]
+- >>{{ $message->created_at }}
+___________________________________
 				                                        </textarea>
 				                                    </div>
 				                                </div>
