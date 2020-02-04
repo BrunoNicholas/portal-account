@@ -231,5 +231,5 @@
           x.innerHTML = position.coords.latitude + ' ' + position.coords.longitude;
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm092t3Kz-SgMCDPib5_cD2GNBnHYnnus"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('app.map_key') }}"></script>
 @endsection

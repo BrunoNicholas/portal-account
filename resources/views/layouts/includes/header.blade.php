@@ -5,7 +5,7 @@
 	        <a href="{{ url('/') }}">
 	          	<!-- <img src="assets/img/demo/logo-header.png" alt=""> -->
 	          	<span class="ms-logo animated zoomInDown animation-delay-5">SP</span>
-	          	<h1 class="animated fadeInRight animation-delay-6"> Salon <span> Portal </span></h1>
+	          	<h1 class="animated fadeInRight animation-delay-6"> {{ explode(' ', trim(config('app.name')))[0] }} <span> {{ explode(' ', trim(config('app.name')))[1] }} </span></h1>
 	        </a>
 	    </div>
       	<div class="header-right">

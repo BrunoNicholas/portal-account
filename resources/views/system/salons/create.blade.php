@@ -83,12 +83,12 @@
 	                		<div class="form-group row mt-0">
 	                			<label for="inputEmail" autocomplete="false" class="col-lg-4 control-label">Owner Account</label>
 				                <div class="col-lg-8">
-				                    @if(Auth::user()->hasRole('company-admin'))
+				                    @if(Auth::user()->hasRole('company-admin') && sizeof(Auth::user()->companies) > 0)
 					                	<input type="hidden" name="company_id" value="{{ App\Models\Company::where('user_id',Auth::user()->id)->first()->id }}">
 					                	<input type="text" class="form-control" value="{{ App\Models\Company::where('user_id',Auth::user()->id)->first()->company_name }} ({{ App\Models\Company::where('user_id',Auth::user()->id)->first()->company_email }})" disabled>
 					               	@else
 					                    <select class="form-control" id="inputName" name="company_id">
-					                    	<option value="">(Leave empty if independent)</option>
+					                    	<option value="">(Leave empty for independent salon)</option>
 					                    	@foreach($companies as $company)
 					                    		<option value="{{ $company->id }}" title="{{ $company->description }}">{{ $company->company_name }}</option>
 					                    	@endforeach
@@ -208,5 +208,5 @@
           x.innerHTML = position.coords.latitude + ' ' + position.coords.longitude;
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm092t3Kz-SgMCDPib5_cD2GNBnHYnnus"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('app.map_key') }}"></script>
 @endsection

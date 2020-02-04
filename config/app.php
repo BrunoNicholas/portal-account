@@ -17,6 +17,8 @@ return [
 
     'description'   => env('APP_DESC', 'The best salon and products shop next to you!'),
 
+    'map_key'       => env('MAP_KEY', 'AIzaSyC40QMPjIYTGeoSTowtAE9rQ8Q5kWAx1Jk&callback=initMap'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

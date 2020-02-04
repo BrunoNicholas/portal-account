@@ -180,28 +180,6 @@
             </form>
         </div>
     </div>
-    {{-- <div class="card card-primary">
-        <div class="row">
-            <div class="col-xl-3 col-lg-4 col-md-5">
-                <div class="card-body wow fadeInUp">
-                  <div class="mb-2">
-                    <span class="ms-logo ms-logo-sm mr-1">M</span>
-                    <h3 class="no-m ms-site-title">Material<span>Style</span></h3>
-                  </div>
-                  <address class="no-mb">
-                    <p><i class="color-danger-light zmdi zmdi-pin mr-1"></i> 795 Folsom Ave, Suite 600</p>
-                    <p><i class="color-warning-light zmdi zmdi-map mr-1"></i> San Francisco, CA 94107</p>
-                    <p><i class="color-info-light zmdi zmdi-email mr-1"></i> <a href="mailto:joe@example.com">example@domain.com</a></p>
-                    <p><i class="color-royal-light zmdi zmdi-phone mr-1"></i>+34 123 456 7890 </p>
-                    <p><i class="color-success-light fa fa-fax mr-1"></i>+34 123 456 7890 </p>
-                  </address>
-                </div>
-            </div>
-            <div class="col-xl-9 col-lg-8 col-md-7">
-                <iframe width="100%" height="340" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48342.06480344582!2d-73.980069429762!3d40.775680208459505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2589a018531e3%3A0xb9df1f7387a94119!2sCentral+Park!5e0!3m2!1sen!2sus!4v1491233314840"></iframe>
-            </div>
-        </div>
-    </div> --}}
 </div>
 @endsection
 @section('scripts')
@@ -217,5 +195,5 @@
           x.innerHTML = position.coords.latitude + ' ' + position.coords.longitude;
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm092t3Kz-SgMCDPib5_cD2GNBnHYnnus"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('app.map_key') }}"></script>
 @endsection
