@@ -40,7 +40,7 @@
             <a class="navbar-brand" href="{{ url('/') }}">
 	            <!-- <img src="assets/img/demo/logo-navbar.png" alt=""> -->
 	            <span class="ms-logo ms-logo-sm">SP</span>
-	            <span class="ms-title"> Salon <strong> Portal </strong></span>
+	            <span class="ms-title"> {{ explode(' ', trim(config('app.name')))[0] }} <span> {{ explode(' ', trim(config('app.name')))[1] }}</strong></span>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="ms-navbar">
@@ -200,7 +200,7 @@
 			                      	@endpermission
 			                      	<li class="dropdown-divider"></li>
 		                      	@endpermission
-		                      	<li><a class="dropdown-item text-success" target="_blank" href="https://salonportal.000webhostapp.com/blog" ><i class="fa fa-link text-success" ></i> Portal Posts</a></li>
+		                      	<li><a class="dropdown-item text-success" target="_blank" href="https://salonportal.000webhostapp.com/blog" ><i class="fa fa-link text-success" ></i> Palace Posts</a></li>
 		                    </ul>
 		                </li>
 		                <li class="dropdown-submenu">

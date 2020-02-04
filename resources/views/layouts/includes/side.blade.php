@@ -16,7 +16,7 @@
 	            </form>
 	            <div class="ms-slidebar-t">
 	              <span class="ms-logo ms-logo-sm">SP</span>
-	              <h3>Salon<span>Portal</span></h3>
+	              <h3> {{ explode(' ', trim(config('app.name')))[0] }} <span> {{ explode(' ', trim(config('app.name')))[1] }} </span></h3>
 	            </div>
 	        </div>
         </header>

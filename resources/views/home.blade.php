@@ -428,7 +428,7 @@
                                                 <div class="col-md-3 col-md-6 col-sm-6 pt-1">
                                                     <div class="panel panel-body">
                                                         <div class="row color-primary ml-0 mr-0">
-                                                            <i class="fa fa-3x fa-tree primary-color text-success text-center col-3" style="padding-top: 20px; padding: 0px; padding-top: 30px; padding-bottom: 30px;"></i>
+                                                            <i class="fa fa-4x fa-tree primary-color text-success text-center col-3" style="padding-top: 20px; padding: 0px; padding-top: 30px; padding-bottom: 30px;"></i>
                                                             <div class="col-9 table-responsive">
                                                                 <div class="row pt-1">
                                                                     @role(['super-admin','admin','company-admin'])
@@ -727,12 +727,15 @@
                                                     <div class="panel panel-body">
                                                         <div class="row color-primary ml-0 mr-0">
                                                             <div class="text-center col-4">
-                                                                <i class="fa fa-4x fa-user primary-color color-primary" style="padding-top: 20px; padding: 0px; padding-top: 30px; padding-bottom: 30px;"></i>
+                                                                <i class="fa fa-5x fa-user primary-color color-primary" style="padding-top: 20px; padding: 0px; padding-top: 30px; padding-bottom: 30px;"></i>
                                                                 <a href="{{ route('users.show',Auth::user()->id) }}" class="btn btn-primary btn-xs btn-block" target="_blank" title="Your Public Profile">
-                                                                    <i class="fa fa-group" style="margin: 0px;"></i> View 
+                                                                    <i class="fa fa-group" style="margin: 0px;font-size:15px;"></i> Public 
                                                                 </a>
                                                                 <a href="{{ route('profile') }}" class="btn btn-info btn-xs btn-block" target="_blank" title="Your your profile">
-                                                                    <i class="fa fa-user" style="margin: 0px;"></i> Profile 
+                                                                    <i class="fa fa-user" style="margin: 0px;font-size:15px;"></i> Profile 
+                                                                </a>
+                                                                <a href="{{ route('galleries.index') }}" class="btn btn-primary btn-xs btn-block" target="_blank" title="View your galleries">
+                                                                    <i class="fa fa-image" style="margin: 0px;font-size:15px;"></i> Galleries
                                                                 </a>
                                                             </div>
                                                             <div class="col-8">
@@ -805,12 +808,6 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </div>
-                                        @endpermission
-                                        @permission('can_view_map')
-                                        <div class="col-md-12" style="padding: 0px;">
-                                            <h4 class="text-center"> Map Accounts, salons, shops locations </h4>
-                                            <div id="map" style="width: 100%; height: 400px;"></div>
                                         </div>
                                         @endpermission
                                     </div>
@@ -972,6 +969,14 @@
                     </div>
                 </div>
             </div>
+            @permission('can_view_map')
+                <div class="col-md-12" style="padding: 0px;">
+                    <div class="card card-primary mb-2 ml-2 mr-2" style="min-height: 400px;">
+                        <h4 class="text-center"> Map Accounts, salons, shops locations </h4>
+                        <div id="map" style="width: 100%; height: 400px;"></div>
+                    </div>
+                </div>
+            @endpermission
         </div>
     </div>
 @endsection

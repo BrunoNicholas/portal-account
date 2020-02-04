@@ -230,7 +230,7 @@ Link: {{ route('styles.show',['all',0,$product->id]) }}
     <div class="row"><?php $i=3; ?>
     	@foreach($shop->products as $prod)
     		@if($prod->id != $product->id)
-	    		<div class="col-md-4">
+	    		<div class="col-lg-4 col-md-5 col-xs-2">
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 	                	<div class="ms-thumbnail card-body p-05">
 	                        <div class="withripple zoom-img">

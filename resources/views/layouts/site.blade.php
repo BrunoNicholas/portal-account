@@ -101,7 +101,7 @@
                         <button type="button" class="close d-inline pull-right mt-2" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
                         <div class="modal-title text-center">
                             <span class="ms-logo ms-logo-white ms-logo-sm mr-1">SP</span>
-                            <h3 class="no-m ms-site-title"> Salon <span> Portal </span></h3>
+                            <h3 class="no-m ms-site-title"> {{ explode(' ', trim(config('app.name')))[0] }} <span> {{ explode(' ', trim(config('app.name')))[1] }} </span></h3>
                         </div>
                         <div class="modal-header-tabs">
                             <ul class="nav nav-tabs nav-tabs-full nav-tabs-3 nav-tabs-primary" role="tablist">

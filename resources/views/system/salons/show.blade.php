@@ -9,7 +9,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-lg-4 col-md-7 col-xs-8">
+        <div class="col-lg-5 col-md-7 col-xs-8">
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
 	            <div class="card card-body text-center">
 	                <!-- Wrapper for slides -->
@@ -120,7 +120,7 @@
 						                          					@if($style->description)
 						                          						<tr>
 						                          							<td colspan="2" class="text-left">
-						                          								{{ strlen($style->description) > 60 ? substr($style->description, 0, 60) . '... ' : $style->description }}
+						                          								{{ strlen($style->description) > 24 ? substr($style->description, 0, 24) . '... ' : $style->description }}
 						                          							</td>
 						                          						</tr>
 						                          					@endif
@@ -139,7 +139,7 @@
 	            </div>
             </div>
         </div>
-        <div class="col-lg-8 col-md-5 col-xs-4">
+        <div class="col-lg-7 col-md-5 col-xs-4">
             <div class="card animated zoomInDown animation-delay-5">
 	            <div class="card-body">
 	            	<div class="row color-success">

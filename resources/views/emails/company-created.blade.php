@@ -11,21 +11,13 @@ With this account, you can be able to create your salons or spa accounts along w
 
   	@if($company->company_email)	{{ ++$i }}. Account Email: - {{ $company->company_email }} @endif 
 
-  	@if($company->company_telephone)	{{ ++$i }}. Telephone No: - {{ $company->company_telephone }} @endif 
-
-  	@if($company->company_location)	{{ ++$i }}. Account Location: - {{ $company->company_location }} @endif
-
- 	  @if($company->company_ID)	{{ ++$i }}. Account ID: - {{ $company->company_ID }} @endif 
+  	@if($company->company_telephone)	{{ ++$i }}. Telephone No: - {{ $company->company_telephone }} @endif
 
   	@if($company->company_bio)	{{ ++$i }}. Bio (Business Slogan): - {{ $company->company_bio }} @endif 
 
     @if($company->description) {{ ++$i }}. {{ $company->description }} @endif 
 
-  	{{ ++$i }}. Account status: - Active 
-
-  	{{ ++$i }}. Account Salons - 0
-
-  	{{ ++$i }}. Account Shops: - 0
+  	{{ ++$i }}. Account status: - {{ $company->status }}
 
   	@if($company->user_id){{ ++$i }}. Account Admin: - {{ App\User::where('id',$company->user_id)->first()->name }} @endif
 

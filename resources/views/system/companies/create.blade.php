@@ -132,7 +132,7 @@
 				                    </div>
 				                    <div class="form-check radio">
                                         <label class="form-radio-label">
-				                    		<input type="radio" id="text23" value="services" name="products_services"> Services (Salons &amp; Spa's Onlu)
+				                    		<input type="radio" id="text23" value="services" name="products_services"> Services (Salons &amp; Spa's Only)
 				                    	</label>
 				                    </div>
 				                    <div class="form-check radio">

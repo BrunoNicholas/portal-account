@@ -198,13 +198,13 @@
                                             @endif
                                             @if($gallery->style_id)
                                                 Fashion Style: 
-                                                <a href="{{ route('styles.show',['all',0,$gallery->style_id]) }}" class="color-primary">
+                                                <a href="{{ route('styles.show',['all',App\Models\Style::where('id',$gallery->style_id)->first()->salon_id,$gallery->style_id]) }}" class="color-primary">
                                                     {{ App\Models\Style::where('id',$gallery->style_id)->first()->style_name }}.
                                                 </a>
                                             @endif
                                             @if($gallery->product_id)
                                                 Product: 
-                                                <a href="{{ route('products.show',['all',0,$gallery->product_id]) }}" class="color-primary">
+                                                <a href="{{ route('products.show',['all',App\Models\Product::where('id',$gallery->product_id)->first()->shop_id,$gallery->product_id]) }}" class="color-primary">
                                                     {{ App\Models\Product::where('id',$gallery->product_id)->first()->product_name }}.
                                                 </a>
                                             @endif

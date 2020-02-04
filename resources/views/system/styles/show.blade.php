@@ -226,7 +226,7 @@ Link: {{ route('styles.show',['all',0,$style->id]) }}
             </div>@endauth
         </div>
     </div>
-    <h3 class="mt-4 mb-4 right-line"> Other Styles From {{ $salon->salon_name }} | <a href="{{ route('salons.index','all') }}"> All other styles </a> </h3>
+    <h3 class="mt-4 mb-4 right-line"> Other Styles From {{ $salon->salon_name }} | <a href="{{ route('styles.index',['all',0]) }}"> Other salons' styles </a> </h3>
     <div class="row"><?php $i=3; ?>
     	@foreach($salon->styles as $sty)
     		@if($sty->id != $style->id)

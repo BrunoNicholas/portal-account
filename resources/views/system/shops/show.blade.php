@@ -9,7 +9,7 @@
 @section('content')
 <div class="container">
 	<div class="row">
-        <div class="col-lg-4 col-md-7 col-xs-8">
+        <div class="col-lg-5 col-md-7 col-xs-8">
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">
 	            <div class="card card-body text-center">
 	                <!-- Wrapper for slides -->
@@ -113,7 +113,7 @@
 			                          							@if($product->current_price)<td class="text-right text-info">UGX. {{ $product->current_price }}</td>@endif
 			                          						</tr>
 			                          						<tr>
-			                          							@if($product->categories_id)<td class="text-left">{{ App\Models\Categories::where('id',$product->categories_id )->first()->display_name }}</td>@endif
+			                          							@if($product->categories_id)<td class="text-left">{{ explode(' ', trim(App\Models\Categories::where('id',$product->categories_id )->first()->display_name))[0] }}</td>@endif
 			                          							@if($product->status)
 			                          							<td class="text-right">
 			                          								<span class="badge badge-xs badge-success">{{ $product->status }}</span>
@@ -122,7 +122,7 @@
 			                          						</tr>
 				                          					@if($product->description)
 				                          						<tr>
-				                          							<td colspan="2" class="text-left"><i>{{ strlen($product->description) > 60 ? substr($product->description, 0, 60) . '... ' : $product->description }}</i></td>
+				                          							<td colspan="2" class="text-left"><i>{{ strlen($product->description) > 24 ? substr($product->description, 0, 24) . '... ' : $product->description }}</i></td>
 				                          						</tr>
 				                          					@endif
 				                          				</tbody>
@@ -138,7 +138,7 @@
 	            </div>
             </div>
         </div>
-        <div class="col-lg-8 col-md-5 col-xs-4">
+        <div class="col-lg-7 col-md-5 col-xs-4">
             <div class="card animated zoomInDown animation-delay-5">
 	            <div class="card-body">
 	            	<div class="row">
@@ -343,7 +343,7 @@
 	            <div class="col-md-4" onclick="window.location='{{ route('shops.show',['all',$sal->id]) }}'">
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 		                <div class="card-body overflow-hidden text-center">
-		                    <img src="{{ sizeof($sal->galleries) > 0 ? asset('files/galleries/images/'.$sal->galleries->firt()->image) :asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid center-block" style="max-height: 250px;">
+		                    <img src="{{ sizeof($sal->galleries) > 0 ? asset('files/galleries/images/'.$sal->galleries->first()->image) :asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid center-block" style="max-height: 250px;">
 		                    <h4 class="text-normal text-center">{{ $sal->shop_name }}</h4>
 		                    <p>{{ strlen($sal->description) > 20 ? substr($sal->description, 0, 20) . '... ' : $sal->description }}</p>
 		                    <div class="mt-1" style="font-size: 8px;">
