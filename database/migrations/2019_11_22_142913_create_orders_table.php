@@ -33,8 +33,8 @@ class CreateOrdersTable extends Migration
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
-            $table->foreign('salon_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('style_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('salon_id')->references('id')->on('salons')->onDelete('cascade');
+            $table->foreign('style_id')->references('id')->on('styles')->onDelete('cascade');
         });
     }
 

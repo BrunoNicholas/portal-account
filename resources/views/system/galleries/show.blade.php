@@ -235,11 +235,11 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label text-right" style="padding: 0px; padding-top: 5px;"> Select Salon </label>
                                                         <div class="col-md-9">
-                                                            @foreach($salons as $salon)
+                                                            @foreach($salons as $salo)
                                                                 <div class="form-check radio">
                                                                     <label class="form-check-label">
-                                                                        <input type="radio" name="salon_id" value="{{ $salon->id }}"> {{ $salon->salon_name . ' | ' . $salon->salon_email }} 
-                                                                        @if(sizeof($salon->galleries) > 0) <i class="fa-check fa color-primary" title="Already connected to a gallery"></i>@endif
+                                                                        <input type="radio" name="salon_id" value="{{ $salo->id }}"> {{ $salo->salon_name . ' | ' . $salo->salon_email }} 
+                                                                        @if(sizeof($salo->galleries) > 0) <i class="fa-check fa color-primary" title="Already connected to a gallery"></i>@endif
                                                                     </label>
                                                                 </div>
                                                             @endforeach

@@ -27,7 +27,7 @@ class CreateJobApplicationsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('salon_id')->references('id')->on('salons')->onDelete('cascade');
-            $table->foreign('shop_id')->references('id')->on('salons')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
         });
     }
 
