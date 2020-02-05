@@ -8,9 +8,8 @@
         <div class="text-center">
             <div class="row">
             	<div class="d-flex no-block align-items-center col-md-4">
-					<span class="text-left color-primary mb-0 wow fadeInDown animation-delay-4" style="font-size: 24px;">
-						<b class="text-white">New Fashion Style</b>
-						<span class="text-white"> | {{ $salon->salon_name }}</span>
+					<span class="text-center color-primary mb-0 wow fadeInDown animation-delay-4 center-block" style="font-size: 24px;">
+						<b class="text-white"> {{ $salon->salon_name }} </b>
 					</span>
 				</div>
 		        <div class="d-flex no-block justify-content-end col-md-8">
@@ -22,14 +21,14 @@
 		                </ol>
 		            </nav>
 		        </div>
-		        <p class="lead lead-lg color-light text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7">Add fashion styles to your salon!</p>
+		        <p class="lead lead-lg color-light text-center center-block mt-2 mw-800 text-uppercase fw-300 animated fadeInUp animation-delay-7"> New fashion styles!</p>
 	        </div>
 	    </div>
 	</div>
 </div>
 @endsection
 @section('content')
-<div class="container">
+<div class="container" style="min-height: 600px;">
     <div class="card card-hero animated fadeInUp animation-delay-7">
         <div class="card-body">
             <form class="form-horizontal" method="POST" action="{{ route('styles.store',['salon',$salon->id]) }}" name="cal">

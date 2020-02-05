@@ -38,7 +38,7 @@
     @permission('can_view_map')
         <p style="display: none;"><?php $remove[] = "'"; $remove[] = '"'; $remove[] = "-";?></p>
     @endpermission
-    <div class="mt-0 pl-2 pr-2">
+    <div class="mt-0 pl-2 pr-2 home-sections">
         <div class="row">
             <div class="col-md-7">
                 <div class="card card-primary" style="min-height: 400px;">

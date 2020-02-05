@@ -80,11 +80,11 @@
                                     <div class="ms-thumbnail card-body p-05">
                                         <div class="withripple zoom-img">
                                             <a href="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery1" data-title="{{ $style->style_name }}">
-                                                <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;">
+                                                <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px; width: auto; overflow-x: hidden;overflow-y: hidden;">
                                             </a>
                                             <div class="col-md-12" style="padding: 0px;">
                                                 <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                                <a title="Go to Salon" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
+                                                <a title="Go to Salon" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right"><i class="fa-child fa text-white" style="margin: 0px;"></i> {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -100,10 +100,10 @@
                                 <div class="card wow zoomIn">
                                     <div class="ms-thumbnail card-body p-05">
                                         <div class="withripple zoom-img">
-                                            <a href="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery2" data-title="{{ $style->style_name }}"><img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+                                            <a href="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery2" data-title="{{ $style->style_name }}"><img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px; width: auto; overflow-x: hidden;overflow-y: hidden;"></a>
                                             <div class="col-md-12" style="padding: 0px;">
                                                 <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                                <a title="Go to Salon Profile" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
+                                                <a title="Go to Salon - {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right"><i class="fa-male fa text-white" style="margin: 0px;"></i> {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -120,10 +120,10 @@
                                     <div class="ms-thumbnail card-body p-05">
                                         <div class="withripple zoom-img">
                                             <a href="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery3" data-title="{{ $style->style_name }}">
-                                                <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+                                                <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px; width: auto; overflow-x: hidden;overflow-y: hidden;"></a>
                                             <div class="col-md-12" style="padding: 0px;">
                                                 <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                                <a title="Go to Salon Profile" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
+                                                <a title="Go to Salon - {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right"><i class="fa-female fa text-white" style="margin: 0px;"></i> {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -140,10 +140,10 @@
                                     <div class="ms-thumbnail card-body p-05">
                                         <div class="withripple zoom-img">
                                             <a href="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery4" data-title="{{ $style->style_name }}">
-                                                <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+                                                <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px; width: auto; overflow-x: hidden;overflow-y: hidden;"></a>
                                             <div class="col-md-12" style="padding: 0px;">
                                                 <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                                <a title="Go to provider Salon Profile" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">Salon: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
+                                                <a title="Go to provider salon - {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right"><i class="zmdi zmdi-male-female text-white" style="margin: 0px;"></i> {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -162,10 +162,10 @@
                         <div class="ms-thumbnail card-body p-05">
                             <div class="withripple zoom-img">
                                 <a href="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $style->style_name }}">
-                                    <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+                                    <img src="{{ sizeof($style->galleries) > 0 ? asset('files/galleries/images/'. $style->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px; width: auto; overflow-x: hidden;overflow-y: hidden;"></a>
                                 <div class="col-md-12" style="padding: 0px;">
                                     <a href="{{ route('styles.show',[($style->categories_id ? App\Models\Categories::where('id',$style->categories_id)->first()->name : 'all'),$style->salon_id,$style->id]) }}" class="btn btn-info btn-xs pull-left" title="View style details" style="padding-top: 5px;">{{ $style->style_name }}</a>
-                                    <a title="Go to provider Salon Profile" href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">By: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
+                                    <a title="Go to provider Salon " href="{{ route('salons.show',['all',$style->salon_id]) }}" class="btn btn-xs btn-info btn-raised pull-right">By: {{ App\Models\Salon::where('id',$style->salon_id)->first()->salon_name }}</a>
                                 </div>
                             </div>
                         </div>

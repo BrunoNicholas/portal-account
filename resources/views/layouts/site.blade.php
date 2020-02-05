@@ -60,9 +60,27 @@
             margin-right: 2px;
         }
 
+        @media only screen and (min-width: 900px) {
+            .home-sections {
+                margin-right: 10%;
+                margin-left: 10%;
+            }
+        }
+
+        @media only screen and (max-width: 900px) {
+            .home-sections {
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+        }
+
         @media only screen and (max-width: 600px) {
             .justify-content-end > nav { display: none; }
             .back-button { display: none; }
+            .home-sections {
+                margin-right: 1px;
+                margin-left: 1px;
+            }
         }
 
         @media only screen and (max-width: 900px) {

@@ -234,7 +234,7 @@ Link: {{ route('styles.show',['all',0,$style->id]) }}
 	                <div class="card ms-feature wow zoomInUp animation-delay-{{ ++$i }}">
 	                    <div class="ms-thumbnail card-body p-05">
 	                        <div class="withripple zoom-img">
-	                            <a href="{{ sizeof($sty->galleries) > 0 ? asset('files/galleries/images/'. $sty->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}"><img src="{{ sizeof($sty->galleries) > 0 ? asset('files/galleries/images/'. $sty->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px;"></a>
+	                            <a href="{{ sizeof($sty->galleries) > 0 ? asset('files/galleries/images/'. $sty->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" data-lightbox="gallery" data-title="{{ $sty->style_name }}"><img src="{{ sizeof($sty->galleries) > 0 ? asset('files/galleries/images/'. $sty->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="height: 200px; width: auto; overflow-x: hidden;overflow-y: hidden;"></a>
 	                            <div class="col-md-12" style="padding: 0px;">
 		                            <div class="pull-left">
 		                            	<a href="javascript:void(0)" class="btn btn-primary btn-xs btn-raised" title="Add to the booking list">
