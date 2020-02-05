@@ -151,7 +151,7 @@
 		                    	<input class="input-3-xs" name="input-3-xs" value="{{ $avg_ratings }}" class="rating-loading" data-size="xs">
 		                    </span>
 		                    <small class="color-primary">
-	                			{{ strlen($avg_ratings) > 3 ? substr($sal->description, 0, 3) : $avg_ratings }} Stars
+	                			{{ strlen($avg_ratings) > 3 ? substr($avg_ratings, 0, 3) : $avg_ratings }} Stars
 	                		</small>
 		                </div>
 			        </div>

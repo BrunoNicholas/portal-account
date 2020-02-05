@@ -42,7 +42,11 @@
 		                  		data-lightbox="gallery" 
 		                  		data-title="{{ $product->product_name }}"
 		                  		style="height: 150px;width: auto;overflow-x: hidden; overflow-y: hidden;">
-		                  		<img src="{{ sizeof($product->galleries) > 0 ? asset('files/galleries/images/'.$product->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" alt="" class="img-fluid" style="width: 100%;"></a>
+								<img 
+									src="{{ sizeof($product->galleries) > 0 ? asset('files/galleries/images/'.$product->galleries->first()->image) : asset('files/defaults/images/cover_bg_2.jpg') }}" 
+									alt="product_image_error" 
+									class="img-fluid" 
+									style="width: 100%; height:200px; width: auto; overflow-x:hidden; overflow-y:hidden;"></a>
 		                  	<div class="col-md-12" style="padding: 0px;">
 		                  		<a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" 
 		                  			class="btn btn-info btn-xs pull-left" 

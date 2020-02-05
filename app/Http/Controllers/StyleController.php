@@ -92,7 +92,7 @@ class StyleController extends Controller
         
         $type   = 'All';
         $styles = Style::latest()->paginate(50);
-        return view('system.styles.index',compact(['styles','child_styles','male_styles','female_styles','unisex_styles','type','id']));
+        return view('system.styles.index',compact(['styles','child_styles','male_styles','female_styles','unisex_styles','type', 'item_id']));
     }
 
     /**

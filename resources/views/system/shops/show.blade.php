@@ -168,7 +168,7 @@
 		                  	@endif
 		                	@if($shop->company_id)
 		                		<tr>
-		                			<td><strong>Company: </strong> </td>
+		                			<td><strong>Group Owner: </strong> </td>
 		                			<td><a href="{{ route('companies.show',['all',$shop->company_id]) }}" target="_blank">
 		                				{{ App\Models\Company::where('id',$shop->company_id)->first()->company_name }}
 		                			</a></td>
@@ -323,7 +323,7 @@
 	    </div>
 	</div>
 	{{-- /end of rating box --}}
-    <h2 class="mt-4 mb-4 right-line"> Other Shops | <a href="{{ route('shops.index','all') }}">View All</a> </h2>
+    <h2 class="mt-4 mb-4 right-line"> More {{ App\Models\Company::where('id',$shop->company_id)->first()->company_name }} shops | <a href="{{ route('shops.index','all') }}"> Other shops </a> </h2>
     <div class="row"><?php $i=3; ?>
         @foreach($shops as $sal)
         	<?php

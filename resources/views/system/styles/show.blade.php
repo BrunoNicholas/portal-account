@@ -21,7 +21,7 @@
     </div>
 @endsection
 @section('content')
-<div class="container">
+<div class="container" style="min-height: 600px;">
 	<div class="row">
         <div class="col-md-6">
             <div id="carousel-product" class="ms-carousel ms-carousel-thumb carousel slide animated zoomInUp animation-delay-5" data-ride="carousel" data-interval="0">

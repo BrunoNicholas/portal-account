@@ -20,18 +20,18 @@
 @endsection
 @section('content')
 <div class="container">
-        @if(sizeof($styles) < 1)
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="card wow zoomIn">
-                    <h3 class="ms-thumbnail card-body pb-5 text-center color-danger">
-                        Oups, No styles recorded for this category yet! <br>
-                        <small>
-                            <a href="{{ route('styles.index',['all',0]) }}" class="btn btn-sm btn-primary">All Fashion Styles</a>
-                        </small>
-                    </h3>
-                </div>
+    @if(sizeof($styles) < 1)
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card wow zoomIn">
+                <h3 class="ms-thumbnail card-body pb-5 text-center color-danger">
+                    Oups, No styles recorded for this category yet! <br>
+                    <small>
+                        <a href="{{ route('styles.index',['all',0]) }}" class="btn btn-sm btn-primary">All Fashion Styles</a>
+                    </small>
+                </h3>
             </div>
-        @endif
+        </div>
+    @endif
     @if(strtolower($type) == 'all')
         <div class="text-center">
             <h2 class="color-primary">Salon fashion styles and designs by categories</h2>
@@ -93,7 +93,7 @@
                         @endforeach 
     	            </div>
                 </div>
-                <div role="tabpanel" class="tab-pane active show fade" id="macos">
+                <div role="tabpanel" class="tab-pane fade" id="macos">
     	            <div class="row">
                         @foreach($male_styles as $style)
                             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -132,7 +132,7 @@
                         @endforeach 
     	            </div>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="othercats">
+                <div role="tabpanel" class="tab-pane active show fade" id="othercats">
     	            <div class="row">
     	                @foreach($unisex_styles as $style)
                             <div class="col-lg-3 col-md-4 col-sm-6">

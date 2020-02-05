@@ -28,12 +28,17 @@
 	              	<li>
 	              		<a href="{{ url('/') }}">
 	              			<i class="fa-angle-double-right fa"></i> 
-	              			{{ config('app.name') }} | <i class="fa-users fa" style="margin: 0px;"></i> Public 
+	              			<i class="fa-users fa" style="margin: 0px;"></i> Public | {{ config('app.name') }} 
 	              		</a>
 	              	</li>
 	              	@auth
 	              	@role(['client']) @else
-	              	<li><a href="{{ route('home') }}"><i class="fa-angle-double-right fa"></i> Home Dashboard</a></li>
+	              	<li>
+						<a href="{{ route('home') }}">
+							<i class="fa-angle-double-right fa"></i> 
+							<i class="fa-home fa" style="margin: 0px;"></i> Home - Control Panel
+						</a>
+					</li>
 	              	@endrole
 	              	@role(['super-admin','admin'])
 	              	<li><a href="{{ route('userhome') }}"><i class="fa-angle-double-right fa"></i> User Dasboard</a></li>

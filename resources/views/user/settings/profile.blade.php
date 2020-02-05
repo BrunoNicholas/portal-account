@@ -353,7 +353,7 @@
 	    </div>
 	</div>
 </div>
-@include('layouts.includes.footer')
+{{--  @include('layouts.includes.footer')  --}}
 @endsection
 @section('scripts')
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

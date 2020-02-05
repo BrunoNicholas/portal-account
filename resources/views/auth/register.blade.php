@@ -2,9 +2,9 @@
 @section('title') Register @endsection
 
 @section('content')
-<header class="wrap wrap-mountain mt--40" style="min-height: 470px;">
+<header class="wrap wrap-mountain mt--40" style="min-height: 700px;">
     <div class="container text-primary">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-3">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">

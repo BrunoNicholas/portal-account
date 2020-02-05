@@ -226,7 +226,7 @@ Link: {{ route('styles.show',['all',0,$product->id]) }}
             </div>@endauth
         </div>
     </div>
-    <h3 class="mt-4 mb-4 right-line"> Other products from {{ $shop->shop_name }} | <a href="{{ route('shops.index','all') }}"> All other products </a> </h3>
+    <h3 class="mt-4 mb-4 right-line"> More products from {{ $shop->shop_name }} | <a href="{{ route('shops.index','all') }}"> Other products </a> </h3>
     <div class="row"><?php $i=3; ?>
     	@foreach($shop->products as $prod)
     		@if($prod->id != $product->id)
@@ -243,7 +243,8 @@ Link: {{ route('styles.show',['all',0,$product->id]) }}
 		                            	<a href="javascript:void(0)" class="btn btn-primary btn-raised btn-xs" title="Add to the booking list">
 		                            		<i class="fa fa-cart-plus"></i>
 		                            	</a>
-		                                <a href="{{ route('products.show',[($product->categories_id ? App\Models\Categories::where('id',$product->categories_id)->first()->name : 'all'),$product->shop_id,$product->id]) }}" class="btn btn-info btn-xs" title="View style details" style="padding-top: 5px;">{{ $prod->product_name }}  | 
+										<a href="{{ route('products.show',[($prod->categories_id ? App\Models\Categories::where('id',$prod->categories_id)->first()->name : 'all'),$prod->shop_id,$prod->id]) }}" class="btn btn-info btn-xs" title="View product details" style="padding-top: 5px;">
+											{{ $prod->product_name }}  | 
 		                                	<strike class="color-danger">UGX. {{ $prod->current_price  }}</strike>
 		                                	<b class="color-success">UGX. {{ $prod->current_price  }}</b>
 		                                </a>

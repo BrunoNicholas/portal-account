@@ -68,7 +68,7 @@
 			                    </li>
 			                    <li class="dropdown-divider"></li>
 			                    <li class="nav-item" onclick="window.location='{{ route('salons.index','all') }}'">
-			                    	<a class="nav-link" data-hover="tab" data-toggle="tab" role="tab"><i class="fa fa-list"></i> All Salons &amp; Spa's </a>
+			                    	<a class="nav-link" data-hover="tab" data-toggle="tab" role="tab"><i class="fa fa-list"></i> Salons &amp; Spa's </a>
 			                    </li>
 			                </ul>
 			                    <!-- Tab panes -->
