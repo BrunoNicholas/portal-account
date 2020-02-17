@@ -47,7 +47,7 @@
 		                        	<b class="counter">{{ App\Models\Company::where('status', 'active')->get()->count() }}</b>
 		                        	<small style="font-size: 15px;"> / <b class="counter">{{ App\Models\Company::all()->count() }}</b></small>
 		                        </h2>
-		                        <p class="mt-2 no-mb lead small-caps">Multi Accounts</p>
+		                        <p class="mt-2 no-mb lead small-caps">multi accounts</p>
 		                    </div>
 		                </div>
                     </div>
